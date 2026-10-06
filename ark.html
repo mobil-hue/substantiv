@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Skriveark – Substantiv 名词</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+body{font-size:11pt}
+.bar{background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:12px 16px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.bar label{font-weight:800}.bar select{font-size:1rem;padding:4px 8px}
+.pg{max-width:210mm;margin:0 auto 12px;background:#fff;box-shadow:var(--shadow)}
+.sheet{width:210mm;min-height:297mm;padding:11mm 12mm;margin:0 auto 10px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.15);position:relative;page-break-after:always;color:#111}
+.key{display:none}body.show-key .key{display:block}
+.shead{display:flex;justify-content:space-between;align-items:flex-start;gap:6mm;border-bottom:2.5px solid #111;padding-bottom:2mm;margin-bottom:3mm}
+.stitle{display:flex;gap:3mm;align-items:center}.stitle h2{margin:0;font-size:16pt}.stitle .zh{font-size:11pt;color:#444}
+.num{width:11mm;height:11mm;border-radius:50%;border:2.5px solid #111;display:inline-flex;align-items:center;justify-content:center;font-weight:900;font-size:14pt}
+.who{font-size:9.5pt;text-align:right;line-height:2}.ln{display:inline-block;border-bottom:1.5px solid #111;width:42mm}.ln.s{width:22mm}.ln.full{display:block;width:100%;height:9mm}
+.instr{background:#f3f4f6;border-radius:3mm;padding:2.5mm 3.5mm;margin-bottom:3mm;font-size:11pt}.instr .zh,.zh{color:#444}
+.ref{border:1.5px dashed #888;border-radius:3mm;padding:2mm 3mm;font-size:9.5pt;margin-bottom:3mm}
+.art{display:inline-block;color:#fff;border-radius:1.8mm;padding:0 2mm;font-weight:900}.en{background:#2563eb}.ei{background:#db2777}.et{background:#16a34a}
+.gt{width:100%;border-collapse:collapse;table-layout:fixed}
+.gt th{border:2px solid #555;border-top-width:4px;padding:1.5mm;font-size:9.5pt;line-height:1.2;vertical-align:top}.gt th .z{font-size:8.5pt;color:#444;font-weight:600}
+.gt th.lh{border-color:#555}
+.gt td{border:1.5px solid #888;height:23mm;padding:1mm 2mm;vertical-align:middle}
+.gt td.lead{width:44mm;font-size:12pt}.lw{display:flex;gap:2.5mm;align-items:center}.em{font-size:24pt;line-height:1}
+.gt td.wr{background-image:linear-gradient(transparent 16mm,#999 16mm,#999 16.4mm,transparent 16.4mm)}
+.gt td.giv{background:#e5e7eb;font-weight:800;font-size:13pt;text-align:center}
+.sm{font-size:9pt}.py{font-size:8pt;color:#666}
+.ans{color:#dc2626;font-weight:800;font-size:12.5pt;white-space:nowrap;font-family:"Comic Sans MS","Segoe Print",cursive}
+.aigrid{display:grid;grid-template-columns:1fr 1fr;gap:2.2mm 8mm}
+.ai{display:flex;align-items:center;gap:2.5mm;border-bottom:1.5px solid #bbb;padding:1.2mm 0;font-size:13pt}.ai .blank{display:inline-block;min-width:16mm;border-bottom:2px solid #111;height:8mm;text-align:center}.ai .zh{margin-left:auto}
+.wordbox{display:flex;flex-wrap:wrap;gap:2.5mm;border:2px solid #111;border-radius:3mm;padding:3mm;margin-bottom:4mm}
+.wb{border:1.5px solid #777;border-radius:2.5mm;padding:1mm 3mm;font-size:13pt;font-weight:800;display:inline-flex;gap:2mm;align-items:center}.wb .em{font-size:16pt}.wb small{font-size:8.5pt;font-weight:600;color:#555}
+.scols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3mm}
+.scol{border:3px solid;border-radius:3mm;overflow:hidden}.scol .sh{color:#fff;font-weight:900;text-align:center;padding:1.8mm;font-size:12pt;line-height:1.2}.scol .sh .zh{color:#fff;font-size:9pt;display:block}
+.sl{height:14mm;border-bottom:1.5px solid #aaa;padding:0 2mm;display:flex;align-items:flex-end}
+@page{size:A4;margin:10mm}
+@media print{
+  body{background:#fff;font-size:10.5pt}.top,.noprint,.bar{display:none!important}
+  main{padding:0;max-width:none}.sheet{box-shadow:none;margin:0;width:auto;min-height:0;height:277mm;padding:0;overflow:hidden}
+  body[data-print=sheets] .key{display:none!important}
+  body[data-print=keys] .sheetwrap{display:none!important}
+  body[data-print=keys] .key{display:block!important}
+}
+</style>
+</head>
+<body class="lang-both">
+<header class="top"><a class="logo" href="index.html" style="text-decoration:none">📘 Substantiv <small>名词</small></a><div class="sp"></div></header>
+<main>
+ <h1 class="noprint">📝 Skriveark <span class="zh" style="font-size:1.1rem">练习纸</span></h1>
+ <div class="bar noprint">
+  <label>Nivå / 难度: <select id="lvl"><option value="1">⭐ Lett – vanlige ord</option><option value="2">⭐⭐ Middels</option><option value="3">⭐⭐⭐ Alle ord (også spesielle)</option></select></label>
+  <button class="btn" id="new">🔄 Nye ark</button>
+  <button class="btn sec" id="printSheets">🖨 Skriv ut ark</button>
+  <button class="btn sec" id="printKeys">🖨 Skriv ut fasit</button>
+  <label><input type="checkbox" id="showKey"> Vis fasit på skjermen / 显示答案</label>
+ </div>
+ <div class="noprint small-note" style="margin-bottom:10px">4 ark: <b>bøying</b> (2 ark) og <b>kjønn en/ei/et</b> (2 ark). Hver gang du trykker «Nye ark» får du nye ord. Samme lenke gir samme ark, så fasiten stemmer. / 每次点“Nye ark”会出现新的单词；同一个链接得到同样的练习纸，答案才对得上。</div>
+ <div id="out"></div>
+</main>
+<script src="js/util.js"></script>
+<script src="js/data.js"></script>
+<script src="js/graphics.js"></script>
+<script src="js/worksheets.js"></script>
+<script>
+(function(){
+  const A = window.App, out = document.getElementById('out'), lvl = document.getElementById('lvl');
+  function params(){ const m = location.hash.match(/s=(\d+)&l=(\d)/); return m ? {seed:+m[1], level:+m[2]} : null; }
+  function render(){
+    let p = params(); if(!p){ p = {seed:Math.floor(Math.random()*1e6), level:1}; history.replaceState(null, '', '#s=' + p.seed + '&l=' + p.level); }
+    lvl.value = p.level;
+    const w = A.Worksheets.build(p.level, p.seed);
+    out.innerHTML = w.sheets + w.keys;
+  }
+  document.getElementById('new').onclick = () => { history.replaceState(null, '', '#s=' + Math.floor(Math.random()*1e6) + '&l=' + lvl.value); render(); };
+  lvl.onchange = () => { const p = params() || {seed:1}; history.replaceState(null, '', '#s=' + p.seed + '&l=' + lvl.value); render(); };
+  const doPrint = what => { document.body.dataset.print = what; window.print(); };
+  document.getElementById('printSheets').onclick = () => doPrint('sheets');
+  document.getElementById('printKeys').onclick = () => doPrint('keys');
+  document.getElementById('showKey').onchange = e => document.body.classList.toggle('show-key', e.target.checked);
+  render();
+})();
+</script>
+</body>
+</html>
