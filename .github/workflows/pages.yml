@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [main, claude/noun-learning-program-bilingual-x6bxw6]
   workflow_dispatch:
 
 permissions:
