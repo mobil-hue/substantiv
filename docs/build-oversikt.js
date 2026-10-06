@@ -90,6 +90,7 @@ body{margin:0;font-family:"Noto Sans","DejaVu Sans","Noto Sans CJK SC",sans-seri
 .rules{grid-column:1 / 3;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2mm}
 .rules .card{font-size:7.8pt;padding:1.4mm 2.2mm}.rules b.t{color:#c2410c}
 rt{font-size:5pt;color:#64748b;line-height:1}
+.brand{display:flex;align-items:center;gap:2.5mm;border-left:1.5px solid #cbd5e1;padding-left:3mm;line-height:1.15;flex:none}.brand .nm{font-weight:900;font-size:10pt;color:#c2410c}.brand .nm span{display:block}.brand .ad{font-size:7pt;color:#475569}.brand .ad span,.brand .ad a{display:block;color:#475569;text-decoration:none}
 `;
 const R = (zh, py) => `<ruby>${zh}<rt>${py}</rt></ruby>`;
 const art = a => `<span class="art ${a}">${a}</span>`;
@@ -99,7 +100,7 @@ const rowh = (c, no, zh) => `<div class="rowh" style="background:${c}">${no} <sp
 
 const html = `<!doctype html><html lang="nb"><head><meta charset="utf-8"><title>Substantiv 名词 – jukselapp</title><style>${css}</style></head><body><div class="page">
 <div class="top"><h1>📘 Substantiv</h1><span class="z">${R('名词', 'míngcí')} · jukselapp 速查表</span><span class="sp"></span>
- <span class="chant">Lær ordet <b>sammen med en/ei/et</b> · 单词要和 en/ei/et 一起记</span></div>
+ <span class="chant">Lær ordet <b>sammen med en/ei/et</b> · 单词要和 en/ei/et 一起记</span><div class="brand"><div class="nm"><span>by Titex as</span><span>Jens Møller</span></div><div class="ad"><span>1792 Tistedal</span><a href="https://www.titex.no">www.titex.no</a></div></div></div>
 <div class="main">
  <div class="left">
   <div class="card"><h2>1 · Substantiv <span class="z">${R('名词', 'míngcí')}</span></h2>

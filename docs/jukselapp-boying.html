@@ -10,6 +10,7 @@ body{margin:0;font-family:"Noto Sans","DejaVu Sans","Noto Sans CJK SC",sans-seri
 .page{width:297mm;height:210mm;padding:5mm 6mm;overflow:hidden;display:grid;grid-template-rows:10mm 14mm 13mm 1fr;gap:2mm}
 .top{display:flex;align-items:center;gap:4mm;border-bottom:2.5px solid #f97316}
 .top h1{margin:0;font-size:17pt;color:#c2410c}.top .z{font-size:13pt;font-weight:800;color:#475569}.top .sp{flex:1}.top .n{font-size:8pt;color:#64748b;text-align:right;line-height:1.25}
+.brand{display:flex;align-items:center;gap:2.5mm;border-left:1.5px solid #cbd5e1;padding-left:3mm;line-height:1.15;flex:none}.brand .nm{font-weight:900;font-size:10pt;color:#c2410c}.brand .nm span{display:block}.brand .ad{font-size:7pt;color:#475569}.brand .ad span,.brand .ad a{display:block;color:#475569;text-decoration:none}
 .legend{display:grid;grid-template-columns:1.15fr repeat(4,1fr);gap:2mm}
 .lg{overflow:hidden;border-radius:2mm;border-top:1.8mm solid var(--c);background:#fff;box-shadow:0 0 0 1.2px #e5e7eb;padding:.6mm 2mm;display:flex;align-items:center;gap:2mm;line-height:1.1}
 .lg svg{flex:none}.lg .t b{color:var(--c);font-size:8.6pt;display:block}.lg .t span{font-size:7pt;color:#475569;display:block}.lg .t i{font-style:normal;font-weight:900;font-size:9pt;color:#111}
@@ -35,7 +36,7 @@ tr:nth-child(even):not(.grp) td{background:#fcfaf5}
 <body>
 <div class="page">
  <div class="top"><h1>📊 Bøyingstabell</h1><span class="z">名词变形表</span><span class="sp"></span>
-  <span class="n">Lær ordet <b>sammen med en / ei / et</b> · 单词要和 en/ei/et 一起记<br>Understreket = endelsen · 画线的部分是词尾</span></div>
+  <span class="n">Lær ordet <b>sammen med en / ei / et</b> · 单词要和 en/ei/et 一起记<br>Understreket = endelsen · 画线的部分是词尾</span><div class="brand"><div class="nm"><span>by Titex as</span><span>Jens Møller</span></div><div class="ad"><span>1792 Tistedal</span><a href="https://www.titex.no">www.titex.no</a></div></div></div>
  <div class="legend" id="legend"></div>
  <div class="pt" id="pt"></div>
  <div class="cols"><table id="t1"></table><table id="t2"></table></div>
