@@ -7,7 +7,7 @@
 @page{size:A4 landscape;margin:0}
 *{box-sizing:border-box}
 body{margin:0;font-family:"Noto Sans","DejaVu Sans","Noto Sans CJK SC",sans-serif;color:#1f2937;background:#fffaf0}
-.page{width:297mm;height:210mm;padding:5mm 6mm;overflow:hidden;display:grid;grid-template-rows:10mm 14mm 11mm 1fr;gap:2mm}
+.page{width:297mm;height:210mm;padding:5mm 6mm;overflow:hidden;display:grid;grid-template-rows:10mm 14mm 13mm 1fr;gap:2mm}
 .top{display:flex;align-items:center;gap:4mm;border-bottom:2.5px solid #f97316}
 .top h1{margin:0;font-size:17pt;color:#c2410c}.top .z{font-size:13pt;font-weight:800;color:#475569}.top .sp{flex:1}.top .n{font-size:8pt;color:#64748b;text-align:right;line-height:1.25}
 .legend{display:grid;grid-template-columns:1.15fr repeat(4,1fr);gap:2mm}
@@ -80,10 +80,12 @@ tr:nth-child(even):not(.grp) td{background:#fcfaf5}
   while(!fits() && rh > 2.4){ rh -= 0.05; document.documentElement.style.setProperty('--rh', rh.toFixed(2) + 'mm'); }
 
   document.getElementById('pt').innerHTML =
-    `<div class="h"><b>den · det · de</b><small>pekeord foran bestemt form · 放在定指形式前的指示词；有形容词时必须用</small></div>` +
-    [['en', 'en hund', 'den hunden', 'den store hunden', '#2563eb'], ['ei', 'ei jente', 'den jenta', 'den store jenta', '#db2777'],
-     ['et', 'et hus', 'det huset', 'det store huset', '#16a34a'], ['', 'hunder (alle 所有)', 'de hundene', 'de store hundene', '#a16207']]
-    .map(r => `<div style="border-left:1.6mm solid ${r[4]}"><span class="x">${r[1]}</span><span class="x" style="color:${r[4]};font-size:7.2pt">→ ${r[2]}</span><span class="x" style="color:${r[4]};font-size:7.2pt">→ ${r[3]}</span></div>`).join('');
+    `<div class="h" style="gap:.3mm"><span style="font-size:7.4pt"><b style="font-size:7.6pt">den · det · de</b> = 那个 · 那些</span><span style="font-size:7.4pt"><b style="font-size:7.6pt">denne · dette · disse</b> = 这个 · 这些</span><small>+ bestemt form · 后面接定指形式</small></div>` +
+    [['en', 'en hund', ['den', 'denne'], 'hunden', 'store hunden', '#2563eb'], ['ei', 'ei jente', ['den', 'denne'], 'jenta', 'store jenta', '#db2777'],
+     ['et', 'et hus', ['det', 'dette'], 'huset', 'store huset', '#16a34a'], ['', 'hunder (alle 所有)', ['de', 'disse'], 'hundene', 'store hundene', '#a16207']]
+    .map(r => `<div style="border-left:1.6mm solid ${r[5]}"><span class="x">${r[1]}</span>
+      <span class="x" style="color:${r[5]};font-size:6.2pt">→ ${r[2][0]} ${r[3]} · ${r[2][0]} ${r[4]}</span>
+      <span class="x" style="color:${r[5]};font-size:6.2pt">→ ${r[2][1]} ${r[3]} · ${r[2][1]} ${r[4]}</span></div>`).join('');
   const ex = A.WORDS.find(w => w.no === 'hund');
   document.getElementById('legend').innerHTML = `<div class="lg key"><b>Slik leser du tabellen · 怎么看这张表</b><br>Eksempel: <b>hund</b> 🐶 = 狗. Hver kolonne er én form. / 每一列是一种形式。</div>` +
     A.FORMS.map(f => `<div class="lg c-${f.key}" style="--c:${f.color}">${A.formIcon(f.key, 34)}<div class="t"><b>${f.no}</b><span>${f.zh} · ${f.tagNo} / ${f.tagZh}</span><i>${f.key === 'ue' ? 'en hund' : ex[f.key]}</i></div></div>`).join('');
