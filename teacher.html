@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lærerside og fasit – Substantiv</title>
+<link rel="stylesheet" href="css/style.css">
+<style>h2{margin-top:1.4em;border-bottom:3px solid var(--brand)}td,th{font-size:.9rem}.cols{columns:2 300px}.sc{break-inside:avoid;margin-bottom:6px}</style>
+</head>
+<body class="lang-both">
+<header class="top"><a class="logo" href="index.html" style="text-decoration:none">📘 Substantiv <small>名词</small></a><div class="sp"></div><button class="pill noprint" onclick="window.print()">🖨 Skriv ut / 打印</button></header>
+<main id="t"></main>
+<script src="js/util.js"></script>
+<script src="js/data.js"></script>
+<script src="js/graphics.js"></script>
+<script src="js/videos.js"></script>
+<script src="js/exercises.js"></script>
+<script>
+(function(){
+const A = window.App, E = A.Ex, c = E.counts(), out = [];
+const taskNames = E.names().filter(n => c.pools[n].task), smallNames = E.names().filter(n => !c.pools[n].task);
+out.push(`<h1>👩‍🏫 Lærerside og fasit / 教师页和答案</h1>
+<div class="card"><h3>Oversikt over oppgaver / 题目总览</h3>
+<p><b>Små oppgaver (unike spørsmål): ${c.small}</b> (krav: minst 100) &nbsp;·&nbsp; <b>Omfattende oppgaver: ${c.task}</b> (krav: minst 50)</p>
+<p>Hver gang trekkes oppgavene tilfeldig, og svar-alternativene stokkes. Oppgaver eleven har bommet på kommer oftere. / 每次练习题目都是随机抽取，选项也会打乱；做错的题目会更常出现。</p>
+<table class="words"><tr><th>Bank</th><th>Type</th><th>Antall</th></tr>
+${E.names().map(n => `<tr><td>${n}</td><td>${c.pools[n].task ? 'omfattende' : 'liten'}</td><td>${c.pools[n].n}</td></tr>`).join('')}</table></div>`);
+
+out.push(`<h2>Ordliste: alle former / 词表：全部形式</h2><div class="tblwrap"><table class="words"><tr><th>nivå</th><th>ubestemt entall</th><th>bestemt entall</th><th>ubestemt flertall</th><th>bestemt flertall</th><th>中文</th><th>gruppe</th></tr>
+${A.WORDS.map(w => `<tr><td>${w.lvl}</td><td>${w.art} ${w.no}</td><td>${w.be}</td><td>${w.uf}</td><td>${w.bf}</td><td>${w.zh} (${w.py})</td><td>${w.cat}</td></tr>`).join('')}</table></div>`);
+
+out.push(`<h2>Egennavn og skrivemåte / 专有名词和写法</h2><p>Stor bokstav: ${A.NAMES.map(n => n.no + ' (' + n.zh + ')').join(', ')}</p><p>Liten bokstav: ${A.LOWER.map(n => n.no + ' (' + n.zh + ')').join(', ')}</p>`);
+
+out.push('<h2>Tekster: substantivene er understreket / 文章：名词已标出</h2><div class="cols">' + A.TEXTS.map(t => `<div class="sc"><b>${t.id}</b> (nivå ${t.lvl}): ${t.no.replace(/\{([^}]+)\}/g, '<u><b>$1</b></u>')}<br><span class="zh">${t.zh}</span></div>`).join('') + '</div>');
+out.push('<h2>Stor bokstav-tekster / 大写练习文章</h2><div class="cols">' + A.CAPS_TEXTS.map(t => `<div class="sc"><b>${t.id}</b>: ${t.no.replace(/\{([^}]+)\}/g, (m, w) => '<u><b>' + w[0].toUpperCase() + w.slice(1) + '</b></u>')}<br><span class="zh">${t.zh}</span></div>`).join('') + '</div>');
+out.push('<h2>Setninger / 句子</h2><div class="cols">' + A.SENTENCES.map(t => `<div class="sc">${t.no.replace(/\{([^}]+)\}/g, '<u><b>$1</b></u>')} — <span class="zh">${t.zh}</span></div>`).join('') + '</div>');
+
+out.push('<h2>Sorteringsoppgaver (fasit) / 分类题（答案）</h2><div class="cols">' + ['sortbox', 'sortcat', 'matchforms'].map(n => E.items(n).map(it => {
+  const s = it.make(); const by = {}; s.items.forEach(i => (by[i.bin] = by[i.bin] || []).push(i.fix || i.id));
+  return `<div class="sc"><b>${it.id}</b>: ` + Object.keys(by).map(k => `<i>${k}</i>: ${by[k].join(', ')}`).join(' &nbsp;|&nbsp; ') + '</div>';
+}).join('')).join('') + '</div>');
+
+out.push('<h2>Tabelloppgaver og diktat (fasit) / 表格题和听写（答案）</h2><div class="cols">' + taskNames.filter(n => /^(forms|dict)/.test(n)).map(n => E.items(n).map(it => {
+  const s = it.make();
+  return `<div class="sc"><b>${it.id}</b>: ` + s.rows.map(r => r.cells.filter(x => x.answers).map(x => x.answers[0]).join(' / ')).join(' &nbsp;|&nbsp; ') + '</div>';
+}).join('')).join('') + '</div>');
+document.getElementById('t').innerHTML = out.join('');
+A.applyLang();
+})();
+</script>
+</body>
+</html>
