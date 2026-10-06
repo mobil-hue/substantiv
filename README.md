@@ -10,6 +10,7 @@ Pedagogisk nettside for en 9 år gammel elev som er svak i norsk og snakker kine
 - **Øvingsrom** med fritt valg av tema, nivå og antall riktige på rad.
 - **Begreper**: kort der blant annet *substantiv* og navnene på de fire formene terpes.
 - **Lærerside** (`teacher.html`): oversikt over alle oppgaver, ordliste og fasit.
+- **Jukselapp (PDF)**: `docs/substantiv-jukselapp.pdf` – alt på én side (bygges med `node docs/build-oversikt.js`).
 
 ## Oppgavemengde
 - Små oppgaver (unike spørsmål): se `teacher.html` (over 1800)
