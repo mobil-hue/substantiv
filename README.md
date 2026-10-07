@@ -9,6 +9,7 @@ Pedagogisk nettside for en 9 år gammel elev som er svak i norsk og snakker kine
 - **Oppgaver underveis i hver modul**: begreper (kort), små oppgaver, omfattende oppgaver og «øv til du er trygg»-løkker.
 - **Øvingsrom** med fritt valg av tema, nivå og antall riktige på rad.
 - **Begreper**: kort der blant annet *substantiv* og navnene på de fire formene terpes.
+- **Gange** (`gange.html`): gangetabellen 2–10 med flervalg/skjermtastatur, poeng, statistikk over svake ganger, stolper med baller som hjelp og tale (norsk + kinesisk).
 - **Lærerside** (`teacher.html`): oversikt over alle oppgaver, ordliste og fasit.
 - **Skriveark** (`ark.html`): utskriftsklare ark for bøying og kjønn (en/ei/et) med fasit. Nye ord hver gang.
 - **Bøyingstabell (PDF)**: `docs/substantiv-boyingstabell.pdf` – 74 vanlige substantiv i alle fire former, gruppert etter en/ei/et (kilde: `docs/jukselapp-boying.html`).
