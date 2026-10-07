@@ -52,7 +52,8 @@ function home(){
       <a class="btn sec" href="ark.html" style="text-decoration:none"><span class="bi"><span class="no">📝 Skriveark (skriv ut)</span><span class="zh">练习纸（打印）</span></span></a>
       <a class="btn sec" href="docs/substantiv-jukselapp.pdf" target="_blank" style="text-decoration:none"><span class="bi"><span class="no">🧾 Jukselapp (PDF)</span><span class="zh">速查表（PDF）</span></span></a>
       <a class="btn sec" href="docs/substantiv-boyingstabell.pdf" target="_blank" style="text-decoration:none"><span class="bi"><span class="no">📊 Bøyingstabell (PDF)</span><span class="zh">变形表（PDF）</span></span></a>
-      <a class="btn sec" href="teacher.html" style="text-decoration:none"><span class="bi"><span class="no">👩‍🏫 Lærer / fasit</span><span class="zh">教师页 / 答案</span></span></a></div>`;
+      <a class="btn sec" href="teacher.html" style="text-decoration:none"><span class="bi"><span class="no">👩‍🏫 Lærer / fasit</span><span class="zh">教师页 / 答案</span></span></a>
+      <a class="btn sec" href="gange.html" style="text-decoration:none"><span class="bi"><span class="no">✖️ Gange</span><span class="zh">乘法</span></span></a></div>`;
   const mods = root.querySelector('#mods');
   A.MODULES.forEach(m => {
     const d = modDone(m.id), n = m.steps.length;
