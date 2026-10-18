@@ -16,13 +16,14 @@
 <script src="js/geo-graphics.js"></script>
 <script src="js/geo-data.js"></script>
 <script src="js/exercises.js"></script>
+<script src="js/geo-art.js"></script>
 <script src="js/geo-exercises.js"></script>
 <script src="js/geo-worksheets.js"></script>
 <script>
 (function(){
   const A = window.App, E = A.Ex, G = A.Geo, NM = A.GEO_NAMES, out = [];
   const names = E.names().filter(n => n.startsWith('g_')); let small = 0, task = 0; const rows = [];
-  names.forEach(n => { const it = E.items(n), isTask = !['choice', 'type'].includes(it[0].kind); (isTask ? (task += it.length) : (small += it.length)); rows.push(`<tr><td>${n}</td><td>${isTask ? 'omfattende' : 'liten'}</td><td>${it.length}</td></tr>`); });
+  names.forEach(n => { const it = E.items(n), isTask = !['choice', 'type', 'num'].includes(it[0].kind); (isTask ? (task += it.length) : (small += it.length)); rows.push(`<tr><td>${n}</td><td>${isTask ? 'omfattende' : 'liten'}</td><td>${it.length}</td></tr>`); });
   out.push(`<h1>👩‍🏫 Lærerside – geometri / 教师页：几何</h1>
   <div class="card"><h3>Oversikt / 总览</h3><p><b>Små oppgaver (unike spørsmål): ${small}</b> &nbsp;·&nbsp; <b>Omfattende oppgaver: ${task}</b></p>
   <p>Oppgavene trekkes tilfeldig. Svaralternativene stokkes. Oppgaver eleven bommer på kommer oftere. / 题目随机抽取，选项会打乱，做错的题目会更常出现。</p>

@@ -23,7 +23,7 @@ rt{font-size:.5em;color:var(--muted);font-weight:600}
 b.nw{color:var(--brand-d)}
 
 /* topp */
-.top{display:flex;align-items:center;gap:10px;padding:10px 16px;background:#fff;border-bottom:3px solid var(--brand);position:sticky;top:0;z-index:20}
+.top{display:flex;align-items:center;flex-wrap:wrap;gap:8px 10px;padding:10px 16px;background:#fff;border-bottom:3px solid var(--brand);position:sticky;top:0;z-index:20}
 .logo{font-weight:900;font-size:1.25rem;color:var(--brand-d);cursor:pointer;display:flex;gap:8px;align-items:baseline}
 .logo small{font-size:.8rem;color:var(--muted);font-weight:700}
 .top .sp{flex:1}
@@ -237,3 +237,55 @@ table.vt th,table.vt td{padding:8px 18px;border:2px solid #e5e7eb;text-align:cen
 .tile .fig{margin:-4px 0}
 .vcard .l{max-width:190px;margin-left:auto;margin-right:auto}
 .opt .fig{width:140px;height:118px}
+
+/* språkvalg i video og andre steder */
+.optgrp{display:inline-flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.optgrp .pill{padding:5px 11px}
+.vlang{display:flex;flex-direction:column;gap:8px;align-items:center;width:100%}
+.vl-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center}
+.vl-lab{font-weight:900;color:var(--muted);font-size:.85rem;min-width:84px;text-align:right}
+.vl-lab .bi{display:inline-block;text-align:right}
+.vl-ico{font-size:1.2rem}
+.vset{display:flex;gap:8px 10px;align-items:center;flex-wrap:wrap;padding:2px 14px 14px;justify-content:center}
+.vwarn{min-height:1.1em;color:var(--warn);font-weight:800}
+.vwarn .bi{display:inline-block}
+@media (max-width:560px){.vl-lab{min-width:0;text-align:center;width:100%}.vl-lab .bi{display:block;text-align:center}}
+.stage.starting{min-height:450px}
+.startcard .big-emoji{font-size:3.6rem}.startcard h2{margin:0}
+
+.startcard{background:rgba(255,255,255,.98)}
+
+/* tegninger på begrepskort */
+.termart{display:flex;flex-direction:column;align-items:center;gap:4px;margin:2px 0}
+.termart.sm .fig{transform:scale(.8);transform-origin:center}
+.artrow{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap}
+.ta{display:inline-flex;flex-direction:column;align-items:center}
+.artcap{font-size:.85rem;color:var(--muted);font-weight:800;text-align:center}
+.artcap .bi .zh{font-size:.95em}
+.artarrow{font-size:2.2rem;color:var(--muted)}
+.artemo{font-size:3rem;line-height:1}
+.artword{font-weight:900;font-size:1.3rem}
+.artcard{background:#fff;border-radius:14px;padding:6px 12px;box-shadow:var(--shadow);text-align:center;border-top:5px solid var(--c,#999)}
+
+/* tallknapper */
+.kpad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:300px;margin:10px auto 0}
+.kpad .key{background:#f3f4f6;border:2px solid var(--line);border-radius:14px;font-size:1.6rem;font-weight:900;padding:10px 0;box-shadow:0 2px 0 #d1d5db}
+.kpad .key:active{background:#e5e7eb;transform:translateY(2px)}
+.kpad .key.ok{background:var(--good);color:#fff;border-color:var(--good)}
+.kpad .key.del{color:var(--bad)}
+input.ans.num{width:min(100%,200px);font-size:2rem}
+select.ans{font-size:1.1rem;font-weight:800;padding:8px;border:3px solid var(--line);border-radius:14px;width:100%;min-width:110px;background:#fff}
+select.ans.ok{border-color:var(--good);background:#dcfce7}
+select.ans.bad{border-color:var(--bad);background:#fee2e2}
+
+/* trinn for trinn */
+.gtoggle{display:block;margin:8px auto 0}
+.stepbox{margin-top:10px;border-top:2px dashed var(--line);padding-top:10px}
+.stepask{display:flex;gap:10px;align-items:center;font-weight:900;font-size:1.15rem}
+.stepask .sn{background:var(--brand);color:#fff;border-radius:999px;padding:2px 10px;font-size:.85rem}
+.stepask .grow{flex:1}
+.wslines{display:flex;flex-direction:column;gap:4px;margin-top:6px}
+.wsl{display:flex;gap:8px;align-items:center;background:#f0fdf4;border-radius:10px;padding:4px 10px;font-weight:800;font-size:1.15rem}
+.wsl.bad{background:#fff7ed}
+.wsl .ck{width:1.6em;text-align:center}
+.bubble{background:#fff;border:3px solid #94a3b8;border-radius:20px;padding:6px 14px;font-weight:900;font-size:1.25rem;box-shadow:var(--shadow)}

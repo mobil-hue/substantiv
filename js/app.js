@@ -40,7 +40,9 @@ const curSpeak = () => A.settings.auto ? Math.max(0, SPEAKS.findIndex(x => x.k =
 function syncPills(){
   document.getElementById('pLang').textContent = LANGS.find(l => l[0] === A.settings.lang)[1];
   const s = document.getElementById('pSound'); s.textContent = SPEAKS[curSpeak()].t; s.classList.toggle('on', A.settings.auto);
+  document.querySelectorAll('.optgrp').forEach(g => g.querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.k === (g.dataset.g === 'speak' ? A.speakKey() : A.settings.lang))));
 }
+A.onSettings = syncPills;
 document.getElementById('pLang').onclick = () => { const i = LANGS.findIndex(l => l[0] === A.settings.lang); A.settings.lang = LANGS[(i + 1) % 3][0]; A.saveSettings(); syncPills(); };
 document.getElementById('pSound').onclick = () => {
   const n = SPEAKS[(curSpeak() + 1) % SPEAKS.length];
@@ -49,6 +51,15 @@ document.getElementById('pSound').onclick = () => {
   if(n.a) A.sayBi('Norsk opplesing', '中文朗读');
 };
 document.getElementById('logo').onclick = () => { location.hash = '#/'; route(); };
+// svarmåte (flervalg / skriv inn / tilfeldig) gjelder matematikk-fagene
+const INPUTS = [['choice', '✅ Flervalg', '选择题'], ['type', '⌨️ Skriv inn', '输入答案'], ['mix', '🎲 Tilfeldig', '随机']];
+if(A.subject !== 'noun'){
+  const pIn = h('button', {class:'pill', id:'pInput', title:'Svarmåte / 答题方式'});
+  document.getElementById('pLang').before(pIn);
+  const syncIn = () => { pIn.textContent = INPUTS.find(x => x[0] === A.prefs.input)[1]; };
+  pIn.onclick = () => { const i = INPUTS.findIndex(x => x[0] === A.prefs.input); A.prefs.input = INPUTS[(i + 1) % INPUTS.length][0]; A.savePrefs(); syncIn(); };
+  A.syncInput = syncIn; syncIn();
+}
 
 /* ---------- hjem ---------- */
 function home(){
@@ -102,7 +113,7 @@ function termsView(keys, onDone, titleHtml){
   function draw(){
     const t = list[idx]; flipped = false;
     root.innerHTML = `<div class="sbar"><button class="x" id="x">✖</button><div class="stitle">${titleHtml || bi('Begreper','概念卡片')}</div><div class="prog"><i style="width:${idx / list.length * 100}%"></i></div></div>
-      <div class="fc" style="--c:${t.color}" id="fc"><div class="term">${t.no}</div><button class="spk" id="sp">🔊</button>
+      <div class="fc" style="--c:${t.color}" id="fc"><div class="term">${t.no}</div>${t.art ? `<div class="termart">${t.art}</div>` : ''}<button class="spk" id="sp">🔊</button>
       <div class="small-note">${bi('Trykk på kortet for å snu','点卡片翻面')}</div></div>
       <div class="typebox" style="margin-top:14px"><span class="small-note">${idx + 1} / ${list.length}</span></div>`;
     root.querySelector('#x').onclick = () => { location.hash = '#/'; };
@@ -110,7 +121,7 @@ function termsView(keys, onDone, titleHtml){
     root.querySelector('#sp').onclick = e => { e.stopPropagation(); A.sayNo(t.no); };
     fc.onclick = () => {
       if(flipped) return; flipped = true;
-      fc.innerHTML = `<div class="term">${t.no}</div><div class="zhsup zh">${A.ruby(t.zh, t.py)}</div><div class="def">${bi(t.defNo, t.defZh)}</div><div class="ex">${t.ex}</div>
+      fc.innerHTML = `<div class="term">${t.no}</div><div class="zhsup zh">${A.ruby(t.zh, t.py)}</div>${t.art ? `<div class="termart sm">${t.art}</div>` : ''}<div class="def">${bi(t.defNo, t.defZh)}</div><div class="ex">${t.ex}</div>
         <button class="spk" id="sp2">🔊</button>
         <div class="typebox"><button class="btn sec" id="more"><span class="bi"><span class="no">🔁 Øv mer</span><span class="zh">再练练</span></span></button>
         <button class="btn" id="know"><span class="bi"><span class="no">✔ Jeg kan det</span><span class="zh">我会了</span></span></button></div>`;
@@ -167,7 +178,7 @@ function Session(o){
     A.Ex.note(cur.id, ok);
     st.attempts++; if(ok) st.correct++;
     if(ok){ st.streak++; st.best = Math.max(st.best, st.streak); } else st.streak = 0;
-    if(!isLoop){ st.idx++; if(!ok && !cur.retry && ['choice', 'type'].includes(cur.kind)) queue.push(Object.assign({}, cur, {retry:true})); }
+    if(!isLoop){ st.idx++; if(!ok && !cur.retry && ['choice', 'type', 'num'].includes(cur.kind)) queue.push(Object.assign({}, cur, {retry:true})); }
     updateBar();
     const cls = res.score >= 0.8 ? 'good' : res.score >= 0.5 ? 'mid' : 'bad';
     const [okNo, okZh] = A.Ex.msgOk();
@@ -274,6 +285,9 @@ function settingsView(){
       <select id="sl">${LANGS.map(l => `<option value="${l[0]}" ${S.lang === l[0] ? 'selected' : ''}>${l[1]}</option>`).join('')}</select></label>
     <label>${bi('Opplesing på (forklaringer og oppgaver)','朗读语言（讲解和练习）')}
       <select id="ssp"><option value="no" ${S.speak === 'no' ? 'selected' : ''}>🇳🇴 Norsk</option><option value="zh" ${S.speak === 'zh' ? 'selected' : ''}>🇨🇳 中文</option><option value="both" ${S.speak === 'both' ? 'selected' : ''}>🇳🇴 + 🇨🇳 Norsk + 中文</option></select></label>
+    ${A.subject !== 'noun' ? `<label>${bi('Svarmåte i oppgaver','答题方式')}
+      <select id="sin">${INPUTS.map(x => `<option value="${x[0]}" ${A.prefs.input === x[0] ? 'selected' : ''}>${x[1]} · ${x[2]}</option>`).join('')}</select></label>` : ''}
+    ${A.subject === 'mult' ? `<label><input type="checkbox" id="sguide" ${A.prefs.guide ? 'checked' : ''}> ${bi('Regneoppgaver: trinn for trinn','计算题：一步一步引导')}</label>` : ''}
     <label><input type="checkbox" id="spy" ${S.pinyin ? 'checked' : ''}> ${bi('Vis pinyin (拼音)','显示拼音')}</label>
     <label><input type="checkbox" id="sauto" ${S.auto ? 'checked' : ''}> ${bi('Les opp oppgavene automatisk','自动朗读题目')}</label>
     <label>${bi('Taletempo','语速')}
@@ -287,6 +301,8 @@ function settingsView(){
   root.querySelector('#back').onclick = () => { location.hash = '#/'; };
   root.querySelector('#sl').onchange = e => { S.lang = e.target.value; A.saveSettings(); syncPills(); };
   root.querySelector('#ssp').onchange = e => { S.speak = e.target.value; S.auto = true; A.saveSettings(); syncPills(); A.sayBi('Norsk opplesing', '中文朗读'); };
+  const sin = root.querySelector('#sin'); if(sin) sin.onchange = e => { A.prefs.input = e.target.value; A.savePrefs(); if(A.syncInput) A.syncInput(); };
+  const sgd = root.querySelector('#sguide'); if(sgd) sgd.onchange = e => { A.prefs.guide = e.target.checked; A.savePrefs(); };
   root.querySelector('#spy').onchange = e => { S.pinyin = e.target.checked; A.saveSettings(); };
   root.querySelector('#sauto').onchange = e => { S.auto = e.target.checked; A.saveSettings(); syncPills(); };
   root.querySelector('#sr').onchange = e => { S.rate = +e.target.value; A.saveSettings(); };

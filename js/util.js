@@ -22,6 +22,35 @@ A.applyLang = function(){
 };
 A.saveSettings = function(){ A.store.set('settings', A.settings); A.applyLang(); };
 
+// valg som gjelder ett fag (svarmåte: flervalg / skriv inn / tilfeldig, trinn for trinn)
+A.subject = window.SUBJECT || 'noun';
+const PREF_DEFAULT = {noun:{input:'mix'}, geo:{input:'choice'}, mult:{input:'mix', guide:true}};
+A.prefs = Object.assign({input:'mix'}, PREF_DEFAULT[A.subject] || {}, A.store.get('prefs_' + A.subject, {}));
+A.savePrefs = function(){ A.store.set('prefs_' + A.subject, A.prefs); };
+
+// valg av tekstspråk og opplesing (brukes i video, innstillinger og menyen)
+A.LANG_OPTS = [['both', '🌐 NO + 中文'], ['no', '🇳🇴 Norsk'], ['zh', '🇨🇳 中文']];
+A.SPEAK_OPTS = [['no', '🔊 Norsk'], ['zh', '🔊 中文'], ['both', '🔊 Norsk + 中文'], ['off', '🔇 Av']];
+A.speakKey = () => A.settings.auto === false ? 'off' : (A.settings.speak || 'no');
+A.setSpeakKey = function(k){
+  if(k === 'off'){ A.settings.auto = false; if(A.Speech) A.Speech.stop(); } else { A.settings.auto = true; A.settings.speak = k; }
+  A.saveSettings(); if(A.onSettings) A.onSettings();
+};
+A.setLangKey = function(k){ A.settings.lang = k; A.saveSettings(); if(A.onSettings) A.onSettings(); };
+A.optGroup = function(kind){
+  const opts = kind === 'speak' ? A.SPEAK_OPTS : A.LANG_OPTS, cur = kind === 'speak' ? A.speakKey() : A.settings.lang;
+  return `<span class="optgrp" data-g="${kind}">${opts.map(o => `<button type="button" class="pill ${o[0] === cur ? 'on' : ''}" data-k="${o[0]}">${o[1]}</button>`).join('')}</span>`;
+};
+A.bindOptGroups = function(root, after){
+  root.querySelectorAll('.optgrp').forEach(g => g.querySelectorAll('button').forEach(b => { b.onclick = e => {
+    e.stopPropagation();
+    const kind = g.dataset.g, k = b.dataset.k;
+    if(kind === 'speak') A.setSpeakKey(k); else A.setLangKey(k);
+    root.querySelectorAll(`.optgrp[data-g="${kind}"] button`).forEach(x => x.classList.toggle('on', x.dataset.k === k));
+    if(after) after(kind, k);
+  }; }));
+};
+
 A.esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 A.shuffle = a => { a = a.slice(); for(let i=a.length-1;i>0;i--){ const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]] = [a[j],a[i]]; } return a; };
 A.pick = a => a[Math.floor(Math.random()*a.length)];

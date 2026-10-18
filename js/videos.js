@@ -175,26 +175,43 @@ A.Video = {
     A.Video.stop();
     const V = A.VIDEOS[id], n = V.scenes.length;
     let idx = 0, playing = false, run = 0, alive = true;
+    const langBox = () => `<div class="vlang"><div class="vl-row"><span class="vl-lab">${A.bi('Opplesing','朗读')}</span>${A.optGroup('speak')}</div>
+      <div class="vl-row"><span class="vl-lab">${A.bi('Tekst','文字')}</span>${A.optGroup('lang')}</div><div class="vwarn small-note"></div></div>`;
     host.innerHTML = `<div class="vwrap"><div class="stage"><div class="scenehost" style="width:100%"></div>
       <div class="startcard"><div class="big-emoji">${V.emoji}</div><h2>${A.bi(V.no, V.zh)}</h2>
+      ${langBox()}
       <button class="btn big start"><span class="bi"><span class="no">▶ Start videoen</span><span class="zh">开始看视频</span></span></button>
       <div class="small-note">🔊 ${A.bi('Lyd på. Skru opp volumet.','请打开声音。')}</div></div></div>
       <div class="vcap"><div class="no"></div><div class="zh"></div></div>
       <div class="vctl"><button class="spk prev" title="Forrige">⏮</button><button class="spk pp" title="Pause">⏸</button><button class="spk next" title="Neste">⏭</button><button class="spk redo" title="Fra start">🔁</button>
-      <div class="dots">${V.scenes.map(() => '<i></i>').join('')}</div></div></div>`;
+      <div class="dots">${V.scenes.map(() => '<i></i>').join('')}</div></div>
+      <div class="vset"><span class="vl-ico" title="Opplesing / 朗读">🔊</span>${A.optGroup('speak')}<span class="vl-ico" title="Tekst / 文字">📝</span>${A.optGroup('lang')}</div></div>`;
     const $ = s => host.querySelector(s);
     const sceneHost = $('.scenehost'), capNo = $('.vcap .no'), capZh = $('.vcap .zh'), dots = host.querySelectorAll('.dots i'), pp = $('.pp');
+    function warn(){
+      const sp = A.speakKey(), w = [];
+      if(A.Speech.supported && sp !== 'off'){
+        if(sp !== 'zh' && !A.Speech.has('no')) w.push(['Ingen norsk stemme funnet på denne enheten.', '这台设备上没有找到挪威语语音。']);
+        if(sp !== 'no' && !A.Speech.has('zh')) w.push(['Ingen kinesisk stemme funnet på denne enheten.', '这台设备上没有找到中文语音。']);
+      }
+      host.querySelectorAll('.vwarn').forEach(e => { e.innerHTML = w.map(x => '⚠️ ' + A.bi(x[0], x[1])).join(''); });
+    }
     function show(i){
       idx = i; const s = V.scenes[i];
       sceneHost.innerHTML = s.html;
       capNo.innerHTML = A.m(s.no); capZh.innerHTML = A.m(s.zh);
       dots.forEach((d, k) => d.classList.toggle('on', k <= i));
     }
+    // uten lyd: gi tid til å lese teksten
+    function readTime(s){
+      const L = A.settings.lang, chars = L === 'no' ? s.no.length : L === 'zh' ? s.zh.length * 2 : s.no.length + s.zh.length * 1.5;
+      return Math.min(16000, 3000 + chars * 55);
+    }
     async function runScene(i){
       const my = ++run; show(i);
       if(!playing) return;
       const s = V.scenes[i];
-      await A.sayBi(s.no, s.zh);
+      if(A.speakKey() === 'off') await A.sleep(readTime(s)); else await A.sayBi(s.no, s.zh);
       if(!alive || my !== run || !playing) return;
       await A.sleep(900);
       if(!alive || my !== run || !playing) return;
@@ -211,12 +228,16 @@ A.Video = {
       o.querySelector('.go').onclick = () => { A.Video.stop(); onEnd && onEnd(); };
     }
     function halt(){ run++; A.Speech.stop(); }
-    $('.start').onclick = () => { $('.startcard').remove(); playing = true; pp.textContent = '⏸'; runScene(0); };
+    // endrer du språk midt i videoen, starter scenen på nytt med ny stemme/tekst
+    A.bindOptGroups(host, kind => { warn(); if(kind === 'speak' && playing){ halt(); runScene(idx); } });
+    $('.stage').classList.add('starting');
+    $('.start').onclick = () => { $('.startcard').remove(); $('.stage').classList.remove('starting'); playing = true; pp.textContent = '⏸'; runScene(0); };
     pp.onclick = () => { if(playing){ playing = false; pp.textContent = '▶'; halt(); } else { playing = true; pp.textContent = '⏸'; runScene(idx); } };
     $('.prev').onclick = () => { halt(); runScene(Math.max(0, idx - 1)); };
     $('.next').onclick = () => { halt(); if(idx < n - 1) runScene(idx + 1); else finish(); };
     $('.redo').onclick = () => { halt(); playing = true; pp.textContent = '⏸'; runScene(0); };
-    show(0);
+    show(0); warn();
+    setTimeout(warn, 800);
     current = { cancel(){ alive = false; run++; } };
   }
 };

@@ -56,7 +56,7 @@ A.GEO_MODULES = [
    S.task('Sorter nettene', '给展开图分类', ['g_sortNets'], 1, {maxLvl:2}),
    S.practice('Hvor mange klosser?', '有多少个小方块？', ['g_blocksCount'], 6, {maxLvl:2}),
    S.practice('Hvor mange klosser mangler?', '还差多少个小方块？', ['g_blocksMissing'], 5, {maxLvl:3}),
-   S.practice('Skriv svaret: klosser som mangler', '写出答案：还差几个小方块', ['g_blocksMissingType'], 4, {maxLvl:3}),
+   S.practice('Regn ut: klosser som mangler', '计算：还差几个小方块', ['g_blocksMissingType'], 4, {maxLvl:3}),
    S.practice('Stemmer det?', '对吗？', ['g_facts'], 6, {maxMod:3, maxLvl:2}),
    S.loop('Øv til du er trygg: nett og klosser', '练到有把握：展开图和小方块', [w('g_netSolid', 2), w('g_netCube', 2), w('g_netFaces', 1), w('g_blocksCount', 2), w('g_blocksMissing', 2), w('g_facts', 1), w('g_meta', 1)], 8, {maxLvl:2, maxMod:3, adaptive:true})
  ]},
@@ -74,7 +74,7 @@ A.GEO_MODULES = [
  {id:5, emoji:'🧩', color:'#9333ea', no:'Finn ut: gåter og utfordringer', zh:'想一想：谜题和挑战', steps:[
    S.video('geo_puzzle', 'Se videoen: finn ut', '看视频：想一想'),
    S.practice('Gåter: hvilken figur er jeg?', '谜语：我是什么图形？', ['g_riddles'], 8, {maxLvl:2}),
-   S.task('Gåter: skriv navnet', '谜语：写出名称', ['g_riddleTask'], 1, {maxLvl:2}),
+   S.task('Gåter: velg navnet', '谜语：选出名称', ['g_riddleTask'], 1, {maxLvl:2}),
    S.task('Tau-oppgaven', '绳子问题', ['g_rope'], 1),
    S.task('Tegn utfordringer', '画图挑战', ['g_drawChallenge'], 2),
    S.practice('Hvor mye tau rundt figuren?', '围一圈要多少绳子？', ['g_perimeter'], 6),

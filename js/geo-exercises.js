@@ -6,6 +6,7 @@ const Q = Ex.Q, FB = Ex.FB, def = Ex.def, NM = A.GEO_NAMES;
 
 const choice = (id, lvl, mod, make, extra) => Object.assign({id, kind:'choice', lvl, mod, make}, extra || {});
 const typed = (id, lvl, mod, make, extra) => Object.assign({id, kind:'type', lvl, mod, make}, extra || {});
+const num = (id, lvl, mod, make, extra) => Object.assign({id, kind:'num', lvl, mod, make}, extra || {});
 const fig = (svg, cls) => `<div class="fig ${cls || ''}">${svg}</div>`;
 const nameBtn = n => `<div><b>${n}</b><div class="gloss zh">${NM[n].zh}</div></div>`;
 const numOpts = (ans, lo) => { const c = uniq([ans + 1, ans - 1, ans + 2, ans - 2, ans + 3, ans + 4]).filter(v => v >= (lo || 0) && v !== ans);
@@ -74,9 +75,9 @@ def('g_shapeEdges', () => { const out = [];
       options:numOpts(n, 1), answer:String(n), fb:FB(DESC[k][0], DESC[k][1]), sayAfter:String(n)};
   })))); return out; });
 def('g_cornersType', () => { const out = [];
-  cornerKinds.filter(k => k !== 'sekskant').forEach(k => G.shapes[k].forEach((v, i) => out.push(typed(`g_cornT:${k}:${i}`, k === 'sirkel' ? 2 : v.lvl, 1, () => ({
-    q:Q('Skriv: Hvor mange hjørner har figuren?', '写出：这个图形有几个顶点？'), say:Q('Hvor mange hjørner har figuren?', '这个图形有几个顶点？'), visual:fig(G.shapeSvg(k, i, {dots:true})),
-    answers:[String(G.shapeCorners[k])], ph:'?', fb:FB(DESC[k][0], DESC[k][1]), sayAfter:String(G.shapeCorners[k])}))))); return out; });
+  cornerKinds.filter(k => k !== 'sekskant').forEach(k => G.shapes[k].forEach((v, i) => out.push(num(`g_cornT:${k}:${i}`, k === 'sirkel' ? 2 : v.lvl, 1, () => ({
+    q:Q('Hvor mange hjørner har figuren?', '这个图形有几个顶点？'), say:Q('Hvor mange hjørner har figuren?', '这个图形有几个顶点？'), visual:fig(G.shapeSvg(k, i, {dots:true})),
+    answer:G.shapeCorners[k], fb:FB(DESC[k][0], DESC[k][1]), sayAfter:String(G.shapeCorners[k])}))))); return out; });
 
 /* ---------- modul 2: tredimensjonale figurer ---------- */
 def('g_twoD3D', () => { const out = [];
@@ -156,12 +157,12 @@ def('g_blocksCount', () => MAPS3.map((m, i) => choice('g_bc:' + i, i < 12 ? 2 : 
 def('g_blocksMissing', () => MAPS3b.map((m, i) => choice('g_bm:' + i, 3, 3, () => { const t = sumMap(m), miss = 27 - t;
   return {q:Q('Hvor mange klosser mangler for at det skal bli en kube (3 × 3 × 3)?', '还差多少个小方块才能拼成一个正方体（3 × 3 × 3）？'), say:Q('Hvor mange klosser mangler for at det skal bli en kube?', '还差多少个小方块才能拼成正方体？'), visual:fig(G.blocks(m, {color:G.C.orange}), 'lg'), layout:'row',
     options:numOpts(miss, 1), answer:String(miss), fb:FB(`En kube på 3 × 3 × 3 har 27 klosser. Figuren har ${t}. 27 − ${t} = ${miss}.`, `3 × 3 × 3 的正方体有 27 个小方块。这个图形有 ${t} 个。27 − ${t} = ${miss}。`), sayAfter:String(miss)}; })));
-def('g_blocksMissingType', () => MAPS3b.slice(0, 12).map((m, i) => typed('g_bmT:' + i, 3, 3, () => { const t = sumMap(m), miss = 27 - t;
-  return {q:Q('Skriv: Hvor mange klosser mangler for at det skal bli en kube (3 × 3 × 3)?', '写出：还差多少个小方块才能拼成正方体（3 × 3 × 3）？'), say:Q('Hvor mange klosser mangler for at det skal bli en kube?', '还差多少个小方块才能拼成正方体？'), visual:fig(G.blocks(m, {color:G.C.blue}), 'lg'),
-    answers:[String(miss)], ph:'?', fb:FB(`27 − ${t} = ${miss}.`, `27 − ${t} = ${miss}。`), sayAfter:String(miss)}; }))
-  .concat(MAPS2.map((m, i) => typed('g_bm2T:' + i, 2, 3, () => { const t = sumMap(m), miss = 8 - t;
-    return {q:Q('Skriv: Hvor mange klosser mangler for at det skal bli en kube (2 × 2 × 2)?', '写出：还差多少个小方块才能拼成正方体（2 × 2 × 2）？'), say:Q('Hvor mange klosser mangler for at det skal bli en kube?', '还差多少个小方块才能拼成正方体？'), visual:fig(G.blocks(m, {color:G.C.green}), 'lg'),
-      answers:[String(miss)], ph:'?', fb:FB(`En kube på 2 × 2 × 2 har 8 klosser. 8 − ${t} = ${miss}.`, `2 × 2 × 2 的正方体有 8 个小方块。8 − ${t} = ${miss}。`), sayAfter:String(miss)}; }))));
+def('g_blocksMissingType', () => MAPS3b.slice(0, 12).map((m, i) => num('g_bmT:' + i, 3, 3, () => { const t = sumMap(m), miss = 27 - t;
+  return {q:Q('Hvor mange klosser mangler for at det skal bli en kube (3 × 3 × 3)?', '还差多少个小方块才能拼成正方体（3 × 3 × 3）？'), say:Q('Hvor mange klosser mangler for at det skal bli en kube?', '还差多少个小方块才能拼成正方体？'), visual:fig(G.blocks(m, {color:G.C.blue}), 'lg'),
+    answer:miss, min:1, fb:FB(`27 − ${t} = ${miss}.`, `27 − ${t} = ${miss}。`), sayAfter:String(miss)}; }))
+  .concat(MAPS2.map((m, i) => num('g_bm2T:' + i, 2, 3, () => { const t = sumMap(m), miss = 8 - t;
+    return {q:Q('Hvor mange klosser mangler for at det skal bli en kube (2 × 2 × 2)?', '还差多少个小方块才能拼成正方体（2 × 2 × 2）？'), say:Q('Hvor mange klosser mangler for at det skal bli en kube?', '还差多少个小方块才能拼成正方体？'), visual:fig(G.blocks(m, {color:G.C.green}), 'lg'),
+      answer:miss, min:1, fb:FB(`En kube på 2 × 2 × 2 har 8 klosser. 8 − ${t} = ${miss}.`, `2 × 2 × 2 的正方体有 8 个小方块。8 − ${t} = ${miss}。`), sayAfter:String(miss)}; }))));
 
 /* ---------- modul 4: vinkler ---------- */
 const AK = {rett:['rett vinkel', '直角', 'Som hjørnet på et ark. 90°.', '像纸的角。90°。'], spiss:['spiss vinkel', '锐角', 'Mindre enn en rett vinkel.', '比直角小。'], stump:['stump vinkel', '钝角', 'Større enn en rett vinkel.', '比直角大。']};
@@ -190,11 +191,11 @@ def('g_riddles', () => A.GEO_RIDDLES.map(r => choice('g_' + r.id, r.lvl, r.mod, 
     fb:FB(`Jeg er en ${r.ans}!`, `我是[${r.ans}]（${NM[r.ans].zh}）！`), sayAfter:r.ans};
 })));
 def('g_perimeter', () => { const L = [[4, 2], [5, 3], [6, 2], [3, 3], [7, 2], [5, 5], [8, 3], [4, 4], [6, 4], [9, 2]];
-  return L.map(([a, b], i) => typed('g_per:' + i, 2, 5, () => { const sq = a === b, per = 2 * (a + b);
+  return L.map(([a, b], i) => num('g_per:' + i, 2, 5, () => { const sq = a === b, per = 2 * (a + b);
     const svg = G.svg(`<rect x="${50 - a * 5}" y="${50 - b * 5}" width="${a * 10}" height="${b * 10}" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/><text x="50" y="${50 - b * 5 - 4}" text-anchor="middle" font-size="9" font-weight="800" font-family="sans-serif">${a} m</text><text x="${50 + a * 5 + 4}" y="52" font-size="9" font-weight="800" font-family="sans-serif">${b} m</text>`, '0 0 100 100');
     return {q:Q(sq ? `Et kvadrat har kanter på ${a} m. Hvor mange meter tau trenger du rundt hele kvadratet?` : `Et rektangel er ${a} m langt og ${b} m bredt. Hvor mange meter tau trenger du rundt hele rektangelet?`,
       sq ? `一个正方形的边长是 ${a} 米。围一圈需要多少米绳子？` : `一个长方形长 ${a} 米，宽 ${b} 米。围一圈需要多少米绳子？`), say:Q('Hvor mange meter tau trenger du rundt hele figuren?', '围一圈需要多少米绳子？'), visual:fig(svg, 'md'),
-      answers:[String(per)], ph:'? m', fb:FB(`${a} + ${b} + ${a} + ${b} = ${per} m.`, `${a} + ${b} + ${a} + ${b} = ${per} 米。`), sayAfter:String(per)}; })); });
+      answer:per, unit:' m', near:[a + b, a * b, 2 * a + b, a + 2 * b], ph:'? m', fb:FB(`${a} + ${b} + ${a} + ${b} = ${per} m.`, `${a} + ${b} + ${a} + ${b} = ${per} 米。`), sayAfter:String(per)}; })); });
 
 /* ordforråd: kinesisk <-> norsk og lyd -> bilde */
 const allNames = A.GEO_2D.concat(A.GEO_3D);
@@ -209,14 +210,31 @@ def('g_listen', () => allNames.map(n => choice('g_listen:' + n, 1, A.GEO_2D.incl
   options:shuffle([n].concat(sample((A.GEO_2D.includes(n) ? A.GEO_2D : A.GEO_3D).filter(x => x !== n), 3))).map(o => ({html:fig(nameSvg(o), 'md'), value:o})), answer:n,
   fb:FB(`Det var «${n}».`, `刚才是[${n}]（${NM[n].zh}）。`), sayAfter:n}), {speech:true})));
 
-/* begreper (som i substantiv-delen) */
+/* begreper (som i substantiv-delen). tegning -> ord bruker bare begreper som ikke kan forveksles */
+const PIC_GROUPS = [['trekant', 'firkant', 'femkant', 'sirkel', 'kvadrat', 'rektangel'], ['kube', 'prisme', 'pyramide', 'sylinder', 'kule'], ['rett', 'spiss', 'stump'], ['kant', 'hjorne', 'flate', 'nett'], ['todim', 'tredim']];
+const QUAD3 = ['firkant', 'kvadrat', 'rektangel'];
+function picOptions(t, grp){
+  let pool = grp.filter(k => k !== t.key);
+  if(QUAD3.includes(t.key)) pool = pool.filter(k => !QUAD3.includes(k));       // en firkant kan også være kvadrat/rektangel
+  else pool = pool.filter(k => !QUAD3.includes(k)).concat(sample(pool.filter(k => QUAD3.includes(k)), 1));
+  let ks = sample(pool, 3);
+  if(grp.length < 4) ks = grp.filter(k => k !== t.key).concat(sample(['kant', 'hjorne', 'flate', 'nett'].filter(k => k !== t.key && !grp.includes(k)), 3 - (grp.length - 1)));
+  return shuffle([t].concat(ks.map(A.geoTerm)));
+}
+
 def('g_meta', () => { const out = [], T = A.GEO_TERMS;
   T.forEach(t => {
     const near = () => { const rest = T.filter(x => x.key !== t.key), low = rest.filter(x => x.mod <= t.mod), high = rest.filter(x => x.mod > t.mod); return sample(low, 3).concat(sample(high, 3)).slice(0, 3); };
     out.push(typed('g_meta:copy:' + t.key, 0, t.mod, () => ({q:Q('Skriv ordet.', '把这个词写下来。'), say:Q('Skriv ordet.', '把这个词写下来。'), word:t.no, visual:`<div><div class="bigword">${t.no}</div><div class="gloss zh">${A.ruby(t.zh, t.py)}</div></div>`,
-      listen:t.no, answers:[t.no.replace(/ \(.*\)/, ''), t.no], ph:'…', fb:FB(`«${t.no}» – ${t.defNo}`, `[${t.no}]（${t.zh}）：${t.defZh}`), sayAfter:t.no})));
+      listen:t.no, answers:[t.no.replace(/ \(.*\)/, ''), t.no], ph:'…', fb:FB(`«${t.no}» – ${t.defNo}`, `[${t.no}]（${t.zh}）：${t.defZh}`), sayAfter:t.no}), {typeOnly:true}));
     out.push(typed('g_meta:dict:' + t.key, 0, t.mod, () => ({q:Q('Hør og skriv ordet.', '听一听，把这个词写下来。'), say:Q('Hør og skriv ordet.', '听一听，把这个词写下来。'), listen:t.no.replace(/ \(.*\)/, ''), visual:`<div class="big-emoji">👂</div>`,
-      answers:[t.no.replace(/ \(.*\)/, ''), t.no], ph:'?', fb:FB(`Ordet er «${t.no}» – ${t.defNo}`, `这个词是[${t.no}]（${t.zh}）：${t.defZh}`), sayAfter:t.no})));
+      answers:[t.no.replace(/ \(.*\)/, ''), t.no], ph:'?', fb:FB(`Ordet er «${t.no}» – ${t.defNo}`, `这个词是[${t.no}]（${t.zh}）：${t.defZh}`), sayAfter:t.no}), {typeOnly:true}));
+    const plain = x => x.no.replace(/ \(.*\)/, '');
+    const grp = PIC_GROUPS.find(g => g.includes(t.key));
+    if(t.art && grp) out.push(choice('g_meta:pic:' + t.key, 0, t.mod, () => ({q:Q('Hvilket ord passer til tegningen?', '哪个词和图画相配？'), say:Q('Hvilket ord passer til tegningen?', '哪个词和图画相配？'), visual:`<div class="termart">${t.artPlain}</div>`, layout:'grid',
+      options:picOptions(t, grp).map(x => ({html:`<span>${plain(x)}</span>`, value:x.key})), answer:t.key, fb:FB(`«${t.no}» – ${t.defNo}`, `[${t.no}]（${t.zh}）：${t.defZh}`), sayAfter:plain(t)})));
+    out.push(choice('g_meta:listen:' + t.key, 0, t.mod, () => ({q:Q('Hør og velg riktig ord.', '听一听，选出正确的词。'), say:Q('Hør og velg riktig ord.', '听一听，选出正确的词。'), listen:plain(t), visual:`<div class="big-emoji">👂</div>`, layout:'grid',
+      options:shuffle([t].concat(near())).map(x => ({html:`<span>${plain(x)}</span>`, value:x.key})), answer:t.key, fb:FB(`Ordet er «${t.no}» – ${t.defNo}`, `这个词是[${t.no}]（${t.zh}）：${t.defZh}`), sayAfter:plain(t)}), {speech:true}));
     out.push(choice('g_meta:def:' + t.key, 0, t.mod, () => ({q:Q(`Hva betyr «${t.no}»?`, `[${t.no}]是什么意思？`), say:Q(`Hva betyr ${t.no}?`, `[${t.no}]是什么意思？`), word:t.no, visual:`<div class="bigword">${t.no}</div>`, layout:'col',
       options:shuffle([t].concat(near())).map(x => ({html:bi(x.defNo, x.defZh), value:x.key})), answer:t.key, fb:FB(`«${t.no}»: ${t.defNo}`, `[${t.no}]：${t.defZh}`), sayAfter:t.no})));
     out.push(choice('g_meta:term:' + t.key, 0, t.mod, () => ({q:Q('Hvilket begrep passer til beskrivelsen?', '哪个术语符合这个说明？'), say:Q('Hvilket begrep passer til beskrivelsen?', '哪个术语符合这个说明？'), visual:`<div class="bigword sm" style="max-width:520px">${bi(t.defNo, t.defZh)}</div>`, layout:'col',
@@ -269,18 +287,19 @@ def('g_sortNets', () => Array.from({length:6}, (_, n) => ({id:'g_sortN:' + n, ki
 }})));
 
 /* ---------- omfattende oppgaver: tabell og gåter ---------- */
+const N15 = Array.from({length:15}, (_, i) => String(i));
 def('g_table3d', () => { const sets = [['kube', 'prisme', 'pyramide'], ['kube', 'pyramide', 'trekantprisme'], ['prisme', 'pyramide', 'trekantprisme'], ['kube', 'prisme', 'trekantprisme'], ['pyramide', 'kube', 'prisme', 'trekantprisme'], ['trekantprisme', 'prisme', 'pyramide', 'kube']];
   return sets.map((s, n) => ({id:'g_t3d:' + n, kind:'grid', lvl:s.includes('trekantprisme') ? 3 : 2, mod:2, make:() => ({
-    title:Q('Hvor mange hjørner, kanter og flater har figurene?', '这些立体图形各有几个顶点、棱和面？'), say:Q('Hvor mange hjørner, kanter og flater har figurene?', '这些立体图形各有几个顶点、棱和面？'),
+    numeric:true, title:Q('Hvor mange hjørner, kanter og flater har figurene?', '这些立体图形各有几个顶点、棱和面？'), say:Q('Hvor mange hjørner, kanter og flater har figurene?', '这些立体图形各有几个顶点、棱和面？'),
     intro:Q('Tips: tenk på en eske. Hjørne = spiss, kant = linje, flate = flat side.', '提示：想一想盒子。顶点=尖角，棱=线，面=平的一面。'),
     head:['<span class="thead">&nbsp;</span>', '<b>hjørner</b><br><span class="z zh">顶点</span>', '<b>kanter</b><br><span class="z zh">棱</span>', '<b>flater</b><br><span class="z zh">面</span>'],
     rows:s.map(k => ({lead:`<span style="display:inline-block;width:78px">${fig(solidSvg(k, 0), 'md').replace('class="fig md"', 'class="fig md" style="width:78px;height:68px"')}</span><b>${k}</b>`, speak:k,
-      cells:[{answers:[String(solidDesc(k).v)], ph:'?'}, {answers:[String(solidDesc(k).e)], ph:'?'}, {answers:[String(solidDesc(k).f)], ph:'?'}]}))}) })); });
+      cells:[{answers:[String(solidDesc(k).v)], opts:N15, ph:'?'}, {answers:[String(solidDesc(k).e)], opts:N15, ph:'?'}, {answers:[String(solidDesc(k).f)], opts:N15, ph:'?'}]}))}) })); });
 def('g_riddleTask', () => { const rs = A.GEO_RIDDLES; return Array.from({length:6}, (_, n) => ({id:'g_rt:' + n, kind:'grid', lvl:n < 3 ? 2 : 3, mod:2, make:() => {
   const rnd = seeded(600 + n * 23), chosen = rs.map(r => [rnd(), r]).sort((a, b) => a[0] - b[0]).slice(0, 5).map(x => x[1]);
-  return {title:Q('Gåter: Hvilken figur er jeg? Skriv navnet.', '谜语：我是什么图形？写出名称。'), say:Q('Gåter: Hvilken figur er jeg? Skriv navnet.', '谜语：我是什么图形？写出名称。'),
-    intro:Q('Tips: tenk på flater, hjørner og kanter.', '提示：想一想面、顶点和棱。'),
-    head:null, rows:chosen.map(r => ({lead:`<span style="white-space:normal;display:block;min-width:200px">${bi(r.no.replace(' Hvilken figur er jeg?', ''), r.zh.replace(/我是什么.*$/, ''))}</span>`, cells:[{answers:[r.ans].concat(r.alts || []), ph:'…'}]}))};
+  return {title:Q('Gåter: Hvilken figur er jeg? Velg navnet.', '谜语：我是什么图形？选出名称。'), say:Q('Gåter: Hvilken figur er jeg? Velg navnet.', '谜语：我是什么图形？选出名称。'),
+    intro:Q('Tips: tenk på flater, hjørner og kanter. Velg navnet i listen.', '提示：想一想面、顶点和棱。在列表里选出名称。'),
+    head:null, rows:chosen.map(r => ({lead:`<span style="white-space:normal;display:block;min-width:200px">${bi(r.no.replace(' Hvilken figur er jeg?', ''), r.zh.replace(/我是什么.*$/, ''))}</span>`, cells:[{answers:[r.ans].concat(r.alts || []), opts:r.set, choiceOnly:true, ph:'…'}]}))};
 }})); });
 
 /* ---------- tegning på prikkpapir ---------- */
@@ -321,8 +340,26 @@ def('g_angleTap', () => { const out = []; ['rett', 'spiss', 'stump'].forEach((t,
     hint:Q(`${AK[t][0].charAt(0).toUpperCase() + AK[t][0].slice(1)}: ${AK[t][2]}`, `${AK[t][1]}：${AK[t][3]}`)};
 }}))); return out; });
 
-/* ---------- fri skriving: tau-oppgaven ---------- */
-def('g_rope', () => [[8, 2], [10, 3], [12, 4], [14, 5]].map(([tot, side], n) => ({id:'g_rope:' + n, kind:'free', lvl:3, mod:5, make:() => ({
+/* ---------- tau-oppgaven: flervalg, eller fri skriving (tall) ---------- */
+const ROPES = [[8, 2], [10, 3], [12, 4], [14, 5]];
+const ropeOk = (v, side, tot) => { const all = v.concat([side]), mx = Math.max(...all); return v.reduce((a, b) => a + b, 0) + side === tot && v.every(x => x >= 1) && mx < tot - mx; };
+const ropeMC = ROPES.map(([tot, side], n) => choice('g_ropeMC:' + n, 3, 5, () => {
+  const rest = tot - side, good = [], badSum = [], badLong = [];
+  for(let a = 1; a <= rest; a++) for(let b = a; b <= rest; b++){
+    const c = rest - a - b; if(c >= b){ (ropeOk([a, b, c], side, tot) ? good : badLong).push([a, b, c]); }
+    for(const d of [-2, -1, 1, 2]){ const c2 = rest - a - b + d; if(c2 >= b && c2 >= 1) badSum.push([a, b, c2]); } }
+  const pickN = (arr, k) => sample(arr, k), g = pick(good);
+  let wrong = pickN(badSum, 2).concat(pickN(badLong, 1)); if(wrong.length < 3) wrong = wrong.concat(pickN(badSum, 3 - wrong.length));
+  const key = t => t.join(',');
+  const seen = new Set([key(g)]); wrong = wrong.filter(t => { if(seen.has(key(t))) return false; seen.add(key(t)); return true; });
+  while(wrong.length < 3) { const t = [1 + Math.floor(Math.random() * 3), 1 + Math.floor(Math.random() * 4), 1 + Math.floor(Math.random() * 5)].sort(); if(!seen.has(key(t)) && !ropeOk(t, side, tot)){ seen.add(key(t)); wrong.push(t); } }
+  const fmtT = t => `${t[0]} m, ${t[1]} m og ${t[2]} m`;
+  return {q:Q(`Mira, Mattis, Jon og Olga lager en firkant av et ${tot} m langt tau. Den ene siden er ${side} m. Hvilke lengder kan de tre andre sidene ha?`, `米拉、马蒂斯、约恩和奥尔加用一根 ${tot} 米长的绳子围成一个四边形。其中一条边是 ${side} 米。其余三条边可以是哪一组长度？`),
+    say:Q(`Et tau er ${tot} meter. Du lager en firkant. Den ene siden er ${side} meter. Hvilke lengder kan de tre andre sidene ha?`, `绳子长 ${tot} 米。围成四边形，其中一条边是 ${side} 米。其余三条边可以是哪一组？`),
+    layout:'col', options:shuffle([g].concat(wrong)).map(t => ({html:`<span style="font-size:1.4rem">${fmtT(t)}</span>`, value:key(t)})), answer:key(g),
+    fb:FB(`Alle fire sidene skal til sammen bli ${tot} m: ${side} + ${g.join(' + ')} = ${tot}. Og ingen side kan være lengre enn summen av de andre.`, `四条边加起来要等于 ${tot} 米：${side} + ${g.join(' + ')} = ${tot}。而且最长的边不能比其余几条边加起来更长。`)};
+}, {choiceOnly:true}));
+def('g_rope', () => ropeMC.concat(ROPES.map(([tot, side], n) => ({id:'g_rope:' + n, kind:'free', typeOnly:true, lvl:3, mod:5, make:() => ({
   title:Q(`Mira, Mattis, Jon og Olga lager en firkant av et ${tot} m langt tau. Den ene siden er ${side} m. Hvor lange kan de andre sidene være? Finn to løsninger.`,
     `米拉、马蒂斯、约恩和奥尔加用一根 ${tot} 米长的绳子围成一个四边形。其中一条边是 ${side} 米。其余三条边可以有多长？找出两种答案。`),
   say:Q(`Et tau er ${tot} meter. Du lager en firkant. Den ene siden er ${side} meter. Hvor lange kan de andre sidene være?`, `绳子长 ${tot} 米。围成四边形，其中一条边是 ${side} 米。其余三条边可以多长？`),
@@ -332,7 +369,7 @@ def('g_rope', () => [[8, 2], [10, 3], [12, 4], [14, 5]].map(([tot, side], n) => 
     const sum = v.reduce((a, b) => a + b, 0) + side; if(sum !== tot) return {ok:false, no:`Sidene blir til sammen ${sum} m. Det skal være ${tot} m.`, zh:`四条边加起来是 ${sum} 米，应该是 ${tot} 米。`};
     const all = v.concat([side]), mx = Math.max(...all); if(mx >= tot - mx) return {ok:false, no:'Den lengste siden er for lang. Da lukker ikke firkanten seg.', zh:'最长的边太长了，四边形围不起来。'};
     return {ok:true, key:v.slice().sort().join(',')}; },
-  fbWin:FB('Flott! Det finnes mange løsninger.', '太棒了！答案不止一种。')})})));
+  fbWin:FB('Flott! Det finnes mange løsninger.', '太棒了！答案不止一种。')})}))));
 
 /* ---------- renderers ---------- */
 const head = spec => `<div class="qtext"><span class="grow">${bi(spec.title.no, spec.title.zh)}</span><button class="spk say" type="button" title="Les opp">🔊</button></div>`;

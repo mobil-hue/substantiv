@@ -21,7 +21,8 @@ Ex.names = () => Object.keys(defs);
 const prio = it => { const s = stats[it.id]; return (s ? s.s*0.8 - s.m*1.6 : 0) + Math.random()*2; };
 function passes(it, o){
   return (it.lvl || 0) <= (o.maxLvl == null ? 3 : o.maxLvl) && (it.mod || 0) <= (o.maxMod == null ? 9 : o.maxMod)
-    && !(it.speech && !A.Speech.supported) && !(it.zhOnly && A.settings.lang === 'no');
+    && !(it.speech && !A.Speech.supported) && !(it.zhOnly && A.settings.lang === 'no')
+    && !(it.typeOnly && A.prefs.input === 'choice') && !(it.choiceOnly && A.prefs.input === 'type');
 }
 function takeFrom(name, o, used){
   const c = Ex.items(name).filter(it => passes(it, o) && !used.has(it.id));
@@ -54,7 +55,7 @@ Ex.drawOne = function(spec, recent){
 Ex.counts = function(){
   const out = {small:0, task:0, pools:{}};
   Ex.names().forEach(n => {
-    const it = Ex.items(n); const task = it.length && !['choice','type'].includes(it[0].kind);
+    const it = Ex.items(n); const task = it.length && !['choice','type','num'].includes(it[0].kind);
     out.pools[n] = {n:it.length, task};
     if(task) out.task += it.length; else out.small += it.length;
   });
@@ -145,7 +146,8 @@ def('cat', () => {
   return WS.map(w => mk(w.no, w.no, w.zh, w.emoji, w.cat, w.lvl)).concat(A.NAMES.map(n => mk(n.no, n.no, n.zh, emo[n.no], n.type, 1, true)));
 });
 
-/* begreper: skriv, hør og skriv, norsk→kinesisk, kinesisk→norsk, + farger */
+/* begreper: skriv, hør og skriv, tegning, norsk→kinesisk, kinesisk→norsk, + farger */
+const PIC_GROUPS = [['substantiv', 'verb', 'adjektiv', 'egennavn'], ['stor', 'liten', 'egennavn', 'substantiv'], ['artikkel', 'en-ord', 'ei-ord', 'et-ord'], ['entall', 'flertall', 'ubestemt', 'bestemt'], ['ue', 'be', 'uf', 'bf']];
 def('meta', () => {
   const out = [];
   A.TERMS.forEach(t => {
@@ -163,6 +165,13 @@ def('meta', () => {
       q:Q('Hør og skriv ordet.','听一听，把这个词写下来。'), say:Q('Hør og skriv ordet.','听一听，把这个词写下来。'), listen:t.no,
       visual:`<div class="big-emoji">👂</div>`, answers:[t.no], ph:'?',
       fb:FB(`Ordet er «${t.no}» – ${t.defNo}`, `这个词是[${t.no}]（${t.zh}）：${t.defZh}`), sayAfter:t.no
+    })));
+    const grp = PIC_GROUPS.find(g => g.includes(t.key));
+    if(t.artPlain && grp) out.push(choice('meta:pic:' + t.key, 0, t.mod, () => ({
+      q:Q('Hvilket begrep passer til tegningen?', '哪个术语和图画相配？'), say:Q('Hvilket begrep passer til tegningen?', '哪个术语和图画相配？'),
+      visual:`<div class="termart">${t.artPlain}</div>`, layout:'grid',
+      options:shuffle([t.key].concat(sample(grp.filter(k => k !== t.key), 3))).map(k => ({html:`<span>${A.term(k).no}</span>`, value:k})), answer:t.key,
+      fb:FB(`Det er «${t.no}» – ${t.defNo}`, `这是[${t.no}]（${t.zh}）：${t.defZh}`), sayAfter:t.no
     })));
     out.push(choice('meta:def:' + t.key, 0, t.mod, () => ({
       q:Q(`Hva betyr «${t.no}»?`, `[${t.no}]是什么意思？`), say:Q(`Hva betyr ${t.no}?`, `[${t.no}]是什么意思？`), word:t.no,
@@ -528,11 +537,28 @@ Ex.speakSpec = function(spec){
   if(spec.word) segs.push(...A.parseSegs(spec.word, 'no'));
   return A.say(segs);
 };
+const autoSpeak = spec => { if(A.settings.auto && !Ex.silent) Ex.speakSpec(spec); };
 function keysRow(getInput){
   const d = A.h('div', {class:'keys'});
   ['æ','ø','å'].forEach(ch => d.append(A.h('button', {type:'button', onclick:() => { const i = getInput(); if(!i || i.readOnly) return; i.focus(); const p = i.selectionStart || i.value.length; i.value = i.value.slice(0, p) + ch + i.value.slice(p); i.setSelectionRange(p+1, p+1); }}, ch)));
   return d;
 }
+// tallknapper (til regneoppgaver): 0-9, slett og OK
+function keypad(getInput, onOk){
+  const d = A.h('div', {class:'kpad'});
+  const put = ch => { const i = getInput(); if(!i || i.dataset.done) return;
+    if(ch === 'del') i.value = i.value.slice(0, -1); else if(i.value.length < 7) i.value += ch;
+    i.dispatchEvent(new Event('input', {bubbles:true})); };
+  [1, 2, 3, 4, 5, 6, 7, 8, 9].forEach(n => d.append(A.h('button', {type:'button', class:'key', onclick:() => put(String(n))}, String(n))));
+  d.append(A.h('button', {type:'button', class:'key del', onclick:() => put('del')}, '⌫'));
+  d.append(A.h('button', {type:'button', class:'key', onclick:() => put('0')}, '0'));
+  d.append(A.h('button', {type:'button', class:'key ok', onclick:() => { if(onOk) onOk(); }}, 'OK'));
+  return d;
+}
+const normNum = s => String(s).replace(/[\s\u00a0\u202f]/g, '').replace(',', '.');
+// svarmåte: flervalg, skriv inn eller tilfeldig (valgt i innstillingene)
+Ex.inputMode = () => A.prefs.input === 'mix' ? (Math.random() < .5 ? 'choice' : 'type') : (A.prefs.input || 'choice');
+Ex.fmtNum = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
 const head = (spec, extra) => `<div class="qtext"><span class="grow">${bi(spec.q ? spec.q.no : spec.title.no, spec.q ? spec.q.zh : spec.title.zh)}</span><button class="spk say" type="button" title="Les opp">🔊</button></div>${extra || ''}`;
 
 function renderChoice(spec, host, ctx){
@@ -551,33 +577,38 @@ function renderChoice(spec, host, ctx){
     };
     btns.push(b); box.append(b);
   });
-  if(A.settings.auto) Ex.speakSpec(spec);
+  autoSpeak(spec);
 }
 
 function renderType(spec, host, ctx){
   host.innerHTML = `<div class="qcard">${head(spec)}<div class="visual">${spec.visual || ''}</div>
-    <div class="typebox"><input class="ans" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="${spec.ph || ''}"><button class="btn check" type="button"><span class="bi"><span class="no">Sjekk ✔</span><span class="zh">检查</span></span></button></div>
+    <div class="typebox"><input class="ans${spec.numeric ? ' num' : ''}" type="text"${spec.numeric ? ' inputmode="numeric" pattern="[0-9]*" readonly' : ''} autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="${spec.ph || ''}"><button class="btn check" type="button"><span class="bi"><span class="no">Sjekk ✔</span><span class="zh">检查</span></span></button></div>
     <div class="keys-host"></div><div class="hint"></div></div>`;
   const inp = host.querySelector('input'), hintEl = host.querySelector('.hint'); let tries = 0, done = false;
-  host.querySelector('.keys-host').append(keysRow(() => inp));
   host.querySelector('.say').onclick = () => Ex.speakSpec(spec);
   const ans = spec.answers[0];
+  const nf = spec.numeric ? normNum : (v => norm(v, spec.caseSensitive));
+  host.querySelector('.keys-host').append(spec.numeric ? keypad(() => inp, () => doCheck()) : keysRow(() => inp));
   const doCheck = () => {
     if(done) return;
-    const v = norm(inp.value, spec.caseSensitive); if(!v) return;
-    const ok = spec.answers.some(a => norm(a, spec.caseSensitive) === v);
+    const v = nf(inp.value); if(!v) return;
+    const ok = spec.answers.some(a => nf(a) === v);
     if(ok){
-      done = true; inp.classList.add('ok'); inp.readOnly = true;
+      done = true; inp.classList.add('ok'); inp.readOnly = true; inp.dataset.done = '1';
       ctx.result({score:tries === 0 ? 1 : 0, ok:tries === 0, retryOk:tries > 0, fb:spec.fb, say:spec.sayAfter});
     } else {
       tries++; inp.classList.remove('shake'); void inp.offsetWidth; inp.classList.add('shake');
       if(tries === 1){
         inp.classList.add('bad');
-        const hintTxt = ans.slice(0, 1) + ' ' + Array.from(ans.slice(1)).map(c => c === ' ' ? '  ' : '_').join(' ');
-        hintEl.innerHTML = `💡 ${bi('Nesten! Prøv en gang til.','差一点！再试一次。')} <b style="letter-spacing:2px">${hintTxt}</b>`;
-        inp.focus();
+        if(spec.hintHtml) hintEl.innerHTML = `💡 ${bi('Nesten! Prøv en gang til.','差一点！再试一次。')}<div style="margin-top:6px">${spec.hintHtml}</div>`;
+        else if(spec.numeric) hintEl.innerHTML = `💡 ${bi('Nesten! Tenk deg om og prøv en gang til.','差一点！再想一想，再试一次。')}`;
+        else {
+          const hintTxt = ans.slice(0, 1) + ' ' + Array.from(ans.slice(1)).map(c => c === ' ' ? '  ' : '_').join(' ');
+          hintEl.innerHTML = `💡 ${bi('Nesten! Prøv en gang til.','差一点！再试一次。')} <b style="letter-spacing:2px">${hintTxt}</b>`;
+        }
+        if(!spec.numeric) inp.focus();
       } else {
-        done = true; inp.value = ans; inp.classList.add('bad'); inp.readOnly = true;
+        done = true; inp.value = ans; inp.classList.add('bad'); inp.readOnly = true; inp.dataset.done = '1';
         ctx.result({score:0, ok:false, fb:spec.fb, say:spec.sayAfter});
       }
     }
@@ -585,17 +616,31 @@ function renderType(spec, host, ctx){
   host.querySelector('.check').onclick = doCheck;
   inp.addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); doCheck(); } });
   inp.addEventListener('input', () => inp.classList.remove('bad'));
-  if(A.settings.auto) Ex.speakSpec(spec);
-  setTimeout(() => { try{ inp.focus(); }catch(e){} }, 50);
+  if(spec.numeric){
+    // tallfelt: skjermtastatur, men fysisk tastatur virker også
+    const onKey = e => { if(!document.body.contains(inp)){ document.removeEventListener('keydown', onKey); return; }
+      if(done || e.ctrlKey || e.metaKey) return;
+      if(/^\d$/.test(e.key)){ if(inp.value.length < 7) inp.value += e.key; inp.classList.remove('bad'); }
+      else if(e.key === 'Backspace'){ inp.value = inp.value.slice(0, -1); }
+      else if(e.key === 'Enter'){ if(e.target === inp) return; e.preventDefault(); doCheck(); } };
+    document.addEventListener('keydown', onKey);
+  }
+  autoSpeak(spec);
+  if(!spec.numeric) setTimeout(() => { try{ inp.focus(); }catch(e){} }, 50);
 }
 
 function renderGrid(spec, host, ctx){
-  const cs = !!spec.caseSensitive;
+  const cs = !!spec.caseSensitive, mode = Ex.inputMode();
+  const useSel = c => !!c.opts && (!!c.choiceOnly || mode === 'choice');
+  const lock = el => { if(el.tagName === 'SELECT') el.disabled = true; else el.readOnly = true; };
   let html = `<div class="qcard">${head(spec, spec.intro ? `<div class="small-note">${bi(spec.intro.no, spec.intro.zh)}</div>` : '')}<div class="tblwrap"><table class="tbl">`;
   if(spec.head) html += `<tr>${spec.head.map(h => `<th>${h}</th>`).join('')}</tr>`;
   spec.rows.forEach((r, ri) => {
     html += `<tr><td class="lead">${r.speak ? `<button class="spk rs" type="button" data-s="${A.esc(r.speak)}">🔊</button> ` : ''}${r.lead || ''}</td>`;
-    r.cells.forEach((c, ci) => { html += c.answers ? `<td><input class="ans" data-r="${ri}" data-c="${ci}" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="${c.ph || ''}"></td>` : `<td>${c.html}</td>`; });
+    r.cells.forEach((c, ci) => {
+      if(!c.answers) html += `<td>${c.html}</td>`;
+      else if(useSel(c)) html += `<td><select class="ans sel" data-r="${ri}" data-c="${ci}"><option value="">?</option>${c.opts.map(o => `<option value="${A.esc(o)}">${A.esc(o)}</option>`).join('')}</select></td>`;
+      else html += `<td><input class="ans" data-r="${ri}" data-c="${ci}"${spec.numeric ? ' inputmode="numeric"' : ''} autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="${c.ph || ''}"></td>`; });
     html += '</tr>';
   });
   html += `</table></div><div class="keys-host"></div><div class="hint"></div>
@@ -605,15 +650,16 @@ function renderGrid(spec, host, ctx){
   host.querySelector('.say').onclick = () => Ex.speakSpec(spec);
   host.querySelectorAll('.rs').forEach(b => b.onclick = () => A.sayNo(b.dataset.s));
   const inputs = []; let last = null;
-  host.querySelectorAll('input.ans').forEach(el => {
+  host.querySelectorAll('.ans').forEach(el => {
     const r = spec.rows[+el.dataset.r], c = r.cells[+el.dataset.c];
     inputs.push({el, answers:c.answers, done:false, row:r});
     el.addEventListener('focus', () => last = el);
     el.addEventListener('input', () => el.classList.remove('bad'));
+    el.addEventListener('change', () => el.classList.remove('bad'));
   });
-  host.querySelector('.keys-host').append(keysRow(() => last || (inputs[0] && inputs[0].el)));
+  if(!spec.numeric && inputs.some(i => i.el.tagName === 'INPUT')) host.querySelector('.keys-host').append(keysRow(() => last || (inputs.find(i => i.el.tagName === 'INPUT') || {}).el));
   const hintEl = host.querySelector('.hint'); let attempt = 0, first = 0, second = 0, finished = false;
-  host.querySelector('.hintbtn').onclick = () => { inputs.filter(i => !i.done && !i.el.value).forEach(i => i.el.placeholder = i.answers[0].slice(0, 1) + '…'); };
+  host.querySelector('.hintbtn').onclick = () => { inputs.filter(i => !i.done && !i.el.value && i.el.tagName === 'INPUT').forEach(i => i.el.placeholder = i.answers[0].slice(0, 1) + '…'); };
   function finish(){
     finished = true; host.querySelectorAll('button.check,button.hintbtn').forEach(b => b.disabled = true);
     if(spec.revealEmoji) spec.rows.forEach((r, i) => { if(r.reveal) host.querySelectorAll('tr')[i + (spec.head ? 1 : 0)].querySelector('.lead').insertAdjacentHTML('beforeend', `<span style="font-size:1.8rem"> ${r.reveal}</span>`); });
@@ -626,17 +672,17 @@ function renderGrid(spec, host, ctx){
     if(pend.some(i => !i.el.value.trim()) && attempt === 1){ hintEl.innerHTML = '✏️ ' + bi('Fyll ut alle feltene først.','请先把每一格都填上。'); attempt--; return; }
     pend.forEach(i => {
       const v = norm(i.el.value, cs);
-      if(i.answers.some(a => norm(a, cs) === v)){ i.done = true; i.el.classList.remove('bad'); i.el.classList.add('ok'); i.el.readOnly = true; attempt === 1 ? first++ : second++; }
+      if(i.answers.some(a => norm(a, cs) === v)){ i.done = true; i.el.classList.remove('bad'); i.el.classList.add('ok'); lock(i.el); attempt === 1 ? first++ : second++; }
       else { i.el.classList.add('bad'); i.el.classList.remove('shake'); void i.el.offsetWidth; i.el.classList.add('shake'); }
     });
     const left = inputs.filter(i => !i.done);
     if(!left.length) return finish();
-    if(attempt >= 2){ left.forEach(i => { i.el.value = i.answers[0]; i.el.readOnly = true; }); return finish(); }
+    if(attempt >= 2){ left.forEach(i => { i.el.value = i.answers[0]; lock(i.el); }); return finish(); }
     hintEl.innerHTML = '🔴 ' + bi('Rett opp de røde feltene og sjekk igjen.','请改正红色的格子，再检查一次。');
   };
   host.querySelector('.check').onclick = check;
   host.addEventListener('keydown', e => { if(e.key === 'Enter' && e.target.tagName === 'INPUT'){ e.preventDefault(); check(); } });
-  if(A.settings.auto) Ex.speakSpec(spec);
+  autoSpeak(spec);
 }
 
 function renderFind(spec, host, ctx){
@@ -665,7 +711,7 @@ function renderFind(spec, host, ctx){
     host.querySelector('.hint').innerHTML = spec.note ? '💡 ' + bi(spec.note.no, spec.note.zh) : '';
     ctx.result({score:sc, ok:sc >= 0.8, fb:null, say:plain, extra:`${hit}/${nMark}`});
   };
-  if(A.settings.auto) Ex.speakSpec(spec);
+  autoSpeak(spec);
 }
 
 function renderSort(spec, host, ctx){
@@ -715,7 +761,7 @@ function renderSort(spec, host, ctx){
   }
   items.forEach(i => i.state = '');
   draw();
-  if(A.settings.auto) Ex.speakSpec(spec);
+  autoSpeak(spec);
 }
 
 function renderBuild(spec, host, ctx){
@@ -742,7 +788,7 @@ function renderBuild(spec, host, ctx){
     draw(); hintEl.innerHTML = '🔴 ' + bi('Nesten! Trykk på de røde ordene for å flytte dem.','差一点！点红色的词重新摆放。');
   };
   draw();
-  if(A.settings.auto) Ex.speakSpec(spec);
+  autoSpeak(spec);
 }
 
 Ex.renderers = {choice:renderChoice, type:renderType, grid:renderGrid, find:renderFind, sort:renderSort, build:renderBuild};
@@ -750,5 +796,5 @@ Ex.render = function(item, host, ctx){
   const spec = item.make();
   Ex.renderers[item.kind](spec, host, ctx);
 };
-Ex.def = def; Ex.keysRow = keysRow; Ex.norm = norm; Ex.Q = Q; Ex.FB = FB;
+Ex.def = def; Ex.keysRow = keysRow; Ex.keypad = keypad; Ex.normNum = normNum; Ex.norm = norm; Ex.Q = Q; Ex.FB = FB; Ex.head = head;
 })();
