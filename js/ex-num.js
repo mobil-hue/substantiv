@@ -143,16 +143,18 @@ function renderCalc(spec, host, ctx){
   const wrap = {result:r => { resolved = true; const t = host.querySelector('.gtoggle'); if(t) t.remove(); ctx.result(r); }};
   const draw = silent => {
     Ex.silent = !!silent;
+    const guided = A.prefs.guide && !spec.noGuide;
     try{
-      if(A.prefs.guide) renderSteps(spec, host, wrap);
+      if(guided) renderSteps(Object.assign({}, spec, {q:null}), host, wrap);
       else {
-        const free = Object.assign({}, spec, {visual:spec.board0 || spec.visual || '', retry:true,
+        const free = Object.assign({}, spec, {say:spec.qsay || spec.say, visual:spec.visual || spec.board0 || '', retry:true,
           hintHtml:`<div>${bi('Tips: trykk «Trinn for trinn» for å få hjelp.', '提示：点“一步一步”可以得到帮助。')}</div>`});
         renderNum(free, host, wrap);
       }
     } finally { Ex.silent = false; }
-    const card = host.querySelector('.qcard'), t = A.h('button', {class:'pill gtoggle' + (A.prefs.guide ? ' on' : ''), type:'button',
-      html:`🪜 ${A.prefs.guide ? 'Trinn for trinn: på · 一步一步：开' : 'Trinn for trinn: av · 一步一步：关'}`});
+    if(spec.noGuide) return;
+    const card = host.querySelector('.qcard'), t = A.h('button', {class:'pill gtoggle' + (guided ? ' on' : ''), type:'button',
+      html:`🪜 <span class="no">${guided ? 'Trinn for trinn: på' : 'Trinn for trinn: av'}</span><span class="zh">${guided ? ' 一步一步：开' : ' 一步一步：关'}</span>`});
     t.onclick = () => { if(resolved) return; A.prefs.guide = !A.prefs.guide; A.savePrefs(); A.Speech.stop(); draw(true); };
     card.insertBefore(t, card.querySelector('.visual') || card.firstChild.nextSibling);
   };

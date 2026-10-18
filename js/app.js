@@ -3,18 +3,27 @@
 const A = window.App;
 const {h, bi, shuffle, pick} = A;
 const app = document.getElementById('app');
-const GEO = window.SUBJECT === 'geo';
-const MODS = GEO ? A.GEO_MODULES : A.MODULES, ROOMS = GEO ? A.GEO_ROOM : A.ROOM, TERMS = GEO ? A.GEO_TERMS : A.TERMS;
+const SUBJ = A.subject;
+const CFG = {
+  noun:{MODS:A.MODULES, ROOMS:A.ROOM, TERMS:A.TERMS, PKEY:'progress', TKEY:'termKnow'},
+  geo:{MODS:A.GEO_MODULES, ROOMS:A.GEO_ROOM, TERMS:A.GEO_TERMS, PKEY:'progress_geo', TKEY:'termKnow_geo'},
+  mult:{MODS:A.MULT_MODULES, ROOMS:A.MULT_ROOM, TERMS:A.MULT_TERMS, PKEY:'progress_mult', TKEY:'termKnow_mult'}
+}[SUBJ];
+const MODS = CFG.MODS, ROOMS = CFG.ROOMS, TERMS = CFG.TERMS, PKEY = CFG.PKEY, TKEY = CFG.TKEY;
 const termOf = k => TERMS.find(t => t.key === k);
-const PKEY = GEO ? 'progress_geo' : 'progress', TKEY = GEO ? 'termKnow_geo' : 'termKnow';
 A.progress = A.store.get(PKEY, {});
 const termKnow = A.store.get(TKEY, {});
 const lnk = (href, no, zh, blank) => `<a class="btn sec" href="${href}"${blank ? ' target="_blank"' : ''} style="text-decoration:none"><span class="bi"><span class="no">${no}</span><span class="zh">${zh}</span></span></a>`;
-const INFO = GEO
-  ? {emoji:'📐', no:'Lær geometri!', zh:'学习几何！', sub:['Se figurer, tegn, tell og øv!', '看图形、画一画、数一数、多练习！'], home:'figur', cls:'', test:['Hei! Dette er geometri. En trekant, en kube, en rett vinkel.', '你好！我们来学习几何。'],
-     links:lnk('geo-ark.html', '📝 Skriveark (skriv ut)', '练习纸（打印）') + lnk('docs/geometri-jukselapp.pdf', '🧾 Jukselapp (PDF)', '速查表（PDF）', true) + lnk('geometri-laerer.html', '👩‍🏫 Lærer / fasit', '教师页 / 答案') + lnk('gange.html', '✖️ Gange', '乘法') + lnk('index.html', '📘 Substantiv', '名词（挪威语语法）')}
-  : {emoji:'📘', no:'Lær substantiv!', zh:'学习名词！', sub:['Litt hver dag. Se, hør, skriv og øv!', '每天一点点。看、听、写、练！'], home:'substantiv', cls:'', test:['Hei! Dette er substantiv. En hund, ei jente, et hus.', '你好！我们来学习名词。'],
-     links:lnk('ark.html', '📝 Skriveark (skriv ut)', '练习纸（打印）') + lnk('docs/substantiv-jukselapp.pdf', '🧾 Jukselapp (PDF)', '速查表（PDF）', true) + lnk('docs/substantiv-boyingstabell.pdf', '📊 Bøyingstabell (PDF)', '变形表（PDF）', true) + lnk('teacher.html', '👩‍🏫 Lærer / fasit', '教师页 / 答案') + lnk('gange.html', '✖️ Gange', '乘法') + lnk('geometri.html', '📐 Geometri', '几何（数学）')};
+const INFO = {
+  noun:{emoji:'📘', no:'Lær substantiv!', zh:'学习名词！', sub:['Litt hver dag. Se, hør, skriv og øv!', '每天一点点。看、听、写、练！'], home:'substantiv', cls:'', test:['Hei! Dette er substantiv. En hund, ei jente, et hus.', '你好！我们来学习名词。'],
+    links:lnk('ark.html', '📝 Skriveark (skriv ut)', '练习纸（打印）') + lnk('docs/substantiv-jukselapp.pdf', '🧾 Jukselapp (PDF)', '速查表（PDF）', true) + lnk('docs/substantiv-boyingstabell.pdf', '📊 Bøyingstabell (PDF)', '变形表（PDF）', true) + lnk('teacher.html', '👩‍🏫 Lærer / fasit', '教师页 / 答案') + lnk('index.html', '🏠 Meny', '主菜单')},
+  geo:{emoji:'📐', no:'Lær geometri!', zh:'学习几何！', sub:['Se figurer, tegn, tell og øv!', '看图形、画一画、数一数、多练习！'], home:'figur', cls:'', test:['Hei! Dette er geometri. En trekant, en kube, en rett vinkel.', '你好！我们来学习几何。'],
+    links:lnk('geo-ark.html', '📝 Skriveark (skriv ut)', '练习纸（打印）') + lnk('docs/geometri-jukselapp.pdf', '🧾 Jukselapp (PDF)', '速查表（PDF）', true) + lnk('geometri-laerer.html', '👩‍🏫 Lærer / fasit', '教师页 / 答案') + lnk('index.html', '🏠 Meny', '主菜单')},
+  mult:{emoji:'✖️', no:'Lær å gange!', zh:'学习乘法！', sub:['Lær knepene, regn trinn for trinn og øv mye!', '学会小窍门，一步一步地算，多多练习！'], home:'gange', cls:'', test:['Hei! Dette er gange. Tre ganger fire er tolv.', '你好！我们来学习乘法。三乘以四等于十二。'],
+    hub:`<div class="card drillcard"><div class="grow"><h2 style="margin:0">🏋️ ${bi('Mengdetrening','大量练习')}</h2><div>${bi('Øv og øv! Velg tall, tekst eller tale, og flervalg eller skriv inn.','练了又练！选择数字、文字或语音，选择题或输入答案。')}</div></div>
+      <div class="row"><a class="btn big" href="#/drill" style="text-decoration:none"><span class="bi"><span class="no">▶ Start</span><span class="zh">开始</span></span></a><a class="btn sec" href="#/stats" style="text-decoration:none"><span class="bi"><span class="no">📊 Statistikk</span><span class="zh">统计</span></span></a></div></div>`,
+    links:lnk('multiplikasjon-laerer.html', '👩‍🏫 Lærer / fasit', '教师页 / 答案') + lnk('docs/gange-jukselapp.pdf', '🧾 Jukselapp (PDF)', '速查表（PDF）', true) + lnk('index.html', '🏠 Meny', '主菜单')}
+}[SUBJ];
 
 const key = (m, i) => `m${m}s${i}`;
 const star = n => '⭐'.repeat(n) + '☆'.repeat(3 - n);
@@ -25,10 +34,15 @@ function nextStep(){
   for(const m of MODS) for(let i = 0; i < m.steps.length; i++) if(!(A.progress[key(m.id, i)] || {}).done) return {m:m.id, i};
   return null;
 }
+// sammendrag til rotmenyen
+function saveSummary(){
+  const total = MODS.reduce((s, m) => s + m.steps.length, 0), done = MODS.reduce((s, m) => s + modDone(m.id), 0);
+  A.store.set('sum_' + A.subject, {done, total});
+}
 function markDone(m, i, stars){
   const k = key(m, i), p = A.progress[k] || {};
   A.progress[k] = {done:true, stars:Math.max(p.stars || 0, stars || 0)};
-  A.store.set(PKEY, A.progress);
+  A.store.set(PKEY, A.progress); saveSummary();
 }
 function leave(){ A.Video.stop(); A.Speech.stop(); if(A._cleanup){ A._cleanup(); A._cleanup = null; } }
 function render(node){ leave(); app.innerHTML = ''; app.append(node); window.scrollTo(0, 0); }
@@ -56,7 +70,7 @@ const INPUTS = [['choice', '✅ Flervalg', '选择题'], ['type', '⌨️ Skriv 
 if(A.subject !== 'noun'){
   const pIn = h('button', {class:'pill', id:'pInput', title:'Svarmåte / 答题方式'});
   document.getElementById('pLang').before(pIn);
-  const syncIn = () => { pIn.textContent = INPUTS.find(x => x[0] === A.prefs.input)[1]; };
+  const syncIn = () => { const t = INPUTS.find(x => x[0] === A.prefs.input)[1], sp = t.indexOf(' '); pIn.innerHTML = t.slice(0, sp) + '<span class="pt">' + t.slice(sp) + '</span>'; };
   pIn.onclick = () => { const i = INPUTS.findIndex(x => x[0] === A.prefs.input); A.prefs.input = INPUTS[(i + 1) % INPUTS.length][0]; A.savePrefs(); syncIn(); };
   A.syncInput = syncIn; syncIn();
 }
@@ -73,6 +87,7 @@ function home(){
     <div class="today"><span class="bigword" style="font-size:2rem">🃏</span><div class="grow" style="flex:1"><div style="font-weight:800;color:var(--muted)">${bi('Dagens begrep','今日概念')}</div>
       <div class="term-big">${term.no} <span class="zh" style="font-size:1.1rem;color:var(--ink)">${A.ruby(term.zh, term.py)}</span></div><div>${bi(term.defNo, term.defZh)}</div></div>
       <button class="spk" id="tspk">🔊</button></div>
+    ${INFO.hub || ''}
     <h2>${bi('Moduler','课程')}</h2><div class="grid" id="mods"></div>
     <div class="links"><button class="btn sec" id="lT"><span class="bi"><span class="no">🃏 Begreper</span><span class="zh">概念卡片</span></span></button>
       <button class="btn sec" id="lP"><span class="bi"><span class="no">🏋️ Øvingsrom</span><span class="zh">练习室</span></span></button>
@@ -147,7 +162,7 @@ function termsView(keys, onDone, titleHtml){
 /* ---------- øktkjører ---------- */
 function Session(o){
   const root = h('div', {class:'session'});
-  const isLoop = !!o.goal, spec = o.spec;
+  const isLoop = !!o.goal || !!o.endless, spec = o.spec || {};
   let queue = isLoop ? null : A.Ex.draw(spec, o.n), initial = queue ? queue.length : 0;
   const st = {correct:0, attempts:0, streak:0, best:0, asked:false, idx:0, recent:[]};
   let cur = null, resolved = false, goal = o.goal;
@@ -161,12 +176,13 @@ function Session(o){
 
   const lvlFor = () => isLoop && o.adaptive ? Math.min(3, (spec.maxLvl || 1) + Math.floor(st.best / 4)) : spec.maxLvl;
   function updateBar(){
-    if(isLoop){ bar.style.width = Math.min(100, st.streak / goal * 100) + '%'; strk.innerHTML = `🔥 ${st.streak}/${goal}` + (st.best >= goal ? ' ' : ''); }
+    if(o.endless){ bar.style.width = (st.attempts % 10) / 10 * 100 + '%'; strk.innerHTML = o.status ? o.status(st) : `🔥 ${st.streak}`; }
+    else if(isLoop){ bar.style.width = Math.min(100, st.streak / goal * 100) + '%'; strk.innerHTML = `🔥 ${st.streak}/${goal}` + (st.best >= goal ? ' ' : ''); }
     else { const total = Math.max(initial, st.idx + queue.length); bar.style.width = (st.idx / total * 100) + '%'; strk.textContent = `${Math.min(st.idx + 1, total)}/${total}`; }
   }
   function show(){
     A.Speech.stop(); fbar.classList.add('hidden'); resolved = false;
-    cur = isLoop ? A.Ex.drawOne(Object.assign({}, spec, {maxLvl:lvlFor()}), st.recent) : queue.shift();
+    cur = o.next ? o.next(st) : isLoop ? A.Ex.drawOne(Object.assign({}, spec, {maxLvl:lvlFor()}), st.recent) : queue.shift();
     if(!cur){ return end(); }
     st.recent.push(cur.id); if(st.recent.length > 8) st.recent.shift();
     updateBar(); stage.innerHTML = '';
@@ -179,6 +195,7 @@ function Session(o){
     st.attempts++; if(ok) st.correct++;
     if(ok){ st.streak++; st.best = Math.max(st.best, st.streak); } else st.streak = 0;
     if(!isLoop){ st.idx++; if(!ok && !cur.retry && ['choice', 'type', 'num'].includes(cur.kind)) queue.push(Object.assign({}, cur, {retry:true})); }
+    if(o.onResult) o.onResult(res, cur, st, ok);
     updateBar();
     const cls = res.score >= 0.8 ? 'good' : res.score >= 0.5 ? 'mid' : 'bad';
     const [okNo, okZh] = A.Ex.msgOk();
@@ -191,7 +208,7 @@ function Session(o){
     let body = `<div><b>${head}</b>`;
     if(res.fb) body += `<div style="margin-top:4px;display:flex;gap:8px;align-items:center"><div style="flex:1">${bi(res.fb.no, res.fb.zh)}</div><button class="spk fbspk" type="button" title="Les opp forklaringen / 朗读解释">🔊</button></div>`;
     if(typeof res.extra === 'string' && res.extra) body += `<div style="margin-top:4px">📝 ${A.esc(res.extra)}</div>`;
-    if(['grid', 'find', 'sort', 'build'].includes(cur.kind)) body += `<div style="margin-top:4px">${Math.round(res.score * 100)}%</div>`;
+    if(['grid', 'find', 'sort', 'build', 'calc'].includes(cur.kind)) body += `<div style="margin-top:4px">${Math.round(res.score * 100)}%</div>`;
     body += '</div>';
     fbar.className = 'fbar ' + cls;
     fbar.innerHTML = `<span class="em">${cls === 'good' ? '🎉' : cls === 'mid' ? '👍' : '💪'}</span><div class="msg">${body}</div><button class="btn next"><span class="bi"><span class="no">Neste ➜</span><span class="zh">下一题</span></span></button>`;
@@ -201,7 +218,7 @@ function Session(o){
     if(res.say) setTimeout(() => A.sayNo(res.say), 250);
   }
   function proceed(){
-    if(isLoop && st.best >= goal && !st.asked){ st.asked = true; return ask(); }
+    if(isLoop && !o.endless && st.best >= goal && !st.asked){ st.asked = true; return ask(); }
     if(!isLoop && !queue.length) return end();
     show();
   }
@@ -232,6 +249,7 @@ function Session(o){
   }
   if(!isLoop && !queue.length){ stage.innerHTML = `<div class="end">${bi('Ingen oppgaver funnet.','没有找到题目。')}</div>`; return; }
   show();
+  return {stats:st};
 }
 
 /* ---------- steg ---------- */
@@ -308,19 +326,22 @@ function settingsView(){
   root.querySelector('#sr').onchange = e => { S.rate = +e.target.value; A.saveSettings(); };
   root.querySelector('#t1').onclick = () => A.sayNo(INFO.test[0]);
   root.querySelector('#t2').onclick = () => A.say(A.parseSegs(INFO.test[1], 'zh'));
-  root.querySelector('#reset').onclick = () => { if(confirm('Nullstille all fremgang? / 要清除所有进度吗？')){ A.progress = {}; A.store.set(PKEY, {}); A.Ex.resetStats(); location.hash = '#/'; route(); } };
+  root.querySelector('#reset').onclick = () => { if(confirm('Nullstille all fremgang? / 要清除所有进度吗？')){ A.progress = {}; A.store.set(PKEY, {}); A.Ex.resetStats(SUBJ === 'mult' ? /^(mf|mm|md|m_)/ : SUBJ === 'geo' ? /^g_/ : undefined); location.hash = '#/'; route(); } };
   render(root);
 }
 
 /* ---------- ruter ---------- */
 function route(){
+  A.store.set('last', {s:A.subject, href:location.pathname.split('/').pop() || 'index.html'}); saveSummary();
   const p = location.hash.replace(/^#\/?/, '').split('/');
-  if(p[0] === 'm' && MODS[+p[1]]) moduleView(+p[1]);
+  if(A.routes && A.routes[p[0]]) A.routes[p[0]](p);
+  else if(p[0] === 'm' && MODS[+p[1]]) moduleView(+p[1]);
   else if(p[0] === 'terms') termsView(null, null);
   else if(p[0] === 'practice') practiceRoom();
   else if(p[0] === 'settings') settingsView();
   else home();
 }
+A.UI = {Session, render, leave, termsView, bi};
 window.addEventListener('hashchange', route);
 A.applyLang(); syncPills(); route();
 })();

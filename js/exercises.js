@@ -12,7 +12,8 @@ Ex.note = function(id, ok){
   s.s++; if(!ok) s.m++;
   A.store.set('stats', stats);
 };
-Ex.resetStats = () => { for(const k in stats) delete stats[k]; A.store.set('stats', stats); };
+Ex.resetStats = re => { for(const k in stats) if(!re || re.test(k)) delete stats[k]; A.store.set('stats', stats); };
+Ex.stat = id => stats[id];
 const def = (name, fn) => { defs[name] = fn; };
 Ex.items = name => cache[name] || (cache[name] = defs[name]());
 Ex.names = () => Object.keys(defs);
@@ -537,7 +538,7 @@ Ex.speakSpec = function(spec){
   if(spec.word) segs.push(...A.parseSegs(spec.word, 'no'));
   return A.say(segs);
 };
-const autoSpeak = spec => { if(A.settings.auto && !Ex.silent) Ex.speakSpec(spec); };
+const autoSpeak = spec => { if((A.settings.auto || spec.forceSpeak) && !Ex.silent) Ex.speakSpec(spec); };
 function keysRow(getInput){
   const d = A.h('div', {class:'keys'});
   ['æ','ø','å'].forEach(ch => d.append(A.h('button', {type:'button', onclick:() => { const i = getInput(); if(!i || i.readOnly) return; i.focus(); const p = i.selectionStart || i.value.length; i.value = i.value.slice(0, p) + ch + i.value.slice(p); i.setSelectionRange(p+1, p+1); }}, ch)));
@@ -794,6 +795,7 @@ function renderBuild(spec, host, ctx){
 Ex.renderers = {choice:renderChoice, type:renderType, grid:renderGrid, find:renderFind, sort:renderSort, build:renderBuild};
 Ex.render = function(item, host, ctx){
   const spec = item.make();
+  if(!host._listenWired){ host._listenWired = true; host.addEventListener('click', e => { const b = e.target.closest('[data-listen]'); if(b){ e.preventDefault(); A.sayNo(b.dataset.listen); } }); }
   Ex.renderers[item.kind](spec, host, ctx);
 };
 Ex.def = def; Ex.keysRow = keysRow; Ex.keypad = keypad; Ex.normNum = normNum; Ex.norm = norm; Ex.Q = Q; Ex.FB = FB; Ex.head = head;

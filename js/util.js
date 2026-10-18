@@ -61,7 +61,7 @@ A.seeded = function(seed){ return function(){ seed |= 0; seed = seed + 0x6D2B79F
 
 // tospråklig tekst. [x] i en streng = norsk ord (leses med norsk stemme, vises fet)
 A.m = s => String(s).replace(/\[([^\]]+)\]/g, '<b class="nw">$1</b>');
-A.bi = (no, zh, cls) => `<span class="bi ${cls||''}"><span class="no">${A.m(no)}</span><span class="zh">${A.m(zh)}</span></span>`;
+A.bi = (no, zh, cls) => String(no).trim() === String(zh).trim() ? `<span class="bi ${cls||''}"><span>${A.m(no)}</span></span>` : `<span class="bi ${cls||''}"><span class="no">${A.m(no)}</span><span class="zh">${A.m(zh)}</span></span>`;
 A.ruby = (zh, py) => py ? `<ruby>${zh}<rt>${py}</rt></ruby>` : zh;
 
 A.h = function(tag, props, ...kids){
@@ -93,6 +93,7 @@ function findVoice(l){
   return null;
 }
 function speakOne(text, l){
+  if(A.spokenMath) text = A.spokenMath(text, l);
   return new Promise(res => {
     if(!supported){ setTimeout(res, 500 + text.length*70); return; }
     const u = new SpeechSynthesisUtterance(text);
