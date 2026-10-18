@@ -23,7 +23,7 @@ const prio = it => { const s = stats[it.id]; return (s ? s.s*0.8 - s.m*1.6 : 0) 
 function passes(it, o){
   return (it.lvl || 0) <= (o.maxLvl == null ? 3 : o.maxLvl) && (it.mod || 0) <= (o.maxMod == null ? 9 : o.maxMod)
     && !(it.speech && !A.Speech.supported) && !(it.zhOnly && A.settings.lang === 'no')
-    && !(it.typeOnly && A.prefs.input === 'choice') && !(it.choiceOnly && A.prefs.input === 'type');
+    && !(it.typeOnly && A.prefs.input !== 'type') && !(it.choiceOnly && A.prefs.input === 'type');
 }
 function takeFrom(name, o, used){
   const c = Ex.items(name).filter(it => passes(it, o) && !used.has(it.id));

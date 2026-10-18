@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Skriveark – Gange 乘法</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+body{font-size:11pt}
+.bar{background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:12px 16px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.bar label{font-weight:800}.bar select{font-size:1rem;padding:4px 8px}
+.sheet{width:210mm;min-height:297mm;padding:11mm 12mm;margin:0 auto 10px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.15);position:relative;page-break-after:always;color:#111}
+.key{display:none}body.show-key .key{display:block}
+.shead{display:flex;justify-content:space-between;align-items:flex-start;gap:6mm;border-bottom:2.5px solid #111;padding-bottom:2mm;margin-bottom:3mm}
+.stitle{display:flex;gap:3mm;align-items:center}.stitle h2{margin:0;font-size:16pt}.stitle .zh,.zh{color:#555}.stitle .zh{font-size:11pt}
+.num{width:11mm;height:11mm;border-radius:50%;border:2.5px solid #111;display:inline-flex;align-items:center;justify-content:center;font-weight:900;font-size:14pt}
+.who{font-size:9.5pt;text-align:right;line-height:2}.ln{display:inline-block;border-bottom:1.5px solid #111;width:42mm}.ln.s{width:22mm}
+.instr{background:#f3f4f6;border-radius:3mm;padding:2.5mm 3.5mm;margin-bottom:3mm;font-size:11pt}
+.ref{border:1.5px dashed #888;border-radius:3mm;padding:2mm 3mm;font-size:9.5pt;margin-bottom:2mm}
+h3{margin:4mm 0 2mm;font-size:12pt;border-bottom:1.5px solid #bbb;padding-bottom:1mm}h3 .zh{font-size:10pt;font-weight:600}
+.ans{color:#dc2626;font-weight:800;font-size:13pt;font-family:"Comic Sans MS","Segoe Print",cursive;white-space:nowrap}
+.eg{display:grid;gap:3.2mm 7mm}.eg.c1{grid-template-columns:1fr}.eg.c2{grid-template-columns:1fr 1fr}.eg.c3{grid-template-columns:repeat(3,1fr)}
+.eq{font-size:13pt;font-weight:700;white-space:nowrap;min-height:9mm;display:flex;align-items:flex-end;gap:2mm}.eq.w{font-size:11.5pt}
+.bl{display:inline-block;border-bottom:1.6px solid #111;height:7mm;vertical-align:bottom}
+.fl{display:inline-block;border-bottom:1.6px solid #bbb;min-width:8mm;text-align:center}
+.tg{display:grid;gap:4mm}.tg.c3{grid-template-columns:repeat(3,1fr)}
+.tk{border:1.5px solid #bbb;border-radius:3mm;padding:2mm;min-width:0}.tk .tt{font-size:12pt;margin-bottom:1mm}.tk .sl{margin-top:2mm;font-size:10pt;white-space:nowrap}
+.tk svg{width:100%;height:auto}
+.tk.f .sl{white-space:normal}
+.cg{border-collapse:collapse;margin:0 auto}.cg td{width:10mm;height:11mm;text-align:center;font-size:15pt;font-weight:900;border:1px dashed #cbd5e1;padding:0}.cg td.sg{border:0;width:6mm}.cg tr.cr td.c{height:6.5mm;font-size:9pt}.cg tr.rl td{height:1mm;padding:0;border:0;background:#111}.cg td.r{background:#f8fafc}
+.cg .ans{font-size:14pt}.cg tr.cr .ans{font-size:9pt}
+.tg.big .tk{padding:3mm}
+.story{border:1.5px solid #bbb;border-radius:3mm;padding:2.5mm 3mm;margin-bottom:3.5mm}.story .sn{font-size:12pt}.story .sl{margin-top:3.2mm;font-size:11.5pt}
+@page{size:A4;margin:10mm}
+@media print{
+  body{background:#fff;font-size:10.5pt}.top,.noprint,.bar{display:none!important}
+  main{padding:0;max-width:none}.sheet{box-shadow:none;margin:0;width:auto;min-height:0;height:277mm;padding:0;overflow:hidden}
+  body[data-print=sheets] .key{display:none!important}
+  body[data-print=keys] .sheetwrap{display:none!important}
+  body[data-print=keys] .key{display:block!important}
+}
+</style>
+</head>
+<body class="lang-both">
+<header class="top"><a class="logo" href="multiplikasjon.html" style="text-decoration:none">✖️ Gange <small>乘法</small></a><div class="sp"></div></header>
+<main>
+ <h1 class="noprint">📝 Skriveark – gange <span class="zh" style="font-size:1.1rem">练习纸</span></h1>
+ <div class="bar noprint">
+  <label>Nivå / 难度: <select id="lvl"><option value="1">⭐ Lett</option><option value="2">⭐⭐ Middels</option><option value="3">⭐⭐⭐ Vanskelig</option></select></label>
+  <button class="btn" id="new">🔄 Nye ark</button>
+  <button class="btn sec" id="printSheets">🖨 Skriv ut ark</button>
+  <button class="btn sec" id="printKeys">🖨 Skriv ut fasit</button>
+  <label><input type="checkbox" id="showKey"> Vis fasit på skjermen / 显示答案</label>
+ </div>
+ <div class="noprint small-note" style="margin-bottom:10px">6 ark: gangetabellen, × 10/100/1 000, del opp tallet og rutenett, runde av og dobbelt, gamlemåten (oppstilling) og tekstoppgaver. Hver gang du trykker «Nye ark» får du nye oppgaver. Samme lenke gir samme ark, så fasiten stemmer. / 每次点“Nye ark”都会出现新的题目；同一个链接得到同样的练习纸，答案才对得上。</div>
+ <div id="out"></div>
+</main>
+<script src="js/util.js"></script>
+<script src="js/mult-data.js"></script>
+<script src="js/mult-graphics.js"></script>
+<script src="js/mult-calc.js"></script>
+<script src="js/mult-worksheets.js"></script>
+<script>
+(function(){
+  const A = window.App, out = document.getElementById('out'), lvl = document.getElementById('lvl');
+  function params(){ const m = location.hash.match(/s=(\d+)&l=(\d)/); return m ? {seed:+m[1], level:+m[2]} : null; }
+  function render(){
+    let p = params(); if(!p){ p = {seed:Math.floor(Math.random() * 1e6), level:1}; history.replaceState(null, '', '#s=' + p.seed + '&l=' + p.level); }
+    lvl.value = p.level; const w = A.MultWorksheets.build(p.level, p.seed); out.innerHTML = w.sheets + w.keys;
+  }
+  document.getElementById('new').onclick = () => { history.replaceState(null, '', '#s=' + Math.floor(Math.random() * 1e6) + '&l=' + lvl.value); render(); };
+  lvl.onchange = () => { const p = params() || {seed:1}; history.replaceState(null, '', '#s=' + p.seed + '&l=' + lvl.value); render(); };
+  const doPrint = what => { document.body.dataset.print = what; window.print(); };
+  document.getElementById('printSheets').onclick = () => doPrint('sheets');
+  document.getElementById('printKeys').onclick = () => doPrint('keys');
+  document.getElementById('showKey').onchange = e => document.body.classList.toggle('show-key', e.target.checked);
+  render();
+})();
+</script>
+</body>
+</html>

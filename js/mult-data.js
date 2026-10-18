@@ -62,6 +62,7 @@ A.spokenMath = function(text, lang){
     .replace(/\s*÷\s*/g, '\u0001d\u0001').replace(/\s*=\s*/g, '\u0001e\u0001');
   t = t.replace(/\d{1,3}(?:[  ]\d{3})+|\d+/g, m => { const v = parseInt(m.replace(/[  ]/g, ''), 10); return Number.isFinite(v) ? conv(v) : m; });
   t = t.replace(/\u0001([xpmed])\u0001/g, (_, k) => op[k]);
+  if(!zh) t = t.replace(/\bkr\b/g, 'kroner');
   return t.replace(/\s{2,}/g, ' ').trim();
 };
 

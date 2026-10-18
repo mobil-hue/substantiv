@@ -154,7 +154,7 @@ function renderCalc(spec, host, ctx){
     } finally { Ex.silent = false; }
     if(spec.noGuide) return;
     const card = host.querySelector('.qcard'), t = A.h('button', {class:'pill gtoggle' + (guided ? ' on' : ''), type:'button',
-      html:`🪜 <span class="no">${guided ? 'Trinn for trinn: på' : 'Trinn for trinn: av'}</span><span class="zh">${guided ? ' 一步一步：开' : ' 一步一步：关'}</span>`});
+      html:`👣 <span class="no">${guided ? 'Trinn for trinn: på' : 'Trinn for trinn: av'}</span><span class="zh">${guided ? ' 一步一步：开' : ' 一步一步：关'}</span>`});
     t.onclick = () => { if(resolved) return; A.prefs.guide = !A.prefs.guide; A.savePrefs(); A.Speech.stop(); draw(true); };
     card.insertBefore(t, card.querySelector('.visual') || card.firstChild.nextSibling);
   };

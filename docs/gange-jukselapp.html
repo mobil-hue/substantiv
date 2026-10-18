@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<title>Gange – jukselapp</title>
+<style>
+@page{size:A4 landscape;margin:0}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Noto Sans","DejaVu Sans","Noto Sans CJK SC",sans-serif;color:#1f2937;background:#fffaf0;font-size:8.2pt;line-height:1.28}
+.page{width:297mm;height:210mm;padding:5mm 6mm;overflow:hidden;display:grid;grid-template-rows:12mm 1fr;gap:2.5mm}
+.top{display:flex;align-items:center;gap:4mm;border-bottom:2.5px solid #f97316}
+.top h1{margin:0;font-size:18pt;color:#c2410c}.top .z{font-size:13pt;font-weight:800;color:#475569}.top .sp{flex:1}.top .n{font-size:8pt;color:#64748b;text-align:right;line-height:1.3}
+.brand{display:flex;align-items:center;gap:2.5mm;border-left:1.5px solid #cbd5e1;padding-left:3mm;line-height:1.15;flex:none}.brand .nm{font-weight:900;font-size:10pt;color:#c2410c}.brand .nm span{display:block}.brand .ad{font-size:7pt;color:#475569}.brand .ad span,.brand .ad a{display:block;color:#475569;text-decoration:none}
+.cols{display:grid;grid-template-columns:1fr 1.02fr 1fr;gap:3mm;min-height:0}
+.col{display:flex;flex-direction:column;gap:2mm;min-height:0}
+.card{background:#fff;border-radius:2.5mm;padding:1.6mm 2.2mm;box-shadow:0 0 0 1.3px #e5e7eb}
+h2{margin:0 0 1mm;font-size:9.6pt;color:#fff;border-radius:2mm;padding:.9mm 2.2mm;display:flex;justify-content:space-between;align-items:baseline}h2 .z{font-size:8pt;font-weight:600;opacity:.95}
+.zh{color:#475569}b{color:#111827}small{font-size:6.8pt;color:#64748b}
+table.k{width:100%;border-collapse:collapse}table.k td{padding:.4mm 1mm;border-bottom:.8px solid #eef2f7;vertical-align:middle}table.k tr:last-child td{border-bottom:0}
+table.k .t{font-weight:900;font-size:10pt;color:#2563eb;width:12mm;white-space:nowrap}table.k .e{font-weight:800}table.k .e small{display:block;font-weight:600}
+.big{font-size:9.4pt;font-weight:900}
+.row2{display:grid;grid-template-columns:auto 1fr;gap:2.5mm;align-items:center}
+.tip{background:#fef9c3;border-radius:2mm;padding:.8mm 2mm;font-size:7.5pt}
+.mgsvg{display:block;margin:0 auto;max-width:100%;height:auto}.mgsvg.area{width:100%;max-width:78mm}
+.mgroups{display:flex;flex-wrap:wrap;gap:1mm;justify-content:center}.mgrp{background:#fffbeb;border:.7mm solid #fcd34d;border-radius:2mm;padding:.5mm 1mm;text-align:center}.mgrp .mh{font-size:9pt;line-height:1}.mgrp .mi{display:grid;font-size:8pt;line-height:1.1}
+.mexpr{display:flex;flex-direction:column;gap:.4mm;align-items:center;font-size:9pt;font-weight:900}.mexpr .g{color:#16a34a}.mexpr .dim{color:#64748b;font-weight:700}
+table.mshift{border-collapse:collapse;margin:0 auto}.mshift th{font-size:5.4pt;color:#64748b;font-weight:800;padding:0 .6mm;border-bottom:1px solid #cbd5e1;line-height:1.05}.mshift td{width:7.2mm;height:5.2mm;text-align:center;font-size:9pt;font-weight:900;border-left:.6px dashed #e5e7eb}.mshift td.v{color:#2563eb}.mshift td.z{color:#dc2626}.mshift tr.ar td{height:3mm;font-size:6pt;color:#64748b}
+table.mcol{border-collapse:collapse;margin:0 auto}.mcol td{width:7mm;height:6.3mm;text-align:center;font-size:12pt;font-weight:900;padding:0}.mcol td.sg{width:4mm;color:#64748b}.mcol .cr td{height:3.6mm;font-size:7pt}.mcol .cy{color:#dc2626;font-weight:900;font-size:7pt}.mcol .ln td{height:.7mm;padding:0;background:#334155}.mcol td.act{background:#fde68a;border-radius:1mm}.mcol td.res{color:#16a34a}
+table.mtab{border-collapse:collapse;margin:0 auto;font-size:6pt;width:100%}.mtab th,.mtab td{border:.6px solid #e5e7eb;padding:.2mm .4mm;text-align:center}.mtab th{background:#fff7ed;font-weight:900;color:#c2410c}
+table.mpart{margin:0 auto;border-collapse:collapse}.mpart td{padding:0 2mm;font-size:9pt;font-weight:900;text-align:right}.mpart td.lb{text-align:left;font-size:7pt;color:#64748b}.mpart tr.sum td.v{border-top:.7mm solid #334155}
+.flow{display:grid;grid-template-columns:1fr 1fr;gap:1mm 2mm;font-size:7.6pt}.flow div{background:#f8fafc;border-radius:1.5mm;padding:.6mm 1.5mm}.flow b{color:#c2410c}
+ol.st{margin:0;padding-left:4mm;font-size:7.8pt}ol.st li{margin:.2mm 0}
+</style>
+</head>
+<body>
+<div class="page">
+ <div class="top"><h1>✖️ Gange</h1><span class="z">乘法 · jukselapp 速查表</span><span class="sp"></span>
+  <span class="n">Gangetabellen, knep og regnestrategier<br>乘法表、小窍门和计算策略</span>
+  <div class="brand"><div class="nm"><span>by Titex as</span><span>Jens Møller</span></div><div class="ad"><span>1792 Tistedal</span><a href="https://www.titex.no">www.titex.no</a></div></div></div>
+ <div class="cols">
+  <div class="col" id="c1"></div><div class="col" id="c2"></div><div class="col" id="c3"></div>
+ </div>
+</div>
+<script src="../js/util.js"></script>
+<script src="../js/mult-data.js"></script>
+<script src="../js/mult-graphics.js"></script>
+<script>
+(function(){
+  const A = window.App, MG = A.MG;
+  const head = (c, no, zh) => `<h2 style="background:${c}">${no}<span class="z">${zh}</span></h2>`;
+  const lab = (v, no, c) => `<span style="display:inline-flex;flex-direction:column;align-items:center;border-bottom:.8mm solid ${c};padding:0 1.2mm;margin:0 .4mm"><b style="font-size:12pt;line-height:1.1">${v}</b><small style="color:${c};font-weight:800;min-height:2.4mm">${no}</small></span>`;
+  const tr = (t, no, zh, ex) => `<tr><td class="t">${t}</td><td class="e">${no}<small class="zh">${zh}</small></td><td><b>${ex}</b></td></tr>`;
+
+  document.getElementById('c1').innerHTML = `
+   <div class="card">${head('#16a34a', 'Hva er gange?', '什么是乘法？')}
+    <div class="row2"><div style="width:30mm">${MG.groups(4, 3, '🍎', '🧺', {small:true})}</div>
+     <div><div class="big">3 + 3 + 3 + 3 = 4 × 3 = 12</div><div style="margin-top:1mm">${lab(4, 'faktor', '#2563eb')}×${lab(3, 'faktor', '#2563eb')}=${lab(12, 'produkt', '#16a34a')}</div></div></div>
+    <div class="tip" style="margin-top:1mm"><b>Bytt om:</b> 3 × 7 = 7 × 3 = 21 · <b>× 1</b> = tallet selv · <b>× 0</b> = 0<br><span class="zh">可以交换：3 × 7 = 7 × 3 · 乘 1，数不变 · 乘 0，得 0</span></div></div>
+   <div class="card">${head('#2563eb', 'Knepene i gangetabellen', '乘法表的小窍门')}
+    <table class="k">
+     ${tr('× 10', 'legg til en null', '后面添一个 0', '7 × 10 = 70')}
+     ${tr('× 2', 'dobbelt', '两倍', '8 × 2 = 8 + 8 = 16')}
+     ${tr('× 5', 'halvparten av × 10', '× 10 的一半', '8 × 5: 80 → 40')}
+     ${tr('× 4', 'dobbelt og dobbelt', '两倍再两倍', '6 × 4: 6 → 12 → 24')}
+     ${tr('× 8', 'dobbelt tre ganger', '连续三次两倍', '6 × 8: 6 → 12 → 24 → 48')}
+     ${tr('× 9', '× 10 minus én', '× 10 再减一个', '9 × 7 = 70 − 7 = 63')}
+     ${tr('× 3', '× 2 og én til', '× 2 再加一个', '3 × 7 = 14 + 7 = 21')}
+     ${tr('× 6', '× 5 og én til', '× 5 再加一个', '6 × 7 = 35 + 7 = 42')}
+     ${tr('7 × 7', 'husk', '记住', '49')}
+    </table></div>
+   <div class="card">${head('#0ea5e9', 'Gangetabellen', '乘法表')}${MG.mtable({small:true})}</div>`;
+
+  document.getElementById('c2').innerHTML = `
+   <div class="card">${head('#dc2626', 'Gange med 10, 100, 1 000', '乘 10、100、1 000')}
+    <div class="row2"><div style="width:44mm">${MG.shift10(7, 2)}</div><div><b>7 × 100 = 700</b><br>sifrene flytter seg mot venstre,<br>nuller fylles på<br><span class="zh">数字向左移，空位补 0</span></div></div>
+    <div class="tip" style="margin-top:1mm"><b>30 × 4</b>: 3 × 4 = 12, legg til en null → <b>120</b> · <b>20 × 30</b>: 2 × 3 = 6, to nuller → <b>600</b><br><span class="zh">先不管 0，最后再添上</span></div></div>
+   <div class="card">${head('#9333ea', 'Del opp tallet og rutenett', '拆分数和方格图')}
+    ${MG.area([200, 70, 6], [3], {cells:[['600', '210', '18']], total:'600 + 210 + 18 = 828'})}
+    <div style="text-align:center;margin-top:.6mm"><b>276 × 3</b> = (200 + 70 + 6) × 3 = 600 + 210 + 18 = <b>828</b><br><span class="zh">utvidet form 展开式 · rutenett 方格图</span></div></div>
+   <div class="card">${head('#f59e0b', 'Runde av og rette opp', '凑整和补偿')}
+    <div class="mexpr"><div>276 × 3 = (300 − 24) × 3</div><div>= 300 × 3 − 24 × 3 = 900 − 72 = <span class="g">828</span></div><div class="dim" style="font-size:7.6pt">298 × 3 = 300 × 3 − 2 × 3 = 900 − 6 = 894</div></div>
+    <div class="tip" style="margin-top:1mm">Nesten et rundt tall? Regn med det runde, og trekk fra det du la på for mye.<br><span class="zh">差不多是整数？先用整数算，再减去多加的部分。</span></div></div>
+   <div class="card">${head('#f97316', 'Dobbelt og halvparten', '两倍和一半')}
+    <div class="mexpr"><div>17 × 4: 17 → 34 → <span class="g">68</span> <span class="dim" style="font-size:7.4pt">(dobbelt og dobbelt)</span></div><div>18 × 5: 18 × 10 = 180 → halvparten <span class="g">90</span></div></div></div>`;
+
+  document.getElementById('c3').innerHTML = `
+   <div class="card">${head('#3b82f6', 'Gamlemåten (oppstilling)', '竖式和进位')}
+    <div class="row2"><div style="width:34mm">${MG.column(276, 3, {res:['8', '2', '8'], carry:[0, 1, 2]})}</div>
+     <div style="font-size:7.6pt"><b>6 × 3 = 18</b> → skriv 8, mente 1<br><b>7 × 3 + 1 = 22</b> → skriv 2, mente 2<br><b>2 × 3 + 2 = 8</b> → skriv 8<br><span class="zh">个位先算，写个位，十位进位</span></div></div>
+    <div class="tip" style="margin-top:1mm"><b>Start bakerst · skriv enerne · ta tierne med som mente.</b><br><span class="zh">从后面开始 · 写个位 · 十位当进位带上</span></div></div>
+   <div class="card">${head('#14b8a6', 'To-sifret × to-sifret', '两位数 × 两位数')}
+    <div class="row2"><div style="width:44mm">${MG.area([20, 3], [10, 4], {cells:[['200', '30'], ['80', '12']], total:'= 322'})}</div>
+     <div style="font-size:7.6pt"><b>23 × 14</b><br>200 + 30 + 80 + 12 = <b>322</b><br><br>${MG.partials([{lb:'23 × 4', v:'92'}, {lb:'23 × 10', v:'230'}, {lb:'sum', v:'322', cls:'sum'}])}</div></div></div>
+   <div class="card">${head('#0d9488', 'Tekstoppgaver: fire steg', '应用题：四步')}
+    <ol class="st"><li><b>Les nøye.</b> Hva vet vi? <span class="zh">仔细读题，知道什么？</span></li><li><b>Hva spør oppgaven om?</b> <span class="zh">题目问什么？</span></li><li><b>Pluss, minus eller gange?</b> Like store grupper → gange. <span class="zh">加、减还是乘？每组一样多 → 乘。</span></li><li><b>Regn ut</b>, skriv svar med ord, og sjekk om det er rimelig. <span class="zh">计算，用一句话写答案，检查是否合理。</span></li></ol></div>
+   <div class="card">${head('#64748b', 'Ordene', '词汇')}
+    <div class="flow" style="grid-template-columns:1fr 1fr 1fr;font-size:7pt"><div><b>faktor</b> 因数</div><div><b>produkt</b> 积</div><div><b>sum</b> 和</div><div><b>differanse</b> 差</div><div><b>mente</b> 进位</div><div><b>oppstilling</b> 竖式</div><div><b>utvidet form</b> 展开式</div><div><b>rutenett</b> 方格图</div><div><b>runde av</b> 凑整</div><div><b>dobbelt</b> 两倍</div><div><b>halvparten</b> 一半</div><div><b>plassverdi</b> 数位</div></div></div>
+   <div class="card">${head('#a855f7', 'Hvilket knep passer best?', '哪个方法最合适？')}
+    <div class="flow"><div><b>Nesten rundt tall</b> (298, 99)<br>→ runde av og rette opp</div><div><b>× 4 eller × 8</b><br>→ dobbelt, dobbelt</div><div><b>× 5</b><br>→ halvparten av × 10</div><div><b>Ellers</b><br>→ del opp tallet</div></div>
+    <div class="tip" style="margin-top:1mm">Virker alltid: <b>gamlemåten</b> (oppstilling) · <span class="zh">总是可用：竖式</span></div></div>`;
+})();
+</script>
+</body>
+</html>

@@ -22,7 +22,7 @@ const INFO = {
   mult:{emoji:'✖️', no:'Lær å gange!', zh:'学习乘法！', sub:['Lær knepene, regn trinn for trinn og øv mye!', '学会小窍门，一步一步地算，多多练习！'], home:'gange', cls:'', test:['Hei! Dette er gange. Tre ganger fire er tolv.', '你好！我们来学习乘法。三乘以四等于十二。'],
     hub:`<div class="card drillcard"><div class="grow"><h2 style="margin:0">🏋️ ${bi('Mengdetrening','大量练习')}</h2><div>${bi('Øv og øv! Velg tall, tekst eller tale, og flervalg eller skriv inn.','练了又练！选择数字、文字或语音，选择题或输入答案。')}</div></div>
       <div class="row"><a class="btn big" href="#/drill" style="text-decoration:none"><span class="bi"><span class="no">▶ Start</span><span class="zh">开始</span></span></a><a class="btn sec" href="#/stats" style="text-decoration:none"><span class="bi"><span class="no">📊 Statistikk</span><span class="zh">统计</span></span></a></div></div>`,
-    links:lnk('multiplikasjon-laerer.html', '👩‍🏫 Lærer / fasit', '教师页 / 答案') + lnk('docs/gange-jukselapp.pdf', '🧾 Jukselapp (PDF)', '速查表（PDF）', true) + lnk('index.html', '🏠 Meny', '主菜单')}
+    links:lnk('mult-ark.html', '📝 Skriveark (skriv ut)', '练习纸（打印）') + lnk('multiplikasjon-laerer.html', '👩‍🏫 Lærer / fasit', '教师页 / 答案') + lnk('docs/gange-jukselapp.pdf', '🧾 Jukselapp (PDF)', '速查表（PDF）', true) + lnk('index.html', '🏠 Meny', '主菜单')}
 }[SUBJ];
 
 const key = (m, i) => `m${m}s${i}`;

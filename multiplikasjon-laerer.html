@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lærerside – Gange</title>
+<link rel="stylesheet" href="css/style.css">
+<style>h2{margin-top:1.4em;border-bottom:3px solid var(--brand)}td,th{font-size:.9rem}.cols{columns:2 320px}.sc{break-inside:avoid;margin-bottom:8px}.ws{background:#fff;border-radius:12px;padding:10px 14px;box-shadow:var(--shadow);margin:8px 0;break-inside:avoid}.ws .ln{font-weight:800}.ws .ln.ok{color:#14532d}.ws small{color:var(--muted)}table.words td{vertical-align:top}.mtwrap{overflow-x:auto}</style>
+</head>
+<body class="lang-both">
+<header class="top"><a class="logo" href="multiplikasjon.html" style="text-decoration:none">✖️ Gange <small>乘法</small></a><div class="sp"></div><a class="pill noprint" href="index.html" style="text-decoration:none;color:inherit">🏠 Meny</a> <button class="pill noprint" onclick="window.print()">🖨 Skriv ut / 打印</button></header>
+<main id="t"></main>
+<script src="js/util.js"></script>
+<script src="js/data.js"></script>
+<script src="js/graphics.js"></script>
+<script src="js/exercises.js"></script>
+<script src="js/ex-num.js"></script>
+<script src="js/mult-data.js"></script>
+<script src="js/mult-graphics.js"></script>
+<script src="js/mult-calc.js"></script>
+<script src="js/mult-exercises.js"></script>
+<script src="js/mult-lessons.js"></script>
+<script>
+(function(){
+  const A = window.App, E = A.Ex, M = A.Mult, MG = A.MG, N = A.N, bi = A.bi, out = [];
+  const names = E.names().filter(n => n.startsWith('m_')); let small = 0, task = 0; const rows = [];
+  const label = {m_groups:'Hvor mange til sammen', m_addmul:'Skriv som gange', m_array:'Rader og kolonner (prikker)', m_arrayEq:'Gangestykke til prikkene', m_words:'Ord og tall', m_zero1:'Gange med 0 og 1', m_tabs:'Gangetabellen (alle)', m_missing:'Hvilket tall mangler?', m_swap:'Bytt om tallene', m_knep:'Hvilket knep passer?', m_x10:'× 10', m_x100:'× 100', m_x1000:'× 1 000', m_ten:'× 10, 100, 1 000 (blandet)', m_tens:'Tiere og hundrer (30 × 4)', m_calcTen:'Trinn for trinn: nuller', m_place:'Plassverdi', m_split2:'Del opp: tosifret', m_split3:'Del opp: tresifret', m_splitMC:'Hvilken oppdeling?', m_areaRead:'Rutenett: hva står i ruten?', m_round:'Runde av og rette opp', m_double:'Dobbelt og halvparten', m_pick:'Hvilket knep passer best?', m_std2:'Oppstilling: to sifre', m_std3:'Oppstilling: tre sifre', m_std4:'Oppstilling: fire sifre', m_carry:'Mente', m_story1:'Tekstoppgaver: små tall', m_story2:'Tekstoppgaver: tosifret', m_story3:'Tekstoppgaver: tresifret', m_storyEq:'Tekstoppgave: regnestykket', m_storyPick:'Pluss, minus eller gange?', m_area22:'Rutenett: 2-sifret × 2-sifret', m_std22:'Oppstilling: 2-sifret × 2-sifret', m_mixCalc:'Blandede regneoppgaver'};
+  names.filter(n => !/^m_tab_/.test(n)).forEach(n => { const it = E.items(n), isTask = it[0].kind === 'calc'; (isTask ? (task += it.length) : (small += it.length));
+    rows.push(`<tr><td>${n}</td><td>${label[n] || ''}</td><td>${isTask ? 'omfattende (trinn for trinn)' : 'liten'}</td><td>${it.length}</td></tr>`); });
+  out.push(`<h1>👩‍🏫 Lærerside – gange / 教师页：乘法</h1>
+  <div class="card"><h3>Oversikt / 总览</h3><p><b>Små oppgaver (unike mal): ${small}</b> &nbsp;·&nbsp; <b>Omfattende oppgaver med trinn for trinn: ${task}</b> &nbsp;·&nbsp; <b>8 moduler, 7 videoer, 16 begreper</b></p>
+  <p>Tallene i oppgavene trekkes på nytt hver gang, så ingen start er lik. Svaralternativene stokkes. Gangetabellen følger med hva eleven bommer på, og de svake gangestykkene kommer oftere. / 每次的数字都是新抽取的，选项会打乱。乘法表会记住学生的错题，错得多的题出现得更频繁。</p>
+  <p><b>Språk:</b> Norsk er hovedspråket, kinesisk er støtte (tekst og opplesing). Velg opplesing på norsk, kinesisk eller begge direkte i videoen, i knappen 🔊 oppe til høyre, eller under Innstillinger. Tallene leses som ord («tre ganger fire er tolv»). / 挪威语是主要语言，中文是辅助（文字和朗读）。可以在视频里、右上角 🔊 按钮或“设置”中选择朗读语言。数字会读成文字。</p>
+  <table class="words"><tr><th>Bank</th><th>Innhold</th><th>Type</th><th>Antall</th></tr>${rows.join('')}</table></div>`);
+
+  out.push(`<h2>Mengdetrening / 大量练习</h2><div class="card"><p>Fra forsiden: <b>🏋️ Mengdetrening</b>. Eleven velger selv, og kan endre underveis: / 学生可以自己选择，并且随时修改：</p>
+  <ul><li><b>Oppgavetyper</b> (kan velges hver for seg): gangetabellen · hva mangler? · × 10/100/1 000 · tiere og hundrer · tosifret × ensifret · tresifret × ensifret · tekstoppgaver. / 题型可以单独选择。</li>
+  <li><b>Tabeller:</b> velg hvilke tabeller (2–10), eller «bare de jeg sliter med». / 选择乘法表，或“只练容易错的”。</li>
+  <li><b>Slik vises oppgaven</b> (kan velges hver for seg): 🔢 tall (3 × 4) · 🔤 tekst (tre ganger fire) · 🔢🔤 tall og tekst · 🔊 <b>bare tale</b> (leses opp på norsk, oppgaven vises ikke, og kan høres igjen så mange ganger eleven vil). / 显示方式可以单独选择：数字、文字、数字加文字、只听（挪威语朗读，题目不显示，可以重复听）。</li>
+  <li><b>Svar:</b> ✅ bare flervalg · ⌨️ skriv inn (tastatur på skjermen) · 🎲 tilfeldig. Valget kan også byttes med knappen øverst på siden. / 答题方式：只选择题、输入答案或随机。</li>
+  <li><b>Trinn for trinn:</b> regneoppgaver kan løses steg for steg. Eleven kan slå trinn for trinn av og på på hver oppgave (knappen 👣), og i innstillingene. / 计算题可以一步一步引导，每道题上的 👣 按钮可以随时开关。</li>
+  <li>Poeng: 1 for riktig første gang, ½ for riktig andre gang (etter hjelp med baller). <b>Statistikk</b> viser en fargekart over hele gangetabellen (rad × kolonne) og hvilke som er vanskeligst. / 积分：一次答对 1 分，第二次答对 ½ 分。统计页显示整个乘法表的颜色图和最难的题目。</li></ul></div>`);
+
+  out.push(`<h2>Gangetabellen med fasit / 乘法表（答案）</h2><div class="card mtwrap">${MG.mtable({})}</div>`);
+
+  const strat = [
+    ['Gange er like store grupper', '乘法就是大小相同的几组', '4 × 3 = 3 + 3 + 3 + 3 = 12. Faktor × faktor = produkt. Du kan bytte om: 3 × 4 = 4 × 3.', '4 × 3 = 3 + 3 + 3 + 3 = 12。因数 × 因数 = 积。可以交换：3 × 4 = 4 × 3。'],
+    ['Knepene i gangetabellen', '乘法表的小窍门', '× 10: legg til en null · × 2: dobbelt · × 5: halvparten av × 10 · × 4: dobbelt og dobbelt · × 8: dobbelt tre ganger · × 9: × 10 minus én · × 3: × 2 og én til · × 6: × 5 og én til · 7 × 7 = 49.', '× 10：后面添 0 · × 2：两倍 · × 5：× 10 的一半 · × 4：两倍再两倍 · × 8：连续三次两倍 · × 9：× 10 再减一个 · × 3：× 2 再加一个 · × 6：× 5 再加一个 · 7 × 7 = 49。'],
+    ['Gange med 10, 100 og 1 000', '乘 10、100 和 1 000', 'Sifrene flytter seg 1, 2 eller 3 plasser mot venstre, og vi fyller med nuller. 35 × 100 = 3 500. 30 × 4: regn 3 × 4 = 12 og legg til en null: 120.', '数字向左移动 1、2 或 3 位，空位补 0。35 × 100 = 3 500。30 × 4：先算 3 × 4 = 12，再添一个 0：120。'],
+    ['Del opp tallet (utvidet form) og rutenett', '拆分数（展开式）和方格图', '276 × 3 = (200 + 70 + 6) × 3 = 200 × 3 + 70 × 3 + 6 × 3 = 600 + 210 + 18 = 828.', '276 × 3 = (200 + 70 + 6) × 3 = 200 × 3 + 70 × 3 + 6 × 3 = 600 + 210 + 18 = 828。'],
+    ['Runde av og rette opp (kompensere)', '凑整再补偿', '276 × 3 = 300 × 3 − 24 × 3 = 900 − 72 = 828. 298 × 3 = 300 × 3 − 2 × 3 = 900 − 6 = 894.', '276 × 3 = 300 × 3 − 24 × 3 = 900 − 72 = 828。298 × 3 = 300 × 3 − 2 × 3 = 900 − 6 = 894。'],
+    ['Dobbelt og halvparten', '两倍和一半', '17 × 4 = (17 × 2) × 2 = 34 × 2 = 68. 18 × 5 = 18 × 10 ÷ 2 = 180 ÷ 2 = 90.', '17 × 4 = (17 × 2) × 2 = 34 × 2 = 68。18 × 5 = 18 × 10 的一半 = 180 的一半 = 90。'],
+    ['Gamlemåten (oppstilling med mente)', '传统竖式（带进位）', 'Start bakerst. Skriv enerne under streken, ta tierne med som mente. 276 × 3: 6 × 3 = 18 (skriv 8, mente 1) · 7 × 3 + 1 = 22 (skriv 2, mente 2) · 2 × 3 + 2 = 8 → 828.', '从个位开始。把个位写在横线下面，十位当作进位带到下一位。276 × 3：6 × 3 = 18（写 8，进位 1）· 7 × 3 + 1 = 22（写 2，进位 2）· 2 × 3 + 2 = 8 → 828。'],
+    ['To-sifret × to-sifret', '两位数 × 两位数', 'Rutenett: 23 × 14 = 20 × 10 + 3 × 10 + 20 × 4 + 3 × 4 = 200 + 30 + 80 + 12 = 322. Oppstilling: 23 × 4 = 92 og 23 × 10 = 230, 92 + 230 = 322.', '方格图：23 × 14 = 200 + 30 + 80 + 12 = 322。竖式：23 × 4 = 92，23 × 10 = 230，92 + 230 = 322。'],
+    ['Tekstoppgaver: fire steg', '应用题：四步', '1. Les nøye: hva vet vi? 2. Hva spør oppgaven om? 3. Pluss, minus eller gange? 4. Regn ut, skriv svar med ord, og sjekk om det er rimelig.', '1. 仔细读题：知道什么？2. 题目问什么？3. 用加、减还是乘？4. 计算、用一句话写出答案，并检查是否合理。']
+  ];
+  out.push('<h2>Strategiene / 计算策略</h2><div class="cols">' + strat.map(s => `<div class="sc card"><b>${s[0]}</b> <span class="zh">${s[1]}</span><p style="margin:.4em 0 0">${s[2]}<br><span class="zh">${s[3]}</span></p></div>`).join('') + '</div>');
+
+  out.push(`<h2>Eksempler med utregning (nye hver gang) / 带过程的示例（每次不同）</h2><p><button class="pill noprint" id="reroll">🔄 Lag nye eksempler / 换一批</button></p><div id="examples"></div>`);
+
+  out.push('<h2>Moduler / 课程</h2>' + A.MULT_MODULES.map(m => `<div class="card"><h3>${m.emoji} ${m.id}. ${m.no} <span class="zh">${m.zh}</span></h3><ol>${m.steps.map(s => `<li>${{video:'🎬', terms:'🃏', practice:'✏️', task:'🧩', loop:'🔁'}[s.t]} ${s.no} <span class="zh">${s.zh}</span></li>`).join('')}</ol></div>`).join(''));
+
+  out.push('<h2>Begreper / 术语</h2><table class="words"><tr><th>Begrep</th><th>中文</th><th>Forklaring</th></tr>' + A.MULT_TERMS.map(t => `<tr><td><b>${t.no}</b></td><td>${t.zh}<br><small>${t.py}</small></td><td>${t.defNo}<br><span class="zh">${t.defZh}</span></td></tr>`).join('') + '</table>');
+  document.getElementById('t').innerHTML = out.join('');
+
+  const rnd = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+  const worked = spec => `<div class="ws"><b>${bi(spec.title.no, spec.title.zh)}</b>${spec.steps.map(st => `<div class="ln ok">✔ ${st.line}</div>`).join('')}<div style="margin-top:4px"><small>${bi(spec.fb.no, spec.fb.zh)}</small></div></div>`;
+  function examples(){
+    let a2; do a2 = rnd(12, 98); while(a2 % 10 === 0); let a3; do a3 = rnd(102, 998); while(a3 % 100 === 0); let c; do c = rnd(12, 49); while(c % 10 === 0); let d; do d = rnd(12, 49); while(d % 10 === 0);
+    const std = (() => { for(let t = 0; t < 200; t++){ const a = rnd(100, 999), b = rnd(2, 9); if(String(a).split('').some(x => x * b >= 10)) return M.calcStd(a, b); } return M.calcStd(276, 3); })();
+    const parts = [M.calcTen(rnd(2, 9), rnd(2, 9), 1, 0), M.calcSplit(a2, rnd(2, 9)), M.calcSplit(a3, rnd(2, 9)), M.calcRound(rnd(2, 10) * 100 - rnd(1, 30), rnd(2, 9)), M.calcRound(rnd(2, 10) * 10 - rnd(1, 3), rnd(3, 9)), M.calcDouble(rnd(6, 49), 4), M.calcDouble(rnd(6, 60), 5), std, M.calcArea22(c, d), M.calcStd22(c, d), M.story('groups', 2), M.story('price', 3)];
+    document.getElementById('examples').innerHTML = '<div class="cols">' + parts.map(worked).join('') + '</div>'; A.applyLang();
+  }
+  examples(); document.getElementById('reroll').onclick = examples; A.applyLang();
+})();
+</script>
+</body>
+</html>

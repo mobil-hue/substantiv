@@ -17,7 +17,7 @@ const PROGRAMS = [
   {section:'matte', id:'multiplikasjon', href:'multiplikasjon.html', sum:'mult', emoji:'✖️', color:'#16a34a',
    no:'Gange – lær og øv', zh:'乘法：学习和练习',
    desc:['Hva gange er, gangetabellen, knep, gange med 10/100/1000, regnestrategier og «gamlemåten». Med mengdetrening.', '什么是乘法、乘法表、小窍门、乘 10/100/1000、计算策略和竖式计算。含大量练习。'],
-   links:[['multiplikasjon.html#/drill', '🏋️ Mengdetrening', '大量练习'], ['multiplikasjon-laerer.html', '👩‍🏫 Lærer', '教师页']]},
+   links:[['multiplikasjon.html#/drill', '🏋️ Mengdetrening', '大量练习'], ['mult-ark.html', '📝 Skriveark', '练习纸'], ['docs/gange-jukselapp.pdf', '🧾 Jukselapp', '速查表'], ['multiplikasjon-laerer.html', '👩‍🏫 Lærer', '教师页']]},
   {section:'matte', id:'geometri', href:'geometri.html', sum:'geo', emoji:'📐', color:'#3b82f6',
    no:'Geometri', zh:'几何',
    desc:['Matematikk 4, kapittel 4: figurer, kanter og hjørner, romfigurer, nett og klosser, vinkler.', '数学 4 年级第 4 章：图形、边和顶点、立体图形、展开图和小方块、角。'],
