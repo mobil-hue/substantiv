@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Skriveark – Geometri 几何</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+body{font-size:11pt}
+.bar{background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:12px 16px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.bar label{font-weight:800}.bar select{font-size:1rem;padding:4px 8px}
+.sheet{width:210mm;min-height:297mm;padding:11mm 12mm;margin:0 auto 10px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.15);position:relative;page-break-after:always;color:#111}
+.key{display:none}body.show-key .key{display:block}
+.shead{display:flex;justify-content:space-between;align-items:flex-start;gap:6mm;border-bottom:2.5px solid #111;padding-bottom:2mm;margin-bottom:3mm}
+.stitle{display:flex;gap:3mm;align-items:center}.stitle h2{margin:0;font-size:16pt}.stitle .zh,.zh{color:#555}.stitle .zh{font-size:11pt}
+.num{width:11mm;height:11mm;border-radius:50%;border:2.5px solid #111;display:inline-flex;align-items:center;justify-content:center;font-weight:900;font-size:14pt}
+.who{font-size:9.5pt;text-align:right;line-height:2}.ln{display:inline-block;border-bottom:1.5px solid #111;width:42mm}.ln.s{width:22mm}
+.instr{background:#f3f4f6;border-radius:3mm;padding:2.5mm 3.5mm;margin-bottom:3mm;font-size:11pt}
+.ref{border:1.5px dashed #888;border-radius:3mm;padding:2mm 3mm;font-size:9.5pt}
+h3{margin:4mm 0 2mm;font-size:12pt;border-bottom:1.5px solid #bbb;padding-bottom:1mm}h3 .zh{font-size:10pt;font-weight:600}
+.gf{display:inline-block;vertical-align:middle}.gf svg{width:100%;height:100%;display:block}
+.gt{width:100%;border-collapse:collapse;table-layout:fixed}.gt th{border:2px solid #555;background:#f8fafc;padding:1.2mm;font-size:9.5pt;line-height:1.2}
+.gt td{border:1.5px solid #888;height:20mm;padding:1mm 2mm;vertical-align:middle;text-align:center}.gt td.fg{width:34mm}.gt td.nm{width:34mm}.gt td.n{width:24mm}
+.gt td.wr{background-image:linear-gradient(transparent 13mm,#999 13mm,#999 13.4mm,transparent 13.4mm)}
+.gt.c1 td{height:17mm}.gt.c1 td.wr{background-image:linear-gradient(transparent 11mm,#999 11mm,#999 11.4mm,transparent 11.4mm)}
+.gt.c2 td{height:14.5mm}.gt.c2 td.fg{width:28mm}.gt.c2 td.wr{background-image:linear-gradient(transparent 9.5mm,#999 9.5mm,#999 9.9mm,transparent 9.9mm)}
+.sc .wl{min-height:7mm}.sc{padding:1.2mm}
+.ans{color:#dc2626;font-weight:800;font-size:13pt;font-family:"Comic Sans MS","Segoe Print",cursive;white-space:nowrap}
+.wordbox{display:flex;flex-wrap:wrap;gap:2mm;border:2px solid #111;border-radius:3mm;padding:2.5mm;margin-bottom:3mm}
+.wb{border:1.5px solid #777;border-radius:2.5mm;padding:.8mm 2.6mm;font-size:12pt;font-weight:800;display:inline-flex;gap:2mm;align-items:baseline}.wb small{font-size:8.5pt;font-weight:600;color:#555}
+.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm}.sc,.an,.bl,.dm,.nt{border:1.5px solid #bbb;border-radius:3mm;padding:2mm;text-align:center}
+.gfw{height:auto;text-align:center}.wl{border-top:1.5px solid #888;margin-top:2mm;padding-top:1mm;min-height:8mm;text-align:center}
+.dg{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:2mm}.dg .dm{padding:1.2mm;min-width:0}.dg .ch{font-size:7.4pt;line-height:1.45;white-space:nowrap}.dg .o{padding:0 .8mm;border-width:1.5px}.dm .ch,.nt .ch{margin-top:1mm;font-size:9.5pt}.o{border:2px solid #dc2626;border-radius:5mm;padding:0 1.5mm;color:#dc2626}
+.ag{display:grid;grid-template-columns:repeat(4,1fr);gap:2.5mm}.pg{display:flex;gap:6mm;justify-content:space-around}.pp{border:1.5px solid #bbb;border-radius:3mm;padding:2mm}
+.dboxes{display:grid;grid-template-columns:1fr 1fr;gap:4mm}.db{border:1.5px solid #888;border-radius:3mm;padding:2mm}.dt{font-size:10.5pt;margin-bottom:1mm;min-height:11mm}.dgd svg{width:100%;height:auto;display:block}
+.bg{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm}.ng{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm}
+@page{size:A4;margin:10mm}
+@media print{
+  body{background:#fff;font-size:10.5pt}.top,.noprint,.bar{display:none!important}
+  main{padding:0;max-width:none}.sheet{box-shadow:none;margin:0;width:auto;min-height:0;height:277mm;padding:0;overflow:hidden}
+  body[data-print=sheets] .key{display:none!important}
+  body[data-print=keys] .sheetwrap{display:none!important}
+  body[data-print=keys] .key{display:block!important}
+}
+</style>
+</head>
+<body class="lang-both">
+<header class="top"><a class="logo" href="geometri.html" style="text-decoration:none">📐 Geometri <small>几何</small></a><div class="sp"></div></header>
+<main>
+ <h1 class="noprint">📝 Skriveark – geometri <span class="zh" style="font-size:1.1rem">练习纸</span></h1>
+ <div class="bar noprint">
+  <label>Nivå / 难度: <select id="lvl"><option value="1">⭐ Lett</option><option value="2">⭐⭐ Middels</option><option value="3">⭐⭐⭐ Vanskelig</option></select></label>
+  <button class="btn" id="new">🔄 Nye ark</button>
+  <button class="btn sec" id="printSheets">🖨 Skriv ut ark</button>
+  <button class="btn sec" id="printKeys">🖨 Skriv ut fasit</button>
+  <label><input type="checkbox" id="showKey"> Vis fasit på skjermen / 显示答案</label>
+ </div>
+ <div class="noprint small-note" style="margin-bottom:10px">5 ark: flate figurer, romfigurer, vinkler, tegning på prikkpapir, klosser og nett. Hver gang du trykker «Nye ark» får du nye oppgaver. Samme lenke gir samme ark, så fasiten stemmer. / 每次点“Nye ark”都会出现新的题目；同一个链接得到同样的练习纸，答案才对得上。</div>
+ <div id="out"></div>
+</main>
+<script src="js/util.js"></script>
+<script src="js/data.js"></script>
+<script src="js/graphics.js"></script>
+<script src="js/geo-graphics.js"></script>
+<script src="js/geo-data.js"></script>
+<script src="js/exercises.js"></script>
+<script src="js/geo-exercises.js"></script>
+<script src="js/geo-worksheets.js"></script>
+<script>
+(function(){
+  const A = window.App, out = document.getElementById('out'), lvl = document.getElementById('lvl');
+  function params(){ const m = location.hash.match(/s=(\d+)&l=(\d)/); return m ? {seed:+m[1], level:+m[2]} : null; }
+  function render(){
+    let p = params(); if(!p){ p = {seed:Math.floor(Math.random() * 1e6), level:1}; history.replaceState(null, '', '#s=' + p.seed + '&l=' + p.level); }
+    lvl.value = p.level; const w = A.GeoWorksheets.build(p.level, p.seed); out.innerHTML = w.sheets + w.keys;
+  }
+  document.getElementById('new').onclick = () => { history.replaceState(null, '', '#s=' + Math.floor(Math.random() * 1e6) + '&l=' + lvl.value); render(); };
+  lvl.onchange = () => { const p = params() || {seed:1}; history.replaceState(null, '', '#s=' + p.seed + '&l=' + lvl.value); render(); };
+  const doPrint = what => { document.body.dataset.print = what; window.print(); };
+  document.getElementById('printSheets').onclick = () => doPrint('sheets');
+  document.getElementById('printKeys').onclick = () => doPrint('keys');
+  document.getElementById('showKey').onchange = e => document.body.classList.toggle('show-key', e.target.checked);
+  render();
+})();
+</script>
+</body>
+</html>

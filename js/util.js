@@ -7,7 +7,13 @@ A.store = {
   get(k, d){ try{ const v = localStorage.getItem('sub_'+k); return v==null ? d : JSON.parse(v); }catch(e){ return (k in mem) ? mem[k] : d; } },
   set(k, v){ mem[k] = v; try{ localStorage.setItem('sub_'+k, JSON.stringify(v)); }catch(e){} }
 };
-A.settings = Object.assign({lang:'both', rate:0.85, pinyin:true, auto:true}, A.store.get('settings', {}));
+// lang = hvilken tekst som vises (norsk + kinesisk støtte). speak = hvilket språk som leses opp.
+const savedSettings = A.store.get('settings', {});
+A.settings = Object.assign({lang:'both', speak:'no', rate:0.85, pinyin:false, auto:true, v:2}, savedSettings);
+if(!savedSettings.v){ // eldre lagrede innstillinger: norsk opplesing og uten pinyin som standard
+  A.settings.v = 2; A.settings.pinyin = false; A.settings.speak = savedSettings.lang === 'zh' ? 'zh' : 'no';
+  A.store.set('settings', A.settings);
+}
 A.applyLang = function(){
   const b = document.body;
   b.classList.remove('lang-both','lang-no','lang-zh');
@@ -27,7 +33,7 @@ A.seeded = function(seed){ return function(){ seed |= 0; seed = seed + 0x6D2B79F
 // tospråklig tekst. [x] i en streng = norsk ord (leses med norsk stemme, vises fet)
 A.m = s => String(s).replace(/\[([^\]]+)\]/g, '<b class="nw">$1</b>');
 A.bi = (no, zh, cls) => `<span class="bi ${cls||''}"><span class="no">${A.m(no)}</span><span class="zh">${A.m(zh)}</span></span>`;
-A.ruby = (zh, py) => `<ruby>${zh}<rt>${py}</rt></ruby>`;
+A.ruby = (zh, py) => py ? `<ruby>${zh}<rt>${py}</rt></ruby>` : zh;
 
 A.h = function(tag, props, ...kids){
   const el = document.createElement(tag);
@@ -95,10 +101,18 @@ A.say = async function(segs){
   return my === token;
 };
 A.sayNo = text => A.say(A.parseSegs(text, 'no'));
+// sayBi: leser opp på språket eleven har valgt (norsk, kinesisk eller begge)
 A.sayBi = function(no, zh){
-  const L = A.settings.lang, segs = [];
-  if(L !== 'zh' && no) segs.push(...A.parseSegs(no, 'no'));
-  if(L !== 'no' && zh) segs.push(...A.parseSegs(zh, 'zh'));
+  const sp = A.settings.speak || 'no', segs = [];
+  if(sp !== 'zh' && no) segs.push(...A.parseSegs(no, 'no'));
+  if(sp !== 'no' && zh) segs.push(...A.parseSegs(zh, 'zh'));
+  return A.say(segs);
+};
+// begrep: det norske ordet leses alltid på norsk, forklaringen på valgt språk
+A.sayTerm = function(t){
+  const sp = A.settings.speak || 'no', segs = A.parseSegs(t.no, 'no');
+  if(sp !== 'zh') segs.push(...A.parseSegs(t.defNo, 'no'));
+  if(sp !== 'no') segs.push(...A.parseSegs(t.defZh, 'zh'));
   return A.say(segs);
 };
 })();

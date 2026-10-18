@@ -21,7 +21,7 @@ Ex.names = () => Object.keys(defs);
 const prio = it => { const s = stats[it.id]; return (s ? s.s*0.8 - s.m*1.6 : 0) + Math.random()*2; };
 function passes(it, o){
   return (it.lvl || 0) <= (o.maxLvl == null ? 3 : o.maxLvl) && (it.mod || 0) <= (o.maxMod == null ? 9 : o.maxMod)
-    && !(it.speech && !A.Speech.supported);
+    && !(it.speech && !A.Speech.supported) && !(it.zhOnly && A.settings.lang === 'no');
 }
 function takeFrom(name, o, used){
   const c = Ex.items(name).filter(it => passes(it, o) && !used.has(it.id));
@@ -164,15 +164,15 @@ def('meta', () => {
       visual:`<div class="big-emoji">👂</div>`, answers:[t.no], ph:'?',
       fb:FB(`Ordet er «${t.no}» – ${t.defNo}`, `这个词是[${t.no}]（${t.zh}）：${t.defZh}`), sayAfter:t.no
     })));
-    out.push(choice('meta:tozh:' + t.key, 0, t.mod, () => ({
-      q:Q(`Hva betyr «${t.no}» på kinesisk?`, `[${t.no}]用中文是什么意思？`), say:Q(`Hva betyr ${t.no} på kinesisk?`, `[${t.no}]是什么意思？`),
-      visual:bigw(t.no), layout:'col', options:shuffle([t].concat(near())).map(x => ({html:`<span>${x.zh}</span>`, value:x.key})), answer:t.key,
-      fb:FB(`«${t.no}» = ${t.zh}. ${t.defNo}`, `[${t.no}] = ${t.zh}。${t.defZh}`), sayAfter:t.no
+    out.push(choice('meta:def:' + t.key, 0, t.mod, () => ({
+      q:Q(`Hva betyr «${t.no}»?`, `[${t.no}]是什么意思？`), say:Q(`Hva betyr ${t.no}?`, `[${t.no}]是什么意思？`), word:t.no,
+      visual:bigw(t.no), layout:'col', options:shuffle([t].concat(near())).map(x => ({html:bi(x.defNo, x.defZh), value:x.key})), answer:t.key,
+      fb:FB(`«${t.no}»: ${t.defNo}`, `[${t.no}]：${t.defZh}`), sayAfter:t.no
     })));
-    out.push(choice('meta:tono:' + t.key, 0, t.mod, () => ({
-      q:Q(`Hvilket norsk ord betyr «${t.zh}»?`, `哪个挪威语词的意思是「${t.zh}」？`), say:Q('Hvilket norsk ord er dette?','哪个挪威语词是这个意思？'),
-      visual:`<div class="bigword">${A.ruby(t.zh, t.py)}</div>`, layout:'col', options:shuffle([t].concat(near())).map(x => ({html:`<span>${x.no}</span>`, value:x.key})), answer:t.key,
-      fb:FB(`«${t.zh}» heter «${t.no}» på norsk. ${t.defNo}`, `「${t.zh}」挪威语叫[${t.no}]。${t.defZh}`), sayAfter:t.no
+    out.push(choice('meta:term:' + t.key, 0, t.mod, () => ({
+      q:Q('Hvilket begrep passer til beskrivelsen?', '哪个术语符合这个说明？'), say:Q('Hvilket begrep passer til beskrivelsen?', '哪个术语符合这个说明？'),
+      visual:`<div class="bigword sm" style="max-width:520px">${bi(t.defNo, t.defZh)}</div>`, layout:'col', options:shuffle([t].concat(near())).map(x => ({html:`<span>${x.no}</span>`, value:x.key})), answer:t.key,
+      fb:FB(`Det er «${t.no}»: ${t.defNo}`, `这是[${t.no}]：${t.defZh}`), sayAfter:t.no
     })));
   });
   const G = [['en','#2563eb','blå','蓝色'],['ei','#db2777','rosa','粉色'],['et','#16a34a','grønn','绿色']];
@@ -194,14 +194,14 @@ def('zhMatch', () => {
         visual:`<div><div class="big-emoji">${w.emoji}</div><div class="bigword sm">${w.zh}</div></div>`, layout:'row',
         options:shuffle([w].concat(d)).map(x => ({html:`<span>${A.artChip(x.art)}${x.no}</span>`, value:x.no})), answer:w.no,
         fb:FB(`${A.label(w, 'ue')} = ${w.zh}`, `${w.zh} = [${A.label(w, 'ue')}]`), sayAfter:A.label(w, 'ue')};
-    }));
+    }, {zhOnly:true}));
     out.push(choice('no2zh:' + w.no, w.lvl, 0, () => {
       const d = sample(unc(WS, [w]), 3);
       return {q:Q('Hva betyr dette på kinesisk?','这个中文是什么意思？'), say:Q('Hva betyr dette på kinesisk?','这个中文是什么意思？'), word:A.label(w, 'ue'),
         visual:`<div class="bigword">${A.artChip(w.art)}${w.no}</div>`, layout:'row',
         options:shuffle([w].concat(d)).map(x => ({html:`<span>${x.zh}</span>`, value:x.no})), answer:w.no,
         fb:FB(`${A.label(w, 'ue')} = ${w.zh} ${w.emoji}`, `[${A.label(w, 'ue')}] = ${w.zh} ${w.emoji}`), sayAfter:A.label(w, 'ue')};
-    }));
+    }, {zhOnly:true}));
   });
   return out;
 });
@@ -322,17 +322,18 @@ def('pic', () => {
 def('nameMatch', () => {
   const out = [];
   A.FORMS.forEach(f => {
-    out.push(choice('nm:tono:' + f.key, 0, 5, () => ({
-      q:Q(`Hva heter «${f.zh}» på norsk?`, `「${f.zh}」用挪威语怎么说？`), say:Q('Hva heter dette på norsk?','这个用挪威语怎么说？'),
-      visual:`<div class="bigword">${A.ruby(f.zh, f.py)}</div>`, layout:'col',
+    const t = A.term(f.key);
+    out.push(choice('nm:term:' + f.key, 0, 5, () => ({
+      q:Q('Hvilken form passer til beskrivelsen?', '哪种形式符合这个说明？'), say:Q('Hvilken form passer til beskrivelsen?', '哪种形式符合这个说明？'),
+      visual:`<div class="bigword sm" style="max-width:520px">${bi(t.defNo, t.defZh)}</div>`, layout:'col',
       options:shuffle(A.FORMS).map(g => ({html:`<div>${A.formIcon(g.key)}<span>${g.no}</span></div>`, value:g.key})), answer:f.key,
-      fb:FB(`«${f.zh}» = ${f.no}`, `「${f.zh}」= [${f.no}]`), sayAfter:f.no
+      fb:FB(`Det er «${f.no}»: ${t.defNo}`, `这是[${f.no}]：${t.defZh}`), sayAfter:f.no
     })));
-    out.push(choice('nm:tozh:' + f.key, 0, 5, () => ({
+    out.push(choice('nm:def:' + f.key, 0, 5, () => ({
       q:Q(`Hva betyr «${f.no}»?`, `[${f.no}]是什么意思？`), say:Q(`Hva betyr ${f.no}?`, `[${f.no}]是什么意思？`), word:f.no,
       visual:`<div>${A.formChip(f.key)}</div>`, layout:'col',
-      options:shuffle(A.FORMS).map(g => ({html:`<span>${g.zh}</span>`, value:g.key})), answer:f.key,
-      fb:FB(`«${f.no}» = ${f.zh}`, `[${f.no}] = ${f.zh}`), sayAfter:f.no
+      options:shuffle(A.FORMS).map(g => { const u = A.term(g.key); return {html:bi(u.defNo, u.defZh), value:g.key}; }), answer:f.key,
+      fb:FB(`«${f.no}»: ${t.defNo}`, `[${f.no}]：${t.defZh}`), sayAfter:f.no
     })));
   });
   return out;
@@ -519,7 +520,7 @@ Ex.msgOk = () => pick(MSG_OK);
 
 Ex.speakSpec = function(spec){
   if(spec.listen) return A.sayNo(spec.listen);
-  const L = A.settings.lang, segs = [];
+  const L = A.settings.speak || 'no', segs = [];
   if(spec.say){
     if(L !== 'zh') segs.push(...A.parseSegs(spec.say.no, 'no'));
     if(L !== 'no') segs.push(...A.parseSegs(spec.say.zh, 'zh'));
@@ -744,8 +745,10 @@ function renderBuild(spec, host, ctx){
   if(A.settings.auto) Ex.speakSpec(spec);
 }
 
+Ex.renderers = {choice:renderChoice, type:renderType, grid:renderGrid, find:renderFind, sort:renderSort, build:renderBuild};
 Ex.render = function(item, host, ctx){
   const spec = item.make();
-  ({choice:renderChoice, type:renderType, grid:renderGrid, find:renderFind, sort:renderSort, build:renderBuild})[item.kind](spec, host, ctx);
+  Ex.renderers[item.kind](spec, host, ctx);
 };
+Ex.def = def; Ex.keysRow = keysRow; Ex.norm = norm; Ex.Q = Q; Ex.FB = FB;
 })();

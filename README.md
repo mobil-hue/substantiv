@@ -1,4 +1,14 @@
-# Substantiv 名词 – lær norsk substantiv (norsk + 中文)
+# Lær norsk fagstoff med kinesisk støtte (norsk + 中文)
+
+To læreopplegg i samme system: **Substantiv** (`index.html`) og **Geometri** (`geometri.html`, Matematikk 4 kap. 4).
+Norsk er hovedspråket. Kinesisk er støtte, både som tekst og som opplesing.
+
+## Språk og opplesing
+- **Vis tekst på:** norsk + 中文 (standard), bare norsk eller bare 中文.
+- **Opplesing på:** norsk, 中文 eller begge (knappen 🔊 øverst til høyre, eller *Innstillinger*). Gjelder både forklaringene (videoene) og oppgavene. Norske fagord leses alltid på norsk.
+- Pinyin er skrudd av som standard (kan slås på under *Innstillinger*).
+
+## Substantiv 名词
 
 Pedagogisk nettside for en 9 år gammel elev som er svak i norsk og snakker kinesisk.
 Åpne `index.html` i en nettleser (Chrome/Edge/Safari). Ingen installasjon.
@@ -14,7 +24,15 @@ Pedagogisk nettside for en 9 år gammel elev som er svak i norsk og snakker kine
 - **Bøyingstabell (PDF)**: `docs/substantiv-boyingstabell.pdf` – 74 vanlige substantiv i alle fire former, gruppert etter en/ei/et (kilde: `docs/jukselapp-boying.html`).
 - **Jukselapp (PDF)**: `docs/substantiv-jukselapp.pdf` – alt på én side (bygges med `node docs/build-oversikt.js`).
 
-## Oppgavemengde
+## Geometri 几何
+- **6 moduler, 58 steg**: figurer rundt oss, todimensjonale figurer (kanter, hjørner, kvadrat og rektangel), tredimensjonale figurer, nett og klosser, vinkler, «Finn ut» (gåter og utfordringer).
+- **7 animerte videoer**, begrepskort, **506 små og 78 omfattende oppgaver**, øvingsrom og «øv til du er trygg»-løkker.
+- Nye oppgavetyper: tegning på prikkpapir (sjekkes automatisk), trykk på vinkler, tau-oppgaven.
+- **Skriveark** (`geo-ark.html`): 5 ark med fasit, nye oppgaver hver gang.
+- **Jukselapp (PDF)**: `docs/geometri-jukselapp.pdf` (kilde: `docs/geometri-jukselapp.html`).
+- **Lærerside**: `geometri-laerer.html`.
+
+## Oppgavemengde (substantiv)
 - Små oppgaver (unike spørsmål): se `teacher.html` (over 1800)
 - Omfattende oppgaver: se `teacher.html` (over 150)
 
@@ -33,5 +51,6 @@ js/graphics.js    grafikk for de fire formene
 js/videos.js      lærevideoene og avspilleren
 js/exercises.js   alle oppgavebanker og oppgavetyper
 js/lessons.js     moduler og steg
-js/app.js         visninger, øktkjører, fremgang
+js/app.js         visninger, øktkjører, fremgang (begge fag)
+js/geo-*.js       geometri: tegninger, data, oppgaver, videoer, moduler, skriveark
 ```

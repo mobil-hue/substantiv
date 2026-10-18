@@ -3,43 +3,60 @@
 const A = window.App;
 const {h, bi, shuffle, pick} = A;
 const app = document.getElementById('app');
-A.progress = A.store.get('progress', {});
-const termKnow = A.store.get('termKnow', {});
+const GEO = window.SUBJECT === 'geo';
+const MODS = GEO ? A.GEO_MODULES : A.MODULES, ROOMS = GEO ? A.GEO_ROOM : A.ROOM, TERMS = GEO ? A.GEO_TERMS : A.TERMS;
+const termOf = k => TERMS.find(t => t.key === k);
+const PKEY = GEO ? 'progress_geo' : 'progress', TKEY = GEO ? 'termKnow_geo' : 'termKnow';
+A.progress = A.store.get(PKEY, {});
+const termKnow = A.store.get(TKEY, {});
+const lnk = (href, no, zh, blank) => `<a class="btn sec" href="${href}"${blank ? ' target="_blank"' : ''} style="text-decoration:none"><span class="bi"><span class="no">${no}</span><span class="zh">${zh}</span></span></a>`;
+const INFO = GEO
+  ? {emoji:'📐', no:'Lær geometri!', zh:'学习几何！', sub:['Se figurer, tegn, tell og øv!', '看图形、画一画、数一数、多练习！'], home:'figur', cls:'', test:['Hei! Dette er geometri. En trekant, en kube, en rett vinkel.', '你好！我们来学习几何。'],
+     links:lnk('geo-ark.html', '📝 Skriveark (skriv ut)', '练习纸（打印）') + lnk('docs/geometri-jukselapp.pdf', '🧾 Jukselapp (PDF)', '速查表（PDF）', true) + lnk('geometri-laerer.html', '👩‍🏫 Lærer / fasit', '教师页 / 答案') + lnk('index.html', '📘 Substantiv', '名词（挪威语语法）')}
+  : {emoji:'📘', no:'Lær substantiv!', zh:'学习名词！', sub:['Litt hver dag. Se, hør, skriv og øv!', '每天一点点。看、听、写、练！'], home:'substantiv', cls:'', test:['Hei! Dette er substantiv. En hund, ei jente, et hus.', '你好！我们来学习名词。'],
+     links:lnk('ark.html', '📝 Skriveark (skriv ut)', '练习纸（打印）') + lnk('docs/substantiv-jukselapp.pdf', '🧾 Jukselapp (PDF)', '速查表（PDF）', true) + lnk('docs/substantiv-boyingstabell.pdf', '📊 Bøyingstabell (PDF)', '变形表（PDF）', true) + lnk('teacher.html', '👩‍🏫 Lærer / fasit', '教师页 / 答案') + lnk('geometri.html', '📐 Geometri', '几何（数学）')};
 
 const key = (m, i) => `m${m}s${i}`;
 const star = n => '⭐'.repeat(n) + '☆'.repeat(3 - n);
 const ICON = {video:'🎬', terms:'🃏', practice:'✏️', task:'🧩', loop:'🔁'};
-const modStars = m => A.MODULES[m].steps.reduce((s, st, i) => s + ((A.progress[key(m, i)] || {}).stars || 0), 0);
-const modDone = m => A.MODULES[m].steps.filter((st, i) => (A.progress[key(m, i)] || {}).done).length;
+const modStars = m => MODS[m].steps.reduce((s, st, i) => s + ((A.progress[key(m, i)] || {}).stars || 0), 0);
+const modDone = m => MODS[m].steps.filter((st, i) => (A.progress[key(m, i)] || {}).done).length;
 function nextStep(){
-  for(const m of A.MODULES) for(let i = 0; i < m.steps.length; i++) if(!(A.progress[key(m.id, i)] || {}).done) return {m:m.id, i};
+  for(const m of MODS) for(let i = 0; i < m.steps.length; i++) if(!(A.progress[key(m.id, i)] || {}).done) return {m:m.id, i};
   return null;
 }
 function markDone(m, i, stars){
   const k = key(m, i), p = A.progress[k] || {};
   A.progress[k] = {done:true, stars:Math.max(p.stars || 0, stars || 0)};
-  A.store.set('progress', A.progress);
+  A.store.set(PKEY, A.progress);
 }
 function leave(){ A.Video.stop(); A.Speech.stop(); if(A._cleanup){ A._cleanup(); A._cleanup = null; } }
 function render(node){ leave(); app.innerHTML = ''; app.append(node); window.scrollTo(0, 0); }
 
 /* ---------- toppknapper ---------- */
 const LANGS = [['both', '🌐 NO + 中文'], ['no', '🇳🇴 Norsk'], ['zh', '🇨🇳 中文']];
+const SPEAKS = [{k:'no', a:true, t:'🔊 Norsk'}, {k:'zh', a:true, t:'🔊 中文'}, {k:'both', a:true, t:'🔊 Norsk + 中文'}, {k:null, a:false, t:'🔇 Av'}];
+const curSpeak = () => A.settings.auto ? Math.max(0, SPEAKS.findIndex(x => x.k === A.settings.speak)) : 3;
 function syncPills(){
   document.getElementById('pLang').textContent = LANGS.find(l => l[0] === A.settings.lang)[1];
-  const s = document.getElementById('pSound'); s.textContent = A.settings.auto ? '🔊 På' : '🔇 Av'; s.classList.toggle('on', A.settings.auto);
+  const s = document.getElementById('pSound'); s.textContent = SPEAKS[curSpeak()].t; s.classList.toggle('on', A.settings.auto);
 }
 document.getElementById('pLang').onclick = () => { const i = LANGS.findIndex(l => l[0] === A.settings.lang); A.settings.lang = LANGS[(i + 1) % 3][0]; A.saveSettings(); syncPills(); };
-document.getElementById('pSound').onclick = () => { A.settings.auto = !A.settings.auto; if(!A.settings.auto) A.Speech.stop(); A.saveSettings(); syncPills(); };
+document.getElementById('pSound').onclick = () => {
+  const n = SPEAKS[(curSpeak() + 1) % SPEAKS.length];
+  if(n.a){ A.settings.auto = true; A.settings.speak = n.k; } else { A.settings.auto = false; A.Speech.stop(); }
+  A.saveSettings(); syncPills();
+  if(n.a) A.sayBi('Norsk opplesing', '中文朗读');
+};
 document.getElementById('logo').onclick = () => { location.hash = '#/'; route(); };
 
 /* ---------- hjem ---------- */
 function home(){
   const nx = nextStep(), root = h('div');
-  const term = Math.random() < 0.4 ? A.term('substantiv') : pick(A.TERMS.filter(t => t.mod <= 6));
-  const total = A.MODULES.reduce((s, m) => s + m.steps.length, 0), done = A.MODULES.reduce((s, m) => s + modDone(m.id), 0);
-  root.innerHTML = `<div class="hero"><div class="big-emoji">📘</div><div class="grow"><h1>${bi('Lær substantiv!','学习名词！')}</h1>
-      <div>${bi('Litt hver dag. Se, hør, skriv og øv!','每天一点点。看、听、写、练！')}</div>
+  const term = Math.random() < 0.4 ? termOf(INFO.home) : pick(TERMS.filter(t => t.mod <= 6));
+  const total = MODS.reduce((s, m) => s + m.steps.length, 0), done = MODS.reduce((s, m) => s + modDone(m.id), 0);
+  root.innerHTML = `<div class="hero"><div class="big-emoji">${INFO.emoji}</div><div class="grow"><h1>${bi(INFO.no, INFO.zh)}</h1>
+      <div>${bi(INFO.sub[0], INFO.sub[1])}</div>
       <div class="mbar" style="background:rgba(255,255,255,.35)"><i style="width:${Math.round(done / total * 100)}%;background:#fff"></i></div></div>
       <button class="btn big sec" id="goNext"><span class="bi"><span class="no">${nx ? (done ? '▶ Fortsett' : '▶ Start her') : '🏆 Øv mer'}</span><span class="zh">${nx ? (done ? '继续' : '从这里开始') : '多练习'}</span></span></button></div>
     <div class="today"><span class="bigword" style="font-size:2rem">🃏</span><div class="grow" style="flex:1"><div style="font-weight:800;color:var(--muted)">${bi('Dagens begrep','今日概念')}</div>
@@ -49,18 +66,15 @@ function home(){
     <div class="links"><button class="btn sec" id="lT"><span class="bi"><span class="no">🃏 Begreper</span><span class="zh">概念卡片</span></span></button>
       <button class="btn sec" id="lP"><span class="bi"><span class="no">🏋️ Øvingsrom</span><span class="zh">练习室</span></span></button>
       <button class="btn sec" id="lS"><span class="bi"><span class="no">⚙️ Innstillinger</span><span class="zh">设置</span></span></button>
-      <a class="btn sec" href="ark.html" style="text-decoration:none"><span class="bi"><span class="no">📝 Skriveark (skriv ut)</span><span class="zh">练习纸（打印）</span></span></a>
-      <a class="btn sec" href="docs/substantiv-jukselapp.pdf" target="_blank" style="text-decoration:none"><span class="bi"><span class="no">🧾 Jukselapp (PDF)</span><span class="zh">速查表（PDF）</span></span></a>
-      <a class="btn sec" href="docs/substantiv-boyingstabell.pdf" target="_blank" style="text-decoration:none"><span class="bi"><span class="no">📊 Bøyingstabell (PDF)</span><span class="zh">变形表（PDF）</span></span></a>
-      <a class="btn sec" href="teacher.html" style="text-decoration:none"><span class="bi"><span class="no">👩‍🏫 Lærer / fasit</span><span class="zh">教师页 / 答案</span></span></a></div>`;
+      ${INFO.links}</div>`;
   const mods = root.querySelector('#mods');
-  A.MODULES.forEach(m => {
+  MODS.forEach(m => {
     const d = modDone(m.id), n = m.steps.length;
     mods.append(h('div', {class:'mod', style:`--c:${m.color}`, onclick:() => { location.hash = '#/m/' + m.id; }, html:
       `<div class="em">${m.emoji}</div><h3>${m.id}. ${bi(m.no, m.zh)}</h3><div class="stars">${star(Math.min(3, Math.round(modStars(m.id) / (n * 3) * 3 + (d === n ? 0.49 : 0))))}</div><div class="small-note" style="text-align:left">${d}/${n}</div><div class="mbar"><i style="width:${d / n * 100}%"></i></div>`}));
   });
   root.querySelector('#goNext').onclick = () => nx ? runStep(nx.m, nx.i) : (location.hash = '#/practice');
-  root.querySelector('#tspk').onclick = () => A.sayBi(`${term.no}. ${term.defNo}`, `${term.zh}。${term.defZh}`);
+  root.querySelector('#tspk').onclick = () => A.sayTerm(term);
   root.querySelector('#lT').onclick = () => { location.hash = '#/terms'; };
   root.querySelector('#lP').onclick = () => { location.hash = '#/practice'; };
   root.querySelector('#lS').onclick = () => { location.hash = '#/settings'; };
@@ -68,7 +82,7 @@ function home(){
 }
 
 function moduleView(id){
-  const m = A.MODULES[id], nx = nextStep(), root = h('div');
+  const m = MODS[id], nx = nextStep(), root = h('div');
   root.innerHTML = `<div class="crumb" id="back">← ${bi('Alle moduler','所有课程')}</div><h1 style="color:${m.color}">${m.emoji} ${m.id}. ${bi(m.no, m.zh)}</h1><div class="steps"></div>`;
   const box = root.querySelector('.steps');
   m.steps.forEach((s, i) => {
@@ -82,7 +96,7 @@ function moduleView(id){
 
 /* ---------- begreper (flashcards) ---------- */
 function termsView(keys, onDone, titleHtml){
-  let list = keys ? keys.map(A.term) : A.TERMS.slice().sort((a, b) => ((termKnow[b.key] || {m:0}).m - (termKnow[a.key] || {m:0}).m) + (Math.random() - .5));
+  let list = keys ? keys.map(termOf) : TERMS.slice().sort((a, b) => ((termKnow[b.key] || {m:0}).m - (termKnow[a.key] || {m:0}).m) + (Math.random() - .5));
   list = list.slice(); let idx = 0, flipped = false;
   const root = h('div', {class:'session'});
   function draw(){
@@ -96,15 +110,15 @@ function termsView(keys, onDone, titleHtml){
     root.querySelector('#sp').onclick = e => { e.stopPropagation(); A.sayNo(t.no); };
     fc.onclick = () => {
       if(flipped) return; flipped = true;
-      fc.innerHTML = `<div class="term">${t.no}</div><div class="zhbig">${A.ruby(t.zh, t.py)}</div><div class="def">${bi(t.defNo, t.defZh)}</div><div class="ex">${t.ex}</div>
+      fc.innerHTML = `<div class="term">${t.no}</div><div class="zhsup zh">${A.ruby(t.zh, t.py)}</div><div class="def">${bi(t.defNo, t.defZh)}</div><div class="ex">${t.ex}</div>
         <button class="spk" id="sp2">🔊</button>
         <div class="typebox"><button class="btn sec" id="more"><span class="bi"><span class="no">🔁 Øv mer</span><span class="zh">再练练</span></span></button>
         <button class="btn" id="know"><span class="bi"><span class="no">✔ Jeg kan det</span><span class="zh">我会了</span></span></button></div>`;
-      fc.querySelector('#sp2').onclick = e => { e.stopPropagation(); A.sayBi(`${t.no}. ${t.defNo}`, `${t.zh}。${t.defZh}`); };
-      const rec = ok => { const k = termKnow[t.key] || (termKnow[t.key] = {k:0, m:0}); ok ? k.k++ : k.m++; A.store.set('termKnow', termKnow); };
+      fc.querySelector('#sp2').onclick = e => { e.stopPropagation(); A.sayTerm(t); };
+      const rec = ok => { const k = termKnow[t.key] || (termKnow[t.key] = {k:0, m:0}); ok ? k.k++ : k.m++; A.store.set(TKEY, termKnow); };
       fc.querySelector('#know').onclick = e => { e.stopPropagation(); rec(true); next(); };
       fc.querySelector('#more').onclick = e => { e.stopPropagation(); rec(false); list.push(t); next(); };
-      A.sayBi(`${t.no}. ${t.defNo}`, `${t.zh}。${t.defZh}`);
+      A.sayTerm(t);
     };
     if(A.settings.auto) A.sayNo(t.no);
   }
@@ -164,13 +178,14 @@ function Session(o){
     else head = bi('Ikke helt. Se på fasiten og prøv å huske.','不太对。看看答案，记住它。');
     const pct = (res.extra !== undefined && !res.fb) ? '' : '';
     let body = `<div><b>${head}</b>`;
-    if(res.fb) body += `<div style="margin-top:4px">${bi(res.fb.no, res.fb.zh)}</div>`;
+    if(res.fb) body += `<div style="margin-top:4px;display:flex;gap:8px;align-items:center"><div style="flex:1">${bi(res.fb.no, res.fb.zh)}</div><button class="spk fbspk" type="button" title="Les opp forklaringen / 朗读解释">🔊</button></div>`;
     if(typeof res.extra === 'string' && res.extra) body += `<div style="margin-top:4px">📝 ${A.esc(res.extra)}</div>`;
     if(['grid', 'find', 'sort', 'build'].includes(cur.kind)) body += `<div style="margin-top:4px">${Math.round(res.score * 100)}%</div>`;
     body += '</div>';
     fbar.className = 'fbar ' + cls;
     fbar.innerHTML = `<span class="em">${cls === 'good' ? '🎉' : cls === 'mid' ? '👍' : '💪'}</span><div class="msg">${body}</div><button class="btn next"><span class="bi"><span class="no">Neste ➜</span><span class="zh">下一题</span></span></button>`;
     fbar.querySelector('.next').onclick = proceed;
+    const fsp = fbar.querySelector('.fbspk'); if(fsp) fsp.onclick = () => A.sayBi(res.fb.no, res.fb.zh);
     fbar.scrollIntoView({block:'nearest', behavior:'smooth'});
     if(res.say) setTimeout(() => A.sayNo(res.say), 250);
   }
@@ -210,7 +225,7 @@ function Session(o){
 
 /* ---------- steg ---------- */
 function runStep(m, i){
-  const mod = A.MODULES[m], s = mod.steps[i];
+  const mod = MODS[m], s = mod.steps[i];
   const backToModule = () => { location.hash = '#/m/' + m; route(); };
   const advance = () => { if(i + 1 < mod.steps.length) runStep(m, i + 1); else backToModule(); };
   if(s.t === 'video'){
@@ -243,7 +258,7 @@ function practiceRoom(){
     root.querySelectorAll('[data-l]').forEach(b => b.onclick = () => { lvl = +b.dataset.l; draw(); });
     root.querySelectorAll('[data-g]').forEach(b => b.onclick = () => { goalN = +b.dataset.g; draw(); });
     const box = root.querySelector('#room');
-    A.ROOM.forEach(r => box.append(h('div', {class:'mod', style:'--c:#f97316', html:`<div class="em">${r.emoji}</div><h3>${bi(r.no, r.zh)}</h3>`, onclick:() => start(r)})));
+    ROOMS.forEach(r => box.append(h('div', {class:'mod', style:'--c:#f97316', html:`<div class="em">${r.emoji}</div><h3>${bi(r.no, r.zh)}</h3>`, onclick:() => start(r)})));
   };
   const start = r => Session({title:{no:r.no, zh:r.zh}, spec:{pools:r.pools, maxLvl:lvl}, goal:goalN, adaptive:true,
     onExit:() => { location.hash = '#/practice'; route(); }, onAgain:() => start(r), onFinish:() => { location.hash = '#/practice'; route(); }});
@@ -255,8 +270,10 @@ function settingsView(){
   const S = A.settings, root = h('div', {class:'settings'});
   const noV = A.Speech.has('no'), zhV = A.Speech.has('zh');
   root.innerHTML = `<div class="crumb" id="back">← ${bi('Hjem','首页')}</div><h1>⚙️ ${bi('Innstillinger','设置')}</h1>
-    <div class="card"><label>${bi('Språk','语言')}
+    <div class="card"><label>${bi('Vis tekst på','文字显示')}
       <select id="sl">${LANGS.map(l => `<option value="${l[0]}" ${S.lang === l[0] ? 'selected' : ''}>${l[1]}</option>`).join('')}</select></label>
+    <label>${bi('Opplesing på (forklaringer og oppgaver)','朗读语言（讲解和练习）')}
+      <select id="ssp"><option value="no" ${S.speak === 'no' ? 'selected' : ''}>🇳🇴 Norsk</option><option value="zh" ${S.speak === 'zh' ? 'selected' : ''}>🇨🇳 中文</option><option value="both" ${S.speak === 'both' ? 'selected' : ''}>🇳🇴 + 🇨🇳 Norsk + 中文</option></select></label>
     <label><input type="checkbox" id="spy" ${S.pinyin ? 'checked' : ''}> ${bi('Vis pinyin (拼音)','显示拼音')}</label>
     <label><input type="checkbox" id="sauto" ${S.auto ? 'checked' : ''}> ${bi('Les opp oppgavene automatisk','自动朗读题目')}</label>
     <label>${bi('Taletempo','语速')}
@@ -269,19 +286,20 @@ function settingsView(){
     <div class="card"><button class="btn sec" id="reset"><span class="bi"><span class="no">🗑 Nullstill fremgang</span><span class="zh">清除学习进度</span></span></button></div>`;
   root.querySelector('#back').onclick = () => { location.hash = '#/'; };
   root.querySelector('#sl').onchange = e => { S.lang = e.target.value; A.saveSettings(); syncPills(); };
+  root.querySelector('#ssp').onchange = e => { S.speak = e.target.value; S.auto = true; A.saveSettings(); syncPills(); A.sayBi('Norsk opplesing', '中文朗读'); };
   root.querySelector('#spy').onchange = e => { S.pinyin = e.target.checked; A.saveSettings(); };
   root.querySelector('#sauto').onchange = e => { S.auto = e.target.checked; A.saveSettings(); syncPills(); };
   root.querySelector('#sr').onchange = e => { S.rate = +e.target.value; A.saveSettings(); };
-  root.querySelector('#t1').onclick = () => A.sayNo('Hei! Dette er substantiv. En hund, ei jente, et hus.');
-  root.querySelector('#t2').onclick = () => A.say(A.parseSegs('你好！我们来学习名词。', 'zh'));
-  root.querySelector('#reset').onclick = () => { if(confirm('Nullstille all fremgang? / 要清除所有进度吗？')){ A.progress = {}; A.store.set('progress', {}); A.Ex.resetStats(); location.hash = '#/'; route(); } };
+  root.querySelector('#t1').onclick = () => A.sayNo(INFO.test[0]);
+  root.querySelector('#t2').onclick = () => A.say(A.parseSegs(INFO.test[1], 'zh'));
+  root.querySelector('#reset').onclick = () => { if(confirm('Nullstille all fremgang? / 要清除所有进度吗？')){ A.progress = {}; A.store.set(PKEY, {}); A.Ex.resetStats(); location.hash = '#/'; route(); } };
   render(root);
 }
 
 /* ---------- ruter ---------- */
 function route(){
   const p = location.hash.replace(/^#\/?/, '').split('/');
-  if(p[0] === 'm' && A.MODULES[+p[1]]) moduleView(+p[1]);
+  if(p[0] === 'm' && MODS[+p[1]]) moduleView(+p[1]);
   else if(p[0] === 'terms') termsView(null, null);
   else if(p[0] === 'practice') practiceRoom();
   else if(p[0] === 'settings') settingsView();

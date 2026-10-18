@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lærerside – Geometri</title>
+<link rel="stylesheet" href="css/style.css">
+<style>h2{margin-top:1.4em;border-bottom:3px solid var(--brand)}td,th{font-size:.9rem}.cols{columns:2 300px}.sc{break-inside:avoid;margin-bottom:6px}.ex{display:inline-block;width:150px;vertical-align:top;margin:4px}.ex svg{width:100%;height:auto;border:1px solid #e5e7eb;border-radius:8px}</style>
+</head>
+<body class="lang-both">
+<header class="top"><a class="logo" href="geometri.html" style="text-decoration:none">📐 Geometri <small>几何</small></a><div class="sp"></div><a class="pill noprint" href="geo-ark.html" style="text-decoration:none;color:inherit">📝 Skriveark</a> <button class="pill noprint" onclick="window.print()">🖨 Skriv ut / 打印</button></header>
+<main id="t"></main>
+<script src="js/util.js"></script>
+<script src="js/data.js"></script>
+<script src="js/graphics.js"></script>
+<script src="js/geo-graphics.js"></script>
+<script src="js/geo-data.js"></script>
+<script src="js/exercises.js"></script>
+<script src="js/geo-exercises.js"></script>
+<script src="js/geo-worksheets.js"></script>
+<script>
+(function(){
+  const A = window.App, E = A.Ex, G = A.Geo, NM = A.GEO_NAMES, out = [];
+  const names = E.names().filter(n => n.startsWith('g_')); let small = 0, task = 0; const rows = [];
+  names.forEach(n => { const it = E.items(n), isTask = !['choice', 'type'].includes(it[0].kind); (isTask ? (task += it.length) : (small += it.length)); rows.push(`<tr><td>${n}</td><td>${isTask ? 'omfattende' : 'liten'}</td><td>${it.length}</td></tr>`); });
+  out.push(`<h1>👩‍🏫 Lærerside – geometri / 教师页：几何</h1>
+  <div class="card"><h3>Oversikt / 总览</h3><p><b>Små oppgaver (unike spørsmål): ${small}</b> &nbsp;·&nbsp; <b>Omfattende oppgaver: ${task}</b></p>
+  <p>Oppgavene trekkes tilfeldig. Svaralternativene stokkes. Oppgaver eleven bommer på kommer oftere. / 题目随机抽取，选项会打乱，做错的题目会更常出现。</p>
+  <p><b>Språk:</b> Norsk er hovedspråket. Kinesisk er støtte, både som tekst og som opplesing. Velg opplesing på norsk, kinesisk eller begge i knappen oppe til høyre (🔊) eller under Innstillinger. Norske fagord leses alltid på norsk. / 挪威语是主要语言，中文是辅助（文字和朗读）。右上角的 🔊 按钮或“设置”里可以选择朗读语言：挪威语、中文或两者。挪威语术语始终用挪威语朗读。</p>
+  <p>Pensum: Matematikk 4 (Cappelen Damm), kapittel 4 Geometri: kanter, hjørner, todimensjonale og tredimensjonale figurer, kvadrat og rektangel, nett, klosser, vinkler og «Finn ut»-oppgaver.</p>
+  <table class="words"><tr><th>Bank</th><th>Type</th><th>Antall</th></tr>${rows.join('')}</table></div>`);
+
+  out.push(`<h2>Todimensjonale figurer / 平面图形</h2><table class="words"><tr><th>Figur</th><th>中文</th><th>Hjørner</th><th>Kanter</th><th>Regel</th></tr>
+   ${['trekant', 'firkant', 'kvadrat', 'rektangel', 'femkant', 'sekskant', 'sirkel'].map(k => `<tr><td>${k}</td><td>${NM[k].zh}</td><td>${G.shapeCorners[k]}</td><td>${k === 'sirkel' ? '–' : G.shapeCorners[k]}</td><td>${k === 'kvadrat' ? '4 rette hjørner, 4 like lange kanter' : k === 'rektangel' ? '4 rette hjørner, kanter like to og to' : k === 'firkant' ? 'alle andre firkanter' : ''}</td></tr>`).join('')}</table>`);
+  out.push(`<h2>Tredimensjonale figurer / 立体图形</h2><table class="words"><tr><th>Figur</th><th>中文</th><th>Hjørner</th><th>Kanter</th><th>Flater</th><th>Flatenes form</th></tr>
+   ${Object.keys(G.SOLIDS).map(k => { const s = G.SOLIDS[k]; return `<tr><td>${k}</td><td>${NM[k].zh}</td><td>${s.v}</td><td>${k === 'sylinder' || k === 'kule' ? '–' : s.e}</td><td>${k === 'sylinder' || k === 'kule' ? '–' : s.f}</td><td>${s.faces}</td></tr>`; }).join('')}</table>
+   <p class="small-note" style="text-align:left">«Prisme» i dette opplegget er en firkantet eske med 2 kvadrater og 4 rektangler, slik som i boka. Sylinder og kule har krumme flater, så antall kanter og flater telles ikke i oppgavene.</p>`);
+  out.push(`<h2>Vinkler / 角</h2><table class="words"><tr><th>Type</th><th>中文</th><th>Regel</th></tr><tr><td>rett vinkel</td><td>直角</td><td>90° (som hjørnet på et ark)</td></tr><tr><td>spiss vinkel</td><td>锐角</td><td>mindre enn 90°</td></tr><tr><td>stump vinkel</td><td>钝角</td><td>større enn 90°</td></tr></table>`);
+  out.push('<h2>Gåter med svar / 谜语和答案</h2><div class="cols">' + A.GEO_RIDDLES.map(r => `<div class="sc"><b>${r.id}</b>: ${r.no}<br><span class="zh">${r.zh}</span><br>→ <b>${r.ans}</b>${r.alts ? ' (også: ' + r.alts.join(', ') + ')' : ''}</div>`).join('') + '</div>');
+  out.push('<h2>Påstander / 判断题</h2><div class="cols">' + A.GEO_FACTS.map(f => `<div class="sc">${f.t ? '✔' : '✖'} ${f.no}<br><span class="zh">${f.zh}</span><br><small>${f.eNo}</small></div>`).join('') + '</div>');
+  const dr = A.GEO_DRAW || [];
+  out.push('<h2>Tegneoppgaver med eksempelløsning / 画图题和示例答案</h2><p>Det finnes mange riktige svar. Her er ett forslag per oppgave. / 正确答案有很多，这里每题给一个示例。</p><div>' + dr.map(t => { const sol = A.GeoWorksheets.solutionFor(t.check); return `<div class="ex"><div style="font-size:.8rem;min-height:3.2em">${t.no}<br><span class="zh">${t.zh}</span></div>${sol ? A.GeoWorksheets.dotGrid(sol) : '–'}</div>`; }).join('') + '</div>');
+  out.push(`<h2>Tau-oppgaven / 绳子问题</h2><p>Et tau (8, 10, 12 eller 14 m) lages til en firkant der én side er kjent (2, 3, 4 eller 5 m). Eleven skriver lengdene på de tre andre sidene i hele meter. Summen må bli riktig, og den lengste siden må være kortere enn summen av de andre (ellers lukker ikke firkanten seg). Eksempel (10 m, én side 3 m): 3 + 3 + 2 + 2, 3 + 4 + 1 + 2, 3 + 2 + 4 + 1 … / 绳子围成四边形：其余三边（整数米）加起来要正确，最长的边要短于其余边之和。</p>`);
+  document.getElementById('t').innerHTML = out.join(''); A.applyLang();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<title>Geometri – jukselapp</title>
+<style>
+@page{size:A4 landscape;margin:0}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Noto Sans","DejaVu Sans","Noto Sans CJK SC",sans-serif;color:#1f2937;background:#fffaf0;font-size:8.4pt;line-height:1.3}
+.page{width:297mm;height:210mm;padding:5mm 6mm;overflow:hidden;display:grid;grid-template-rows:12mm 1fr;gap:2.5mm}
+.top{display:flex;align-items:center;gap:4mm;border-bottom:2.5px solid #f97316}
+.top h1{margin:0;font-size:18pt;color:#c2410c}.top .z{font-size:13pt;font-weight:800;color:#475569}.top .sp{flex:1}.top .n{font-size:8pt;color:#64748b;text-align:right;line-height:1.3}
+.brand{display:flex;align-items:center;gap:2.5mm;border-left:1.5px solid #cbd5e1;padding-left:3mm;line-height:1.15;flex:none}.brand .nm{font-weight:900;font-size:10pt;color:#c2410c}.brand .nm span{display:block}.brand .ad{font-size:7pt;color:#475569}.brand .ad span,.brand .ad a{display:block;color:#475569;text-decoration:none}
+.cols{display:grid;grid-template-columns:1.05fr 1.05fr .95fr;gap:3mm;min-height:0}
+.col{display:flex;flex-direction:column;gap:2mm;min-height:0}
+.card{background:#fff;border-radius:2.5mm;padding:1.8mm 2.4mm;box-shadow:0 0 0 1.3px #e5e7eb}
+h2{margin:0 0 1mm;font-size:10pt;color:#fff;border-radius:2mm;padding:1mm 2.4mm;display:flex;justify-content:space-between;align-items:baseline}h2 .z{font-size:8.5pt;font-weight:600;opacity:.95}
+.zh{color:#475569}b{color:#111827}
+table{width:100%;border-collapse:collapse}td,th{padding:0 1.2mm;vertical-align:middle}th{font-size:7pt;color:#475569;font-weight:700;border-bottom:1.5px solid #e2e8f0;text-align:center;padding-bottom:.6mm}
+td{border-bottom:.8px solid #eef2f7;height:12.6mm}tr:last-child td{border-bottom:0}
+.f{width:15mm}.f svg{width:14mm;height:12mm;display:block}.nm{font-weight:900;font-size:9.5pt;line-height:1.1}.nm small{display:block;font-weight:600;color:#64748b;font-size:7pt}
+.num{font-size:13pt;font-weight:900;text-align:center;width:13mm}.num.h{color:#ef4444}.num.k{color:#3b82f6}.num.fl{color:#f97316}
+.sol td{height:19.5mm}.sol .f{width:22mm}.sol .f svg{width:21mm;height:17mm}.sol .nm{width:23mm;font-size:9pt}
+.pill{display:inline-block;border-radius:5mm;color:#fff;font-weight:800;padding:0 1.3mm;font-size:6.8pt;margin:0 .2mm;white-space:nowrap}
+.p1{background:#ef4444}.p2{background:#3b82f6}.p3{background:#f97316}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:2mm}.mini{text-align:center;font-size:7.4pt;line-height:1.2}.mini svg{width:100%;height:15mm;display:block}
+.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5mm;text-align:center}.row3 svg{width:100%;height:16mm;display:block}.row3 b{font-size:8pt}
+.nets{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5mm;text-align:center;font-size:7pt}.nets svg{width:100%;height:15mm;display:block}
+.tip{background:#fef9c3;border-radius:2mm;padding:1mm 2mm;font-size:7.6pt}
+.ang{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5mm;text-align:center}.ang svg{width:100%;height:17mm;display:block}.ang b{font-size:8.6pt}.ang small{display:block;font-size:7pt;color:#475569}
+</style>
+</head>
+<body>
+<div class="page">
+ <div class="top"><h1>📐 Geometri</h1><span class="z">几何 · jukselapp 速查表</span><span class="sp"></span>
+  <span class="n">Matematikk 4 · figurer, vinkler og romfigurer<br>数学四年级 · 图形、角和立体图形</span>
+  <div class="brand"><div class="nm"><span>by Titex as</span><span>Jens Møller</span></div><div class="ad"><span>1792 Tistedal</span><a href="https://www.titex.no">www.titex.no</a></div></div></div>
+ <div class="cols">
+  <div class="col" id="c1"></div><div class="col" id="c2"></div><div class="col" id="c3"></div>
+ </div>
+</div>
+<script src="../js/util.js"></script>
+<script src="../js/data.js"></script>
+<script src="../js/graphics.js"></script>
+<script src="../js/geo-graphics.js"></script>
+<script src="../js/geo-data.js"></script>
+<script>
+(function(){
+  const A = window.App, G = A.Geo, NM = A.GEO_NAMES;
+  const shape = (k, i) => G.shapeSvg(k, i || 0, {right:true});
+  const solid = k => G.SOLIDS[k].draw().svg;
+  const tick = (pts, counts, color) => { let t = '';
+    pts.forEach((p, i) => { const q = pts[(i + 1) % pts.length], n = counts[i]; if(!n) return; const mx = (p[0] + q[0]) / 2, my = (p[1] + q[1]) / 2, dx = q[0] - p[0], dy = q[1] - p[1], L = Math.hypot(dx, dy), nx = -dy / L, ny = dx / L, ux = dx / L, uy = dy / L;
+      for(let k = 0; k < n; k++){ const off = (k - (n - 1) / 2) * 6; t += `<line x1="${(mx + ux * off + nx * 6).toFixed(1)}" y1="${(my + uy * off + ny * 6).toFixed(1)}" x2="${(mx + ux * off - nx * 6).toFixed(1)}" y2="${(my + uy * off - ny * 6).toFixed(1)}" stroke="#dc2626" stroke-width="3.5" stroke-linecap="round"/>`; } });
+    return G.svg(G.poly(pts, color, {right:true}) + t); };
+  const head = (c, no, zh) => `<h2 style="background:${c}">${no}<span class="z">${zh}</span></h2>`;
+
+  // ---- kolonne 1: todimensjonale figurer ----
+  const rows2d = [['trekant', 0, 3, 3], ['firkant', 0, 4, 4], ['kvadrat', 0, 4, 4], ['rektangel', 0, 4, 4], ['femkant', 0, 5, 5], ['sirkel', 0, 0, 0]]
+    .map(r => `<tr><td class="f">${shape(r[0], r[1])}</td><td class="nm">${r[0]}<small>${NM[r[0]].zh}</small></td><td class="num h">${r[2]}</td><td class="num k">${r[0] === 'sirkel' ? '–' : r[3]}</td></tr>`).join('');
+  const RECT = [[10, 28], [90, 28], [90, 72], [10, 72]], SQ = [[22, 22], [78, 22], [78, 78], [22, 78]];
+  document.getElementById('c1').innerHTML = `
+   <div class="card">${head('#0ea5e9', 'Todimensjonale figurer', '二维 · 平面图形')}
+    <table><tr><th></th><th></th><th>hjørner<br>顶点</th><th>kanter<br>边</th></tr>${rows2d}</table></div>
+   <div class="card"><div class="two">
+     <div class="mini">${tick(SQ, [1, 1, 1, 1], G.C.orange)}<b>kvadrat</b> 正方形<br>4 rette hjørner<br>4 like lange kanter<br><span class="zh">4 个直角，4 条边一样长</span></div>
+     <div class="mini">${tick(RECT, [1, 2, 1, 2], G.C.green)}<b>rektangel</b> 长方形<br>4 rette hjørner<br>kanter like to og to<br><span class="zh">4 个直角，对边一样长</span></div></div></div>
+   <div class="card"><div class="two"><div class="mini">${G.svg(G.poly(SQ, G.C.blue, {right:false}) + SQ.map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="7" fill="#ef4444" stroke="#fff" stroke-width="2.5"/>`).join(''))}<b style="color:#ef4444">hjørne</b> 顶点<br>der kantene møtes</div>
+     <div class="mini">${G.svg(G.poly(SQ, G.C.blue, {right:false}) + `<line x1="${SQ[0][0]}" y1="${SQ[0][1]}" x2="${SQ[1][0]}" y2="${SQ[1][1]}" stroke="#ef4444" stroke-width="8" stroke-linecap="round"/>`)}<b style="color:#ef4444">kant</b> 边<br>linjen mellom to hjørner</div></div></div>`;
+
+  // ---- kolonne 2: tredimensjonale figurer ----
+  const S = G.SOLIDS;
+  const sol = [['kube', 'p'], ['prisme', 'p'], ['pyramide', 'p'], ['trekantprisme', 'p'], ['sylinder', 'r'], ['kule', 'k']].map(r => {
+    const s = S[r[0]], counts = r[1] === 'p' ? `<span class="pill p3">${s.f} flater</span><span class="pill p2">${s.e} kanter</span><span class="pill p1">${s.v} hjørner</span>` : (r[1] === 'r' ? '<span class="pill p1">0 hjørner</span>' : '<span class="pill p1">0 hjørner</span><span class="pill p2">0 kanter</span>');
+    return `<tr><td class="f">${solid(r[0])}</td><td class="nm">${r[0]}<small>${NM[r[0]].zh}</small></td><td style="font-size:7.8pt">${counts}<br>${s.faces}<br><span class="zh">${s.facesZh}</span></td></tr>`; }).join('');
+  document.getElementById('c2').innerHTML = `
+   <div class="card">${head('#9333ea', 'Tredimensjonale figurer', '三维 · 立体图形')}
+    <table class="sol">${sol}</table></div>
+   <div class="card"><div class="row3">
+     <div>${G.cubeMark('flate')}<b style="color:#ef4444">flate</b> 面<br><span class="zh">flat side</span></div>
+     <div>${G.cubeMark('kant')}<b style="color:#ef4444">kant</b> 棱<br><span class="zh">der to flater møtes</span></div>
+     <div>${G.cubeMark('hjorne')}<b style="color:#ef4444">hjørne</b> 顶点<br><span class="zh">der kantene møtes</span></div></div></div>`;
+
+  // ---- kolonne 3: nett, klosser, vinkler ----
+  const cube = G.cubeNets();
+  const nets = [G.cells(cube[0].cells, {color:G.C.orange}), G.cells(cube[3].cells, {color:G.C.orange}), G.netSvg('pyramide'), G.netSvg('prisme')];
+  const ang = (deg, base) => G.angle(deg, {base});
+  document.getElementById('c3').innerHTML = `
+   <div class="card">${head('#14b8a6', 'Nett (utbrettet figur)', '展开图')}
+    <div class="nets">${nets.map((n, i) => `<div>${n}${['kube: 6 kvadrater', 'kube: et annet nett', 'pyramide: 1 kvadrat + 4 trekanter', 'prisme: 2 kvadrater + 4 rektangler'][i]}</div>`).join('')}</div>
+    <div class="tip" style="margin-top:1mm">Et kubenett har <b>6 kvadrater</b>, og ingen flater havner oppå hverandre når du bretter. <span class="zh">正方体展开图有 6 个正方形，折起来没有面重叠。</span></div></div>
+   <div class="card">${head('#f59e0b', 'Klosser', '小方块')}
+    <div style="display:flex;gap:2mm;align-items:center"><div style="width:32mm">${G.blocks([[3, 3, 2], [3, 1, 1], [2, 1, 0]], {color:G.C.orange})}</div>
+     <div style="font-size:7.8pt">Tell <b>kolonne for kolonne</b> – også de du ikke ser. <span class="zh">一列一列地数，看不见的也要数。</span><br><b>3 × 3 × 3 = 27</b> klosser i en kube.<br>16 klosser → <b>27 − 16 = 11</b> mangler. <span class="zh">还差 11 个。</span></div></div></div>
+   <div class="card">${head('#16a34a', 'Vinkler', '角')}
+    <div class="ang"><div>${ang(90, 0)}<b style="color:#16a34a">rett</b> = 90°<small>直角 · som hjørnet på et ark</small></div><div>${ang(45, 0)}<b style="color:#ef4444">spiss</b> &lt; 90°<small>锐角 · mindre enn rett</small></div><div>${ang(130, 0)}<b style="color:#3b82f6">stump</b> &gt; 90°<small>钝角 · større enn rett</small></div></div>
+    <div class="tip" style="margin-top:1mm">I et <b>rektangel</b> er alle 4 vinklene rette. <span class="zh">长方形的 4 个角都是直角。</span> En trekant kan ha både spisse og en stump vinkel. <span class="zh">三角形可以有锐角，也可以有一个钝角。</span></div></div>`;
+})();
+</script>
+</body>
+</html>
