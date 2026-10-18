@@ -21,6 +21,7 @@ Jeg har vondt i magen. | I have a stomach ache. | 我肚子疼。 | s | «Magen�
 Jeg har vondt i ryggen. | I have back pain. | 我背疼。 | s | Lower back = «korsryggen», back of the neck = «nakken». // 腰部叫 korsryggen，后颈叫 nakken。
 Jeg har vondt i halsen. | I have a sore throat. | 我喉咙疼。 | s | «Halsen» means both throat and neck. // halsen 既指喉咙，也指脖子。
 Jeg har vondt i øret. | I have an earache. | 我耳朵疼。 | s | «Øret» is a neuter word: et øre, øret, ører, ørene. // øret 是中性名词：et øre, øret, ører, ørene。
+Jeg har vondt i foten. | My foot hurts. | 我脚疼。 | s | «Fot» is irregular: en fot, foten, føtter, føttene. // fot 是不规则名词：en fot, foten, føtter, føttene。
 Jeg har vondt i brystet. | I have chest pain. | 我胸口疼。 | s | Chest pain with shortness of breath or pain in the arm is an emergency: call 113. // 胸痛并伴有呼吸困难或手臂疼痛属于紧急情况，请拨打 113。
 Det gjør vondt her. | It hurts here. | 这里疼。 | s | Point to the place with your hand. «Her» = here, «der» = there. // 用手指出疼的位置。her 是“这里”，der 是“那里”。
 Det verker i ryggen. | My back aches. | 我背部隐隐作痛。 | s | «Verke» is a dull ache that lasts; «svi» is a burning feeling. // verke 是持续的钝痛；svi 是灼烧感。
@@ -48,7 +49,7 @@ Jeg kan være gravid. | I might be pregnant. | 我可能怀孕了。 | s | After
 Jeg er gravid i uke 12. | I am 12 weeks pregnant. | 我怀孕12周了。 | s | Say «i uke 12» (in week 12). Pregnancy check-ups are done by your GP or a midwife («jordmor»). // 说 i uke 12（在第12周）。孕期检查由家庭医生或助产士（jordmor）负责。
 Jeg trenger nødprevensjon. | I need emergency contraception. | 我需要紧急避孕药。 | s | Also called «angrepille». Take it as soon as possible after unprotected sex. // 也叫 angrepille（事后避孕药）。无保护性行为后应尽快服用。
 Jeg vil ha p-piller. | I would like to have contraceptive pills. | 我想要口服避孕药。 | s | «P-piller» need a prescription. «Prevensjon» means contraception in general. // p-piller 需要医生开处方。prevensjon 泛指避孕。
-Jeg vil ta celleprøve. | I would like to have a cervical smear test. | 我想做宫颈细胞检查。 | s | Women are invited by letter to regular cell tests from the age of 25. Your fastlege can do it. // 从25岁起，女性会收到信件邀请定期做宫颈细胞检查，家庭医生可以操作。
+Jeg vil ta celleprøve. | I would like to have a cervical smear test. | 我想做宫颈涂片检查。 | s | Women are invited by letter to regular cell tests from the age of 25. Your fastlege can do it. // 从25岁起，女性会收到信件邀请定期做宫颈涂片（细胞）检查，家庭医生可以操作。
 Kan du være gravid? | Could you be pregnant? | 你有可能怀孕吗？ | h | The doctor asks this before X-rays and some medicines. // 拍片或开某些药之前，医生会问这个问题。
 `);
 (window.VOXRAW = window.VOXRAW || []).push(`
@@ -63,25 +64,28 @@ Er du allergisk mot noe? | Are you allergic to anything? | 你对什么东西过
 Kan du kle av deg til livet? | Can you undress to the waist? | 请把上身的衣服脱掉，好吗？ | h | «Kle av seg» is reflexive: jeg kler av meg, du kler av deg. «Livet» = the waist. // kle av seg 是反身动词：jeg kler av meg, du kler av deg。livet = 腰部。
 Legg deg her på benken. | Lie down here on the couch. | 请躺在这张检查床上。 | h | The imperative is the plain verb stem («legg»); you do not say «du». // 命令式就是动词词干（legg），不加 du。
 Pust dypt inn og pust sakte ut. | Breathe in deeply and breathe out slowly. | 请深吸一口气，然后慢慢呼出。 | h | «Pust inn» and «pust ut» are separable verbs: the particle comes last. // pust inn 和 pust ut 是可分动词，小品词放在后面。
+Åpne munnen og si aa. | Open your mouth and say ah. | 请张开嘴，说“啊”。 | h | «Munn» is masculine: en munn, munnen. The doctor looks at your throat. // munn 是阳性名词：en munn, munnen。医生要检查你的喉咙。
 Jeg skal ta blodtrykket. | I am going to take your blood pressure. | 我来给你量一下血压。 | h | Here «skal» announces what the doctor is about to do. // 这里的 skal 表示医生马上要做的事。
 Jeg skal ta en blodprøve. | I am going to take a blood sample. | 我要给你抽个血。 | h | Sometimes you must be fasting: «Du må være fastende». // 有时需要空腹：Du må være fastende（你必须空腹）。
 Du må levere en urinprøve. | You need to hand in a urine sample. | 你需要留一份尿样。 | h | «Levere» = hand in. You will get a small cup for the sample. // levere = 交出、提交。你会拿到一个小杯子来装样本。
 Jeg skriver ut en resept. | I will write you a prescription. | 我给你开个处方。 | h | The prescription is electronic: you pick up the medicine at any pharmacy, so bring ID. // 处方是电子处方：你可以去任何一家药店取药，请带上身份证件。
 Du får antibiotika i fem dager. | You will get antibiotics for five days. | 你需要吃五天抗生素。 | h | «Antibiotika» has no article and no plural. Take it exactly as the doctor says. // antibiotika 不加冠词，也没有复数。请严格按医生的指示服用。
-Du trenger sykemelding. | You need a sick note. | 你需要开病假证明。 | h | A «sykemelding» is the doctor's certificate for sick leave. For the first days many employers accept «egenmelding» (your own declaration). // sykemelding 是医生开具的病假证明。头几天很多雇主接受 egenmelding（自己声明）。
+Du trenger sykemelding. | You need a sick note. | 你需要病假证明。 | h | A «sykemelding» is the doctor's certificate for sick leave. For the first days many employers accept «egenmelding» (your own declaration). // sykemelding 是医生开具的病假证明。头几天很多雇主接受 egenmelding（自己声明）。
 Du må komme tilbake om en uke. | You need to come back in a week. | 你一周后需要再来一次。 | h | «Om en uke» = in a week; «for en uke siden» = a week ago. // om en uke = 一周后；for en uke siden = 一周前。
 Ta kontakt hvis det blir verre. | Get in touch if it gets worse. | 如果情况加重，请联系我们。 | h | «Ta kontakt» = get in touch. «Verre» = worse. // ta kontakt = 联系。verre = 更糟。
 Dette er ikke farlig. | This is not dangerous. | 这没有危险。 | h | You will hear this often. In a main clause «ikke» comes after «er». // 你会经常听到这句话。主句中 ikke 放在 er 后面。
+Det går over av seg selv. | It will pass by itself. | 这会自己好的。 | h | «Av seg selv» = by itself. You often hear this about colds and minor problems. // av seg selv = 自行（好转）。感冒或小毛病常听到这句话。
+Det er en virusinfeksjon. Antibiotika hjelper ikke. | It is a viral infection. Antibiotics do not help. | 这是病毒感染，抗生素没有用。 | h | Norwegian doctors only prescribe antibiotics for bacterial infections. // 挪威医生只在细菌感染时才开抗生素。
 Er det alvorlig? | Is it serious? | 这严重吗？ | s | Common answers: «Nei, det er ikke alvorlig» or «Vi må ta flere prøver». // 常见回答：Nei, det er ikke alvorlig（不严重）或 Vi må ta flere prøver（我们需要再做检查）。
 Må jeg ta medisin? | Do I have to take medicine? | 我需要吃药吗？ | s | Questions start with the verb: «Må jeg …?». «Ta medisin» = take medicine. // 疑问句以动词开头：Må jeg …？ta medisin 即“吃药”。
 Hvordan tar jeg tablettene? | How do I take the tablets? | 这些药片怎么吃？ | s | «Tablettene» is the definite plural. You can also ask «Hvor mange om dagen?». // tablettene 是定冠词复数形式。也可以问 Hvor mange om dagen?（每天吃几片）。
 Kan jeg gå på jobb i morgen? | Can I go to work tomorrow? | 我明天可以去上班吗？ | s | «Gå på jobb» is the everyday way to say go to work. // gå på jobb 是“去上班”的日常说法。
 Kan jeg få sykemelding? | Can I get a sick note? | 可以给我开病假证明吗？ | s | «Kan jeg få …?» is the polite way to ask for something. // Kan jeg få …？是礼貌地请求某物的常用说法。
 Hva koster en time hos legen? | How much does an appointment with the doctor cost? | 看一次医生要多少钱？ | s | You usually pay only an «egenandel» (your own share), not the full price. // 通常你只需支付 egenandel（自付部分），而不是全价。
-Hva er egenandelen? | What is the patient fee? | 自付费用是多少？ | s | When you have paid up to the yearly ceiling you get a «frikort» and pay no more for most services. // 当年自付达到上限后，你会得到 frikort（免自付额卡），大部分服务不用再付费。
+Hva er egenandelen? | What is the co-payment? | 自付费用是多少？ | s | When you have paid up to the yearly ceiling you get a «frikort» and pay no more for most services. // 当年自付达到上限后，你会得到 frikort（免自付额卡），大部分服务不用再付费。
 Jeg trenger lege nå. | I need a doctor now. | 我现在就需要看医生。 | s | If your own doctor is closed, contact the legevakt. // 如果你的家庭医生不上班，请联系 legevakt（急诊门诊）。
 Hvor er legevakten? | Where is the out-of-hours clinic? | 急诊门诊在哪里？ | s | «Legevakt» treats urgent problems day and night. The number is 116 117. // legevakt 全天候处理紧急但不危及生命的问题。电话是 116 117。
-Ring legevakten på 116 117. | Call the out-of-hours clinic on 116 117. | 请拨打 116 117 联系急诊门诊。 | b | Call 116 117 for urgent but not life-threatening problems, and 113 if it is life-threatening. // 紧急但不危及生命的情况拨打 116 117；危及生命时拨打 113。
+Ring legevakten på 116 117. | Call the out-of-hours clinic on 116 117. | 请拨打116 117联系急诊门诊。 | b | Call 116 117 for urgent but not life-threatening problems, and 113 if it is life-threatening. // 紧急但不危及生命的情况拨打 116 117；危及生命时拨打 113。
 `);
 (window.VOXRAW = window.VOXRAW || []).push(`
 @deck p-apotek | 💊 | På apoteket | At the pharmacy | 在药店 | phrases
@@ -102,7 +106,7 @@ Kan jeg få en graviditetstest? | Can I have a pregnancy test? | 我可以买一
 Jeg er gravid. Er dette trygt? | I am pregnant. Is this safe? | 我怀孕了。这个药安全吗？ | s | Always tell the pharmacist. If you breastfeed, say «Jeg ammer». // 一定要告诉药剂师。如果你在哺乳，就说 Jeg ammer。
 Er dette trygt for barn? | Is this safe for children? | 这个药对儿童安全吗？ | s | «Trygt» is the neuter form of «trygg» (safe). Say the child's age: «Hun er fire år.» // trygt 是 trygg（安全的）的中性形式。可以说出孩子的年龄：Hun er fire år（她四岁）。
 Jeg har frikort. | I have an exemption card. | 我有免自付额卡。 | s | With a «frikort» you have paid your yearly share and pay nothing more for covered medicines. // 有 frikort 说明你当年的自付额已达上限，报销范围内的药不用再付自付部分。
-Hvor mye må jeg betale selv? | How much do I have to pay myself? | 我自己要付多少钱？ | s | Your own share is called «egenandel». // 你自己支付的部分叫 egenandel。
+Det blir hundre og tjue kroner. | That will be one hundred and twenty kroner. | 一共是一百二十克朗。 | h | The cashier says «Det blir …» for the price. The part you pay yourself is called «egenandel». // 收银员用 Det blir … 报价格。你自己承担的部分叫 egenandel。
 Har du legitimasjon? | Do you have ID? | 你带身份证件了吗？ | h | You may be asked for photo ID when you collect medicine. A passport or driving licence works. // 取药时可能被要求出示带照片的证件。护照或驾照都可以。
 Ta én tablett to ganger om dagen. | Take one tablet twice a day. | 每天吃两次，每次一片。 | h | «Én» with an accent means the number one, not the article «en». // 带重音的 én 表示数字“一”，不是冠词 en。
 Ikke drikk alkohol sammen med dette. | Do not drink alcohol with this. | 吃这个药的时候不要喝酒。 | h | With the imperative, «ikke» comes before the verb: «Ikke drikk». // 命令式的否定把 ikke 放在动词前面：Ikke drikk。
@@ -133,6 +137,9 @@ Jeg trenger hjelp nå. | I need help now. | 我现在需要帮助。 | s | Add �
 Hva har skjedd? | What has happened? | 发生了什么事？ | h | The operator or the police will ask this first. // 接线员或警察通常先问这个问题。
 Hva er adressen din? | What is your address? | 你的地址是什么？ | h | Say where you are now, not only your home address. // 请说出你现在所在的位置，不一定是家里的地址。
 Er noen skadet? | Is anyone injured? | 有人受伤吗？ | h | «Skadet» = injured. // skadet = 受伤的。
+Puster han? | Is he breathing? | 他有呼吸吗？ | h | The operator asks this to judge how serious it is. Answer «Ja» or «Nei». // 接线员通过这个问题判断情况有多严重。回答 Ja（有）或 Nei（没有）。
+Vi sender en ambulanse. | We are sending an ambulance. | 我们正在派救护车过去。 | h | Stay on the line and follow the instructions. // 请保持通话，并按指示操作。
+Ikke legg på. | Do not hang up. | 请不要挂断电话。 | h | «Legge på» = to hang up (separable verb). // legge på = 挂断电话（可分动词）。
 Bli der du er. Hjelpen er på vei. | Stay where you are. Help is on its way. | 请留在原地。救援正在赶来。 | h | «Bli» = stay (imperative). «På vei» = on the way. // bli = 留下（命令式）。på vei = 在路上。
 `);
 (window.VOXRAW = window.VOXRAW || []).push(`
@@ -166,7 +173,7 @@ Vi har dugnad på lørdag. | We have a communal work day on Saturday. | 我们�
 Hvor er vaskekjelleren? | Where is the laundry room? | 洗衣房在哪里？ | s | The shared laundry in the basement is called «vaskekjeller». You often have to book a time. // 地下室的公用洗衣房叫 vaskekjeller。通常需要预约时间。
 Hvor kaster jeg søppelet? | Where do I throw the rubbish? | 垃圾扔到哪里？ | s | «Søppel» is the everyday word; «avfall» is more formal. Rubbish is sorted. // søppel 是日常用语；avfall 更正式。垃圾需要分类。
 Matavfall, plast og restavfall sorteres hver for seg. | Food waste, plastic and general waste are sorted separately. | 厨余垃圾、塑料和其他垃圾要分开投放。 | h | Glass and metal packaging («glass- og metallemballasje») has its own container. Rules differ between municipalities. // 玻璃和金属包装（glass- og metallemballasje）放进单独的容器。各市的规定不同。
-Hvor leverer jeg pantflasker? | Where do I return deposit bottles? | 带押金的瓶子在哪里退？ | s | Look for the «pant» mark. Put bottles and cans in the machine in a shop and use the receipt at the till. // 认准瓶身上的 pant 标志。把瓶罐放进商店里的回收机，收据可在收银台抵扣。
+Du må rydde etter deg i vaskekjelleren. | You must clean up after yourself in the laundry room. | 你在洗衣房用完后要收拾干净。 | h | «Rydde etter seg» = clean up after yourself. Shared rooms must be left tidy for the next person. // rydde etter seg = 自己收拾干净。公用房间用完后要整理好，方便下一个人使用。
 Jeg bor i et borettslag. | I live in a housing cooperative. | 我住在一个住房合作社里。 | s | In a «borettslag» you own a share and pay monthly «felleskostnader» (common costs). A «sameie» is similar. // 在 borettslag 中你拥有一份股份，每月支付 felleskostnader（共同费用）。sameie 是类似的共同所有形式。
 Beklager støyen. | Sorry for the noise. | 抱歉吵到你了。 | s | «Støy» = noise. Say it at the door if you have disturbed a neighbour. // støy = 噪音。如果打扰了邻居，可以当面这样说。
 Kan du dempe lyden? | Could you turn the sound down? | 你能把声音调小一点吗？ | s | Add «litt» (a bit) and «takk» to sound polite. // 加上 litt（一点）和 takk（谢谢）会更礼貌。
@@ -181,7 +188,7 @@ Jeg har fagbrev som elektriker. | I have a trade certificate as an electrician. 
 Jeg kan starte med en gang. | I can start right away. | 我可以马上开始工作。 | s | «Med en gang» = immediately. // med en gang = 马上、立刻。
 Hva er arbeidstiden? | What are the working hours? | 工作时间是怎么安排的？ | s | A full-time job is often 37.5 hours a week. // 全职工作通常每周37.5小时。
 Hva er lønnen? | What is the salary? | 工资是多少？ | s | «Brutto» = before tax, «netto» = after tax. «Timelønn» = hourly wage. // brutto = 税前，netto = 税后。timelønn = 时薪。
-Er det fast stilling eller vikariat? | Is it a permanent position or a temporary cover? | 这是正式职位还是临时代班？ | s | «Fast stilling» = permanent job, «vikariat» = temporary replacement. // fast stilling = 正式（长期）职位，vikariat = 临时替班。
+Er det fast stilling eller vikariat? | Is it a permanent position or a temporary replacement? | 这是正式职位还是临时代班？ | s | «Fast stilling» = permanent job, «vikariat» = temporary replacement. // fast stilling = 正式（长期）职位，vikariat = 临时替班。
 Fortell litt om deg selv. | Tell me a bit about yourself. | 请简单介绍一下你自己。 | h | A typical start of a job interview. Keep it short: work, education, languages. // 面试的常见开场。回答要简短：工作、学历、语言。
 Hva slags jobb leter du etter? | What kind of job are you looking for? | 你在找什么类型的工作？ | h | «Hva slags» = what kind of. // hva slags = 什么样的。
 Har du erfaring fra Norge? | Do you have experience from Norway? | 你有在挪威工作的经验吗？ | h | A short answer: «Nei, men jeg lærer fort.» (No, but I learn fast.) // 简短回答：Nei, men jeg lærer fort.（没有，但我学得很快。）
@@ -241,7 +248,7 @@ Hvor mye koster barnehageplassen? | How much does the kindergarten place cost? |
 Barnet mitt blir mobbet. | My child is being bullied. | 我的孩子被欺负了。 | s | Schools must act on bullying. Contact the class teacher at once. // 学校有义务处理欺凌问题。请马上联系班主任。
 Hvem er kontaktlæreren? | Who is the class teacher? | 谁是班主任？ | s | The «kontaktlærer» is your main contact at the school. // kontaktlærer 是你和学校联系的主要老师（班主任）。
 Har barnet lekser? | Does the child have homework? | 孩子有作业吗？ | s | «Lekser» is usually plural: «gjøre lekser» = do homework. // lekser 通常用复数：gjøre lekser = 做作业。
-Kan barnet få fri på fredag? | Can my child have Friday off? | 孩子星期五可以请假吗？ | s | Formally you apply for «permisjon». Do it in advance. // 正式的说法是申请 permisjon（请假）。请提前申请。
+Kan hun få fri på fredag? | Can she have Friday off? | 她星期五可以请假吗？ | s | «Få fri» = get time off. Formally you apply for «permisjon», and you should do it in advance. // få fri = 获准休息。正式的说法是申请 permisjon（请假），请提前申请。
 Klassen skal på ekskursjon i morgen. | The class is going on a field trip tomorrow. | 班里明天要去校外参观。 | h | «Ekskursjon» = school trip. Dress for the weather and bring a packed lunch. // ekskursjon = 校外参观、郊游。请根据天气穿衣，并带午餐。
 Det er planleggingsdag i morgen. | It is a staff planning day tomorrow. | 明天是教师计划日，不上课。 | h | On a «planleggingsdag» the teachers plan and the pupils are off. // planleggingsdag 老师们做工作计划，学生放假。
 Husk gymtøy på torsdag. | Remember your PE clothes on Thursday. | 请记得周四带体育服。 | h | «Gym» is the school subject PE; «gymtøy» = PE clothes. // gym 是体育课；gymtøy = 体育服。
@@ -257,13 +264,13 @@ Kan jeg få snakke med Anna? | Can I speak to Anna? | 我可以和安娜通话�
 Hvem ringer det fra? | Who is calling? | 请问你是哪位？ | h | You can also hear «Hvem snakker jeg med?» (Who am I speaking to?). // 也可能听到 Hvem snakker jeg med?（请问我在和谁通话）。
 Han er ikke her nå. | He is not here now. | 他现在不在。 | h | For a woman, say «Hun er ikke her nå». // 如果是女士，说 Hun er ikke her nå。
 Kan jeg legge igjen en beskjed? | Can I leave a message? | 我可以留个口信吗？ | s | «Beskjed» is masculine: en beskjed. // beskjed 是阳性名词：en beskjed。
-Kan du ringe tilbake senere? | Can you call back later? | 你可以稍后再打过来吗？ | h | «Ringe tilbake» = call back. // ringe tilbake = 回电话。
-Jeg ringer tilbake senere. | I will call back later. | 我稍后再打过去。 | s | The present tense often expresses the future: «Jeg ringer» = I will call. // 现在时常用来表示将来：Jeg ringer = 我会打电话。
+Kan du ringe tilbake senere? | Can you call back later? | 你可以稍后再打过来吗？ | b | «Ringe tilbake» = call back. // ringe tilbake = 回电话。
+Jeg ringer tilbake senere. | I will call back later. | 我稍后再打过去。 | b | The present tense often expresses the future: «Jeg ringer» = I will call. // 现在时常用来表示将来：Jeg ringer = 我会打电话。
 Linjen er opptatt. | The line is busy. | 电话占线。 | h | «Opptatt» = busy, occupied. // opptatt = 忙线、被占用。
 Jeg hører deg dårlig. | I can hear you badly. | 我听不太清你说话。 | s | You can add «Det er dårlig dekning» (the signal is poor). // 可以再说 Det er dårlig dekning（信号不好）。
-Kan du ringe meg? | Can you call me? | 你可以给我打电话吗？ | s | «Ringe» is also used with a person as object: «ringe meg». // ringe 后面可以直接接人：ringe meg。
+Kan du ringe meg? | Can you call me? | 你可以给我打电话吗？ | b | «Ringe» is also used with a person as object: «ringe meg». // ringe 后面可以直接接人：ringe meg。
 Hva er telefonnummeret ditt? | What is your phone number? | 你的电话号码是多少？ | b | Norwegian phone numbers have eight digits and are often said in pairs. // 挪威电话号码有8位数字，通常两位两位地读。
-Kan du sende meg en SMS? | Can you send me a text message? | 你可以给我发条短信吗？ | s | You can also say «melding» (message). // 也可以说 melding（消息）。
+Kan du sende meg en SMS? | Can you send me a text message? | 你可以给我发条短信吗？ | b | You can also say «melding» (message). // 也可以说 melding（消息）。
 Beklager, jeg har ringt feil nummer. | Sorry, I have called the wrong number. | 抱歉，我打错电话了。 | s | «Feil nummer» has no article. // feil nummer 前面不加冠词。
 Ett øyeblikk, jeg kobler deg videre. | One moment, I will put you through. | 请稍等，我帮你转接。 | h | «Koble videre» = to put a caller through. // koble videre = 转接电话。
 Hva kan jeg hjelpe deg med? | How can I help you? | 请问有什么可以帮您？ | h | The standard question from a clerk. Answer: «Jeg vil …» (I would like to …). // 店员或柜员的标准问法。可以回答：Jeg vil …（我想……）。
