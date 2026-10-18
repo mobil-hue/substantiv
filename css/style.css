@@ -408,3 +408,5 @@ body.lang-zh .mq + .gloss,body.lang-zh .mq.txt + .gloss{font-size:2rem;color:var
 
 .gtoggle .zh{margin-left:4px}
 body.lang-zh .gtoggle .zh{margin-left:0}
+
+.today .termart{zoom:.75}

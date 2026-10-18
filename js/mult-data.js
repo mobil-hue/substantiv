@@ -70,9 +70,9 @@ A.spokenMath = function(text, lang){
 const NAMES = [['Mia', '米娅'], ['Ola', '奥拉'], ['Sara', '萨拉'], ['Lars', '拉尔斯'], ['Kari', '卡里'], ['Jon', '约恩'], ['Nora', '诺拉'], ['Emil', '埃米尔']];
 // item: et.sg/et.pl = entall/flertall ubestemt, zh = ord, mw = målord, emoji
 const THINGS = [
-  {sg:'eple', pl:'epler', zh:'苹果', mw:'个', emoji:'🍎'}, {sg:'kule', pl:'kuler', zh:'弹珠', mw:'颗', emoji:'🔮'}, {sg:'kjeks', pl:'kjeks', zh:'饼干', mw:'块', emoji:'🍪'},
-  {sg:'blyant', pl:'blyanter', zh:'铅笔', mw:'支', emoji:'✏️'}, {sg:'klistremerke', pl:'klistremerker', zh:'贴纸', mw:'张', emoji:'⭐'}, {sg:'egg', pl:'egg', zh:'鸡蛋', mw:'个', emoji:'🥚'},
-  {sg:'blomst', pl:'blomster', zh:'花', mw:'朵', emoji:'🌸'}, {sg:'ball', pl:'baller', zh:'球', mw:'个', emoji:'⚽'}, {sg:'bok', pl:'bøker', zh:'书', mw:'本', emoji:'📚'}, {sg:'drue', pl:'druer', zh:'葡萄', mw:'颗', emoji:'🍇'}
+  {art:'et', sg:'eple', pl:'epler', zh:'苹果', mw:'个', emoji:'🍎'}, {art:'en', sg:'kule', pl:'kuler', zh:'弹珠', mw:'颗', emoji:'🔮'}, {art:'en', sg:'kjeks', pl:'kjeks', zh:'饼干', mw:'块', emoji:'🍪'},
+  {art:'en', sg:'blyant', pl:'blyanter', zh:'铅笔', mw:'支', emoji:'✏️'}, {art:'et', sg:'klistremerke', pl:'klistremerker', zh:'贴纸', mw:'张', emoji:'⭐'}, {art:'et', sg:'egg', pl:'egg', zh:'鸡蛋', mw:'个', emoji:'🥚'},
+  {art:'en', sg:'blomst', pl:'blomster', zh:'花', mw:'朵', emoji:'🌸'}, {art:'en', sg:'ball', pl:'baller', zh:'球', mw:'个', emoji:'⚽'}, {art:'en', sg:'bok', pl:'bøker', zh:'书', mw:'本', emoji:'📚'}, {art:'en', sg:'drue', pl:'druer', zh:'葡萄', mw:'颗', emoji:'🍇'}
 ];
 const HOLDERS = [
   {sg:'pose', pl:'poser', zh:'袋', emoji:'🛍️'}, {sg:'eske', pl:'esker', zh:'盒', emoji:'📦'}, {sg:'kurv', pl:'kurver', zh:'篮', emoji:'🧺'}, {sg:'boks', pl:'bokser', zh:'盒', emoji:'🥡'}, {sg:'skål', pl:'skåler', zh:'碗', emoji:'🥣'}

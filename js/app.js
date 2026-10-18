@@ -85,7 +85,7 @@ function home(){
       <div class="mbar" style="background:rgba(255,255,255,.35)"><i style="width:${Math.round(done / total * 100)}%;background:#fff"></i></div></div>
       <button class="btn big sec" id="goNext"><span class="bi"><span class="no">${nx ? (done ? '▶ Fortsett' : '▶ Start her') : '🏆 Øv mer'}</span><span class="zh">${nx ? (done ? '继续' : '从这里开始') : '多练习'}</span></span></button></div>
     <div class="today"><span class="bigword" style="font-size:2rem">🃏</span><div class="grow" style="flex:1"><div style="font-weight:800;color:var(--muted)">${bi('Dagens begrep','今日概念')}</div>
-      <div class="term-big">${term.no} <span class="zh" style="font-size:1.1rem;color:var(--ink)">${A.ruby(term.zh, term.py)}</span></div><div>${bi(term.defNo, term.defZh)}</div></div>
+      <div class="term-big">${term.no} <span class="zh" style="font-size:1.1rem;color:var(--ink)">${A.ruby(term.zh, term.py)}</span></div><div>${bi(term.defNo, term.defZh)}</div>${term.art ? `<div class="termart sm" style="margin-top:6px">${term.art}</div>` : ''}</div>
       <button class="spk" id="tspk">🔊</button></div>
     ${INFO.hub || ''}
     <h2>${bi('Moduler','课程')}</h2><div class="grid" id="mods"></div>
@@ -215,7 +215,7 @@ function Session(o){
     fbar.querySelector('.next').onclick = proceed;
     const fsp = fbar.querySelector('.fbspk'); if(fsp) fsp.onclick = () => A.sayBi(res.fb.no, res.fb.zh);
     fbar.scrollIntoView({block:'nearest', behavior:'smooth'});
-    if(res.say) setTimeout(() => A.sayNo(res.say), 250);
+    if(res.say && A.settings.auto) setTimeout(() => A.sayNo(res.say), 250);
   }
   function proceed(){
     if(isLoop && !o.endless && st.best >= goal && !st.asked){ st.asked = true; return ask(); }

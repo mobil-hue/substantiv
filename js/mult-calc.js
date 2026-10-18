@@ -279,7 +279,7 @@ M.storyModel = function(kind, lvl){
     no = `${nm} har ${a} ${ho.pl} med ${b} ${th.pl} i hver ${ho.sg}. Hvor mange ${th.pl} er det til sammen?`;
     zh = `${nz}有 ${a} ${ho.zh}${th.zh}，每${ho.zh}有 ${b} ${th.mw}。一共有多少${th.mw}${th.zh}？`; }
   else if(kind === 'price'){ a = small(); b = lvl === 3 ? rnd(101, 299) : lvl === 2 ? rnd(11, 49) : rnd(2, 9); unit = ' kr';
-    no = `En ${th.sg} koster ${b} kr. Hvor mye koster ${a} ${th.pl}?`; zh = `一${th.mw}${th.zh}要 ${b} 克朗。${a} ${th.mw}${th.zh}要多少钱？`; }
+    no = `${th.art === 'et' ? 'Et' : 'En'} ${th.sg} koster ${b} kr. Hvor mye koster ${a} ${th.pl}?`; zh = `一${th.mw}${th.zh}要 ${b} 克朗。${a} ${th.mw}${th.zh}要多少钱？`; }
   else if(kind === 'rows'){ a = small(); b = big(); emoji = '🪑'; holder = '';
     no = `Det er ${a} rader med ${b} stoler i hver rad. Hvor mange stoler er det?`; zh = `有 ${a} 排椅子，每排 ${b} 把。一共有多少把椅子？`; }
   else if(kind === 'times'){ a = small(); b = big();

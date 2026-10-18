@@ -109,7 +109,6 @@ function setup(){
 /* ---------- selve treningen ---------- */
 function start(){
   const U = A.UI; let points = A.store.get('mult_pts', 0); const S = {n:0, pts:0, ok:0, first:0};
-  if(A.settings.auto === false && cfg.pres.length === 1 && cfg.pres[0] === 'speech') A.settings.auto = true;
   U.Session({title:{no:'Mengdetrening', zh:'大量练习'}, endless:true,
     next:st => nextItem(st.recent),
     onResult:(res, cur, st, ok) => { points += res.score; S.pts += res.score; S.n++; if(ok) S.ok++; A.store.set('mult_pts', points); },
