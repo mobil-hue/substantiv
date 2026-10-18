@@ -135,3 +135,41 @@ Hva er adressen din? | What is your address? | 你的地址是什么？ | h | Sa
 Er noen skadet? | Is anyone injured? | 有人受伤吗？ | h | «Skadet» = injured. // skadet = 受伤的。
 Bli der du er. Hjelpen er på vei. | Stay where you are. Help is on its way. | 请留在原地。救援正在赶来。 | h | «Bli» = stay (imperative). «På vei» = on the way. // bli = 留下（命令式）。på vei = 在路上。
 `);
+(window.VOXRAW = window.VOXRAW || []).push(`
+@deck p-bolig | 🏠 | Bolig og naboer | Housing and neighbours | 住房和邻居 | phrases
+Jeg leter etter en leilighet. | I am looking for an apartment. | 我在找一套公寓。 | s | «Leie» = to rent, «eie» = to own, «kjøpe» = to buy. // leie = 租，eie = 拥有，kjøpe = 买。
+Hvor mye er husleien? | How much is the rent? | 房租是多少？ | s | «Husleie» is usually paid once a month. // husleie 通常按月支付。
+Husleien er tolv tusen kroner i måneden. | The rent is twelve thousand kroner a month. | 房租每月一万两千克朗。 | h | «Tusen» = thousand. In writing «kroner» is shortened to «kr». // tusen = 千。书写时 kroner 简写为 kr。
+Er strøm inkludert i leien? | Is electricity included in the rent? | 房租包含电费吗？ | s | In Norway electricity is often not included. Ask about internet too. // 在挪威，电费常常不包含在房租里。也可以问一下网络费用。
+Strømmen kommer i tillegg. | Electricity is extra. | 电费另算。 | h | «I tillegg» = in addition, on top. // i tillegg = 另外、额外。
+Hvor mye er depositumet? | How much is the deposit? | 押金是多少？ | s | The deposit may be at most six months' rent and goes into a blocked deposit account in your name. // 押金最多不超过六个月房租，要存入以你名字开立的专用冻结账户。
+Depositumet er tre måneders husleie. | The deposit is three months' rent. | 押金是三个月的房租。 | h | Note the genitive -s: «tre måneders husleie». // 注意属格 -s：tre måneders husleie。
+Når kan jeg flytte inn? | When can I move in? | 我什么时候可以搬进去？ | s | «Flytte inn» = move in, «flytte ut» = move out. // flytte inn = 搬进，flytte ut = 搬出。
+Leiligheten er ledig fra første november. | The apartment is available from the first of November. | 公寓从十一月一日起可以入住。 | h | Dates: «første november» = 1 November; the day comes before the month. // 日期顺序：先日后月，første november 即11月1日。
+Kan jeg se leiligheten? | Can I see the apartment? | 我可以去看房吗？ | s | A viewing is called «visning». // 看房叫 visning。
+Er kjæledyr tillatt? | Are pets allowed? | 可以养宠物吗？ | s | The landlord decides. Always ask before you get a pet. // 是否允许由房东决定。养宠物之前一定要先问。
+Kjæledyr er dessverre ikke tillatt. | Unfortunately, pets are not allowed. | 很遗憾，不允许养宠物。 | h | «Dessverre» = unfortunately. // dessverre = 很遗憾、不幸的是。
+Kan jeg få leiekontrakten skriftlig? | Can I have the rental contract in writing? | 可以给我书面的租房合同吗？ | s | You have the right to ask for a written rental contract. Read it before you sign. // 你有权要求书面的租房合同。签字前请先读清楚。
+Kan du skrive under her? | Can you sign here? | 请在这里签字，好吗？ | h | «Skrive under» = sign (separable verb). // skrive under = 签字（可分动词）。
+Du må betale depositum før du får nøklene. | You must pay the deposit before you get the keys. | 你要先付押金才能拿到钥匙。 | h | After «før» the subordinate clause has the order «før du får». // før 引导的从句语序是 før du får。
+Det lekker i taket. | There is a leak in the ceiling. | 天花板漏水。 | s | «Å lekke» = to leak. Tell the landlord in writing too, for example by text or email. // lekke = 漏。也请用书面方式（短信或邮件）通知房东。
+Det er fuktskade på badet. | There is damp damage in the bathroom. | 浴室受潮损坏了。 | s | «Fuktskade» = damp or water damage. Take photos and send them to the landlord. // fuktskade = 受潮或渗水造成的损坏。请拍照并发给房东。
+Det er kaldt i leiligheten. | It is cold in the apartment. | 公寓里很冷。 | s | Norwegian needs a formal subject: «Det er kaldt» (literally: it is cold). // 挪威语需要形式主语：Det er kaldt（字面：它是冷的）。
+Varmen virker ikke. | The heating does not work. | 暖气坏了。 | s | «Virke» = to work, to function. «Ikke» comes after the verb. // virke = 运转、起作用。ikke 放在动词后面。
+Kjøleskapet er ødelagt. | The fridge is broken. | 冰箱坏了。 | s | «Ødelagt» = broken; «i stykker» is also common. «Kjøleskap» is neuter: et kjøleskap. // ødelagt = 坏了；也常说 i stykker。kjøleskap 是中性名词：et kjøleskap。
+Jeg har mistet nøkkelen til leiligheten. | I have lost the key to the apartment. | 我把公寓的钥匙弄丢了。 | s | Contact the landlord («utleier») or the caretaker («vaktmester») at once. // 请马上联系房东（utleier）或管理员（vaktmester）。
+Jeg har låst meg ute. | I have locked myself out. | 我被锁在门外了。 | s | Call your landlord or a locksmith («låsesmed»). A locksmith can be expensive. // 可以联系房东或开锁师傅（låsesmed）。开锁服务可能很贵。
+Kan du sende noen for å se på det? | Can you send someone to look at it? | 你可以派人来看一下吗？ | s | «For å» + infinitive = in order to. // for å + 动词原形 = 为了……。
+Jeg sender noen i morgen. | I will send someone tomorrow. | 我明天会派人过去。 | h | The landlord or the caretaker may answer like this. // 房东或管理员可能会这样回答。
+Det skal være ro i huset etter klokka ti. | There must be quiet in the building after ten o'clock. | 晚上十点以后楼里要保持安静。 | h | Quiet hours («ro») are usually from 22:00 or 23:00 to 07:00. Check the house rules («husordensregler»). // 安静时间（ro）通常是22点或23点到次日7点。请查看 husordensregler（住户守则）。
+Vi har dugnad på lørdag. | We have a communal work day on Saturday. | 我们周六有集体义务劳动日。 | h | A «dugnad» is unpaid work that neighbours do together, for example cleaning the yard. Everyone is expected to take part. // dugnad 是邻居们一起做的无偿劳动，比如打扫院子。大家都应该参加。
+Hvor er vaskekjelleren? | Where is the laundry room? | 洗衣房在哪里？ | s | The shared laundry in the basement is called «vaskekjeller». You often have to book a time. // 地下室的公用洗衣房叫 vaskekjeller。通常需要预约时间。
+Hvor kaster jeg søppelet? | Where do I throw the rubbish? | 垃圾扔到哪里？ | s | «Søppel» is the everyday word; «avfall» is more formal. Rubbish is sorted. // søppel 是日常用语；avfall 更正式。垃圾需要分类。
+Matavfall, plast og restavfall sorteres hver for seg. | Food waste, plastic and general waste are sorted separately. | 厨余垃圾、塑料和其他垃圾要分开投放。 | h | Glass and metal packaging («glass- og metallemballasje») has its own container. Rules differ between municipalities. // 玻璃和金属包装（glass- og metallemballasje）放进单独的容器。各市的规定不同。
+Hvor leverer jeg pantflasker? | Where do I return deposit bottles? | 带押金的瓶子在哪里退？ | s | Look for the «pant» mark. Put bottles and cans in the machine in a shop and use the receipt at the till. // 认准瓶身上的 pant 标志。把瓶罐放进商店里的回收机，收据可在收银台抵扣。
+Jeg bor i et borettslag. | I live in a housing cooperative. | 我住在一个住房合作社里。 | s | In a «borettslag» you own a share and pay monthly «felleskostnader» (common costs). A «sameie» is similar. // 在 borettslag 中你拥有一份股份，每月支付 felleskostnader（共同费用）。sameie 是类似的共同所有形式。
+Beklager støyen. | Sorry for the noise. | 抱歉吵到你了。 | s | «Støy» = noise. Say it at the door if you have disturbed a neighbour. // støy = 噪音。如果打扰了邻居，可以当面这样说。
+Kan du dempe lyden? | Could you turn the sound down? | 你能把声音调小一点吗？ | s | Add «litt» (a bit) and «takk» to sound polite. // 加上 litt（一点）和 takk（谢谢）会更礼貌。
+Hei, jeg er ny nabo. | Hi, I am your new neighbour. | 你好，我是新搬来的邻居。 | s | Neighbours often greet each other and say their name and floor. // 邻居之间常常互相问好，并自我介绍姓名和楼层。
+Jeg må sende flyttemelding til folkeregisteret. | I have to send a notice of change of address to the population register. | 我需要向人口登记处提交迁居通知。 | s | You must report a move within eight days. You can do it online through the Tax Administration (Skatteetaten). // 搬家后八天内必须申报。可以通过税务局（Skatteetaten）在线办理。
+`);
