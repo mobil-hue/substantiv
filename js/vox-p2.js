@@ -217,3 +217,76 @@ Saksbehandleren tar kontakt med deg. | The case officer will contact you. | 办�
 Søknaden din er innvilget. | Your application has been approved. | 你的申请已获批准。 | h | The opposite is «avslag» (refusal): «Du har fått avslag.» // 反义是 avslag（拒绝）：Du har fått avslag.
 Du har rett til tolk. | You have the right to an interpreter. | 你有权使用翻译。 | h | You can ask NAV for an interpreter for meetings. // 你可以要求 NAV 在会面时提供翻译。
 `);
+(window.VOXRAW = window.VOXRAW || []).push(`
+@deck p-skole | 🏫 | Barnehage og skole | Kindergarten and school | 幼儿园和学校 | phrases
+Jeg vil melde barnet mitt på barnehage. | I want to register my child for kindergarten. | 我想给孩子报名上幼儿园。 | s | You apply for a place through the municipality («kommunen»). The main deadline is usually 1 March. // 要通过市政府（kommunen）申请名额。主要申请截止日期通常是3月1日。
+Jeg vil melde barnet mitt på skolen. | I want to enrol my child at school. | 我想给孩子报名入学。 | s | Children start school the year they turn six. Contact the municipality or the school. // 孩子在满六岁的那一年入学。请联系市政府或学校。
+Når begynner skolen? | When does school start? | 什么时候开学？ | s | School usually starts in mid-August, after the summer holiday. // 学校通常在暑假后的八月中旬开学。
+Barnet mitt er sykt i dag. | My child is sick today. | 我的孩子今天生病了。 | s | «Barn» is neuter: «barnet mitt», and the adjective gets -t: «sykt». // barn 是中性名词：barnet mitt，形容词加 -t：sykt。
+Han har feber og kan ikke komme. | He has a fever and cannot come. | 他发烧了，来不了。 | s | Tell the school or kindergarten in the morning, by phone, text or app. // 请在早上通过电话、短信或应用告知学校或幼儿园。
+Jeg henter henne klokka tre. | I will pick her up at three o'clock. | 我三点来接她。 | s | «Hente» = pick up, «levere» = drop off: «Jeg leverer ham klokka åtte.» «Ham» and «henne» are the object forms of «han» and «hun». // hente = 接，levere = 送：Jeg leverer ham klokka åtte。ham 和 henne 是 han 和 hun 的宾格。
+Hva trenger barnet med seg? | What does my child need to bring? | 孩子需要带什么？ | s | «Med seg» = along. Ask the kindergarten or the teacher. // med seg = 随身带着。可以问幼儿园或老师。
+Barnet trenger regntøy og skiftetøy. | The child needs rain clothes and spare clothes. | 孩子需要雨衣雨裤和换洗衣服。 | h | Children play outside in all weather. Norwegians say: «Det finnes ikke dårlig vær, bare dårlige klær.» // 孩子们不管什么天气都在户外玩。挪威人常说：Det finnes ikke dårlig vær, bare dårlige klær.（没有坏天气，只有不合适的衣服。）
+Husk matpakke og drikkeflaske. | Remember a packed lunch and a water bottle. | 请记得带午餐盒和水壶。 | h | In Norway children usually bring a «matpakke» (sandwiches) to school. // 在挪威，孩子们通常自带 matpakke（三明治午餐）去学校。
+Når er foreldremøtet? | When is the parents' meeting? | 家长会什么时候开？ | s | A «foreldremøte» is held a few times a year. // foreldremøte 每年召开几次。
+Det er foreldremøte torsdag klokka seks. | There is a parents' meeting on Thursday at six. | 周四六点有家长会。 | h | Days of the week have no preposition in Norwegian: «torsdag». // 说星期几时不用介词，直接说 torsdag。
+Kan jeg få tolk på foreldremøtet? | Can I have an interpreter at the parents' meeting? | 家长会上可以安排翻译吗？ | s | Schools can book an interpreter. Ask in advance. // 学校可以安排翻译，请提前提出。
+Vi har utviklingssamtale i neste uke. | We have a development talk next week. | 我们下周有家长面谈。 | h | An «utviklingssamtale» is a talk between teacher and parents about the child. The talk with the pupil is the «elevsamtale». // utviklingssamtale 是老师和家长就孩子的发展进行的面谈。和学生本人的谈话叫 elevsamtale。
+Hvordan går det med henne på skolen? | How is she doing at school? | 她在学校表现怎么样？ | s | A common question to the teacher. An answer: «Det går bra.» // 向老师常问的问题。回答可以是：Det går bra.（挺好的。）
+Han har vært flink på skolen. | He has done well at school. | 他在学校表现得很好。 | h | «Flink» = good, skilful, often used about children. // flink = 能干、表现好，常用来形容孩子。
+Hun trives godt i barnehagen. | She is doing well in kindergarten. | 她在幼儿园过得很开心。 | h | «Trives» means feels at home and happy. // trives = 感到舒适、开心、适应得很好。
+Kan han få hjelp med norsk? | Can he get help with Norwegian? | 他可以得到挪威语方面的帮助吗？ | s | Pupils who need it have the right to extra Norwegian teaching. // 有需要的学生有权获得额外的挪威语教学。
+Hva er SFO? | What is SFO? | SFO是什么？ | s | SFO (skolefritidsordning) is after-school care for pupils in grades 1 to 4. It costs money. // SFO（skolefritidsordning）是为一至四年级学生提供的课后托管，需要付费。
+Hvor mye koster barnehageplassen? | How much does the kindergarten place cost? | 幼儿园的费用是多少？ | s | There is a national maximum price, and families with low income can get a reduction. // 幼儿园有全国统一的最高收费标准，低收入家庭可以申请减免。
+Barnet mitt blir mobbet. | My child is being bullied. | 我的孩子被欺负了。 | s | Schools must act on bullying. Contact the class teacher at once. // 学校有义务处理欺凌问题。请马上联系班主任。
+Hvem er kontaktlæreren? | Who is the class teacher? | 谁是班主任？ | s | The «kontaktlærer» is your main contact at the school. // kontaktlærer 是你和学校联系的主要老师（班主任）。
+Har barnet lekser? | Does the child have homework? | 孩子有作业吗？ | s | «Lekser» is usually plural: «gjøre lekser» = do homework. // lekser 通常用复数：gjøre lekser = 做作业。
+Kan barnet få fri på fredag? | Can my child have Friday off? | 孩子星期五可以请假吗？ | s | Formally you apply for «permisjon». Do it in advance. // 正式的说法是申请 permisjon（请假）。请提前申请。
+Klassen skal på ekskursjon i morgen. | The class is going on a field trip tomorrow. | 班里明天要去校外参观。 | h | «Ekskursjon» = school trip. Dress for the weather and bring a packed lunch. // ekskursjon = 校外参观、郊游。请根据天气穿衣，并带午餐。
+Det er planleggingsdag i morgen. | It is a staff planning day tomorrow. | 明天是教师计划日，不上课。 | h | On a «planleggingsdag» the teachers plan and the pupils are off. // planleggingsdag 老师们做工作计划，学生放假。
+Husk gymtøy på torsdag. | Remember your PE clothes on Thursday. | 请记得周四带体育服。 | h | «Gym» is the school subject PE; «gymtøy» = PE clothes. // gym 是体育课；gymtøy = 体育服。
+Les gjerne sammen med barnet hver dag. | Please read together with your child every day. | 请每天和孩子一起读书。 | h | You can read in Norwegian or in your own language. // 可以用挪威语读，也可以用你自己的母语读。
+Hun har feber. Kan du hente henne? | She has a fever. Can you pick her up? | 她发烧了。你可以来接她吗？ | h | The kindergarten calls you if your child is ill. Keep your phone on. // 孩子生病时幼儿园会给你打电话。请保持手机畅通。
+Skolebussen går klokka halv åtte. | The school bus leaves at half past seven. | 校车七点半开。 | h | «Halv åtte» is 7:30 (half an hour to eight), not 8:30. // halv åtte 是7点半（差半小时到8点），不是8点半。
+Får barnet skoleskyss? | Does my child get school transport? | 孩子有校车接送吗？ | s | «Skoleskyss» depends on the distance to school and how dangerous the route is. // 能否有 skoleskyss（校车接送）取决于离学校的距离和路上是否危险。
+`);
+(window.VOXRAW = window.VOXRAW || []).push(`
+@deck p-tlf | 📞 | Telefon, post og bank | Phone, post and bank | 电话、邮局和银行 | phrases
+Hei, det er Li Wei. | Hello, this is Li Wei. | 你好，我是李伟。 | s | On the phone Norwegians say their name first: «Hei, det er …». // 打电话时，挪威人通常先报上自己的名字：Hei, det er …。
+Kan jeg få snakke med Anna? | Can I speak to Anna? | 我可以和安娜通话吗？ | s | «Kan jeg få snakke med …?» is the polite way to ask for a person. // Kan jeg få snakke med …？是礼貌地找人的说法。
+Hvem ringer det fra? | Who is calling? | 请问你是哪位？ | h | You can also hear «Hvem snakker jeg med?» (Who am I speaking to?). // 也可能听到 Hvem snakker jeg med?（请问我在和谁通话）。
+Han er ikke her nå. | He is not here now. | 他现在不在。 | h | For a woman, say «Hun er ikke her nå». // 如果是女士，说 Hun er ikke her nå。
+Kan jeg legge igjen en beskjed? | Can I leave a message? | 我可以留个口信吗？ | s | «Beskjed» is masculine: en beskjed. // beskjed 是阳性名词：en beskjed。
+Kan du ringe tilbake senere? | Can you call back later? | 你可以稍后再打过来吗？ | h | «Ringe tilbake» = call back. // ringe tilbake = 回电话。
+Jeg ringer tilbake senere. | I will call back later. | 我稍后再打过去。 | s | The present tense often expresses the future: «Jeg ringer» = I will call. // 现在时常用来表示将来：Jeg ringer = 我会打电话。
+Linjen er opptatt. | The line is busy. | 电话占线。 | h | «Opptatt» = busy, occupied. // opptatt = 忙线、被占用。
+Jeg hører deg dårlig. | I can hear you badly. | 我听不太清你说话。 | s | You can add «Det er dårlig dekning» (the signal is poor). // 可以再说 Det er dårlig dekning（信号不好）。
+Kan du ringe meg? | Can you call me? | 你可以给我打电话吗？ | s | «Ringe» is also used with a person as object: «ringe meg». // ringe 后面可以直接接人：ringe meg。
+Hva er telefonnummeret ditt? | What is your phone number? | 你的电话号码是多少？ | b | Norwegian phone numbers have eight digits and are often said in pairs. // 挪威电话号码有8位数字，通常两位两位地读。
+Kan du sende meg en SMS? | Can you send me a text message? | 你可以给我发条短信吗？ | s | You can also say «melding» (message). // 也可以说 melding（消息）。
+Beklager, jeg har ringt feil nummer. | Sorry, I have called the wrong number. | 抱歉，我打错电话了。 | s | «Feil nummer» has no article. // feil nummer 前面不加冠词。
+Ett øyeblikk, jeg kobler deg videre. | One moment, I will put you through. | 请稍等，我帮你转接。 | h | «Koble videre» = to put a caller through. // koble videre = 转接电话。
+Hva kan jeg hjelpe deg med? | How can I help you? | 请问有什么可以帮您？ | h | The standard question from a clerk. Answer: «Jeg vil …» (I would like to …). // 店员或柜员的标准问法。可以回答：Jeg vil …（我想……）。
+Jeg skal sende denne pakken til Kina. | I am going to send this parcel to China. | 我要把这个包裹寄到中国。 | s | «Pakke» = parcel, «brev» = letter. The price depends on weight and speed. // pakke = 包裹，brev = 信件。价格取决于重量和速度。
+Pakken veier to kilo. | The parcel weighs two kilos. | 包裹重两公斤。 | h | «Veie» = to weigh. // veie = 称重、重量为。
+Hva er det i pakken? | What is in the parcel? | 包裹里是什么？ | h | For international parcels you must declare the contents for customs. // 国际包裹必须向海关申报内容。
+Hvor mye koster frimerker? | How much do stamps cost? | 邮票多少钱？ | s | «Frimerke» is neuter: et frimerke, frimerker. // frimerke 是中性名词：et frimerke, frimerker。
+Jeg har fått en hentelapp. | I have received a pick-up notice. | 我收到了一张取件通知。 | s | A «hentelapp» tells you that a parcel is waiting for you. // hentelapp 是通知你有包裹等待领取的单子。
+Hvor kan jeg hente pakken? | Where can I pick up the parcel? | 我可以去哪里取包裹？ | s | Parcels are often collected at a pick-up point in a shop. Bring ID. // 包裹通常在商店里的取件点领取。请带上证件。
+Kan jeg få sporingsnummeret? | Can I have the tracking number? | 可以给我物流单号吗？ | s | With the «sporingsnummer» you can follow the parcel online. // 用 sporingsnummer（追踪号）可以在网上查询包裹。
+Jeg vil åpne en konto. | I would like to open an account. | 我想开一个银行账户。 | s | You need ID, and often a Norwegian ID number (fødselsnummer or D-number). // 开户需要证件，通常还需要挪威的身份号码（fødselsnummer 或 D-nummer）。
+Jeg trenger BankID. | I need BankID. | 我需要BankID。 | s | BankID is the digital ID for online banking, NAV and public services. You get it through your bank. // BankID 是用于网银、NAV 和公共服务的电子身份验证，可通过你的银行申请。
+Du må logge inn med BankID. | You have to log in with BankID. | 你需要用BankID登录。 | h | «Logge inn» = log in, «logge ut» = log out. // logge inn = 登录，logge ut = 退出登录。
+Jeg har mistet bankkortet. | I have lost my bank card. | 我的银行卡丢了。 | s | Report it at once, day or night. // 请马上报告，不论白天还是夜晚。
+Kan du sperre kortet? | Can you block the card? | 你可以帮我冻结银行卡吗？ | s | «Sperre» = to block. You can also block the card in the online bank. // sperre = 冻结。也可以在网上银行里自己冻结银行卡。
+Du får et nytt kort i posten. | You will get a new card in the post. | 新卡会寄到你家。 | h | «I posten» = by post. «Kort» is neuter: et kort. // i posten = 通过邮寄。kort 是中性名词：et kort。
+Jeg vil overføre penger til utlandet. | I want to transfer money abroad. | 我想汇款到国外。 | s | Ask about the exchange rate («kurs») and the fee («gebyr»). // 请问清楚汇率（kurs）和手续费（gebyr）。
+Hva er gebyret? | What is the fee? | 手续费是多少？ | s | «Gebyr» is neuter: et gebyr, gebyret. // gebyr 是中性名词：et gebyr, gebyret。
+Gebyret er hundre kroner. | The fee is one hundred kroner. | 手续费是一百克朗。 | h | The plural of «krone» is «kroner». // krone 的复数形式是 kroner。
+Hva er kontonummeret mitt? | What is my account number? | 我的账号是多少？ | s | Norwegian account numbers have 11 digits. // 挪威银行账号有11位数字。
+Jeg har ikke tilgang til nettbanken. | I do not have access to online banking. | 我登录不了网上银行。 | s | «Tilgang» = access. // tilgang = 访问权限、使用权。
+Jeg vil betale en regning. | I would like to pay a bill. | 我想付一张账单。 | s | Enter the «KID» number exactly as it is on the bill. // 请严格按账单上的 KID 号码输入。
+Kan jeg få se legitimasjonen din? | Could I see your ID? | 我可以看一下你的证件吗？ | h | Passport, driving licence or other photo ID counts as «legitimasjon». // 护照、驾照或其他带照片的证件都算 legitimasjon。
+Har du Vipps? | Do you have Vipps? | 你有Vipps吗？ | b | Vipps is the Norwegian mobile payment app for friends and shops. You need BankID and a Norwegian phone number. // Vipps 是挪威常用的手机支付应用，用于转账和购物。需要 BankID 和挪威手机号。
+Kan jeg vippse deg pengene? | Can I send you the money with Vipps? | 我可以用Vipps把钱转给你吗？ | s | «Vippse» is a verb: å vippse. // vippse 是动词：å vippse。
+`);

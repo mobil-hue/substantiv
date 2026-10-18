@@ -75,3 +75,87 @@ Jeg skal si det på en annen måte. | I'll say it in another way. | 我换个说
 Snakker du norsk? | Do you speak Norwegian? | 你会说挪威语吗？ | h | A normal question when you meet someone new. // 遇到新认识的人时的常见问题。
 Det er helt greit. | That's perfectly fine. | 没关系，完全可以。 | h | Often said to reassure a learner. // 常用来安慰正在学语言的人。
 `);
+(window.VOXRAW = window.VOXRAW || []).push(`
+@deck p-smaprat | 🙋 | Presentere seg og småprat | Introductions and small talk | 自我介绍与闲聊 | phrases
+Jeg heter Wang Li. | My name is Wang Li. | 我叫王丽。 | s | This is the normal way to say your name. «Mitt navn er …» sounds stiff. // 这是自我介绍的常用说法，“Mitt navn er …”听起来太生硬。
+Hva heter du? | What is your name? | 你叫什么名字？ | b | Literally "what are you called". // 字面意思是“你被叫作什么”。
+Jeg kommer fra Kina. | I come from China. | 我来自中国。 | s | Country names have no article in Norwegian: «fra Kina». // 挪威语的国名前不加冠词：fra Kina。
+Hvor kommer du fra? | Where are you from? | 你是哪里人？ | b | The preposition «fra» stays at the end of the question. // 介词 fra 留在句末。
+Jeg kommer fra Shanghai. | I am from Shanghai. | 我来自上海。 | s | Say the city if people do not know the place. // 如果对方不熟悉，可以说出具体城市。
+Jeg bor i Oslo. | I live in Oslo. | 我住在奥斯陆。 | s | Use «i» with cities and countries. // 城市和国家前面用 i。
+Jeg har bodd her i to år. | I have lived here for two years. | 我在这里住了两年。 | s | Use the perfect tense «har bodd» because you still live here. // 现在还住在这里，所以用完成时 har bodd。
+Jeg har bodd i Norge siden i fjor. | I have lived in Norway since last year. | 我从去年起就住在挪威。 | s | «Siden» goes with a starting point, «i» with a length of time. // siden 接起始时间点，i 接时间长度。
+Hvor lenge har du bodd her? | How long have you lived here? | 你在这里住多久了？ | b | A very common question for newcomers. // 对新来的人很常见的问题。
+Jeg jobber som kokk. | I work as a cook. | 我是做厨师的。 | s | No article after «som» with a profession. // 说职业时，som 后面不加冠词。
+Hva jobber du med? | What do you do for work? | 你是做什么工作的？ | b | Literally "what do you work with". // 字面意思是“你在做什么方面的工作”。
+Jeg jobber på kontor. | I work in an office. | 我在办公室工作。 | s | The preposition is fixed: «på kontor», «på sykehus», «i butikk». // 介词是固定搭配：på kontor、på sykehus、i butikk。
+Jeg er student. | I am a student. | 我是学生。 | s | No «en» before a profession or role after «være». // 用 være 说职业或身份时，前面不加 en。
+Jeg er gift. | I am married. | 我结婚了。 | s | // 
+Jeg har to barn. | I have two children. | 我有两个孩子。 | s | «Barn» is the same in singular and plural: «et barn, to barn». // barn 单复数同形：et barn, to barn。
+Jeg har en sønn og en datter. | I have a son and a daughter. | 我有一个儿子和一个女儿。 | s | // 
+Har du barn? | Do you have children? | 你有孩子吗？ | b | No article before «barn» here. // 这里 barn 前面不加冠词。
+Hvor gammel er datteren din? | How old is your daughter? | 你女儿多大了？ | b | The possessive comes after the noun: «datteren din». // 所有格放在名词后面：datteren din。
+Familien min bor i Kina. | My family lives in China. | 我的家人住在中国。 | s | After a definite noun the possessive follows: «familien min». // 名词带定冠后缀时，所有格放后面：familien min。
+Jeg savner maten hjemme. | I miss the food at home. | 我想念家乡的饭菜。 | s | // 
+Jeg snakker kinesisk og litt engelsk. | I speak Chinese and a little English. | 我会说中文和一点英语。 | s | // 
+Jeg går på norskkurs. | I am taking a Norwegian course. | 我在上挪威语课。 | s | «Gå på kurs» means to attend a course. // gå på kurs 的意思是参加课程。
+Jeg er ny i nabolaget. | I am new in the neighbourhood. | 我刚搬来这一带。 | s | A friendly way to start a talk with a neighbour. // 和邻居开口聊天的友好说法。
+Hyggelig å bli kjent med deg! | Nice to get to know you! | 很高兴能和你熟悉起来！ | s | // 
+Hva gjør du i helgen? | What are you doing this weekend? | 你周末做什么？ | b | «I helgen» means this coming weekend. // i helgen 指即将到来或这个周末。
+I helgen skal jeg på tur. | This weekend I am going on a hike. | 这个周末我要去郊游。 | s | V2 rule: the verb stays in second place, so «skal» comes before «jeg». // V2 规则：动词必须在第二位，所以 skal 在 jeg 前面。
+Hva gjør du på fritiden? | What do you do in your free time? | 你业余时间做什么？ | b | // 
+Har du noen hobbyer? | Do you have any hobbies? | 你有什么爱好吗？ | b | // 
+Jeg liker å gå på tur. | I like going for walks in nature. | 我喜欢去户外走走。 | s | After «liker» you use «å» + infinitive. Walking in nature is very popular in Norway. // liker 后面接 å + 不定式。在大自然里散步远足在挪威非常受欢迎。
+Jeg liker norsk mat. | I like Norwegian food. | 我喜欢挪威菜。 | s | // 
+Har du smakt brunost? | Have you tried brown cheese? | 你尝过棕色奶酪吗？ | b | «Brunost» is a sweet brown cheese that is often eaten on bread. // brunost 是一种甜味的棕色奶酪，常放在面包上吃。
+Hvordan trives du i Norge? | How do you like living in Norway? | 你在挪威过得习惯吗？ | b | «Trives» means to feel at home and enjoy it. // trives 表示感觉自在、过得愉快。
+Jeg trives godt her. | I feel very happy here. | 我在这里过得很开心。 | s | // 
+Har du lyst til å bli med på tur? | Would you like to come along on a hike? | 你想一起去郊游吗？ | h | «Bli med» means to come along. // bli med 的意思是一起去。
+Jeg blir gjerne med! | I would love to come along! | 我很乐意一起去！ | s | «Gjerne» is a polite and warm way to say yes. // gjerne 是礼貌又热情的答应方式。
+Vil du komme på kaffe? | Would you like to come over for coffee? | 想来我家喝杯咖啡吗？ | h | A common way to invite a neighbour or friend home. // 邀请邻居或朋友来家里坐坐的常用说法。
+Det er dugnad i nabolaget på lørdag. | There is a community work day in the neighbourhood on Saturday. | 星期六小区有集体义务劳动日。 | h | A «dugnad» is unpaid work done together, for example cleaning up outdoors. It is a social event. // dugnad 是大家一起做的无偿劳动，比如打扫户外环境，也是一种社交活动。
+`);
+(window.VOXRAW = window.VOXRAW || []).push(`
+@deck p-handle | 🛍️ | I butikken | In the shop | 在商店 | phrases
+Hvor mye koster den? | How much is it? | 这个多少钱？ | s | «Den» for en- and ei-words, «det» for et-words. // 阴性和阳性名词用 den，中性名词用 det。
+Hvor mye koster det? | How much does that cost? | 那个多少钱？ | s | Use «det» for an et-word, for example «et eple». // 中性名词（如 et eple）用 det。
+Har dere melk? | Do you have milk? | 你们有牛奶吗？ | s | «Dere» means "you" in the plural, so it fits a shop with several staff. // dere 是“你们”，适合问一家商店的店员。
+Hvor finner jeg brød? | Where can I find bread? | 我在哪里能找到面包？ | s | // 
+Jeg leter etter en genser. | I am looking for a sweater. | 我在找一件毛衣。 | s | «Lete etter» means to look for something. // lete etter 的意思是寻找。
+Jeg tar den. | I will take it. | 我要这个了。 | s | Say this when you have decided to buy. // 决定要买时这样说。
+Det er for dyrt. | That is too expensive. | 太贵了。 | s | «For» + adjective means "too". Use «dyrt» with «det». // for + 形容词表示“太……”。说 det 时用 dyrt。
+Den er for stor. | It is too big. | 这个太大了。 | s | // 
+Den er for liten. | It is too small. | 这个太小了。 | s | For an et-word you say «Det er for lite.» // 如果是中性名词要说 Det er for lite。
+Har dere en større størrelse? | Do you have a bigger size? | 有大一号的吗？ | s | // 
+Har dere en mindre størrelse? | Do you have a smaller size? | 有小一号的吗？ | s | // 
+Har dere denne i en annen farge? | Do you have this in another colour? | 这个有别的颜色吗？ | s | // 
+Jeg bruker størrelse 40. | I wear size 40. | 我穿40码。 | s | «Bruke» is used for the size you wear. // 说穿多大码时用动词 bruke。
+Hvilken størrelse bruker du? | What size do you wear? | 你穿多大码？ | h | // 
+Kan jeg prøve den? | Can I try it on? | 我可以试穿吗？ | s | // 
+Hvor er prøverommet? | Where is the fitting room? | 试衣间在哪里？ | s | // 
+Den passer meg godt. | It fits me well. | 很合我的身。 | s | // 
+Har dere noe billigere? | Do you have anything cheaper? | 有便宜一点的吗？ | s | // 
+Er den på tilbud? | Is it on sale? | 这个在打折吗？ | s | «Tilbud» is a special offer, «salg» is a bigger sale. // tilbud 是特价优惠，salg 是更大规模的打折。
+Kan du hjelpe meg å finne ris? | Can you help me find rice? | 你能帮我找一下大米吗？ | s | // 
+Hvor finner jeg frukt og grønt? | Where can I find fruit and vegetables? | 水果和蔬菜在哪里？ | s | «Frukt og grønt» is the common name for the fruit and vegetable section. // frukt og grønt 是果蔬区的常用说法。
+Kan jeg hjelpe deg? | Can I help you? | 需要帮忙吗？ | h | // 
+Jeg skal bare se meg rundt. | I am just looking around. | 我只是随便看看。 | s | A polite answer when staff offer help. // 店员问是否需要帮忙时的礼貌回答。
+Jeg trenger hjelp. | I need help. | 我需要帮助。 | s | // 
+Hvor er kassen? | Where is the checkout? | 收银台在哪里？ | s | // 
+Kassen her er ledig. | This checkout is free. | 这个收银台没人，请过来。 | h | // 
+Det er alt, takk. | That is all, thanks. | 就这些，谢谢。 | s | Said at the checkout. // 在收银台结账时说。
+Var det alt? | Was that everything? | 就这些吗？ | h | // 
+Det blir 249 kroner. | That will be 249 kroner. | 一共249挪威克朗。 | h | // 
+Kan jeg betale med kort? | Can I pay by card? | 我可以刷卡吗？ | s | // 
+Tar dere Vipps? | Do you take Vipps? | 你们可以用 Vipps 付款吗？ | s | Vipps is a mobile payment app that is very common in Norway. // Vipps 是挪威非常普遍的手机支付应用。
+Kan jeg betale kontant? | Can I pay in cash? | 我可以付现金吗？ | s | Cards are used for almost everything in Norway; cash is rare. // 在挪威几乎一切都用银行卡，现金很少用。
+Trenger du pose? | Do you need a bag? | 你需要袋子吗？ | h | Carrier bags cost a few kroner in Norwegian shops. // 挪威商店的购物袋要另外付几克朗。
+Nei takk, jeg har pose med meg. | No thanks, I have a bag with me. | 不用了，谢谢，我自己带了袋子。 | s | «Nei takk» is friendlier than just «nei». // “Nei takk”比单说“nei”更友好。
+Kan jeg få kvittering? | Can I have a receipt? | 可以给我收据吗？ | s | // 
+Vil du ha kvitteringen på e-post? | Do you want the receipt by email? | 收据要发到邮箱吗？ | h | // 
+Har du medlemskort? | Do you have a member card? | 你有会员卡吗？ | h | Many chains give a discount or bonus to members. // 很多连锁店会给会员折扣或积分。
+Jeg vil gjerne bytte denne. | I would like to exchange this. | 我想换这个。 | s | «Vil gjerne» is a polite way to say what you want. // vil gjerne 是表达想要什么的礼貌说法。
+Jeg vil gjerne returnere denne. | I would like to return this. | 我想退掉这个。 | s | Bring the receipt. Return rules depend on the shop. // 请带上收据。退货规则取决于商店。
+Hvor er panteautomaten? | Where is the bottle return machine? | 退瓶机在哪里？ | s | Bottles and cans with «pant» (deposit) go in the machine, and you get a slip for the checkout. // 带有 pant（押金）的瓶子和易拉罐放进机器，会得到一张可在收银台抵扣的凭条。
+Når stenger butikken? | When does the shop close? | 商店几点关门？ | s | Many shops are closed on Sundays. // 很多商店星期日不营业。
+`);
