@@ -83,3 +83,55 @@ Jeg trenger lege nå. | I need a doctor now. | 我现在就需要看医生。 | 
 Hvor er legevakten? | Where is the out-of-hours clinic? | 急诊门诊在哪里？ | s | «Legevakt» treats urgent problems day and night. The number is 116 117. // legevakt 全天候处理紧急但不危及生命的问题。电话是 116 117。
 Ring legevakten på 116 117. | Call the out-of-hours clinic on 116 117. | 请拨打 116 117 联系急诊门诊。 | b | Call 116 117 for urgent but not life-threatening problems, and 113 if it is life-threatening. // 紧急但不危及生命的情况拨打 116 117；危及生命时拨打 113。
 `);
+(window.VOXRAW = window.VOXRAW || []).push(`
+@deck p-apotek | 💊 | På apoteket | At the pharmacy | 在药店 | phrases
+Jeg har resept. | I have a prescription. | 我有处方。 | s | Prescriptions are electronic: give your name and show ID, and the pharmacist can find it. // 处方是电子的：报上姓名并出示证件，药剂师就能查到。
+Jeg vil hente medisinen min. | I would like to pick up my medicine. | 我来取我的药。 | s | The possessive comes after the noun in the definite form: «medisinen min». // 物主代词放在带定冠词的名词后面：medisinen min。
+Har dere noe mot hodepine? | Do you have anything for a headache? | 你们有治头痛的药吗？ | s | «Noe mot …» = something for …. The pharmacist may ask about your age and other medicines. // noe mot … = 治……的药。药剂师可能会问你的年龄和正在吃的其他药。
+Har dere noe mot forkjølelse? | Do you have anything for a cold? | 你们有治感冒的药吗？ | s | «Forkjølelse» is a common cold; «influensa» is the flu. // forkjølelse 是普通感冒；influensa 是流感。
+Har dere noe mot allergi? | Do you have anything for allergies? | 你们有治过敏的药吗？ | s | Many hay fever tablets («allergitabletter») can be bought without a prescription. // 很多治花粉症的药片（allergitabletter）不需要处方就能买到。
+Hvordan skal jeg ta dette? | How should I take this? | 这个药该怎么吃？ | s | «Skal» asks about instructions: «Hvordan skal jeg …?». // skal 用来询问规定的做法：Hvordan skal jeg …？
+Hvor mange tabletter skal jeg ta om dagen? | How many tablets should I take per day? | 我每天该吃几片？ | s | «Om dagen» = per day, «om morgenen» = in the morning. // om dagen = 每天；om morgenen = 在早上。
+Skal jeg ta dette før eller etter mat? | Should I take this before or after food? | 这个药应该饭前吃还是饭后吃？ | s | «Mat» has no article. «Til maten» means with the meal. // mat 前面不加冠词。til maten 的意思是随餐服用。
+Kan jeg ta dette sammen med andre medisiner? | Can I take this together with other medicines? | 这个药可以和别的药一起吃吗？ | s | Say what you use, for example «Jeg bruker blodtrykksmedisin». // 请说明你在吃什么药，例如 Jeg bruker blodtrykksmedisin（我在吃降压药）。
+Er det noen bivirkninger? | Are there any side effects? | 有什么副作用吗？ | s | The leaflet in the box is called «pakningsvedlegg». // 药盒里的说明书叫 pakningsvedlegg。
+Er dette reseptfritt? | Can I buy this without a prescription? | 这个药不用处方就能买吗？ | s | «Reseptfri» = over the counter; «reseptbelagt» = on prescription only. // reseptfri = 非处方；reseptbelagt = 处方药。
+Jeg trenger plaster og en bandasje. | I need plasters and a bandage. | 我需要创可贴和绷带。 | s | «Plaster» is for small cuts, «bandasje» for larger wounds. // plaster 用于小伤口，bandasje 用于较大的伤口。
+Jeg vil ha nødprevensjon. | I would like emergency contraception. | 我想买紧急避孕药。 | s | Also called «angrepille». You can buy it at the pharmacy without a prescription; you may ask quietly at the counter. // 也叫 angrepille。在药店不需要处方就能买到，不想大声说的话可以低声告诉药剂师。
+Kan jeg få en graviditetstest? | Can I have a pregnancy test? | 我可以买一个验孕棒吗？ | s | «Graviditet» = pregnancy; «gravid» = pregnant. // graviditet = 怀孕（名词）；gravid = 怀孕的。
+Jeg er gravid. Er dette trygt? | I am pregnant. Is this safe? | 我怀孕了。这个药安全吗？ | s | Always tell the pharmacist. If you breastfeed, say «Jeg ammer». // 一定要告诉药剂师。如果你在哺乳，就说 Jeg ammer。
+Er dette trygt for barn? | Is this safe for children? | 这个药对儿童安全吗？ | s | «Trygt» is the neuter form of «trygg» (safe). Say the child's age: «Hun er fire år.» // trygt 是 trygg（安全的）的中性形式。可以说出孩子的年龄：Hun er fire år（她四岁）。
+Jeg har frikort. | I have an exemption card. | 我有免自付额卡。 | s | With a «frikort» you have paid your yearly share and pay nothing more for covered medicines. // 有 frikort 说明你当年的自付额已达上限，报销范围内的药不用再付自付部分。
+Hvor mye må jeg betale selv? | How much do I have to pay myself? | 我自己要付多少钱？ | s | Your own share is called «egenandel». // 你自己支付的部分叫 egenandel。
+Har du legitimasjon? | Do you have ID? | 你带身份证件了吗？ | h | You may be asked for photo ID when you collect medicine. A passport or driving licence works. // 取药时可能被要求出示带照片的证件。护照或驾照都可以。
+Ta én tablett to ganger om dagen. | Take one tablet twice a day. | 每天吃两次，每次一片。 | h | «Én» with an accent means the number one, not the article «en». // 带重音的 én 表示数字“一”，不是冠词 en。
+Ikke drikk alkohol sammen med dette. | Do not drink alcohol with this. | 吃这个药的时候不要喝酒。 | h | With the imperative, «ikke» comes before the verb: «Ikke drikk». // 命令式的否定把 ikke 放在动词前面：Ikke drikk。
+Dette må du ha resept på. | You need a prescription for this. | 这个药你必须有处方才能买。 | h | «Dette» is moved to the front; the preposition «på» stays at the end. // dette 被提到句首，介词 på 留在句末。
+Vi har ikke dette på lager. | We do not have this in stock. | 这个药我们没有现货。 | h | «På lager» = in stock. The pharmacy can usually order it for you. // på lager = 有库存。药店通常可以帮你订购。
+@deck p-nod | 🚨 | Nød og akutt hjelp | Emergencies | 紧急情况 | phrases
+Hjelp! | Help! | 救命！ | s | Shout «Hjelp!» to get people's attention. // 需要别人注意时大喊 Hjelp！
+Ring 113, vi trenger ambulanse! | Call 113, we need an ambulance! | 快打113，我们需要救护车！ | b | 113 is the medical emergency number. It is free and answered day and night. // 113 是医疗急救电话，免费，全天有人接听。
+Ring politiet på 112! | Call the police on 112! | 请拨打112报警！ | b | 112 is the police emergency number. For matters that are not urgent, call 02800. // 112 是警察的紧急电话。不紧急的事可以拨打 02800。
+Ring brannvesenet på 110! | Call the fire brigade on 110! | 请拨打110叫消防队！ | b | 110 is the fire brigade. All three emergency numbers (110, 112, 113) are free. // 110 是消防队的电话。三个紧急电话（110、112、113）都是免费的。
+Ring 116 117 hvis det ikke er livsfarlig. | Call 116 117 if it is not life-threatening. | 如果没有生命危险，请拨打116 117。 | b | 116 117 is the legevakt (out-of-hours doctor) for urgent problems that are not life-threatening. // 116 117 是 legevakt（急诊门诊）的电话，用于紧急但不危及生命的情况。
+Det har skjedd en ulykke. | There has been an accident. | 发生了一起事故。 | s | Use the perfect tense «har skjedd» for something that has just happened. // 刚刚发生的事用现在完成时 har skjedd。
+Adressen er … | The address is … | 地址是…… | s | Say the street name, the number and the town. The operator needs the address first. // 说出街道名、门牌号和城镇。接线员最先需要地址。
+Det brenner! | There is a fire! | 着火了！ | s | Get out of the building first, then call 110. // 先离开建筑物，再拨打110。
+Han puster ikke! | He is not breathing! | 他没有呼吸了！ | s | Say «Hun puster ikke» for a woman. The operator will tell you how to help. // 如果是女性，说 Hun puster ikke。接线员会指导你如何施救。
+Hun er bevisstløs. | She is unconscious. | 她失去知觉了。 | s | For a man, say «Han er bevisstløs». // 如果是男性，说 Han er bevisstløs。
+Noen har stjålet vesken min. | Someone has stolen my bag. | 有人偷了我的包。 | s | You can report a theft to the police, also online. You need the report for insurance. // 可以向警方报案，也可以在网上报案。保险理赔需要报案记录。
+Jeg har mistet passet. | I have lost my passport. | 我的护照丢了。 | s | Report it to the police. Foreign citizens should also contact their embassy. // 请向警方报案。外国公民还应联系本国大使馆。
+Jeg har mistet mobilen min. | I have lost my phone. | 我的手机丢了。 | s | Call your phone company and ask them to block the SIM card. // 请联系你的电信运营商，让他们冻结 SIM 卡。
+Jeg føler meg ikke trygg. | I do not feel safe. | 我觉得不安全。 | s | «Føle seg» is reflexive: jeg føler meg. // føle seg 是反身动词：jeg føler meg。
+Noen følger etter meg. | Someone is following me. | 有人在跟踪我。 | s | Go to a place with people, such as a shop, and call 112. // 请去有人的地方，比如商店，并拨打112。
+Jeg blir truet. | I am being threatened. | 我受到威胁。 | s | «Bli» + participle forms the passive: «Jeg blir truet». Call 112 if you are in danger. // bli + 过去分词构成被动：Jeg blir truet。有危险时请拨打112。
+Jeg er utsatt for vold. | I am being subjected to violence. | 我正遭受暴力。 | s | Violence in the home is a crime in Norway. You have the right to help and protection. // 在挪威，家庭暴力是犯罪。你有权获得帮助和保护。
+Jeg trenger plass på et krisesenter. | I need a place at a crisis centre. | 我需要入住危机中心。 | s | A «krisesenter» offers free, safe shelter and advice to people who experience violence at home. // krisesenter 为在家中遭受暴力的人免费提供安全住所和咨询。
+Ring krisesentertelefonen på 800 40 008. | Call the crisis centre helpline on 800 40 008. | 请拨打800 40 008联系危机中心热线。 | b | The helpline is free and open day and night. // 这条热线免费，全天开放。
+Ring Mental Helse på 116 123. | Call Mental Helse on 116 123. | 请拨打116 123联系心理健康热线。 | b | A free helpline where you can talk to someone, day and night. // 免费的心理健康热线，全天都可以倾诉。
+Jeg trenger hjelp nå. | I need help now. | 我现在需要帮助。 | s | Add «politiet» if you need the police: «Jeg trenger politiet.» // 如果需要警察，可以说 Jeg trenger politiet。
+Hva har skjedd? | What has happened? | 发生了什么事？ | h | The operator or the police will ask this first. // 接线员或警察通常先问这个问题。
+Hva er adressen din? | What is your address? | 你的地址是什么？ | h | Say where you are now, not only your home address. // 请说出你现在所在的位置，不一定是家里的地址。
+Er noen skadet? | Is anyone injured? | 有人受伤吗？ | h | «Skadet» = injured. // skadet = 受伤的。
+Bli der du er. Hjelpen er på vei. | Stay where you are. Help is on its way. | 请留在原地。救援正在赶来。 | h | «Bli» = stay (imperative). «På vei» = on the way. // bli = 留下（命令式）。på vei = 在路上。
+`);
