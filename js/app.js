@@ -12,9 +12,9 @@ const termKnow = A.store.get(TKEY, {});
 const lnk = (href, no, zh, blank) => `<a class="btn sec" href="${href}"${blank ? ' target="_blank"' : ''} style="text-decoration:none"><span class="bi"><span class="no">${no}</span><span class="zh">${zh}</span></span></a>`;
 const INFO = GEO
   ? {emoji:'📐', no:'Lær geometri!', zh:'学习几何！', sub:['Se figurer, tegn, tell og øv!', '看图形、画一画、数一数、多练习！'], home:'figur', cls:'', test:['Hei! Dette er geometri. En trekant, en kube, en rett vinkel.', '你好！我们来学习几何。'],
-     links:lnk('geo-ark.html', '📝 Skriveark (skriv ut)', '练习纸（打印）') + lnk('docs/geometri-jukselapp.pdf', '🧾 Jukselapp (PDF)', '速查表（PDF）', true) + lnk('geometri-laerer.html', '👩‍🏫 Lærer / fasit', '教师页 / 答案') + lnk('index.html', '📘 Substantiv', '名词（挪威语语法）')}
+     links:lnk('geo-ark.html', '📝 Skriveark (skriv ut)', '练习纸（打印）') + lnk('docs/geometri-jukselapp.pdf', '🧾 Jukselapp (PDF)', '速查表（PDF）', true) + lnk('geometri-laerer.html', '👩‍🏫 Lærer / fasit', '教师页 / 答案') + lnk('gange.html', '✖️ Gange', '乘法') + lnk('index.html', '📘 Substantiv', '名词（挪威语语法）')}
   : {emoji:'📘', no:'Lær substantiv!', zh:'学习名词！', sub:['Litt hver dag. Se, hør, skriv og øv!', '每天一点点。看、听、写、练！'], home:'substantiv', cls:'', test:['Hei! Dette er substantiv. En hund, ei jente, et hus.', '你好！我们来学习名词。'],
-     links:lnk('ark.html', '📝 Skriveark (skriv ut)', '练习纸（打印）') + lnk('docs/substantiv-jukselapp.pdf', '🧾 Jukselapp (PDF)', '速查表（PDF）', true) + lnk('docs/substantiv-boyingstabell.pdf', '📊 Bøyingstabell (PDF)', '变形表（PDF）', true) + lnk('teacher.html', '👩‍🏫 Lærer / fasit', '教师页 / 答案') + lnk('geometri.html', '📐 Geometri', '几何（数学）')};
+     links:lnk('ark.html', '📝 Skriveark (skriv ut)', '练习纸（打印）') + lnk('docs/substantiv-jukselapp.pdf', '🧾 Jukselapp (PDF)', '速查表（PDF）', true) + lnk('docs/substantiv-boyingstabell.pdf', '📊 Bøyingstabell (PDF)', '变形表（PDF）', true) + lnk('teacher.html', '👩‍🏫 Lærer / fasit', '教师页 / 答案') + lnk('gange.html', '✖️ Gange', '乘法') + lnk('geometri.html', '📐 Geometri', '几何（数学）')};
 
 const key = (m, i) => `m${m}s${i}`;
 const star = n => '⭐'.repeat(n) + '☆'.repeat(3 - n);
