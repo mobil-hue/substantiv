@@ -6,7 +6,8 @@ const app = document.getElementById('app');
 
 const SECTIONS = [
   {id:'norsk', emoji:'🇳🇴', no:'Norsk', zh:'挪威语', color:'#2563eb'},
-  {id:'matte', emoji:'🔢', no:'Matematikk', zh:'数学', color:'#f97316'}
+  {id:'matte', emoji:'🔢', no:'Matematikk', zh:'数学', color:'#f97316'},
+  {id:'voksen', emoji:'🧑‍🏫', no:'Norsk Voksenopplæring', zh:'成人挪威语', color:'#0f766e'}
 ];
 // sum = nøkkel til fremgangen programmet lagrer (sub_sum_<sum>)
 const PROGRAMS = [
@@ -24,7 +25,24 @@ const PROGRAMS = [
    links:[['geo-ark.html', '📝 Skriveark', '练习纸'], ['docs/geometri-jukselapp.pdf', '🧾 Jukselapp', '速查表'], ['geometri-laerer.html', '👩‍🏫 Lærer', '教师页']]},
   {section:'matte', id:'gange', href:'gange.html', sum:null, emoji:'🎯', color:'#a855f7',
    no:'Gangespill (rask trening)', zh:'乘法小游戏（快速练习）',
-   desc:['Raskt spill med gangetabellen 2–10: poeng, statistikk og hjelp med baller.', '乘法表 2–10 的快速小游戏：积分、统计和小球提示。'], links:[]}
+   desc:['Raskt spill med gangetabellen 2–10: poeng, statistikk og hjelp med baller.', '乘法表 2–10 的快速小游戏：积分、统计和小球提示。'], links:[]},
+  // Norsk Voksenopplæring: norsk for kinesisktalende voksne (norsk, engelsk og kinesisk)
+  {section:'voksen', id:'vox-top100', href:'voksen.html#/deck/top:1-100', sum:'vox_top100', unit:['ord lært', '个词已学会'], emoji:'🔟', color:'#0f766e',
+   no:'De 100 vanligste ordene', zh:'最常用的 100 个词',
+   desc:['De viktigste ordene på norsk, med uttale, forklaring, eksempel og quiz. Norsk, engelsk og kinesisk.', '挪威语最重要的词：发音、详细解释、例句和测验。挪威语、英语和中文。'],
+   links:[['voksen.html#/learn/top:1-100', '🆕 Lær nye ord', '学新词'], ['voksen.html#/quiz/top:1-100', '🧠 Quiz', '测验']]},
+  {section:'voksen', id:'vox-top500', href:'voksen.html#/deck/top:1-500', sum:'vox_top500', unit:['ord lært', '个词已学会'], emoji:'5️⃣', color:'#0d9488',
+   no:'De 500 vanligste ordene', zh:'最常用的 500 个词',
+   desc:['De 500 mest brukte ordene i pakker på 50. Smart repetisjon av det du glemmer.', '最常用的 500 个词，每 50 个一组。智能复习容易忘记的词。'],
+   links:[['voksen.html#/quiz/top:1-500', '🧠 Quiz', '测验']]},
+  {section:'voksen', id:'vox-words', href:'voksen.html#/', sum:'vox_words', unit:['ord lært', '个词已学会'], emoji:'🧺', color:'#14b8a6',
+   no:'Hverdagsord', zh:'日常词汇',
+   desc:['Dyr, fisk, mat, klær, skog, kroppen, helse, rom og utstyr i huset, by og transport og mer.', '动物、鱼、食物、衣服、森林、身体、健康、房间和家用物品、城市和交通等。'],
+   links:[['voksen.html#/words', '🔎 Ordliste', '词汇表']]},
+  {section:'voksen', id:'vox-phrases', href:'voksen.html#/', sum:'vox_phrases', unit:['setninger lært', '个句子已学会'], emoji:'💬', color:'#7c3aed',
+   no:'Hverdagssetninger', zh:'日常句子',
+   desc:['Setninger du trenger: i butikken, hos legen, på apoteket, buss og tog, NAV, bolig, telefon og bank.', '日常需要的句子：商店、看医生、药店、公交和火车、NAV、住房、电话和银行。'],
+   links:[['voksen.html#/sound', '🔤 Uttale', '发音'], ['voksen.html#/settings', '⚙️ Stemme', '语音设置']]}
 ];
 
 /* ---------- topp-knapper ---------- */
@@ -49,7 +67,7 @@ const fmt = n => String(Math.round(n * 10) / 10).replace('.', ',');
 function card(p){
   const pr = progress(p), pct = pr && pr.total ? Math.round(pr.done / pr.total * 100) : 0;
   let st = '';
-  if(pr && pr.total) st = `<div class="mbar"><i style="width:${pct}%"></i></div><div class="small-note" style="text-align:left">${bi(`${pr.done} av ${pr.total} steg fullført`, `已完成 ${pr.done} / ${pr.total} 步`)}</div>`;
+  if(pr && pr.total){ const u = p.unit; st = `<div class="mbar"><i style="width:${pct}%"></i></div><div class="small-note" style="text-align:left">${u ? bi(`${pr.done} av ${pr.total} ${u[0]}`, `${pr.done} / ${pr.total} ${u[1]}`) : bi(`${pr.done} av ${pr.total} steg fullført`, `已完成 ${pr.done} / ${pr.total} 步`)}</div>`; }
   else if(pr && pr.pts != null) st = `<div class="small-note" style="text-align:left">${bi(`⭐ ${fmt(pr.pts)} poeng`, `⭐ ${fmt(pr.pts)} 分`)}</div>`;
   else st = `<div class="small-note" style="text-align:left">${bi('Ikke startet ennå', '还没有开始')}</div>`;
   const el = h('div', {class:'mod hubcard', style:`--c:${p.color}`, tabindex:'0', role:'link', onclick:() => { location.href = p.href; }, html:

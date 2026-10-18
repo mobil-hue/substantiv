@@ -84,22 +84,25 @@ let token = 0;
 function loadVoices(){ try{ voices = speechSynthesis.getVoices() || []; }catch(e){ voices = []; } }
 if(supported){ loadVoices(); try{ speechSynthesis.onvoiceschanged = loadVoices; }catch(e){} }
 
+const VOICE_CANDS = {no:['nb-no','no-no','nn-no','nb','no'], zh:['zh-cn','cmn-hans-cn','zh-tw','zh-hk','zh'], en:['en-gb','en-us','en-au','en']};
+const VOICE_PRE = {no:['nb','no','nn'], zh:['zh','cmn'], en:['en']};
+const LANG_CODE = {no:'nb-NO', zh:'zh-CN', en:'en-GB'};
+const vnorm = v => (v.lang || '').replace('_','-').toLowerCase();
 function findVoice(l){
-  const cands = l === 'no' ? ['nb-no','no-no','nn-no','nb','no'] : ['zh-cn','cmn-hans-cn','zh-tw','zh-hk','zh'];
-  const norm = v => (v.lang || '').replace('_','-').toLowerCase();
-  for(const c of cands){ const v = voices.find(v => norm(v) === c); if(v) return v; }
-  const pre = l === 'no' ? ['nb','no','nn'] : ['zh','cmn'];
-  for(const c of pre){ const v = voices.find(v => norm(v).startsWith(c)); if(v) return v; }
+  const pref = (A.settings.voice || {})[l];   // stemme valgt av brukeren (navn)
+  if(pref){ const pv = voices.find(v => v.name === pref); if(pv) return pv; }
+  for(const c of (VOICE_CANDS[l] || VOICE_CANDS.zh)){ const v = voices.find(v => vnorm(v) === c); if(v) return v; }
+  for(const c of (VOICE_PRE[l] || VOICE_PRE.zh)){ const v = voices.find(v => vnorm(v).startsWith(c)); if(v) return v; }
   return null;
 }
-function speakOne(text, l){
+function speakOne(text, l, rate){
   if(A.spokenMath) text = A.spokenMath(text, l);
   return new Promise(res => {
     if(!supported){ setTimeout(res, 500 + text.length*70); return; }
     const u = new SpeechSynthesisUtterance(text);
     const v = findVoice(l);
-    if(v){ u.voice = v; u.lang = v.lang; } else u.lang = (l === 'no' ? 'nb-NO' : 'zh-CN');
-    u.rate = A.settings.rate;
+    if(v){ u.voice = v; u.lang = v.lang; } else u.lang = LANG_CODE[l] || 'zh-CN';
+    u.rate = rate || A.settings.rate;
     let done = false, t;
     const fin = () => { if(done) return; done = true; clearTimeout(t); res(); };
     u.onend = fin; u.onerror = fin;
@@ -110,6 +113,11 @@ function speakOne(text, l){
 A.Speech = {
   supported,
   has: l => !!findVoice(l),
+  // alle stemmer for et språk (no / zh / en), og valgt stemme
+  voices: l => voices.filter(v => (VOICE_PRE[l] || []).some(p => vnorm(v).startsWith(p))).map(v => ({name:v.name, lang:v.lang, local:!!v.localService})),
+  current: l => { const v = findVoice(l); return v ? v.name : ''; },
+  choose(l, name){ A.settings.voice = Object.assign({}, A.settings.voice || {}, {[l]: name || ''}); if(!name) delete A.settings.voice[l]; A.store.set('settings', A.settings); },
+  onVoices(cb){ if(supported){ const prev = speechSynthesis.onvoiceschanged; try{ speechSynthesis.onvoiceschanged = () => { loadVoices(); if(prev) try{ prev(); }catch(e){} cb(); }; }catch(e){} } },
   stop(){ token++; if(supported){ try{ speechSynthesis.cancel(); }catch(e){} } }
 };
 A.parseSegs = function(str, base){
@@ -126,7 +134,7 @@ A.say = async function(segs){
   if(supported){ try{ speechSynthesis.cancel(); }catch(e){} await A.sleep(40); }
   for(const s of segs){
     if(my !== token) return false;
-    await speakOne(s.t, s.l);
+    await speakOne(s.t, s.l, s.r);
   }
   return my === token;
 };
