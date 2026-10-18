@@ -121,12 +121,8 @@ function renderSteps(spec, host, ctx){
       inEl.querySelector('.check').onclick = doCheck;
       inEl.querySelector('.keys-host').append(Ex.keypad(() => inp, doCheck));
       inp.addEventListener('input', () => inp.classList.remove('bad'));
-      const onKey = e => { if(!document.body.contains(inp)){ document.removeEventListener('keydown', onKey); return; }
-        if(done || e.ctrlKey || e.metaKey) return;
-        if(/^\d$/.test(e.key)){ if(inp.value.length < 7) inp.value += e.key; inp.classList.remove('bad'); }
-        else if(e.key === 'Backspace') inp.value = inp.value.slice(0, -1);
-        else if(e.key === 'Enter'){ e.preventDefault(); doCheck(); } };
-      document.addEventListener('keydown', onKey);
+      inp.addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); doCheck(); } });
+      Ex.numTarget(inp, () => done, doCheck);
     }
     if(A.settings.auto && !Ex.silent){
       const q = st.say || st.ask;

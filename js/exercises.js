@@ -557,6 +557,18 @@ function keypad(getInput, onOk){
   return d;
 }
 const normNum = s => String(s).replace(/[\s\u00a0\u202f]/g, '').replace(',', '.');
+// tallfelt med skjermtastatur: ett felles tastetrykk-lytter, som følger siste tallfelt
+let numT = null;
+document.addEventListener('keydown', e => {
+  if(!numT) return;
+  const t = numT;
+  if(!document.body.contains(t.inp)){ numT = null; return; }
+  if(t.done() || e.ctrlKey || e.metaKey || e.altKey) return;
+  if(/^\d$/.test(e.key)){ if(t.inp.value.length < 7) t.inp.value += e.key; t.inp.classList.remove('bad'); }
+  else if(e.key === 'Backspace') t.inp.value = t.inp.value.slice(0, -1);
+  else if(e.key === 'Enter'){ if(e.target === t.inp) return; e.preventDefault(); t.check(); }
+});
+Ex.numTarget = (inp, done, check) => { numT = {inp, done, check}; };
 // svarmåte: flervalg, skriv inn eller tilfeldig (valgt i innstillingene)
 Ex.inputMode = () => A.prefs.input === 'mix' ? (Math.random() < .5 ? 'choice' : 'type') : (A.prefs.input || 'choice');
 Ex.fmtNum = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
@@ -617,15 +629,7 @@ function renderType(spec, host, ctx){
   host.querySelector('.check').onclick = doCheck;
   inp.addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); doCheck(); } });
   inp.addEventListener('input', () => inp.classList.remove('bad'));
-  if(spec.numeric){
-    // tallfelt: skjermtastatur, men fysisk tastatur virker også
-    const onKey = e => { if(!document.body.contains(inp)){ document.removeEventListener('keydown', onKey); return; }
-      if(done || e.ctrlKey || e.metaKey) return;
-      if(/^\d$/.test(e.key)){ if(inp.value.length < 7) inp.value += e.key; inp.classList.remove('bad'); }
-      else if(e.key === 'Backspace'){ inp.value = inp.value.slice(0, -1); }
-      else if(e.key === 'Enter'){ if(e.target === inp) return; e.preventDefault(); doCheck(); } };
-    document.addEventListener('keydown', onKey);
-  }
+  if(spec.numeric) Ex.numTarget(inp, () => done, doCheck);   // fysisk tastatur virker også
   autoSpeak(spec);
   if(!spec.numeric) setTimeout(() => { try{ inp.focus(); }catch(e){} }, 50);
 }

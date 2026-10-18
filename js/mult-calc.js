@@ -10,6 +10,7 @@ const M = A.Mult = {};
 const rnd = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
 const P10 = k => Math.pow(10, k);
 const exprBoard = lines => `<div class="mexpr">${lines.map(l => `<div>${l}</div>`).join('')}</div>`;
+const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
 const znames = ['个位', '十位', '百位', '千位'], nnames = ['enerne', 'tierne', 'hundrene', 'tusenene'];
 
 /* ---------- hvordan oppgaven vises: tall, tekst, tall + tekst eller bare tale ---------- */
@@ -50,7 +51,7 @@ M.fact = function(a, b, pres){
   return Object.assign(p, {say:T(`Hva er ${a} × ${b}?`, `${a} × ${b} 等于多少？`), answer:ans, min:0, retry:true,
     near:[a * (b + 1), a * (b - 1), (a + 1) * b, (a - 1) * b].filter(v => v > 0),
     hintHtml:MG.ballCols(Math.min(a, 10), Math.min(b, 10)),
-    fb:T(`${a} × ${b} = ${ans}. ${N.eqNo(a, b)} er ${N.no(ans)}. ${tp.no}`, `${a} × ${b} = ${ans}。${N.eqZh(a, b)}等于${N.zh(ans)}。${tp.zh}`), sayAfter:`${a} × ${b} = ${ans}`});
+    fb:T(`${a} × ${b} = ${ans}. ${cap(N.eqNo(a, b))} er ${N.no(ans)}. ${tp.no}`, `${a} × ${b} = ${ans}。${N.eqZh(a, b)}等于${N.zh(ans)}。${tp.zh}`), sayAfter:`${a} × ${b} = ${ans}`});
 };
 M.missing = function(a, b, pres){
   pres = M.pres(pres);
