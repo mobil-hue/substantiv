@@ -173,3 +173,47 @@ Kan du dempe lyden? | Could you turn the sound down? | 你能把声音调小一�
 Hei, jeg er ny nabo. | Hi, I am your new neighbour. | 你好，我是新搬来的邻居。 | s | Neighbours often greet each other and say their name and floor. // 邻居之间常常互相问好，并自我介绍姓名和楼层。
 Jeg må sende flyttemelding til folkeregisteret. | I have to send a notice of change of address to the population register. | 我需要向人口登记处提交迁居通知。 | s | You must report a move within eight days. You can do it online through the Tax Administration (Skatteetaten). // 搬家后八天内必须申报。可以通过税务局（Skatteetaten）在线办理。
 `);
+(window.VOXRAW = window.VOXRAW || []).push(`
+@deck p-jobb | 💼 | Jobb og NAV | Work and NAV | 工作和NAV | phrases
+Jeg søker jobb som butikkmedarbeider. | I am looking for a job as a shop assistant. | 我在找商店店员的工作。 | s | You usually send a «søknad» (application letter) and a CV. // 求职时通常要提交 søknad（申请信）和 CV（简历）。
+Jeg har erfaring som lagerarbeider. | I have experience as a warehouse worker. | 我有仓库工作经验。 | s | After «som» (as) a job title has no article: «som lagerarbeider». // som（作为）后面的职业名称前不加冠词：som lagerarbeider。
+Jeg har fagbrev som elektriker. | I have a trade certificate as an electrician. | 我有电工职业资格证书。 | s | A «fagbrev» is a vocational certificate. For a foreign education you can apply to NOKUT for recognition. // fagbrev 是职业资格证书。外国学历可以向 NOKUT 申请认可。
+Jeg kan starte med en gang. | I can start right away. | 我可以马上开始工作。 | s | «Med en gang» = immediately. // med en gang = 马上、立刻。
+Hva er arbeidstiden? | What are the working hours? | 工作时间是怎么安排的？ | s | A full-time job is often 37.5 hours a week. // 全职工作通常每周37.5小时。
+Hva er lønnen? | What is the salary? | 工资是多少？ | s | «Brutto» = before tax, «netto» = after tax. «Timelønn» = hourly wage. // brutto = 税前，netto = 税后。timelønn = 时薪。
+Er det fast stilling eller vikariat? | Is it a permanent position or a temporary cover? | 这是正式职位还是临时代班？ | s | «Fast stilling» = permanent job, «vikariat» = temporary replacement. // fast stilling = 正式（长期）职位，vikariat = 临时替班。
+Fortell litt om deg selv. | Tell me a bit about yourself. | 请简单介绍一下你自己。 | h | A typical start of a job interview. Keep it short: work, education, languages. // 面试的常见开场。回答要简短：工作、学历、语言。
+Hva slags jobb leter du etter? | What kind of job are you looking for? | 你在找什么类型的工作？ | h | «Hva slags» = what kind of. // hva slags = 什么样的。
+Har du erfaring fra Norge? | Do you have experience from Norway? | 你有在挪威工作的经验吗？ | h | A short answer: «Nei, men jeg lærer fort.» (No, but I learn fast.) // 简短回答：Nei, men jeg lærer fort.（没有，但我学得很快。）
+Har du førerkort? | Do you have a driving licence? | 你有驾照吗？ | h | «Førerkort» is neuter: et førerkort, førerkortet. // førerkort 是中性名词：et førerkort, førerkortet。
+Kan du jobbe kvelder og helger? | Can you work evenings and weekends? | 你可以上晚班和周末班吗？ | h | «Kvelder» and «helger» are plural forms without an article. // kvelder 和 helger 是不带冠词的复数形式。
+Når kan du begynne? | When can you start? | 你什么时候可以开始？ | h | You can answer: «Jeg kan begynne på mandag.» // 可以回答：Jeg kan begynne på mandag.（我周一可以开始。）
+Du har fått jobben! | You have got the job! | 你被录用了！ | h | You can reply: «Tusen takk!» (Thank you very much!) // 可以回答：Tusen takk!（非常感谢！）
+Jeg er syk i dag og kan ikke komme. | I am sick today and cannot come in. | 我今天生病了，来不了。 | s | Tell your boss as early as possible, by phone or text. For a few days you can often use «egenmelding». // 请尽早打电话或发信息告诉上司。几天的病假通常可以用 egenmelding（自己声明）。
+Jeg trenger fri i morgen. | I need the day off tomorrow. | 我明天需要请假。 | s | «Ha fri» = to be off work, «få fri» = to get time off. // ha fri = 休息、不上班；få fri = 获准休息。
+Kan jeg ta ferie i uke 28? | Can I take holiday in week 28? | 我可以在第28周休假吗？ | s | Many people take their holiday in July. «Ferie» = holiday, «fri» = a day off. // 很多人在七月休假。ferie = 假期（年假），fri = 一天休息。
+Jeg kommer litt for sent. | I will be a little late. | 我会晚到一会儿。 | s | Punctuality matters in Norway. Send a message if you will be late. // 挪威很看重守时。要迟到的话请发信息说明。
+Hvem er sjefen min? | Who is my boss? | 我的上司是谁？ | s | «Sjef» is more informal than «leder» (manager). The possessive comes after the noun: «sjefen min». // sjef 比 leder（领导）更口语。物主代词放在名词后面：sjefen min。
+Vi har møte klokka ti. | We have a meeting at ten o'clock. | 我们十点开会。 | h | «Klokka ti» = at ten o'clock; no preposition is needed. // klokka ti = 十点钟（前面不用介词）。
+Kan du forklare oppgaven? | Can you explain the task? | 你可以解释一下这项任务吗？ | s | «Oppgave» = task; it is common at work and at school. // oppgave = 任务；在工作和学校里都很常用。
+Jeg trenger en skriftlig arbeidsavtale. | I need a written employment contract. | 我需要一份书面的劳动合同。 | s | By law your employer must give you a written «arbeidsavtale». // 按法律规定，雇主必须给你书面的 arbeidsavtale。
+Jeg vil melde meg som arbeidssøker. | I want to register as a job seeker. | 我想登记为求职者。 | s | NAV is the state agency for work and benefits. You can register online. // NAV 是负责就业和福利的国家机构，可以在网上登记。
+Jeg søker om dagpenger. | I am applying for unemployment benefit. | 我在申请失业金。 | s | «Dagpenger» is plural. You apply online at nav.no. // dagpenger 是复数形式。在 nav.no 上在线申请。
+Jeg har time hos NAV i morgen. | I have an appointment at NAV tomorrow. | 我明天在NAV有预约。 | s | «Ha time» = have an appointment. Be on time and bring ID. // ha time = 有预约。请准时到达并带上证件。
+Jeg trenger hjelp til å fylle ut skjemaet. | I need help to fill in the form. | 我需要帮助填写这张表格。 | s | «Fylle ut» = fill in. «Skjema» is neuter: skjemaet. // fylle ut = 填写。skjema 是中性名词：skjemaet。
+Hvor sender jeg dokumentet? | Where do I send the document? | 我把文件寄到哪里？ | s | Most documents are sent digitally through nav.no. // 大多数文件通过 nav.no 在线提交。
+Jeg har fått brev fra NAV. | I have received a letter from NAV. | 我收到了NAV的来信。 | s | NAV letters usually arrive digitally. Read them carefully, because deadlines matter. // NAV 的信件通常通过网络送达。请认真阅读，因为有截止日期。
+Hva betyr dette vedtaket? | What does this decision mean? | 这个决定是什么意思？ | s | A «vedtak» is a formal decision from NAV. You can appeal it. // vedtak 是 NAV 作出的正式决定，你可以申诉。
+Jeg vil klage på vedtaket. | I want to appeal against the decision. | 我想对这个决定提出申诉。 | s | You normally have six weeks to appeal («klagefrist»). Check the letter. // 申诉期限通常是六周（klagefrist）。请查看来信确认。
+Har jeg rett til dagpenger? | Am I entitled to unemployment benefit? | 我有权领取失业金吗？ | s | «Ha rett til» = to be entitled to. // ha rett til = 有权获得……。
+Hva er fristen? | What is the deadline? | 截止日期是什么时候？ | s | «Frist» is masculine: en frist, fristen. Deadlines are strict. // frist 是阳性名词：en frist, fristen。截止日期很严格。
+Hvor lenge tar saksbehandlingen? | How long does the case processing take? | 案件办理需要多长时间？ | s | «Saksbehandlingstid» = processing time. It can take several weeks. // saksbehandlingstid = 办理时间，可能需要几周。
+Jeg trenger tolk i møtet med NAV. | I need an interpreter at the meeting with NAV. | 我和NAV见面时需要翻译。 | s | Ask for an interpreter well in advance. // 请提前申请翻译。
+Du må registrere deg som arbeidssøker. | You must register as a job seeker. | 你必须登记为求职者。 | h | «Registrere seg» is reflexive. You can do it online at nav.no. // registrere seg 是反身动词。可以在 nav.no 上在线登记。
+Vi trenger flere opplysninger fra deg. | We need more information from you. | 我们需要你提供更多信息。 | h | «Opplysninger» is plural (en opplysning). // opplysninger 是复数（en opplysning）。
+Du må levere dokumentasjonen innen fredag. | You must hand in the documents by Friday. | 你必须在星期五之前提交材料。 | h | «Innen» = by, within a deadline. // innen = 在……之前或之内。
+Vi har mottatt søknaden din. | We have received your application. | 我们已经收到你的申请。 | h | «Søknad» is masculine, and the possessive comes after the noun: «søknaden din». // søknad 是阳性名词，物主代词放在名词后面：søknaden din。
+Saksbehandleren tar kontakt med deg. | The case officer will contact you. | 办理你案件的工作人员会联系你。 | h | «Ta kontakt med» = to contact. The «saksbehandler» is the person who handles your case. // ta kontakt med = 联系。saksbehandler 是处理你案件的工作人员。
+Søknaden din er innvilget. | Your application has been approved. | 你的申请已获批准。 | h | The opposite is «avslag» (refusal): «Du har fått avslag.» // 反义是 avslag（拒绝）：Du har fått avslag.
+Du har rett til tolk. | You have the right to an interpreter. | 你有权使用翻译。 | h | You can ask NAV for an interpreter for meetings. // 你可以要求 NAV 在会面时提供翻译。
+`);
