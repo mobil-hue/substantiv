@@ -91,7 +91,7 @@ B.applies = function(m, item){
   if(m.fam === 'p' && item.type !== 'p') return false;
   if(m.audio && !(V.prefs.speak && A.Speech.supported)) return false;
   switch(m.k){
-    case 'gender': return item.pos === 'n';
+    case 'gender': return item.pos === 'n' && !!item.forms[0] && item.forms[0] !== '-' && !/^[A-ZÆØÅ]{2,}/.test(item.nb);   // ikke ord uten entallsform eller forkortelser
     case 'forms': return !!V.FORMS[item.pos] && V.formRows(item).length > 0;
     case 'cloze': return !!item.ex && !!V.findForm(item, item.ex);
     case 'pcloze': return !!clozeToken(item);
