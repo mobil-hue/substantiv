@@ -8,7 +8,8 @@ Læreopplegg i samme system, samlet i en **rotmeny** (`index.html`) med fagene *
 | Norsk | **Substantiv 名词** (fullstendig kurs) | `substantiv.html` |
 | Norsk | **Adjektiv – grunnkurs 形容词基础课** (nytt, enklere start) | `adjektiv-grunnkurs.html` |
 | Norsk | **Adjektiv 形容词** (fullstendig kurs) | `adjektiv.html` |
-| Matematikk | **Gange – lær og øv 乘法** (nytt) | `multiplikasjon.html` |
+| Matematikk | **Gangetabellen som system 乘法系统** (nytt) | `gangesystem.html` |
+| Matematikk | **Gange – lær og øv 乘法** | `multiplikasjon.html` |
 | Matematikk | **Geometri 几何** (Matematikk 4 kap. 4) | `geometri.html` |
 | Matematikk | **Gangespill** (rask trening av gangetabellen) | `gange.html` |
 | Norsk Voksenopplæring | **Norsk for voksne** – norsk · English · 中文 | `voksen.html` |
@@ -61,6 +62,15 @@ Bygger på samme system som substantiv (samme motor, svarmåte flervalg / skriv 
 - **Skriveark** (`adjektiv-ark.html`, 6 ark med fasit), **Lærerside** (`adjektiv-laerer.html`), **Jukselapp** (`docs/adjektiv-jukselapp.pdf`, bygges med `node docs/build-adjektiv.js`).
 - Data (adjektiv, former, motsetninger, gradbøying, begreper, tekster) ligger i `js/adj-data.js`.
 
+## Gangetabellen som system 乘法系统
+Bygger på «Den lille gangetabellen – hva må egentlig pugges?»: tabellen behandles som et system som krymper fra **100 ruter til 10 regnestykker**. Rekkefølgen er fast, og den samme rekkefølgen brukes til å finne regelen for et regnestykke:
+1. speilvendte ut (5 × 6 = 6 × 5) → 55 · 2. **1-, 2- og 10-gangen** ut → 28 · 3. **5-gangen** (halvparten av 10-gangen) ut → 21 · 4. **like × like** (6 kvadrattall) ut → 15 · 5. **9-regelen** y × 9 = (y × 10) − y ut → 10 · 6. **de 10 som må pugges** (3×4, 3×6, 3×7, 3×8, 4×6, 4×7, 4×8, 6×7, 6×8, 7×8), med triks (4-gangen = doble to ganger, 8-gangen = doble tre ganger, rekka 5-6-7-8 → 56 = 7 × 8).
+- **8 videoer** (samme avspiller og tospråklig opplesing som resten): systemet · speilvendte · 1-2-10 · 5-gangen · y × y · 9-gangen · de 10 · hvilken regel gjelder?
+- **Læringsløype** på forsiden (video + øving per steg, med hake når steget er gjort) og en **interaktiv tabell**: trinn 1–7 (kan spilles av), alle regler i farger, og trykk på en rute for å få vite hvilken regel som gjelder og hvordan du regner.
+- **Treningsmodus** (`#/train/all`, `#/train/easy|five|sq|nine|learn`, `#/spot`, `#/cards/learn`, `#/speed`, `#/mirror`, `#/stats`): hele tabellen blandet · én gruppe om gangen · **regelspotter** (velg hvilken regel som gjelder) · pugge-kort · fartsrunde 60 s · speilvendte. I øving kan regelhjelp velges: vis regelen først, ❓-knapp, eller bare etter feil; svar som flervalg, skriving eller tilfeldig; «forklar etter hvert svar». Feil kommer raskere tilbake.
+- **Fremgang** per regnestykke (ny → lærer → sikker) som fargekart over tabellen og per gruppe.
+- Filer: `gangesystem.html`, `css/gs.css`, `js/gs-core.js` (grupper, regelklassifisering, forklaringer, fremgang, tabelltegning), `js/gs-videos.js`, `js/gs-app.js`. Bruker `A.Video`, tale og tallord fra resten av systemet.
+
 ## Gange – lær og øv 乘法
 - **8 moduler:** hva er gange · gangetabellen og knepene · gange med 10/100/1 000 · del opp tallet (utvidet form og rutenett) · runde av og rette opp (276 × 3 = 300 × 3 − 24 × 3), dobbelt og halvparten · gamlemåten (oppstilling med mente) · tekstoppgaver · utfordringer og mesterprøve.
 - **7 animerte videoer**, **16 begrepskort med tegninger**, over 700 små og 480 omfattende oppgaver.
@@ -101,6 +111,7 @@ js/mult-data.js            tallord (norsk/kinesisk), tale av regnestykker
 js/mult-graphics.js        grupper, prikker, rutenett, oppstilling, tabell
 js/mult-calc.js            regneoppgaver og trinn for trinn
 js/mult-exercises.js, mult-lessons.js, mult-videos.js, mult-drill.js, mult-worksheets.js
+gangesystem.html, css/gs.css, js/gs-core.js, gs-videos.js, gs-app.js   gangetabellen som system
 js/hub.js                  rotmenyen
 voksen.html                Norsk Voksenopplæring (css/vox.css)
 js/vox-core.js             data, repetisjon (SRS), tekst- og taleverktøy
