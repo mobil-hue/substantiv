@@ -175,9 +175,10 @@ A.Video = {
     A.Video.stop();
     const V = A.VIDEOS[id], n = V.scenes.length;
     let idx = 0, playing = false, run = 0, alive = true;
+    const boardBtn = () => V.board ? `<div class="vl-row"><button type="button" class="pill bdtoggle ${A.settings.board !== false ? 'on' : ''}">🧑‍🏫 ${A.bi('Tavle og lærerinne','黑板和老师')}</button></div>` : '';
     const langBox = () => `<div class="vlang"><div class="vl-row"><span class="vl-lab">${A.bi('Opplesing','朗读')}</span>${A.optGroup('speak')}</div>
-      <div class="vl-row"><span class="vl-lab">${A.bi('Tekst','文字')}</span>${A.optGroup('lang')}</div><div class="vwarn small-note"></div></div>`;
-    host.innerHTML = `<div class="vwrap${V.board ? ' board' : ''}"><div class="stage"><div class="scenehost" style="width:100%"></div>${V.board && A.teacherHTML ? A.teacherHTML() : ''}
+      <div class="vl-row"><span class="vl-lab">${A.bi('Tekst','文字')}</span>${A.optGroup('lang')}</div>${boardBtn()}<div class="vwarn small-note"></div></div>`;
+    host.innerHTML = `<div class="vwrap${V.board && A.settings.board !== false ? ' board' : ''}"><div class="stage"><div class="scenehost" style="width:100%"></div>${V.board && A.teacherHTML ? A.teacherHTML() : ''}
       <div class="startcard"><div class="big-emoji">${V.emoji}</div><h2>${A.bi(V.no, V.zh)}</h2>
       ${langBox()}
       <button class="btn big start"><span class="bi"><span class="no">▶ Start videoen</span><span class="zh">开始看视频</span></span></button>
@@ -185,8 +186,12 @@ A.Video = {
       <div class="vcap"><div class="no"></div><div class="zh"></div></div>
       <div class="vctl"><button class="spk prev" title="Forrige">⏮</button><button class="spk pp" title="Pause">⏸</button><button class="spk next" title="Neste">⏭</button><button class="spk redo" title="Fra start">🔁</button>
       <div class="dots">${V.scenes.map(() => '<i></i>').join('')}</div></div>
-      <div class="vset"><span class="vl-ico" title="Opplesing / 朗读">🔊</span>${A.optGroup('speak')}<span class="vl-ico" title="Tekst / 文字">📝</span>${A.optGroup('lang')}</div></div>`;
+      <div class="vset"><span class="vl-ico" title="Opplesing / 朗读">🔊</span>${A.optGroup('speak')}<span class="vl-ico" title="Tekst / 文字">📝</span>${A.optGroup('lang')}</div>${boardBtn()}</div>`;
     const $ = s => host.querySelector(s);
+    host.querySelectorAll('.bdtoggle').forEach(bt => bt.onclick = () => {
+      const on = A.settings.board === false; A.settings.board = on; A.saveSettings();
+      host.querySelector('.vwrap').classList.toggle('board', on); host.querySelectorAll('.bdtoggle').forEach(x => x.classList.toggle('on', on));
+    });
     const teacher = $('.teacher'), setTalk = on => { if(teacher) teacher.classList.toggle('talking', on); };
     const sceneHost = $('.scenehost'), capNo = $('.vcap .no'), capZh = $('.vcap .zh'), dots = host.querySelectorAll('.dots i'), pp = $('.pp');
     function warn(){

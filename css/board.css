@@ -77,4 +77,9 @@
 .board .startcard .pill{color:#1f2937;text-shadow:none}
 .board .startcard .pill.on{color:#fff}
 .board .stage .gbadge .bi .zh{color:inherit;margin-left:6px}
-.board .stage.starting{min-height:540px}
+.board .stage.starting{min-height:620px}
+
+/* av/på-knapp i videospilleren */
+.vwrap:not(.board) .teacher{display:none}
+.bdtoggle .bi{display:inline}.bdtoggle .bi .zh{display:inline;font-size:1em;color:inherit;margin-left:5px}
+.vset .bdtoggle{margin-left:4px}
