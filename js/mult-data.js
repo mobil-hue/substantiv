@@ -57,6 +57,7 @@ N.eqZh = (a, b) => `${N.zh(a)}乘以${N.zh(b)}`;
 // regneord for språk der tallene leses av stemmen selv (sifre beholdes)
 A.OPWORDS = {
   en:{x:' times ', p:' plus ', m:' minus ', e:' equals ', d:' divided by '},
+  sv:{x:' gånger ', p:' plus ', m:' minus ', e:' är ', d:' delat med '},
   ar:{x:' ضرب ', p:' زائد ', m:' ناقص ', e:' يساوي ', d:' مقسوم على '},
   es:{x:' por ', p:' más ', m:' menos ', e:' es igual a ', d:' dividido entre '},
   pl:{x:' razy ', p:' plus ', m:' minus ', e:' jest ', d:' podzielić przez '},

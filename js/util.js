@@ -21,6 +21,7 @@ A.I18N = window.SUPPORT_LANGS === true;
 A.LANGS = [
   {c:'zh', name:'中文', en:'Chinese', bcp:'zh-CN', test:'你好！这是语音测试。'},
   {c:'en', name:'English', en:'English', bcp:'en-GB', test:'Hello! This is a test of the voice.'},
+  {c:'sv', name:'Svenska', en:'Swedish', bcp:'sv-SE', test:'Hej! Det här är ett test av rösten.'},
   {c:'ar', name:'العربية', en:'Arabic', bcp:'ar-SA', rtl:true, test:'مرحبا! هذا اختبار للصوت.'},
   {c:'es', name:'Español', en:'Spanish', bcp:'es-ES', test:'¡Hola! Esta es una prueba de la voz.'},
   {c:'pl', name:'Polski', en:'Polish', bcp:'pl-PL', test:'Cześć! To jest test głosu.'},
@@ -143,9 +144,9 @@ function loadVoices(){ try{ voices = speechSynthesis.getVoices() || []; }catch(e
 if(supported){ loadVoices(); try{ speechSynthesis.onvoiceschanged = loadVoices; }catch(e){} }
 
 const VOICE_CANDS = {no:['nb-no','no-no','nn-no','nb','no'], zh:['zh-cn','cmn-hans-cn','zh-tw','zh-hk','zh'], en:['en-gb','en-us','en-au','en'],
-  ar:['ar-sa','ar-eg','ar-ae','ar'], es:['es-es','es-mx','es-us','es'], pl:['pl-pl','pl'], uk:['uk-ua','uk'], th:['th-th','th'], tl:['fil-ph','tl-ph','fil','tl'], so:['so-so','so']};
-const VOICE_PRE = {no:['nb','no','nn'], zh:['zh','cmn'], en:['en'], ar:['ar'], es:['es'], pl:['pl'], uk:['uk'], th:['th'], tl:['fil','tl'], so:['so']};
-const LANG_CODE = {no:'nb-NO', zh:'zh-CN', en:'en-GB', ar:'ar-SA', es:'es-ES', pl:'pl-PL', uk:'uk-UA', th:'th-TH', tl:'fil-PH', so:'so-SO'};
+  sv:['sv-se','sv-fi','sv'], ar:['ar-sa','ar-eg','ar-ae','ar'], es:['es-es','es-mx','es-us','es'], pl:['pl-pl','pl'], uk:['uk-ua','uk'], th:['th-th','th'], tl:['fil-ph','tl-ph','fil','tl'], so:['so-so','so']};
+const VOICE_PRE = {no:['nb','no','nn'], zh:['zh','cmn'], en:['en'], sv:['sv'], ar:['ar'], es:['es'], pl:['pl'], uk:['uk'], th:['th'], tl:['fil','tl'], so:['so']};
+const LANG_CODE = {no:'nb-NO', zh:'zh-CN', en:'en-GB', sv:'sv-SE', ar:'ar-SA', es:'es-ES', pl:'pl-PL', uk:'uk-UA', th:'th-TH', tl:'fil-PH', so:'so-SO'};
 const vnorm = v => (v.lang || '').replace('_','-').toLowerCase();
 function findVoice(l){
   const pref = (A.settings.voice || {})[l];   // stemme valgt av brukeren (navn)
