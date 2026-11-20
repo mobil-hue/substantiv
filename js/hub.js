@@ -92,7 +92,7 @@ function build(){
     <div class="card hublang"><div class="vl-row"><span class="vl-lab">${bi('Opplesing', '朗读')}</span>${A.optGroup('speak')}</div>
       <div class="vl-row"><span class="vl-lab">${bi('Tekst', '文字')}</span>${A.optGroup('lang')}</div>
       <div class="small-note">${bi('Norsk er hovedspråket. Kinesisk er støtte.', '挪威语是主要语言，中文是辅助。')}</div>
-      <details class="vp-det" style="margin-top:8px"><summary style="cursor:pointer;font-weight:800">🎙️ ${bi('Velg stemme', '选择语音')}</summary><div id="vpHost"></div></details></div>`;
+      <div style="margin-top:10px"><button class="btn sec" id="vpOpen" type="button"><span class="bi"><span class="no">🎙️ Velg stemme</span><span class="zh">选择语音</span></span></button></div></div>`;
   SECTIONS.forEach(sec => {
     const list = PROGRAMS.filter(p => p.section === sec.id);
     if(!list.length) return;
@@ -101,7 +101,13 @@ function build(){
   });
   app.innerHTML = ''; app.append(root);
   A.bindOptGroups(root);
-  A.voicePicker(root.querySelector('#vpHost'));
+  root.querySelector('#vpOpen').onclick = () => {
+    const m = h('div', {class:'modal', html:`<div class="box" style="max-height:90vh;overflow:auto;text-align:left"><h2 style="margin-top:0">🎙️ ${bi('Velg stemme', '选择语音')}</h2><div id="vpHost"></div>
+      <div style="text-align:center;margin-top:12px"><button class="btn big" id="vpClose" type="button"><span class="bi"><span class="no">Ferdig</span><span class="zh">完成</span></span></button></div></div>`});
+    document.body.append(m);
+    A.voicePicker(m.querySelector('#vpHost'));
+    m.querySelector('#vpClose').onclick = () => { A.Speech.stop(); m.remove(); };
+  };
 }
 A.applyLang(); syncPills(); build();
 })();
