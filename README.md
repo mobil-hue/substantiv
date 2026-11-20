@@ -72,6 +72,14 @@ Bygger på «Den lille gangetabellen – hva må egentlig pugges?»: tabellen be
 - **Fremgang** per regnestykke (ny → lærer → sikker) som fargekart over tabellen og per gruppe.
 - Filer: `gangesystem.html`, `css/gs.css`, `js/gs-core.js` (grupper, regelklassifisering, forklaringer, fremgang, tabelltegning), `js/gs-videos.js`, `js/gs-app.js`. Bruker `A.Video`, tale og tallord fra resten av systemet.
 
+### Introduksjonsvideo til YouTube (norsk og engelsk)
+`tools/video/build.js` setter sammen de 8 gangesystem-videoene til én mp4 (1280 × 720, tavle med kritt-skrift og lærerinne i hjørnet), med avslutning om at det er gratis, og lager `.srt`-undertekster, kapitler og ferdig YouTube-beskrivelse for hvert språk. Engelsk tekst ligger i `js/gs-en.js`. Talen lages med Azure Speech (norsk `nb-NO-PernilleNeural`, engelsk `en-GB-SoniaNeural`):
+
+```
+AZURE_SPEECH_KEY=… AZURE_SPEECH_REGION=westeurope SITE=ditt-domene.no node tools/video/build.js
+```
+Uten nøkkel lages en stum prøveversjon. Valg: `--lang no,en`, `--only gs_system,outro`, `--preview`. Resultatet havner i `tools/video/out/` (ikke i git). Krever node, playwright, ffmpeg og curl. Fonten Patrick Hand (OFL) ligger i `css/fonts/`.
+
 ## Gange – lær og øv 乘法
 - **8 moduler:** hva er gange · gangetabellen og knepene · gange med 10/100/1 000 · del opp tallet (utvidet form og rutenett) · runde av og rette opp (276 × 3 = 300 × 3 − 24 × 3), dobbelt og halvparten · gamlemåten (oppstilling med mente) · tekstoppgaver · utfordringer og mesterprøve.
 - **7 animerte videoer**, **16 begrepskort med tegninger**, over 700 små og 480 omfattende oppgaver.

@@ -1,3 +1,5 @@
+@font-face{font-family:"Patrick Hand";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/patrick-hand-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Patrick Hand";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/patrick-hand-latin-ext.woff2) format("woff2");unicode-range:U+0100-02AF,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}
 /* Tavle-utseende for videoer (V.board = true): grønn tavle, kritt-skrift og lærerinne i hjørnet */
 .vwrap.board{--tsz:84px;--chalk:#f6f3e8;--chalk2:#ffe8a3}
 @media (min-width:560px){.vwrap.board{--tsz:112px}}
@@ -5,7 +7,7 @@
   background:radial-gradient(ellipse at 30% 20%,rgba(255,255,255,.10),transparent 55%),radial-gradient(ellipse at 80% 90%,rgba(255,255,255,.06),transparent 50%),linear-gradient(160deg,#3a6f4b,#2b5a3a);
   border:9px solid #9a6a3a;border-radius:12px;box-shadow:inset 0 0 38px rgba(0,0,0,.4),0 3px 8px rgba(0,0,0,.18);
   padding-bottom:calc(var(--tsz) + 20px);
-  color:var(--chalk);font-family:"Chalkboard SE","Segoe Print","Bradley Hand","Comic Sans MS","Marker Felt",cursive;
+  color:var(--chalk);font-family:"Patrick Hand","Chalkboard SE","Segoe Print","Bradley Hand","Comic Sans MS","Marker Felt",cursive;
   text-shadow:0 0 1px rgba(255,255,255,.75),0 0 7px rgba(255,255,255,.12)}
 .board .stage.starting{padding-bottom:18px}
 .board .stage .bi .zh{color:var(--chalk2)}
@@ -83,3 +85,10 @@
 .vwrap:not(.board) .teacher{display:none}
 .bdtoggle .bi{display:inline}.bdtoggle .bi .zh{display:inline;font-size:1em;color:inherit;margin-left:5px}
 .vset .bdtoggle{margin-left:4px}
+
+/* fargede ruter må slå generell tavle-stil */
+.board .gst td.g-easy{background:#b9e07f;color:#2b4a05}
+.board .gst td.g-five{background:#fcd28a;color:#6b3a04}
+.board .gst td.g-sq{background:#a7e8d0;color:#05453d}
+.board .gst td.g-nine{background:#f9c0d8;color:#7a0f3d}
+.board .gst td.g-learn{background:#d4cffa;color:#35127a}
