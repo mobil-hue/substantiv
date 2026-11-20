@@ -177,7 +177,7 @@ A.Video = {
     let idx = 0, playing = false, run = 0, alive = true;
     const langBox = () => `<div class="vlang"><div class="vl-row"><span class="vl-lab">${A.bi('Opplesing','朗读')}</span>${A.optGroup('speak')}</div>
       <div class="vl-row"><span class="vl-lab">${A.bi('Tekst','文字')}</span>${A.optGroup('lang')}</div><div class="vwarn small-note"></div></div>`;
-    host.innerHTML = `<div class="vwrap"><div class="stage"><div class="scenehost" style="width:100%"></div>
+    host.innerHTML = `<div class="vwrap${V.board ? ' board' : ''}"><div class="stage"><div class="scenehost" style="width:100%"></div>${V.board && A.teacherHTML ? A.teacherHTML() : ''}
       <div class="startcard"><div class="big-emoji">${V.emoji}</div><h2>${A.bi(V.no, V.zh)}</h2>
       ${langBox()}
       <button class="btn big start"><span class="bi"><span class="no">▶ Start videoen</span><span class="zh">开始看视频</span></span></button>
@@ -187,6 +187,7 @@ A.Video = {
       <div class="dots">${V.scenes.map(() => '<i></i>').join('')}</div></div>
       <div class="vset"><span class="vl-ico" title="Opplesing / 朗读">🔊</span>${A.optGroup('speak')}<span class="vl-ico" title="Tekst / 文字">📝</span>${A.optGroup('lang')}</div></div>`;
     const $ = s => host.querySelector(s);
+    const teacher = $('.teacher'), setTalk = on => { if(teacher) teacher.classList.toggle('talking', on); };
     const sceneHost = $('.scenehost'), capNo = $('.vcap .no'), capZh = $('.vcap .zh'), dots = host.querySelectorAll('.dots i'), pp = $('.pp');
     function warn(){
       const sp = A.speakKey(), w = [];
@@ -211,14 +212,14 @@ A.Video = {
       const my = ++run; show(i);
       if(!playing) return;
       const s = V.scenes[i];
-      if(A.speakKey() === 'off') await A.sleep(readTime(s)); else await A.sayBi(s.no, s.zh);
+      if(A.speakKey() === 'off') await A.sleep(readTime(s)); else { setTalk(true); await A.sayBi(s.no, s.zh); if(my === run) setTalk(false); }
       if(!alive || my !== run || !playing) return;
       await A.sleep(900);
       if(!alive || my !== run || !playing) return;
       if(i < n - 1) runScene(i + 1); else finish();
     }
     function finish(){
-      playing = false; pp.textContent = '▶';
+      playing = false; pp.textContent = '▶'; setTalk(false);
       const o = document.createElement('div'); o.className = 'startcard';
       o.innerHTML = `<div class="big-emoji">🎉</div><h2>${A.bi('Ferdig!','看完了！')}</h2>
         <div class="row"><button class="btn sec again"><span class="bi"><span class="no">↻ Se på nytt</span><span class="zh">再看一遍</span></span></button>
@@ -227,7 +228,7 @@ A.Video = {
       o.querySelector('.again').onclick = () => { o.remove(); playing = true; pp.textContent = '⏸'; runScene(0); };
       o.querySelector('.go').onclick = () => { A.Video.stop(); onEnd && onEnd(); };
     }
-    function halt(){ run++; A.Speech.stop(); }
+    function halt(){ run++; A.Speech.stop(); setTalk(false); }
     // endrer du språk midt i videoen, starter scenen på nytt med ny stemme/tekst
     A.bindOptGroups(host, kind => { warn(); if(kind === 'speak' && playing){ halt(); runScene(idx); } });
     $('.stage').classList.add('starting');

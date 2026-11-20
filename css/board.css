@@ -1,0 +1,80 @@
+/* Tavle-utseende for videoer (V.board = true): grønn tavle, kritt-skrift og lærerinne i hjørnet */
+.vwrap.board{--tsz:84px;--chalk:#f6f3e8;--chalk2:#ffe8a3}
+@media (min-width:560px){.vwrap.board{--tsz:112px}}
+.board .stage{
+  background:radial-gradient(ellipse at 30% 20%,rgba(255,255,255,.10),transparent 55%),radial-gradient(ellipse at 80% 90%,rgba(255,255,255,.06),transparent 50%),linear-gradient(160deg,#3a6f4b,#2b5a3a);
+  border:9px solid #9a6a3a;border-radius:12px;box-shadow:inset 0 0 38px rgba(0,0,0,.4),0 3px 8px rgba(0,0,0,.18);
+  padding-bottom:calc(var(--tsz) + 20px);
+  color:var(--chalk);font-family:"Chalkboard SE","Segoe Print","Bradley Hand","Comic Sans MS","Marker Felt",cursive;
+  text-shadow:0 0 1px rgba(255,255,255,.75),0 0 7px rgba(255,255,255,.12)}
+.board .stage.starting{padding-bottom:18px}
+.board .stage .bi .zh{color:var(--chalk2)}
+.board .stage b.nw{color:#ffd37a}
+.board .stage .big-emoji{text-shadow:none}
+.board .scene h2,.board .bigword,.board .scene .sub{color:var(--chalk)}
+.board .stage .small-note,.board .stage .gl-l{color:var(--chalk2)}
+
+/* kritt skrives opp: venstre → høyre */
+@keyframes chalkwrite{from{clip-path:inset(-8px 100% -8px -8px)}to{clip-path:inset(-8px -8px -8px -8px)}}
+.board .stage .pop,.board .stage .fade,.board .stage .up{opacity:1;animation:chalkwrite .85s ease-out both;animation-delay:var(--d,0s)}
+
+/* startkort over tavla */
+.board .startcard{background:rgba(34,70,46,.97);color:var(--chalk);text-shadow:none;font-family:inherit}
+.board .startcard .bi .zh{color:var(--chalk2)}
+.board .startcard .vl-lab{color:var(--chalk2)}
+.board .startcard .small-note{color:var(--chalk2)}
+
+/* kort, brikker og merker tegnet med kritt */
+.board .vcard{background:rgba(255,255,255,.07);border:3px solid rgba(246,243,232,.55);border-top-color:var(--c,#f6f3e8);box-shadow:none;color:var(--chalk)}
+.board .vcard .z{color:var(--chalk2)}
+.board .mexpr .g{color:#ffe27a}
+.board .mexpr .dim{color:var(--chalk2)}
+.board .chip{background:color-mix(in srgb,var(--c) 55%,#fff);color:#1f2937;text-shadow:none}
+.board .chp{background:transparent;border-color:var(--c);color:var(--c)}
+.board .gfact{background:transparent;border-color:var(--bg);color:var(--chalk)}
+.board .gbadge{text-shadow:none}
+.board .gfr{background:rgba(255,255,255,.08);border-left-color:var(--bg);color:var(--chalk)}
+.board .gfr .n{background:var(--bg);color:#1f2937;text-shadow:none}
+.board .gfr .q .bi .zh{color:var(--chalk2)}
+.board .gfr.hi{box-shadow:0 0 0 3px var(--bg)}
+.board .gtrace li{background:rgba(255,255,255,.08);color:var(--chalk)}
+.board .gtrace li.y{background:rgba(255,255,255,.14);border-color:var(--bg)}
+.board .mgrp{background:rgba(255,255,255,.08);border-color:rgba(246,243,232,.5)}
+.board .mshift th{color:var(--chalk2);border-bottom-color:rgba(246,243,232,.5)}
+.board .mshift td{color:var(--chalk);border-left-color:rgba(246,243,232,.3)}
+.board .mshift td.v{color:#9cc4ff}.board .mshift td.z{color:#ffa3a3}
+.board .mshift tr.ar td{color:var(--chalk2)}
+.board svg.nline line{stroke:var(--chalk)}
+.board svg.nline text[fill="#334155"]{fill:var(--chalk)}
+
+/* tabellen på tavla */
+.board .gst th{color:var(--chalk2)}
+.board .gst td{background:rgba(255,255,255,.05);color:var(--chalk);box-shadow:inset 0 0 0 1px rgba(246,243,232,.4);text-shadow:none}
+.board .gst td.keep{background:rgba(255,255,255,.05);color:var(--chalk)}
+.board .gst td.gone{background:transparent;color:rgba(246,243,232,.2);box-shadow:inset 0 0 0 1px rgba(246,243,232,.1)}
+.board .gst td.mir{background:rgba(255,255,255,.2);color:rgba(246,243,232,.75)}
+.board .gst td.hi{outline-color:#ffe27a}
+
+/* bildetekst under tavla */
+.board .vcap{background:#3b2a1a}
+.board .vcap .zh{color:var(--chalk2)}
+
+/* lærerinnen */
+.teacher{position:absolute;right:10px;bottom:10px;width:var(--tsz,84px);height:var(--tsz,84px);border-radius:14px;overflow:hidden;background:linear-gradient(#fff4dc,#fbe3b8);border:3px solid #fff;box-shadow:0 3px 10px rgba(0,0,0,.35);z-index:2;animation:tpop .5s ease both}
+.teacher svg{width:100%;height:100%;display:block}
+@keyframes tpop{from{transform:translateY(14px) scale(.85);opacity:0}to{transform:none;opacity:1}}
+.teacher .eyes{transform-box:fill-box;transform-origin:center;animation:tblink 4.6s infinite}
+@keyframes tblink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+.teacher .m-o{opacity:0;transform-box:fill-box;transform-origin:center}
+.teacher.talking .m-c{opacity:0}
+.teacher.talking .m-o{opacity:1;animation:tmouth .3s ease-in-out infinite alternate}
+@keyframes tmouth{from{transform:scale(.8,.25)}to{transform:scale(1,1.05)}}
+.teacher .head{transform-box:view-box;transform-origin:60px 88px}
+.teacher.talking .head{animation:tbob 1.1s ease-in-out infinite}
+@keyframes tbob{0%,100%{transform:rotate(-1.6deg)}50%{transform:rotate(1.6deg) translateY(-.6px)}}
+
+/* rettinger */
+.board .startcard .pill{color:#1f2937;text-shadow:none}
+.board .startcard .pill.on{color:#fff}
+.board .stage .gbadge .bi .zh{color:inherit;margin-left:6px}
+.board .stage.starting{min-height:540px}

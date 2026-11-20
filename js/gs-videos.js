@@ -6,7 +6,9 @@ const A = window.App, GS = A.GS, MG = A.MG, G = GS.G;
 const scene = (...p) => `<div class="scene">${p.join('')}</div>`;
 const title = (emoji, no, zh, extra) => `<div class="scene"><div class="big-emoji bounce">${emoji}</div><h2 class="up">${A.bi(no, zh)}</h2>${extra || ''}</div>`;
 const bubble = (h, d) => `<div class="pop sub" style="--d:${d || 0}s">${h}</div>`;
-const big = (t, d, c) => `<div class="bigword pop" style="--d:${d || 0}s;${c ? 'color:' + c : ''}">${t}</div>`;
+const CHALK = {'#4d7c0f':'#c9ee94', '#b45309':'#ffd99a', '#0f766e':'#aef0da', '#be185d':'#ffc4de', '#5b21b6':'#d9d3ff', '#2563eb':'#9cc4ff', '#f97316':'#ffb36b', '#16a34a':'#9ef0b4'};
+const chalk = c => CHALK[c] || c;
+const big = (t, d, c) => `<div class="bigword pop" style="--d:${d || 0}s;${c ? 'color:' + chalk(c) : ''}">${t}</div>`;
 const popIn = (h, d) => `<div class="pop" style="--d:${d || 0}s">${h}</div>`;
 const fadeIn = (h, d) => `<div class="fade" style="--d:${d || 0}s">${h}</div>`;
 const ex = lines => `<div class="mexpr">${lines.map(l => `<div>${l}</div>`).join('')}</div>`;
@@ -91,7 +93,7 @@ gs_five: {
     no:'Fem er halvparten av ti. Så fem-gangen er halvparten av ti-gangen. 7 × 10 er 70, og halvparten er 35.', zh:'5 是 10 的一半，所以 5 的乘法就是 10 的乘法的一半。7 × 10 等于 70，一半是 35。'},
    {html:scene(big('8 × 5 = ?', .1), ex(['halvparten av 8 er 4', 'null bak: <span class="g">40</span>']), bubble(A.bi('partall: halver, null bak', '偶数：取一半，后面加 0'), 2.2)),
     no:'Er tallet et partall, kan du halvere tallet og sette en null bak. 8 × 5: halvparten av 8 er 4, null bak, 40.', zh:'如果是偶数，可以先取一半，再在后面加 0。8 × 5：8 的一半是 4，后面加 0，得到 40。'},
-   {html:scene(`<div class="row">${[5, 10, 15, 20, 25, 30, 35, 40, 45, 50].map((v, i) => `<span class="chp pop" style="--c:${v % 10 ? '#f97316' : '#2563eb'};--d:${i * .35}s;font-size:1.5rem;font-weight:900;color:var(--c)">${v}</span>`).join('')}</div>`, bubble(A.bi('slutter på 0 eller 5', '个位是 0 或 5'), 3.8)),
+   {html:scene(`<div class="row">${[5, 10, 15, 20, 25, 30, 35, 40, 45, 50].map((v, i) => `<span class="chp pop" style="--c:${v % 10 ? '#ffb36b' : '#9cc4ff'};--d:${i * .35}s;font-size:1.5rem;font-weight:900;color:var(--c)">${v}</span>`).join('')}</div>`, bubble(A.bi('slutter på 0 eller 5', '个位是 0 或 5'), 3.8)),
     no:'Svarene i fem-gangen ender alltid på 0 eller 5.', zh:'5 的乘法的答案，个位总是 0 或 5。'},
    {html:scene(tbl({step:4}), bubble(A.bi('5-gangen ut → 21', '去掉 5 的乘法 → 21'), 1.2)),
     no:'Fem-gangen tar bort 7 regnestykker til. Nå er det 21 igjen.', zh:'5 的乘法又去掉 7 个算式。现在剩 21 个。'},
@@ -104,7 +106,7 @@ gs_square: {
   scenes:[
    {html:title('🟦', 'Like × like', '相同两数相乘', `<div class="sub fade" style="--d:.6s">y × y</div>`),
     no:'Nå skal vi lære like ganger like. De heter kvadrattall.', zh:'现在学相同两数相乘，叫做平方数，挪威语是 [kvadrattall]。'},
-   {html:scene(`<div class="row" style="align-items:flex-end;gap:20px">${popIn(MG.dots(3, 3, {s:22, r:8}), .2)}${popIn(MG.dots(4, 4, {s:22, r:8, c1:'#f97316'}), 1.4)}${popIn(MG.dots(5, 5, {s:22, r:8, c1:'#16a34a'}), 2.6)}</div>`, bubble(A.bi('kvadrat = firkant', '平方 = 正方形'), 3.6)),
+   {html:scene(`<div class="row" style="align-items:flex-end;gap:20px">${popIn(MG.dots(3, 3, {s:22, r:8}), .2)}${popIn(MG.dots(4, 4, {s:22, r:8, c1:'#f97316'}), 1.4)}${popIn(MG.dots(5, 5, {s:22, r:8, c1:'#fde047'}), 2.6)}</div>`, bubble(A.bi('kvadrat = firkant', '平方 = 正方形'), 3.6)),
     no:'3 rader med 3. 4 rader med 4. Prikkene blir en firkant, et kvadrat. Derfor heter det kvadrattall.', zh:'三行，每行三个。四行，每行四个。点排成一个正方形，所以叫平方数。'},
    {html:scene(facts(['3 × 3 = 9', '4 × 4 = 16', '6 × 6 = 36'], 'sq', .3, 1.2)),
     no:'Disse må vi pugge som en egen liten gruppe. 3 × 3 er 9. 4 × 4 er 16. 6 × 6 er 36.', zh:'这些要作为一小组背下来。3 × 3 等于 9，4 × 4 等于 16，6 × 6 等于 36。'},
@@ -185,4 +187,6 @@ gs_which: {
     no:'Når du øver, kan du alltid trykke på spørsmålstegnet. Da får du vite hvilken regel som gjelder.', zh:'练习时，你随时可以点问号，看看用的是哪条规则。'}
   ]}
 });
+// alle gangesystem-videoene vises på tavle med lærerinne i hjørnet
+Object.keys(A.VIDEOS).filter(k => k.startsWith('gs_')).forEach(k => { A.VIDEOS[k].board = true; });
 })();
