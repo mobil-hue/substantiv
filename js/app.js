@@ -300,7 +300,6 @@ function practiceRoom(){
 /* ---------- innstillinger ---------- */
 function settingsView(){
   const S = A.settings, root = h('div', {class:'settings'});
-  const noV = A.Speech.has('no'), zhV = A.Speech.has('zh');
   root.innerHTML = `<div class="crumb" id="back">← ${bi('Hjem','首页')}</div><h1>⚙️ ${bi('Innstillinger','设置')}</h1>
     <div class="card"><label>${bi('Vis tekst på','文字显示')}
       <select id="sl">${LANGS.map(l => `<option value="${l[0]}" ${S.lang === l[0] ? 'selected' : ''}>${l[1]}</option>`).join('')}</select></label>
@@ -313,11 +312,7 @@ function settingsView(){
     <label><input type="checkbox" id="sauto" ${S.auto ? 'checked' : ''}> ${bi('Les opp oppgavene automatisk','自动朗读题目')}</label>
     <label>${bi('Taletempo','语速')}
       <select id="sr"><option value="0.65" ${S.rate === 0.65 ? 'selected' : ''}>🐢 Sakte / 慢</option><option value="0.85" ${S.rate === 0.85 ? 'selected' : ''}>🙂 Normal / 正常</option><option value="1" ${S.rate === 1 ? 'selected' : ''}>🐇 Rask / 快</option></select></label></div>
-    <div class="card"><b>${bi('Stemmer','语音')}</b>
-      <p>🇳🇴 ${noV ? '✅ ' : '⚠️ '}${bi(noV ? 'Norsk stemme funnet' : 'Ingen norsk stemme funnet på denne enheten. Installer norsk tale i system-innstillingene.', noV ? '找到了挪威语语音' : '这台设备上没有找到挪威语语音。请在系统设置里安装挪威语语音。')}</p>
-      <p>🇨🇳 ${zhV ? '✅ ' : '⚠️ '}${bi(zhV ? 'Kinesisk stemme funnet' : 'Ingen kinesisk stemme funnet på denne enheten.', zhV ? '找到了中文语音' : '这台设备上没有找到中文语音。')}</p>
-      <div class="row"><button class="btn sec" id="t1"><span class="bi"><span class="no">🔊 Test norsk</span><span class="zh">测试挪威语</span></span></button>
-      <button class="btn sec" id="t2"><span class="bi"><span class="no">🔊 Test kinesisk</span><span class="zh">测试中文</span></span></button></div></div>
+    <div class="card"><b>${bi('Stemmer','语音')}</b><div id="vpHost"></div></div>
     <div class="card"><button class="btn sec" id="reset"><span class="bi"><span class="no">🗑 Nullstill fremgang</span><span class="zh">清除学习进度</span></span></button></div>`;
   root.querySelector('#back').onclick = () => { location.hash = '#/'; };
   root.querySelector('#sl').onchange = e => { S.lang = e.target.value; A.saveSettings(); syncPills(); };
@@ -327,8 +322,7 @@ function settingsView(){
   root.querySelector('#spy').onchange = e => { S.pinyin = e.target.checked; A.saveSettings(); };
   root.querySelector('#sauto').onchange = e => { S.auto = e.target.checked; A.saveSettings(); syncPills(); };
   root.querySelector('#sr').onchange = e => { S.rate = +e.target.value; A.saveSettings(); };
-  root.querySelector('#t1').onclick = () => A.sayNo(INFO.test[0]);
-  root.querySelector('#t2').onclick = () => A.say(A.parseSegs(INFO.test[1], 'zh'));
+  A.voicePicker(root.querySelector('#vpHost'));
   root.querySelector('#reset').onclick = () => { if(confirm('Nullstille all fremgang? / 要清除所有进度吗？')){ A.progress = {}; A.store.set(PKEY, {}); A.Ex.resetStats(SUBJ === 'mult' ? /^(mf|mm|md|m_)/ : SUBJ === 'geo' ? /^g_/ : SUBJ === 'adj' ? /^aj_/ : undefined); location.hash = '#/'; route(); } };
   render(root);
 }

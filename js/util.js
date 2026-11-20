@@ -120,6 +120,25 @@ A.Speech = {
   onVoices(cb){ if(supported){ const prev = speechSynthesis.onvoiceschanged; try{ speechSynthesis.onvoiceschanged = () => { loadVoices(); if(prev) try{ prev(); }catch(e){} cb(); }; }catch(e){} } },
   stop(){ token++; if(supported){ try{ speechSynthesis.cancel(); }catch(e){} } }
 };
+// stemmevalg (felles for alle fag): velg blant stemmene som finnes på enheten. Lagres globalt i innstillingene.
+A.voicePicker = function(host){
+  const LBL = {no:['🇳🇴 Norsk stemme', '挪威语语音', 'Norwegian'], zh:['🇨🇳 Kinesisk stemme', '中文语音', 'Chinese']};
+  const TEST = {no:['Hei! Dette er en test av stemmen. En stor hund, et stort hus.', 'no'], zh:['你好！这是语音测试。', 'zh']};
+  function draw(){
+    const pick = A.settings.voice || {};
+    host.innerHTML = ['no', 'zh'].map(l => {
+      const vs = A.Speech.voices(l), cur = A.Speech.current(l);
+      return `<div class="vp-row" style="margin:8px 0"><b>${A.bi(LBL[l][0], LBL[l][1])}</b>
+        ${vs.length ? `<select class="ans sel vp-sel" data-l="${l}" style="font-size:1rem;max-width:100%"><option value="">Automatisk / 自动</option>${vs.map(v => `<option value="${A.esc(v.name)}"${pick[l] === v.name ? ' selected' : ''}>${A.esc(v.name)} (${A.esc(v.lang)}${v.local ? '' : ', online'})</option>`).join('')}</select>
+          <div class="small-note" style="text-align:left">${A.bi('Bruker nå: ' + (cur || '—'), '当前使用：' + (cur || '—'))}</div>`
+        : `<div class="small-note" style="text-align:left">⚠️ ${A.Speech.supported ? A.bi('Ingen stemme funnet på denne enheten.', '这台设备上没有找到语音。') : A.bi('Nettleseren kan ikke lese opp.', '此浏览器不支持朗读。')}</div>`}
+        <button type="button" class="btn sec vp-test" data-l="${l}"><span class="bi"><span class="no">🔊 Test</span><span class="zh">试听</span></span></button></div>`;
+    }).join('');
+    host.querySelectorAll('.vp-sel').forEach(sel => sel.onchange = () => { A.Speech.choose(sel.dataset.l, sel.value); draw(); A.say(A.parseSegs(TEST[sel.dataset.l][0], TEST[sel.dataset.l][1])); });
+    host.querySelectorAll('.vp-test').forEach(b => b.onclick = () => A.say(A.parseSegs(TEST[b.dataset.l][0], TEST[b.dataset.l][1])));
+  }
+  draw(); A.Speech.onVoices(draw);
+};
 A.parseSegs = function(str, base){
   const out = []; const re = /\[([^\]]+)\]/g; let last = 0, m;
   while((m = re.exec(str))){
