@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arbeidsark – Gangesystemet 乘法系统</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+*{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-size:11pt}
+.bar{background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:12px 16px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.sheet{width:210mm;min-height:297mm;padding:11mm 12mm;margin:0 auto 10px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.15);position:relative;page-break-after:always;color:#111}
+.key{display:none}body.show-key .key{display:block}
+.shead{display:flex;justify-content:space-between;align-items:flex-start;gap:6mm;border-bottom:2.5px solid #111;padding-bottom:2mm;margin-bottom:3mm}
+.stitle{display:flex;gap:3mm;align-items:center}.stitle h2{margin:0;font-size:16pt}.stitle .zh,.zh{color:#555}.stitle .zh{font-size:11pt}
+.num{width:11mm;height:11mm;border-radius:50%;border:2.5px solid #111;display:inline-flex;align-items:center;justify-content:center;font-weight:900;font-size:14pt;flex:none}
+.who{font-size:9.5pt;text-align:right;line-height:2}.ln{display:inline-block;border-bottom:1.5px solid #111;width:42mm}.ln.s{width:22mm}
+.instr{background:#f3f4f6;border-radius:3mm;padding:2.5mm 3.5mm;margin-bottom:3mm;font-size:10.5pt}
+.ref{border:1.5px dashed #888;border-radius:3mm;padding:2mm 3mm;font-size:9.5pt;margin-bottom:2mm}
+h3{margin:4mm 0 2mm;font-size:12pt;border-bottom:1.5px solid #bbb;padding-bottom:1mm}h3 .zh{font-size:10pt;font-weight:600}
+.ans{color:#dc2626;font-weight:800;font-size:13pt;font-family:"Comic Sans MS","Segoe Print",cursive;white-space:nowrap}
+.eg{display:grid;gap:3.2mm 7mm}.eg.c1{grid-template-columns:1fr}.eg.c2{grid-template-columns:1fr 1fr}.eg.c3{grid-template-columns:repeat(3,1fr)}.eg.c4{grid-template-columns:repeat(4,1fr)}
+.eq{font-size:13pt;font-weight:700;white-space:nowrap;min-height:9mm;display:flex;align-items:flex-end;gap:2mm}.eq.w{font-size:11.5pt}
+.bl{display:inline-block;border-bottom:1.6px solid #111;height:7mm;vertical-align:bottom}
+.fl{display:inline-block;border-bottom:1.6px solid #bbb;min-width:8mm;text-align:center}
+.tg{display:grid;gap:4mm}.tg.c3{grid-template-columns:repeat(3,1fr)}
+.tk{border:1.5px solid #bbb;border-radius:3mm;padding:2mm;min-width:0}.tk .tt{font-size:12pt;margin-bottom:1mm}
+.sqk{text-align:center}.sqk svg{max-width:100%;height:auto}
+/* farger */
+.gt{display:inline-flex;gap:1mm;align-items:center;border-radius:99px;padding:0 2.2mm;font-weight:900;font-size:9pt;background:var(--bg);color:var(--c);border:1.5px solid var(--c);white-space:nowrap}
+.kl{display:flex;flex-wrap:wrap;gap:2mm 5mm;margin-bottom:3mm;font-size:9.5pt}
+.kk{display:inline-flex;gap:1.5mm;align-items:center;font-size:9.5pt}.kk i{display:inline-block;width:6mm;height:6mm;border-radius:1.2mm;border:2px solid var(--c);background:var(--bg)}
+.kl2{display:inline-flex;gap:2mm 5mm;flex-wrap:wrap}
+.tbc{margin:2mm auto 3mm;text-align:center}
+.tbc .gst{--cs:10.5mm;border-spacing:1px}.tbc .gst td{font-size:10pt;box-shadow:inset 0 0 0 1px #aaa}.tbc .gst th{font-size:10pt;color:#111}
+.tbc .gst td.dim{opacity:1}.tbc .gst td{background:#fff;cursor:default}
+.tbc .gst td.g-easy{background:#b9e07f}.tbc .gst td.g-five{background:#fcd28a}.tbc .gst td.g-sq{background:#a7e8d0}.tbc .gst td.g-nine{background:#f9c0d8}.tbc .gst td.g-learn{background:#d4cffa}
+.cnts{display:flex;flex-wrap:wrap;gap:3mm 6mm;align-items:center}.cnt{font-size:11pt;display:inline-flex;gap:2mm;align-items:flex-end}
+.funl{display:flex;flex-wrap:wrap;gap:2mm 3mm;align-items:flex-end;font-size:12pt}.fn small{font-size:8pt;color:#555;display:block;text-align:center;margin-top:-1mm}.fn{display:inline-flex;flex-direction:column;align-items:center}.fa{display:inline-flex;gap:1mm;align-items:flex-end}
+.oddl{font-size:13pt;font-weight:800;display:flex;flex-wrap:wrap;gap:2mm;align-items:flex-end}.oddl .pl{color:#0f766e}
+.chk{margin-left:auto;font-size:11pt}.chk small{font-size:8pt;color:#555}
+/* hvilken regel */
+.rt{border:1.5px solid #bbb;border-radius:3mm;overflow:hidden}
+.rh,.rr{display:grid;grid-template-columns:24mm repeat(5,1fr) 30mm;align-items:center;padding:1.2mm 3mm;gap:1mm}
+.rh{background:#f3f4f6;border-bottom:1.5px solid #bbb}.rr{border-bottom:1px solid #e5e7eb;min-height:9.2mm}.rr:last-child{border-bottom:0}
+.rr .rq{font-size:13pt}.rb{text-align:center}.ra{text-align:left}
+.bx{display:inline-flex;align-items:center;justify-content:center;width:6.4mm;height:6.4mm;border:2px solid var(--c);border-radius:1.5mm;font-style:normal}
+/* hele tabellen */
+.gfill{border-collapse:collapse;margin:0 auto}
+.gfill th{width:13.5mm;height:13.5mm;font-size:14pt;background:#f3f4f6;border:1.5px solid #555}
+.gfill td{width:13.5mm;height:13.5mm;text-align:center;border:1.5px solid #555;padding:0}
+.gfill td.g-easy{background:#b9e07f}.gfill td.g-five{background:#fcd28a}.gfill td.g-sq{background:#a7e8d0}.gfill td.g-nine{background:#f9c0d8}.gfill td.g-learn{background:#d4cffa}
+@page{size:A4;margin:10mm}
+@media print{
+  body{background:#fff;font-size:10.5pt}.top,.noprint,.bar{display:none!important}
+  main{padding:0;max-width:none}.sheet{box-shadow:none;margin:0;width:auto;min-height:0;height:277mm;padding:0;overflow:hidden}
+  body[data-print=sheets] .key{display:none!important}
+  body[data-print=keys] .sheetwrap{display:none!important}
+  body[data-print=keys] .key{display:block!important}
+}
+</style>
+<link rel="stylesheet" href="css/gs.css">
+</head>
+<body class="lang-both">
+<header class="top"><a class="logo" href="gangesystem.html" style="text-decoration:none">🧩 Gangesystemet <small>乘法系统</small></a><div class="sp"></div></header>
+<main>
+ <h1 class="noprint">📝 Arbeidsark – gangesystemet <span class="zh" style="font-size:1.1rem">练习纸</span></h1>
+ <div class="bar noprint">
+  <button class="btn" id="new">🔄 Nye ark</button>
+  <button class="btn sec" id="printSheets">🖨 Skriv ut ark</button>
+  <button class="btn sec" id="printKeys">🖨 Skriv ut fasit</button>
+  <label><input type="checkbox" id="showKey"> Vis fasit på skjermen / 显示答案</label>
+ </div>
+ <div class="noprint small-note" style="margin-bottom:10px">8 ark, ett for hvert steg i systemet: 1 systemet (fargelegg tabellen) · 2 speilvendte og 1-2-10 · 3 5-gangen · 4 like × like · 5 9-gangen · 6 de 10 som pugges · 7 hvilken regel gjelder? · 8 mesterprøve (hele tabellen). Hver gang du trykker «Nye ark» får du nye oppgaver. Samme lenke gir samme ark, så fasiten stemmer. / 每次点“Nye ark”都会出现新的题目；同一个链接得到同样的练习纸，答案才对得上。</div>
+ <div id="out"></div>
+</main>
+<script src="js/util.js"></script>
+<script src="js/mult-data.js"></script>
+<script src="js/mult-graphics.js"></script>
+<script src="js/gs-core.js"></script>
+<script src="js/gs-worksheets.js"></script>
+<script>
+(function(){
+  const A = window.App, out = document.getElementById('out');
+  function seed(){ const m = location.hash.match(/s=(\d+)/); return m ? +m[1] : null; }
+  function render(){
+    let s = seed(); if(s == null){ s = Math.floor(Math.random() * 1e6); history.replaceState(null, '', '#s=' + s); }
+    const w = A.GsWorksheets.build(s); out.innerHTML = w.sheets + w.keys;
+  }
+  document.getElementById('new').onclick = () => { history.replaceState(null, '', '#s=' + Math.floor(Math.random() * 1e6)); render(); };
+  const doPrint = what => { document.body.dataset.print = what; window.print(); };
+  document.getElementById('printSheets').onclick = () => doPrint('sheets');
+  document.getElementById('printKeys').onclick = () => doPrint('keys');
+  document.getElementById('showKey').onchange = e => document.body.classList.toggle('show-key', e.target.checked);
+  render();
+})();
+</script>
+</body>
+</html>

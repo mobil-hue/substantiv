@@ -34,7 +34,7 @@ const PROGRAMS = [
   {section:'matte', id:'gangesystem', href:'gangesystem.html', sum:'gs', unit:['regnestykker sikre', '道算式已掌握'], emoji:'🧩', color:'#7c3aed',
    no:'Gangetabellen som system', zh:'乘法表：系统化学习',
    desc:['Fra 100 ruter til 10 regnestykker: speilvendte, 1-2-10, 5, y × y, 9-regelen og de 10 som må pugges. Videoer og flere treningsmodus med regelhjelp.', '从 100 个格子到 10 道算式：对称、1-2-10、5、y × y、9 的规则和要背的 10 个。有视频和多种练习模式，带规则提示。'],
-   links:[['gangesystem.html#/train/all', '📋 Hele tabellen', '整个乘法表'], ['gangesystem.html#/spot', '🔍 Regelspotter', '找规则'], ['gangesystem.html#/speed', '⚡ Fartsrunde', '速度挑战'], ['gangesystem.html#/stats', '📊 Fremgang', '进度']]},
+   links:[['gangesystem.html#/train/all', '📋 Hele tabellen', '整个乘法表'], ['gangesystem.html#/spot', '🔍 Regelspotter', '找规则'], ['gangesystem.html#/speed', '⚡ Fartsrunde', '速度挑战'], ['gangesystem.html#/stats', '📊 Fremgang', '进度'], ['gs-ark.html', '📝 Arbeidsark', '练习纸']]},
   {section:'matte', id:'geometri', href:'geometri.html', sum:'geo', emoji:'📐', color:'#3b82f6',
    no:'Geometri', zh:'几何',
    desc:['Matematikk 4, kapittel 4: figurer, kanter og hjørner, romfigurer, nett og klosser, vinkler.', '数学 4 年级第 4 章：图形、边和顶点、立体图形、展开图和小方块、角。'],
