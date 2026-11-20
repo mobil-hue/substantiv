@@ -15,7 +15,7 @@ const PROGRAMS = [
    no:'Substantiv', zh:'名词',
    desc:['Hva et substantiv er, en/ei/et, entall og flertall, bestemt og ubestemt form.', '什么是名词、en/ei/et、单数和复数、定指和不定指。'],
    links:[['ark.html', '📝 Skriveark', '练习纸'], ['docs/substantiv-jukselapp.pdf', '🧾 Jukselapp', '速查表'], ['docs/substantiv-boyingstabell.pdf', '📊 Bøyingstabell', '变形表'], ['teacher.html', '👩‍🏫 Lærer', '教师页']]},
-  {section:'norsk', id:'adjektiv', href:'adjektiv.html', sum:'adj', emoji:'🌈', color:'#16a34a',
+  {section:'norsk', id:'adjektiv', href:'adjektiv.html', sum:'adj', emoji:'🐱', color:'#16a34a',
    no:'Adjektiv', zh:'形容词',
    desc:['Hva et adjektiv er, motsetninger, adjektiv med en/ei/et, flertall og bestemt form, liten og andre spesielle, og sammenligning (stor, større, størst).', '什么是形容词、反义词、形容词和 en/ei/et、复数和定指形式、liten 等特殊形容词，以及比较（stor、større、størst）。'],
    links:[['adjektiv-ark.html', '📝 Skriveark', '练习纸'], ['docs/adjektiv-jukselapp.pdf', '🧾 Jukselapp', '速查表'], ['adjektiv-laerer.html', '👩‍🏫 Lærer', '教师页']]},
