@@ -1,0 +1,176 @@
+/* Gangesystemet (kommer i tillegg til css/style.css) */
+
+/* ---------- gangetabellen ---------- */
+.gst{border-collapse:separate;border-spacing:2px;margin:0 auto;--cs:23px}
+.gst th{font-size:.62rem;font-weight:900;color:var(--muted);width:var(--cs);height:var(--cs);padding:0;text-align:center}
+.gst td{width:var(--cs);height:var(--cs);padding:0;text-align:center;font-size:.62rem;font-weight:800;border-radius:5px;background:#fff;color:#374151;box-shadow:inset 0 0 0 1px #e5e7eb;cursor:pointer;transition:background .35s,color .35s,opacity .35s}
+@media (min-width:560px){.gst{--cs:35px}.gst th{font-size:.82rem}.gst td{font-size:.84rem;border-radius:7px}}
+.gst td.keep{background:#fff;color:#111827}
+.gst td.gone{background:#f4f3ef;color:#d3d1c8;box-shadow:none;font-weight:600}
+.gst td.mir{background:#e5e7eb;color:#6b7280}
+.gst td.g-easy{background:#b9e07f;color:#2b4a05}
+.gst td.g-five{background:#fcd28a;color:#6b3a04}
+.gst td.g-sq{background:#a7e8d0;color:#05453d}
+.gst td.g-nine{background:#f9c0d8;color:#7a0f3d}
+.gst td.g-learn{background:#d4cffa;color:#35127a}
+.gst td.dim{opacity:.5}
+.gst td.hi{outline:3px solid #ea580c;outline-offset:-1px;font-weight:900;position:relative;z-index:1}
+.gst td.sel{outline:3px solid #1d4ed8;outline-offset:-1px;font-weight:900;position:relative;z-index:1}
+.gst td.lv-new{background:#f1f0eb;color:#a3a3a3}
+.gst td.lv-weak{background:#fca5a5;color:#7f1d1d}
+.gst td.lv-learning{background:#fde68a;color:#78350f}
+.gst td.lv-sure{background:#86efac;color:#14532d}
+.gst td.gb-easy{box-shadow:inset 0 -4px 0 #84cc16}
+.gst td.gb-five{box-shadow:inset 0 -4px 0 #f59e0b}
+.gst td.gb-sq{box-shadow:inset 0 -4px 0 #14b8a6}
+.gst td.gb-nine{box-shadow:inset 0 -4px 0 #ec4899}
+.gst td.gb-learn{box-shadow:inset 0 -4px 0 #8b5cf6}
+.stage .gst{--cs:21px}
+@media (min-width:560px){.stage .gst{--cs:29px}.stage .gst td{font-size:.74rem}}
+
+/* ---------- merker og brikker ---------- */
+.gbadge{display:inline-flex;gap:4px;align-items:center;border-radius:999px;padding:1px 10px;font-weight:900;font-size:.82rem;background:var(--bg);color:var(--c);border:2px solid var(--c);white-space:nowrap;text-decoration:none}
+.gbadge.big{font-size:1rem;padding:4px 14px}
+.gbadge .bi{display:inline}.gbadge .bi .zh{display:inline;font-size:1em;color:inherit}
+.gfact{display:inline-block;border-radius:12px;padding:4px 12px;font-weight:900;background:var(--bg);color:#1f2937;border:3px solid var(--c);font-size:1.12rem;font-family:inherit}
+button.gfact{cursor:pointer}
+.gfact small{font-size:.7em;opacity:.7}
+.gl{display:inline-flex;align-items:center;gap:5px}
+.gl i{display:inline-block;width:15px;height:15px;border-radius:4px;background:var(--bg);border:2px solid var(--c)}
+.gl .bi{display:inline}.gl .bi .zh{display:inline;font-size:1em}
+.gl.lv-sure i{background:#86efac;border-color:#16a34a}.gl.lv-learning i{background:#fde68a;border-color:#d97706}
+.gl.lv-weak i{background:#fca5a5;border-color:#dc2626}.gl.lv-new i{background:#f1f0eb;border-color:#d1d5db}
+
+/* ---------- regel-boks og forklaring ---------- */
+.rulebox{position:relative;border:3px solid var(--c);background:#fff;border-radius:16px;padding:12px 14px;margin-top:12px;text-align:left}
+.rulebox .rb-h{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:1.05rem;padding-right:46px}
+.rulebox .rb-h .bi{display:inline}.rulebox .rb-h .bi .zh{display:inline;margin-left:6px}
+.rb-f{font-size:1.25rem;font-weight:900;color:var(--c);margin:6px 0 2px}
+.rb-l{font-weight:700}
+.rb-tt{font-size:.8rem;font-weight:900;color:var(--muted);margin:10px 0 2px}
+.rb-s{background:var(--bg);border-radius:12px;padding:6px 12px 10px;margin-top:10px}
+.gsteps{margin:4px 0 0;padding-left:22px;font-weight:700}
+.gsteps li{margin:4px 0}
+.gchain{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:8px;font-weight:900}
+.gchain b{background:var(--c);color:#fff;border-radius:999px;padding:2px 12px}
+.gchain i{font-style:normal;color:var(--muted)}
+.rb-dots{margin-top:8px;text-align:center}
+.rb-say{position:absolute;top:8px;right:8px;width:38px;height:38px;font-size:1.1rem}
+.gtrace{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:5px}
+.gtrace li{display:flex;gap:8px;align-items:center;padding:5px 10px;border-radius:10px;background:#f6f5f1;font-weight:700;font-size:.9rem;text-align:left}
+.gtrace li.y{background:var(--bg);border:2px solid var(--c)}
+.gtrace li.n{opacity:.85}
+.gtrace .tx{flex:1}.gtrace .tk{flex:none}.gtrace .tg{flex:none}
+.gx-q{font-size:2rem;font-weight:900;text-align:center;margin-top:4px}
+
+/* ---------- «slik krymper tabellen» ---------- */
+.gx-steps{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0;justify-content:center}
+.gx-st{background:color-mix(in srgb,var(--c) 40%,#fff);border-color:var(--c);min-width:40px;text-align:center}
+.gx-st.on{background:var(--c);color:#1f2937;box-shadow:0 0 0 3px #1f2937}
+#gxPlay{background:#e0f2fe;border-color:#7dd3fc}
+.gx-cap{text-align:center;margin:8px 0}
+.gx-tbl{overflow-x:auto;text-align:center;padding-bottom:2px}
+.gx-legend{display:flex;gap:6px 14px;flex-wrap:wrap;justify-content:center;margin:12px 0 4px;font-size:.78rem;font-weight:800}
+.gfun{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+.gf-row{display:grid;grid-template-columns:36px 1fr;align-items:center;gap:0 8px}
+.gf-row b{text-align:right;font-weight:900}
+.gf-bar{display:block;height:14px;border-radius:7px;transition:width .4s}
+.gf-row i{grid-column:2;font-style:normal;font-size:.78rem;color:var(--muted);font-weight:700;line-height:1.15}
+.gx-rule{margin-top:8px}
+
+/* ---------- forside ---------- */
+.gs-sec{margin:24px 0 4px;font-size:1.25rem}
+.gs-secsub{display:block;font-size:.85rem;color:var(--muted);font-weight:700}
+.gpath{cursor:default}
+.gp-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.gp-btns .pill{text-decoration:none;display:inline-flex;gap:4px;align-items:center}
+.gp-btns .pill .bi{display:inline}.gp-btns .pill .bi .zh{display:inline;font-size:1em;color:inherit}
+.gp-btns .pill.ok{background:#dcfce7;border-color:#86efac}
+.gm-groups{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.gs-vp{max-width:820px;margin:0 auto}
+.gs-vp h1{font-size:1.5rem}
+.gs-after{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px}
+.gl-list{display:flex;flex-direction:column;gap:8px;align-items:center}
+.gl-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center}
+.gl-l{font-weight:900;min-width:76px;text-align:right;color:var(--muted)}
+.gl-row .gfact{font-size:.95rem;padding:2px 9px}
+
+/* ---------- oppsett ---------- */
+.gs-setup{max-width:720px;margin:0 auto}
+.gs-opt{margin:14px 0}
+.gs-ol{font-weight:900;margin-bottom:6px}
+.gs-ol .bi .zh{font-size:.8em}
+.gchip{border:3px solid var(--c);background:#fff;border-radius:999px;padding:6px 12px;font-weight:900;opacity:.6}
+.gchip.on{background:var(--bg);opacity:1;box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 30%,transparent)}
+.gchip small{opacity:.7}
+.gs-chk{display:flex;gap:10px;align-items:center;font-weight:800}
+.gs-chk input{width:22px;height:22px}
+.gs-chk .bi{display:inline-block}
+
+/* ---------- oppgaver ---------- */
+.gs-sess{max-width:620px}
+.qcard.gq,.qcard.gcard{border-top:8px solid var(--c,#7c3aed)}
+.gq-eq{display:flex;align-items:center;justify-content:center;gap:12px;font-size:2.8rem;font-weight:900;flex-wrap:wrap;margin:6px 0 10px}
+.gq-q{min-width:1.5em;border-bottom:5px solid var(--c,#7c3aed);color:var(--c,#7c3aed);text-align:center}
+.gq-q.good{color:var(--good);border-color:var(--good)}
+.gq-q.bad{color:var(--bad);border-color:var(--bad)}
+.gq-ctl{text-align:center;margin-top:12px}
+.gq-rule{margin-top:6px}
+.gcard-b{text-align:center}
+.gchoices{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.gchoice{background:#eff6ff;border:3px solid #bfdbfe;border-radius:16px;font-size:2rem;font-weight:900;padding:14px 0;color:#1e3a8a}
+.gchoice:active{background:#dbeafe}
+.gchoice.good{background:#dcfce7;border-color:var(--good);color:#14532d}
+.gchoice.bad{background:#fee2e2;border-color:var(--bad);color:var(--bad)}
+.gchoice[disabled]{cursor:default}
+.gdisp{min-height:64px;display:flex;align-items:center;justify-content:center;font-size:2.6rem;font-weight:900;border:3px solid #bfdbfe;background:#eff6ff;border-radius:16px;margin-bottom:10px;color:#1e3a8a}
+.gdisp.empty{color:#9ca3af;font-size:1.1rem;font-weight:700}
+.gpad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.gkey{background:#f3f4f6;border:2px solid var(--line);border-radius:14px;font-size:1.8rem;font-weight:900;padding:10px 0}
+.gkey:active{background:#e5e7eb}
+.gkey.ok{background:var(--good);color:#fff;border-color:var(--good)}
+.gkey.del{color:var(--bad)}
+.gm-dots{text-align:center;margin:6px 0}
+.gspot{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.gsp{background:var(--bg);border:3px solid var(--c);border-radius:16px;padding:8px 6px;display:flex;flex-direction:column;align-items:center;gap:1px;font-weight:800;color:#1f2937}
+.gsp:last-child{grid-column:1/-1}
+.gsp .e{font-size:1.5rem;line-height:1.1}
+.gsp b{font-size:1.25rem;color:var(--c)}
+.gsp small{font-size:.7rem;line-height:1.15}
+.gsp small .bi .zh{font-size:.95em}
+.gsp.good{box-shadow:0 0 0 5px #86efac}
+.gsp.bad{box-shadow:0 0 0 5px #fca5a5;opacity:.8}
+.gsp[disabled]{cursor:default}
+.gs-miss{margin-top:12px}
+.gs-miss .row{justify-content:center}
+
+/* ---------- fremgang ---------- */
+.gs-stats{max-width:720px;margin:0 auto}
+.gs-stats .sum{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.gs-stats .sum div{flex:1 1 90px;background:#fff7ed;border-radius:12px;padding:6px 10px;text-align:center}
+.gs-stats .sum b{display:block;font-size:1.4rem;color:var(--brand-d)}
+.gs-stats .sum span{font-size:.75rem;color:var(--muted);font-weight:700}
+.gst-bar{display:grid;grid-template-columns:minmax(0,1.4fr) 1fr 48px;gap:8px;align-items:center;margin:8px 0;text-decoration:none;color:inherit}
+.gst-bar .l{font-weight:800;font-size:.9rem}
+.gst-bar .l .bi{display:inline}.gst-bar .l .bi .zh{display:inline;font-size:.9em}
+.gst-bar .b{height:12px;background:#eee;border-radius:99px;overflow:hidden}
+.gst-bar .b i{display:block;height:100%;background:var(--c)}
+.gst-bar .n{font-weight:900;text-align:right;font-size:.9rem}
+@media (max-width:560px){.gq-eq{font-size:2.3rem}.gl-l{min-width:0;width:100%;text-align:center}}
+
+/* ---------- regelrekken (video) ---------- */
+.gflow{display:flex;flex-direction:column;gap:6px;width:100%;max-width:520px}
+.gfr{display:flex;align-items:center;gap:8px;background:var(--bg);border-left:8px solid var(--c);border-radius:12px;padding:5px 10px;text-align:left;font-weight:800;font-size:.95rem}
+.gfr .n{width:24px;height:24px;border-radius:50%;background:var(--c);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex:none}
+.gfr .q{flex:1}.gfr .r{flex:none}
+.gfr .q .bi .zh{font-size:.85em}
+.gfr.lo>*{opacity:.35}
+.gfr.hi{box-shadow:0 0 0 4px color-mix(in srgb,var(--c) 45%,transparent);font-size:1.05rem}
+.scene .gtrace{width:100%;max-width:520px}
+
+/* lenker som knapper */
+a.pill,a.btn,a.gbadge,a.crumb{text-decoration:none}
+a.pill{color:inherit}
+a.gbadge{color:var(--c)}
+.gl .bi .zh,.gst-bar .l .bi .zh{margin-left:6px}
+.gbadge.big{white-space:normal;text-align:center;max-width:100%}
