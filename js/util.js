@@ -24,9 +24,11 @@ A.saveSettings = function(){ A.store.set('settings', A.settings); A.applyLang();
 
 // valg som gjelder ett fag (svarmåte: flervalg / skriv inn / tilfeldig, trinn for trinn)
 A.subject = window.SUBJECT || 'noun';
+A.course = window.COURSE || 'full';                       // 'basic' = grunnkurs
+A.subjKey = A.subject + (A.course === 'basic' ? '_b' : '');
 const PREF_DEFAULT = {noun:{input:'mix'}, geo:{input:'choice'}, mult:{input:'mix', guide:true}, adj:{input:'mix'}};
-A.prefs = Object.assign({input:'mix'}, PREF_DEFAULT[A.subject] || {}, A.store.get('prefs_' + A.subject, {}));
-A.savePrefs = function(){ A.store.set('prefs_' + A.subject, A.prefs); };
+A.prefs = Object.assign({input:'mix'}, PREF_DEFAULT[A.subject] || {}, A.course === 'basic' ? {input:'choice'} : {}, A.store.get('prefs_' + A.subjKey, {}));
+A.savePrefs = function(){ A.store.set('prefs_' + A.subjKey, A.prefs); };
 
 // valg av tekstspråk og opplesing (brukes i video, innstillinger og menyen)
 A.LANG_OPTS = [['both', '🌐 NO + 中文'], ['no', '🇳🇴 Norsk'], ['zh', '🇨🇳 中文']];

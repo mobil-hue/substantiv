@@ -22,6 +22,7 @@ Ex.names = () => Object.keys(defs);
 const prio = it => { const s = stats[it.id]; return (s ? s.s*0.8 - s.m*1.6 : 0) + Math.random()*2; };
 function passes(it, o){
   return (it.lvl || 0) <= (o.maxLvl == null ? 3 : o.maxLvl) && (it.mod || 0) <= (o.maxMod == null ? 9 : o.maxMod)
+    && !(o.skip && new RegExp(o.skip).test(it.id))
     && !(it.speech && !A.Speech.supported) && !(it.zhOnly && A.settings.lang === 'no')
     && !(it.typeOnly && A.prefs.input !== 'type') && !(it.choiceOnly && A.prefs.input === 'type');
 }

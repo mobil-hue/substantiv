@@ -4,8 +4,10 @@ Læreopplegg i samme system, samlet i en **rotmeny** (`index.html`) med fagene *
 
 | Fag | Opplegg | Side |
 |---|---|---|
-| Norsk | **Substantiv 名词** | `substantiv.html` |
-| Norsk | **Adjektiv 形容词** (nytt) | `adjektiv.html` |
+| Norsk | **Substantiv – grunnkurs 名词基础课** (nytt, enklere start) | `substantiv-grunnkurs.html` |
+| Norsk | **Substantiv 名词** (fullstendig kurs) | `substantiv.html` |
+| Norsk | **Adjektiv – grunnkurs 形容词基础课** (nytt, enklere start) | `adjektiv-grunnkurs.html` |
+| Norsk | **Adjektiv 形容词** (fullstendig kurs) | `adjektiv.html` |
 | Matematikk | **Gange – lær og øv 乘法** (nytt) | `multiplikasjon.html` |
 | Matematikk | **Geometri 几何** (Matematikk 4 kap. 4) | `geometri.html` |
 | Matematikk | **Gangespill** (rask trening av gangetabellen) | `gange.html` |
@@ -39,6 +41,14 @@ Norsk for **kinesisktalende voksne**. Alle ord og setninger står på norsk, eng
 - Fremgangen lagres lokalt i nettleseren (`sub_vox_*`).
 
 Data (ord, former, oversettelser, eksempler og merknader) ligger i `js/vox-*.js` i et enkelt tekstformat, beskrevet i `docs/vox-format.md`. Sjekk filer med `node docs/vox-validate.js js/vox-xxx.js`.
+
+## Grunnkurs (substantiv og adjektiv)
+For elever som sliter med å få hele sammenhengen. Samme motor og samme oppgaver som det fullstendige kurset, men:
+- **5 små moduler** med 3–5 steg hver, og kun de aller enkleste ordene (nivå 1: regelmessige ord, og bare adjektiv som får vanlig +t og +e).
+- **Korte videoer** (4–5 scener, ett poeng om gangen) og **kun flervalg**, ingen skriving.
+- Substantiv: hva er et substantiv · en/ei/et · én eller flere · bilen/hunden · alt sammen. Adjektiv: hva er et adjektiv · motsetninger · en stor hund/et stort hus · store hunder · alt sammen.
+- Egen fremgang (lagres adskilt fra det fullstendige kurset). Fra grunnkurset er det en knapp til **Fullstendig kurs**, og omvendt.
+- Moduler og steg ligger i `js/basic-lessons.js`, videoene i `js/basic-videos.js`. Siden velges med `window.COURSE = 'basic'`.
 
 ## Substantiv 名词
 - **7 moduler** (0–6), **7 animerte lærevideoer**, begrepskort med tegninger, små og omfattende oppgaver, øvingsrom og «øv til du er trygg»-løkker.
@@ -74,7 +84,7 @@ Bruker nettleserens talesyntese (Web Speech API): norsk (`nb-NO`) og kinesisk (`
 ## Filer
 ```
 index.html                 rotmeny (js/hub.js: programmer og fag)
-substantiv.html, adjektiv.html, geometri.html, multiplikasjon.html, gange.html
+substantiv.html, substantiv-grunnkurs.html, adjektiv.html, adjektiv-grunnkurs.html, geometri.html, multiplikasjon.html, gange.html
 teacher.html, adjektiv-laerer.html, geometri-laerer.html, multiplikasjon-laerer.html
 ark.html, adjektiv-ark.html, geo-ark.html, mult-ark.html     skriveark
 css/style.css, css/gange.css
@@ -84,6 +94,7 @@ js/ex-num.js               tallsvar (flervalg/skriv), trinn-for-trinn-oppgaver
 js/app.js                  visninger, øktkjører, fremgang (alle fag)
 js/data.js, graphics.js, videos.js, lessons.js          substantiv
 js/geo-*.js                geometri
+js/basic-lessons.js, basic-videos.js   grunnkurs (substantiv og adjektiv)
 js/adj-data.js             adjektiv, former, motsetninger, begreper, tekster
 js/adj-exercises.js, adj-lessons.js, adj-videos.js, adj-worksheets.js   adjektiv
 js/mult-data.js            tallord (norsk/kinesisk), tale av regnestykker
