@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<title>Videoeksport (verktøy)</title>
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/gs.css">
+<link rel="stylesheet" href="../../css/board.css">
+<style>
+html,body{margin:0;background:#000;overflow:hidden}
+/* 960 × 540 css-piksler; Playwright tar skjermbilder med skala 4/3 → 1280 × 720 */
+#w{width:960px;height:540px;display:flex;flex-direction:column;border-radius:0;box-shadow:none;background:#3b2a1a}
+#w .stage{flex:1;min-height:0;padding:14px 18px;border-radius:0;border-width:10px}
+#w .scenehost{width:100%}
+#w .vcap{height:122px;min-height:0;padding:9px 20px;overflow:hidden}
+#w .vcap .no{font-size:1.06rem;line-height:1.25}
+#w .vcap .zh{font-size:.98rem;line-height:1.25;margin-top:3px}
+#w{--tsz:124px}
+#w .teacher{right:16px;bottom:14px}
+#w .stage .gst{--cs:26px}
+.scene h2{font-size:2.3rem}
+.bigword{font-size:2.6rem}
+.url{font-size:3rem;font-weight:900;color:#ffe27a;letter-spacing:.02em}
+</style>
+</head>
+<body class="lang-both no-pinyin">
+<div class="vwrap board" id="w"><div class="stage"><div class="scenehost" id="sh"></div></div>
+<div class="vcap"><div class="no" id="cNo"></div><div class="zh" id="cEn"></div></div></div>
+<script src="../../js/util.js"></script>
+<script src="../../js/data.js"></script>
+<script src="../../js/graphics.js"></script>
+<script src="../../js/board.js"></script>
+<script src="../../js/videos.js"></script>
+<script src="../../js/mult-data.js"></script>
+<script src="../../js/mult-graphics.js"></script>
+<script src="../../js/gs-core.js"></script>
+<script src="../../js/gs-videos.js"></script>
+<script src="../../js/gs-en.js"></script>
+<script>
+(function(){
+  const A = window.App, EN = A.GS_EN;
+  document.getElementById('w').querySelector('.stage').insertAdjacentHTML('beforeend', A.teacherHTML());
+  const teacher = document.querySelector('.teacher');
+  const ORDER = ['gs_system', 'gs_mirror', 'gs_easy', 'gs_five', 'gs_square', 'gs_nine', 'gs_learn', 'gs_which'];
+  const strip = s => String(s).replace(/<[^>]+>/g, '').replace(/\[([^\]]+)\]/g, '$1');
+  const params = new URLSearchParams(location.search);
+  const SITE = params.get('site') || 'ditt-domene.no';
+
+  /* utroppet: [{id, video, i, no, en, noSpeech, enSpeech, html}] */
+  function outro(){
+    const html = `<div class="scene"><div class="big-emoji bounce">🎓</div><h2 class="up">${A.bi('Gratis å bruke!', 'Free to use!')}</h2>
+      <div class="url pop" style="--d:1s">${SITE}</div>
+      <div class="sub pop" style="--d:2s">${A.bi('Øv · se videoer · skriv ut arbeidsark', 'Practise · watch videos · print worksheets')}</div></div>`;
+    return {id:'outro', i:0, html,
+      no:`Dette er helt gratis. Du finner det på ${SITE}. Der kan du se alle videoene, øve på hver gruppe og på hele tabellen, og skrive ut arbeidsark med fasit. Lykke til!`,
+      en:`This is completely free. You can find it at ${SITE}. There you can watch all the videos, practise each group and the whole table, and print worksheets with answer keys. Good luck!`};
+  }
+  window.__scenes = () => {
+    const out = [];
+    ORDER.forEach(id => A.VIDEOS[id].scenes.forEach((s, i) => out.push({id, i, html:s.html, no:strip(s.no), en:EN.SCENES[id][i]})));
+    out.push(outro());
+    return out.map(s => ({id:s.id, i:s.i, no:s.no, en:s.en, noSpeech:A.spokenMath(s.no, 'no'), enSpeech:A.spokenMathEn(s.en)}));
+  };
+  const find = (id, i) => id === 'outro' ? outro() : {html:A.VIDEOS[id].scenes[i].html, no:strip(A.VIDEOS[id].scenes[i].no), en:EN.SCENES[id][i]};
+
+  /* viser en scene: norsk på tavla (hvit), engelsk som andrelinje (gul) */
+  window.__show = (id, i) => {
+    const s = find(id, i), sh = document.getElementById('sh');
+    sh.innerHTML = s.html;
+    sh.querySelectorAll('.bi').forEach(b => {
+      const n = b.querySelector('.no'), z = b.querySelector('.zh');
+      if(n && z){ const k = n.innerHTML.replace(/&amp;/g, '&'); z.innerHTML = EN.LABELS[k] != null ? EN.LABELS[k] : (/[一-鿿]/.test(z.textContent) ? '' : z.innerHTML); }
+    });
+    document.getElementById('cNo').textContent = s.no;
+    document.getElementById('cEn').textContent = s.en;
+    teacher.classList.remove('talking');
+    return new Promise(r => requestAnimationFrame(() => requestAnimationFrame(() => {
+      // hvor lenge varer innsettingsanimasjonene?
+      let end = 0; sh.getAnimations({subtree:true}).forEach(a => { const t = a.effect.getComputedTiming(); if(isFinite(t.endTime)) end = Math.max(end, t.endTime); });
+      r(end);
+    })));
+  };
+  window.__time = (ms, talking) => {
+    teacher.classList.toggle('talking', !!talking);
+    document.getAnimations().forEach(a => { try{ a.pause(); a.currentTime = ms; }catch(e){} });
+  };
+  window.__ready = true;
+})();
+</script>
+</body>
+</html>

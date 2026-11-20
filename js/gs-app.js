@@ -88,7 +88,7 @@ function home(){
 
   <h2 class="gs-sec">${bi('Treningsmodus', '练习模式')}</h2>
   <div class="grid" id="gModes"></div>
-  <div class="small-note" style="margin-top:16px">${bi('Vil du ha mer? ', '想要更多？')} <a class="crumb" href="multiplikasjon.html">${bi('Gange – lær og øv', '乘法：学习和练习')}</a> · <a class="crumb" href="gange.html">${bi('Gangespill', '乘法小游戏')}</a></div>`;
+  <div class="small-note" style="margin-top:16px">${bi('Vil du ha mer? ', '想要更多？')} <a class="crumb" href="gs-ark.html">${bi('📝 Arbeidsark (skriv ut)', '📝 练习纸（打印）')}</a> · <a class="crumb" href="multiplikasjon.html">${bi('Gange – lær og øv', '乘法：学习和练习')}</a> · <a class="crumb" href="gange.html">${bi('Gangespill', '乘法小游戏')}</a></div>`;
   app.append(root);
 
   /* --- tabell-utforsker --- */

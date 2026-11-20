@@ -68,8 +68,17 @@ Bygger på «Den lille gangetabellen – hva må egentlig pugges?»: tabellen be
 - **8 videoer** på en **grønn tavle med kritt-skrift** (norsk i hvitt, kinesisk i gult, teksten «skrives opp» fra venstre) og en **blid lærerinne i en «snakkefirkant»** nede i hjørnet; munnen beveger seg mens det leses opp. Kan slås av og på med knappen «Tavle og lærerinne» i spilleren (valget huskes). Gjelder videoer med `board: true` (`css/board.css`, `js/board.js`); samme avspiller og tospråklig opplesing som resten: systemet · speilvendte · 1-2-10 · 5-gangen · y × y · 9-gangen · de 10 · hvilken regel gjelder?
 - **Læringsløype** på forsiden (video + øving per steg, med hake når steget er gjort) og en **interaktiv tabell**: trinn 1–7 (kan spilles av), alle regler i farger, og trykk på en rute for å få vite hvilken regel som gjelder og hvordan du regner.
 - **Treningsmodus** (`#/train/all`, `#/train/easy|five|sq|nine|learn`, `#/spot`, `#/cards/learn`, `#/speed`, `#/mirror`, `#/stats`): hele tabellen blandet · én gruppe om gangen · **regelspotter** (velg hvilken regel som gjelder) · pugge-kort · fartsrunde 60 s · speilvendte. I øving kan regelhjelp velges: vis regelen først, ❓-knapp, eller bare etter feil; svar som flervalg, skriving eller tilfeldig; «forklar etter hvert svar». Feil kommer raskere tilbake.
+- **Arbeidsark** (`gs-ark.html`): 8 ark med fasit, ett per steg: systemet (fargelegg tabellen) · speilvendte og 1-2-10 · 5-gangen · like × like · 9-gangen · de 10 som pugges · hvilken regel gjelder? · mesterprøve (hele tabellen). «Nye ark» gir nye oppgaver, og samme lenke gir samme ark så fasiten stemmer. Bygger på `js/gs-worksheets.js`.
 - **Fremgang** per regnestykke (ny → lærer → sikker) som fargekart over tabellen og per gruppe.
 - Filer: `gangesystem.html`, `css/gs.css`, `js/gs-core.js` (grupper, regelklassifisering, forklaringer, fremgang, tabelltegning), `js/gs-videos.js`, `js/gs-app.js`. Bruker `A.Video`, tale og tallord fra resten av systemet.
+
+### Introduksjonsvideo til YouTube (norsk og engelsk)
+`tools/video/build.js` setter sammen de 8 gangesystem-videoene til én mp4 (1280 × 720, tavle med kritt-skrift og lærerinne i hjørnet), med avslutning om at det er gratis, og lager `.srt`-undertekster, kapitler og ferdig YouTube-beskrivelse for hvert språk. Engelsk tekst ligger i `js/gs-en.js`. Talen lages med Azure Speech (norsk `nb-NO-PernilleNeural`, engelsk `en-GB-SoniaNeural`):
+
+```
+AZURE_SPEECH_KEY=… AZURE_SPEECH_REGION=westeurope SITE=ditt-domene.no node tools/video/build.js
+```
+Uten nøkkel lages en stum prøveversjon. Valg: `--lang no,en`, `--only gs_system,outro`, `--preview`. Resultatet havner i `tools/video/out/` (ikke i git). Krever node, playwright, ffmpeg og curl. Fonten Patrick Hand (OFL) ligger i `css/fonts/`.
 
 ## Gange – lær og øv 乘法
 - **8 moduler:** hva er gange · gangetabellen og knepene · gange med 10/100/1 000 · del opp tallet (utvidet form og rutenett) · runde av og rette opp (276 × 3 = 300 × 3 − 24 × 3), dobbelt og halvparten · gamlemåten (oppstilling med mente) · tekstoppgaver · utfordringer og mesterprøve.
