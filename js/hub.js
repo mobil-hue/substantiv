@@ -91,7 +91,8 @@ function build(){
       ${lp ? `<a class="btn big sec" href="${last.href || lp.href}" style="text-decoration:none"><span class="bi"><span class="no">▶ Fortsett: ${lp.no}</span><span class="zh">继续：${lp.zh}</span></span></a>` : ''}</div>
     <div class="card hublang"><div class="vl-row"><span class="vl-lab">${bi('Opplesing', '朗读')}</span>${A.optGroup('speak')}</div>
       <div class="vl-row"><span class="vl-lab">${bi('Tekst', '文字')}</span>${A.optGroup('lang')}</div>
-      <div class="small-note">${bi('Norsk er hovedspråket. Kinesisk er støtte.', '挪威语是主要语言，中文是辅助。')}</div></div>`;
+      <div class="small-note">${bi('Norsk er hovedspråket. Kinesisk er støtte.', '挪威语是主要语言，中文是辅助。')}</div>
+      <details class="vp-det" style="margin-top:8px"><summary style="cursor:pointer;font-weight:800">🎙️ ${bi('Velg stemme', '选择语音')}</summary><div id="vpHost"></div></details></div>`;
   SECTIONS.forEach(sec => {
     const list = PROGRAMS.filter(p => p.section === sec.id);
     if(!list.length) return;
@@ -100,6 +101,7 @@ function build(){
   });
   app.innerHTML = ''; app.append(root);
   A.bindOptGroups(root);
+  A.voicePicker(root.querySelector('#vpHost'));
 }
 A.applyLang(); syncPills(); build();
 })();

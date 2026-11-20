@@ -48,6 +48,7 @@ if(tts){ const lv = () => { try{ voices = speechSynthesis.getVoices() || []; }ca
 function voice(l){
   const pre = l === 'no' ? ['nb', 'no', 'nn'] : ['zh', 'cmn'];
   const norm = v => (v.lang || '').replace('_', '-').toLowerCase();
+  try{ const nm = (JSON.parse(localStorage.getItem('sub_settings')) || {}).voice; const pv = nm && nm[l] && voices.find(v => v.name === nm[l]); if(pv) return pv; }catch(e){}
   for(const p of pre){ const v = voices.find(v => norm(v).startsWith(p)); if(v) return v; }
   return null;
 }
