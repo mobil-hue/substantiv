@@ -6,13 +6,14 @@ Sist oppdatert 2026-11-20. Alt som er skrevet så langt ligger i git. Dette er e
 - Verktøy som lager videoen: `build.js` + `export.html` (se README, «Introduksjonsvideo til YouTube»). Hele gangevideoen (8 deler, 63 scener) med tavle, kritt-skrift og lærerinne, og en ny avslutning: «Tren, øv og lær helt gratis» med `www.skoleboken.com`, liste over språkene, skjermbilder (tas automatisk av appen), arbeidsark med fasit, og sluttkort: «Dette er et hobbyprosjekt 100% laget med AI. Det har vært fokus på innhold og funksjonalitet.»
 - Norsk og engelsk (samme bilder, ulik tale). Undertekster (`.srt`), kapitler og ferdig YouTube-beskrivelse på begge språk.
 - Tale: **Piper** er koblet på (gratis, lokalt). **Azure Speech** er også støttet, men krever abonnement (kontoen hadde ingen).
-- Gangesystemet er flerspråklig (9 støttespråk, se README), og engelsk ligger i `js/i18n/en.js`.
+- Gangesystemet er flerspråklig (10 støttespråk, se README), og engelsk ligger i `js/i18n/en.js`.
 - Arbeidsark for gangesystemet (`gs-ark.html`).
 
-## Utkastet er laget med disse stemmene (ikke valgt av deg ennå)
-- Norsk: `no_NO-nvcc-medium`, taler 0 (KNN – trolig kvinne, ikke bekreftet).
-- Engelsk: `en_GB-cori-high`.
-- Bytt med `PIPER_NO_MODEL`, `PIPER_NO_SPEAKER`, `PIPER_EN_MODEL`, `PIPER_EN_SPEAKER`, `PIPER_SPEED` (se README) og kjør på nytt. Lydfiler mellomlagres per stemme.
+## Stemmer
+- Norsk: `no_NO-talesyntese-medium` (Piper, standardinnstillinger). Valgt av deg etter lytting; nvcc-stemmene (bl.a. KNN) ble forkastet som uklare og hakkete.
+- Engelsk: `en_GB-cori-high` (ikke bekreftet av deg ennå; alternativer `en_GB-jenny_dioco-medium`, `en_GB-alba-medium`).
+- Bytt med `PIPER_NO_MODEL`, `PIPER_EN_MODEL` osv. (se README) og kjør på nytt. Lydfiler mellomlagres per stemme og innstilling.
+- Hvis uttalen fortsatt er svak finnes Azure-stemmene (Pernille, Iselin, Finn) som alternativ, men de krever abonnement.
 
 ## Det som gjenstår
 1. **Lytt til utkastet** og velg stemmer (eller bruk Azure når abonnement finnes).

@@ -4,7 +4,7 @@
  * Bruk (fra repo-roten):
  *   Piper (gratis, lokalt):  TTS=piper PIPER_PY=<python med piper-tts> PIPER_DIR=<mappe med .onnx-modeller> node tools/video/build.js
  *   Azure:  AZURE_SPEECH_KEY=... AZURE_SPEECH_REGION=westeurope node tools/video/build.js
- *   Valgfritt: SITE=www.skoleboken.com (standard), PIPER_NO_MODEL / PIPER_NO_SPEAKER / PIPER_EN_MODEL / PIPER_EN_SPEAKER / PIPER_SPEED
+ *   Valgfritt: SITE=www.skoleboken.com (standard), PIPER_NO_MODEL / PIPER_NO_SPEAKER / PIPER_EN_MODEL / PIPER_EN_SPEAKER / PIPER_SPEED (length-scale) / PIPER_SILENCE
  *
  * Valg:
  *   --lang no,en          hvilke språk (standard: begge)
@@ -27,9 +27,10 @@ const KEY = process.env.AZURE_SPEECH_KEY || '', REGION = process.env.AZURE_SPEEC
 const SITE = process.env.SITE || 'www.skoleboken.com';
 const TTS = (process.env.TTS || (KEY ? 'azure' : 'silent')).toLowerCase();
 const PIPER = { py:process.env.PIPER_PY || 'python3', dir:process.env.PIPER_DIR || path.join(__dirname, 'piper'),
-  no:{ model:process.env.PIPER_NO_MODEL || 'no_NO-nvcc-medium', speaker:process.env.PIPER_NO_SPEAKER || '0' },
-  en:{ model:process.env.PIPER_EN_MODEL || 'en_GB-cori-high', speaker:process.env.PIPER_EN_SPEAKER || '' } };
-const voiceId = l => TTS === 'piper' ? `piper:${PIPER[l].model}:${PIPER[l].speaker}:${process.env.PIPER_SPEED || '1.08'}` : TTS === 'azure' ? VOICE[l].name : 'silent';
+  no:{ model:process.env.PIPER_NO_MODEL || 'no_NO-talesyntese-medium', speaker:process.env.PIPER_NO_SPEAKER != null ? process.env.PIPER_NO_SPEAKER : '' },
+  en:{ model:process.env.PIPER_EN_MODEL || 'en_GB-cori-high', speaker:process.env.PIPER_EN_SPEAKER != null ? process.env.PIPER_EN_SPEAKER : '' },
+  speed:process.env.PIPER_SPEED || '', silence:process.env.PIPER_SILENCE || '' };   // tomt = Pipers standard
+const voiceId = l => TTS === 'piper' ? `piper:${PIPER[l].model}:${PIPER[l].speaker}:${PIPER.speed}:${PIPER.silence}` : TTS === 'azure' ? VOICE[l].name : 'silent';
 const VOICE = {no:{name:process.env.VOICE_NO || 'nb-NO-PernilleNeural', loc:'nb-NO'}, en:{name:process.env.VOICE_EN || 'en-GB-SoniaNeural', loc:'en-GB'}};
 const FPS_FAST = PREVIEW ? 8 : 15, FPS_SLOW = PREVIEW ? 4 : 8, PAD = 0.9;
 const TITLES = {
@@ -50,7 +51,9 @@ function speak(text, lang, file){
   if(fs.existsSync(file)) return;
   if(TTS === 'piper'){
     const m = PIPER[lang], wav = file + '.wav', txt = file + '.txt'; fs.writeFileSync(txt, text);
-    const args = ['-m', 'piper', '-m', path.join(PIPER.dir, m.model + '.onnx'), '-i', txt, '-f', wav, '--sentence-silence', '0.3', '--length-scale', process.env.PIPER_SPEED || '1.08'];
+    const args = ['-m', 'piper', '-m', path.join(PIPER.dir, m.model + '.onnx'), '-i', txt, '-f', wav];
+    if(PIPER.silence) args.push('--sentence-silence', PIPER.silence);
+    if(PIPER.speed) args.push('--length-scale', PIPER.speed);
     if(m.speaker !== '') args.push('-s', m.speaker);
     const r = spawnSync(PIPER.py, args, { encoding:'utf8' });
     if(r.status !== 0) throw new Error('Piper feilet (' + lang + '): ' + (r.stderr || '').slice(-300));

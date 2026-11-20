@@ -79,7 +79,7 @@ Bygger på «Den lille gangetabellen – hva må egentlig pugges?»: tabellen be
 TTS=piper PIPER_PY=<python med piper-tts> PIPER_DIR=<mappe med .onnx-modeller> node tools/video/build.js
 AZURE_SPEECH_KEY=… AZURE_SPEECH_REGION=westeurope node tools/video/build.js
 ```
-Standard adresse er `www.skoleboken.com` (`SITE=…` for å bytte). Piper-stemmer: `PIPER_NO_MODEL` / `PIPER_NO_SPEAKER` (standard `no_NO-nvcc-medium`, taler 0) og `PIPER_EN_MODEL` (standard `en_GB-cori-high`). Uten tale lages en stum prøveversjon. Valg: `--lang no,en`, `--only gs_system,outro`, `--preview`. Resultatet havner i `tools/video/out/` (ikke i git). Krever node, playwright, ffmpeg og curl. Fonten Patrick Hand (OFL) ligger i `css/fonts/`.
+Standard adresse er `www.skoleboken.com` (`SITE=…` for å bytte). Piper-stemmer: `PIPER_NO_MODEL` (standard `no_NO-talesyntese-medium`, valgt etter lytting) og `PIPER_EN_MODEL` (standard `en_GB-cori-high`); `PIPER_NO_SPEAKER`/`PIPER_EN_SPEAKER` for modeller med flere talere, `PIPER_SPEED` og `PIPER_SILENCE` for tempo og pauser (standard: Pipers egne). Uten tale lages en stum prøveversjon. Valg: `--lang no,en`, `--only gs_system,outro`, `--preview`. Resultatet havner i `tools/video/out/` (ikke i git). Krever node, playwright, ffmpeg og curl. Fonten Patrick Hand (OFL) ligger i `css/fonts/`.
 
 ## Språk (støttespråk) i gangesystemet
 Norsk er hovedspråket. Eleven velger **støttespråk** med 🌍-knappen øverst: **English, Svenska, 中文, العربية, Español, Polski, Українська, ไทย, Tagalog og Soomaali**. Valget gjelder tekst, regelforklaringer, videoer (tekst og opplesing) og oppgaver, og lagres i nettleseren. Første gang velges språk ut fra nettleseren (ellers engelsk). Arabisk vises fra høyre mot venstre, og regnestykker snus ikke.
