@@ -12,14 +12,18 @@
 <header class="top">
   <div class="logo" id="logo" onclick="location.hash='#/'">🧩 Gangesystemet <small>乘法系统</small></div>
   <div class="sp"></div>
-  <a class="pill" href="#/stats" title="Fremgang / 进度">📊<span class="pt"> Fremgang</span></a>
-  <a class="pill" id="pHome" href="index.html" title="Til menyen / 主菜单">🏠<span class="pt"> Meny</span></a>
+  <a class="pill" href="#/stats" title="Fremgang / 进度">📊<span class="pt" data-no="Fremgang" data-zh="进度"> Fremgang</span></a>
+  <a class="pill" id="pHome" href="index.html" title="Til menyen / 主菜单">🏠<span class="pt" data-no="Meny" data-zh="菜单"> Meny</span></a>
+  <button class="pill" id="pSup" title="Støttespråk / Language">🌍</button>
   <button class="pill" id="pLang" title="Tekst / 文字">🌐 NO + 中文</button>
   <button class="pill" id="pSound" title="Opplesing / 朗读">🔊</button>
 </header>
 <main id="app"></main>
-<script>window.SUBJECT = 'gs';</script>
+<script>window.SUBJECT = 'gs'; window.SUPPORT_LANGS = true;</script>
 <script src="js/util.js"></script>
+<script>/* ordbøker: norsk nøkkel-liste + engelsk (reserve) + valgt støttespråk */
+(function(){ const l = window.App.supLang(); if(l === 'zh') return;
+  ['keys', 'en'].concat(l === 'en' ? [] : [l]).forEach(f => document.write('<script src="js/i18n/' + f + '.js"><\/script>')); })();</script>
 <script src="js/data.js"></script>
 <script src="js/graphics.js"></script>
 <script src="js/board.js"></script>

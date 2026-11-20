@@ -54,7 +54,22 @@ N.eqNo = (a, b) => `${N.no(a)} ganger ${N.no(b)}`;
 N.eqZh = (a, b) => `${N.zh(a)}乘以${N.zh(b)}`;
 
 /* ---------- regnestykker som tale: «276 × 3 = ?» → «to hundre og syttiseks ganger tre er …» ---------- */
+// regneord for språk der tallene leses av stemmen selv (sifre beholdes)
+A.OPWORDS = {
+  en:{x:' times ', p:' plus ', m:' minus ', e:' equals ', d:' divided by '},
+  ar:{x:' ضرب ', p:' زائد ', m:' ناقص ', e:' يساوي ', d:' مقسوم على '},
+  es:{x:' por ', p:' más ', m:' menos ', e:' es igual a ', d:' dividido entre '},
+  pl:{x:' razy ', p:' plus ', m:' minus ', e:' jest ', d:' podzielić przez '},
+  uk:{x:' помножити на ', p:' плюс ', m:' мінус ', e:' дорівнює ', d:' поділити на '},
+  th:{x:' คูณ ', p:' บวก ', m:' ลบ ', e:' เท่ากับ ', d:' หารด้วย '},
+  tl:{x:' beses ', p:' dagdag ', m:' bawas ', e:' ay ', d:' hatiin sa '},
+  so:{x:' dhuf ', p:' ku dar ', m:' ka jar ', e:' waa ', d:' u qaybi '}
+};
 A.spokenMath = function(text, lang){
+  if(lang !== 'no' && lang !== 'zh'){
+    const w = A.OPWORDS[lang] || A.OPWORDS.en;
+    return String(text).replace(/\s*×\s*/g, w.x).replace(/\s*\+\s*/g, w.p).replace(/\s*[−]\s*/g, w.m).replace(/\s+-\s+/g, w.m).replace(/\s*÷\s*/g, w.d).replace(/\s*=\s*/g, w.e).replace(/\s{2,}/g, ' ').trim();
+  }
   const zh = lang === 'zh', conv = zh ? N.zh : N.no;
   const op = zh ? {x:'乘以', p:'加', m:'减', e:'等于', d:'除以'} : {x:' ganger ', p:' pluss ', m:' minus ', e:' er ', d:' delt på '};
   let t = String(text);
