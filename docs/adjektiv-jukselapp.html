@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<title>Adjektiv – jukselapp</title>
+<style>
+@page{size:A4 landscape;margin:0}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Noto Sans","DejaVu Sans","Noto Sans CJK SC",sans-serif;color:#1f2937;background:#f7fff9;font-size:9.2pt;line-height:1.28}
+.page{width:297mm;height:210mm;padding:5mm 6mm;overflow:hidden;display:grid;grid-template-rows:12mm 1fr;gap:2.5mm}
+.top{display:flex;align-items:center;gap:4mm;border-bottom:2.5px solid #16a34a}
+.top h1{margin:0;font-size:18pt;color:#15803d}.top .z{font-size:13pt;font-weight:800;color:#475569}.top .sp{flex:1}.top .n{font-size:8pt;color:#64748b;text-align:right;line-height:1.3}
+.brand{display:flex;align-items:center;gap:2.5mm;border-left:1.5px solid #cbd5e1;padding-left:3mm;line-height:1.15;flex:none}.brand .nm{font-weight:900;font-size:10pt;color:#15803d}.brand .nm span{display:block}.brand .ad{font-size:7pt;color:#475569}.brand .ad span,.brand .ad a{display:block;color:#475569;text-decoration:none}
+.cols{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:3mm;min-height:0}
+.col{display:flex;flex-direction:column;gap:2mm;min-height:0}
+.card{background:#fff;border-radius:2.5mm;padding:1.6mm 2.2mm;box-shadow:0 0 0 1.3px #e5e7eb}
+h2{margin:0 0 1mm;font-size:9.6pt;color:#fff;border-radius:2mm;padding:.9mm 2.2mm;display:flex;justify-content:space-between;align-items:baseline}h2 .z{font-size:8pt;font-weight:600;opacity:.95}
+.zh{color:#475569}b{color:#111827}small{font-size:6.8pt;color:#64748b}
+table.k{width:100%;border-collapse:collapse}table.k td,table.k th{padding:.35mm 1mm;border-bottom:.8px solid #eef2f7;vertical-align:middle;text-align:left}table.k th{font-size:7pt;color:#64748b}table.k tr:last-child td{border-bottom:0}
+.g{color:#15803d;font-weight:900}.bl{color:#2563eb;font-weight:900}.pk{color:#db2777;font-weight:900}.gr{color:#16a34a;font-weight:900}.pu{color:#9333ea;font-weight:900}.rd{color:#dc2626;font-weight:900}
+.art{display:inline-block;color:#fff;border-radius:1.4mm;padding:0 1.4mm;font-weight:900}.en{background:#2563eb}.ei{background:#db2777}.et{background:#16a34a}
+.tip{background:#fef9c3;border-radius:2mm;padding:.8mm 2mm;font-size:7.5pt}
+.big{font-size:9.4pt;font-weight:900}
+.chips{display:flex;flex-wrap:wrap;gap:1mm}.chip{border-radius:2mm;padding:.2mm 1.6mm;font-weight:800;font-size:7.6pt;background:#ecfdf5;border:.7px solid #86efac}
+.ex{font-size:8.6pt}.ex b{color:#15803d}
+</style>
+</head>
+<body>
+<div class="page">
+ <div class="top"><h1>🌈 Adjektiv</h1><span class="z">形容词 · jukselapp 速查表</span><span class="sp"></span>
+  <span class="n">Hvordan er det? Former, regler og sammenligning<br>它怎么样？形式、规则和比较</span>
+  <div class="brand"><div class="nm"><span>by Titex as</span><span>Jens Møller</span></div><div class="ad"><span>1792 Tistedal</span><a href="https://www.titex.no">www.titex.no</a></div></div></div>
+ <div class="cols">
+  <div class="col" id="c1"></div><div class="col" id="c2"></div><div class="col" id="c3"></div>
+ </div>
+</div>
+<script src="../js/util.js"></script>
+<script src="../js/data.js"></script>
+<script src="../js/adj-data.js"></script>
+<script>
+(function(){
+  const A = window.App, C = id => document.getElementById(id);
+  const card = (c, no, zh, body) => `<div class="card"><h2 style="background:${c}"><span>${no}</span><span class="z">${zh}</span></h2>${body}</div>`;
+  const art = a => `<span class="art ${a}">${a}</span>`;
+  const G = m => A.adj(m);
+  const OPP = [['stor', 'liten'], ['varm', 'kald'], ['ny', 'gammel'], ['rask', 'langsom'], ['lang', 'kort'], ['tung', 'lett'], ['glad', 'trist'], ['billig', 'dyr'], ['ren', 'skitten'], ['høy', 'lav'], ['god', 'dårlig'], ['pen', 'stygg']];
+  const zhOf = m => A.adjZh(m);
+
+  C('c1').innerHTML =
+   card('#16a34a', '1 · Hva er et adjektiv?', '什么是形容词？',
+    `<div class="ex"><b>Et adjektiv sier hvordan noe er.</b><br><span class="zh">形容词说明事物怎么样。</span></div>
+     <table class="k"><tr><td>🎨 <b>farge</b> <small>颜色</small></td><td>rød · blå · gul · grønn · hvit</td></tr>
+     <tr><td>📏 <b>størrelse</b> <small>大小</small></td><td>stor · liten · lang · høy · tykk</td></tr>
+     <tr><td>😊 <b>følelse</b> <small>心情</small></td><td>glad · trist · sint · sulten</td></tr>
+     <tr><td>⭐ <b>egenskap</b> <small>特点</small></td><td>ny · gammel · snill · pen · god</td></tr></table>
+     <div class="tip">Foran substantivet: <b>en stor hund</b> · Etter «er»: <b>Hunden er stor.</b><br><span class="zh">在名词前面，或在 er 后面。</span></div>`) +
+   card('#e11d48', '2 · Motsetninger', '反义词',
+    `<table class="k">${OPP.map(o => `<tr><td class="g">${o[0]}</td><td>↔</td><td class="rd">${o[1]}</td><td><small>${zhOf(o[0])} ↔ ${zhOf(o[1])}</small></td></tr>`).join('')}</table>`);
+
+  const FORMS = ['stor', 'rød', 'varm', 'ny', 'hvit', 'blå', 'grønn', 'billig', 'norsk', 'trist', 'gammel', 'åpen', 'vakker', 'tom'];
+  C('c2').innerHTML =
+   card('#2563eb', '3 · Former', '形式',
+    `<table class="k"><tr><th>${art('en')} / ${art('ei')}</th><th>${art('et')}</th><th>flertall <small>复数</small></th><th></th></tr>
+     ${FORMS.map(m => { const a = G(m); return `<tr><td class="bl">${a.m}</td><td class="gr">${a.n}</td><td class="pu">${a.pl}</td><td><small>${a.zh}</small></td></tr>`; }).join('')}
+     <tr><td class="bl">liten <small>(ei: lita)</small></td><td class="gr">lite</td><td class="pu">små</td><td><small>小的</small></td></tr></table>`) +
+   card('#16a34a', '4 · Regler for et-form', 'et 形式的规则',
+    `<table class="k"><tr><td class="bl">+ t</td><td>stor → <b>stort</b> · rød → <b>rødt</b> · grønn → <b>grønt</b> <small>(nn → nt)</small></td></tr>
+     <tr><td class="pu">+ tt</td><td>hvit → <b>hvitt</b> · blå → <b>blått</b> · ny → <b>nytt</b> · søt → <b>søtt</b></td></tr>
+     <tr><td class="gr">= ingen</td><td>billig · norsk · trist · svart · lett <small>(-ig, -sk, -st …)</small></td></tr></table>
+     <div class="tip">Flertall: <b>+e</b> (store). <b>blå</b> og <b>grå</b> får ikke -e. <b>gammel → gamle</b>, åpen → åpne, vakker → vakre <small>(e-en forsvinner)</small> · tom → <b>tomme</b>.<br><span class="zh">复数加 e；blå、grå 不变；gammel 去掉 e；tom 双写 m。</span></div>`);
+
+  C('c3').innerHTML =
+   card('#9333ea', '5 · den, det, de', 'den / det / de',
+    `<div class="ex">${art('en')} <b>den</b> store hunden<br>${art('ei')} <b>den</b> store boka<br>${art('et')} <b>det</b> store huset<br>flertall <b>de</b> store hundene</div>
+     <div class="tip">den/det/de + <b>e-form</b> + substantiv i bestemt form · <b>liten</b>: den/det <b>lille</b>, de <b>små</b><br><span class="zh">定指：den/det/de + e 形式 + 定指名词。</span></div>`) +
+   card('#0ea5e9', '6 · Sammenligning', '比较',
+    `<table class="k"><tr><th>grunnform</th><th>komparativ <small>比较级</small></th><th>superlativ <small>最高级</small></th></tr>
+     ${['stor', 'rask', 'pen', 'varm', 'høy'].map(m => { const a = G(m); return `<tr><td class="g">${a.m}</td><td class="bl">${a.cmp}</td><td class="pu">${a.sup}</td></tr>`; }).join('')}
+     <tr><td colspan="3"><small>Uregelmessige / 不规则：</small></td></tr>
+     ${['god', 'liten', 'gammel', 'dårlig', 'lang'].map(m => { const a = G(m); return `<tr><td class="rd">${a.m}</td><td class="rd">${a.cmp}</td><td class="rd">${a.sup}</td></tr>`; }).join('')}
+     <tr><td class="g">interessant</td><td colspan="2"><b>mer</b> interessant · <b>mest</b> interessant</td></tr></table>
+     <div class="ex"><b>større enn</b> musa <small>比……大</small><br>like stor <b>som</b> katten <small>和……一样大</small><br><b>størst</b> av alle <small>最大</small></div>`) +
+   card('#f97316', '7 · Husk! / 记住！', 'Husk',
+    `<div class="chips"><span class="chip">en stor hund</span><span class="chip">ei stor bok</span><span class="chip">et stort hus</span><span class="chip">store hunder</span><span class="chip">den store hunden</span></div>
+     <div class="tip">1) Hvilket substantiv? 2) en, ei, et eller flertall? 3) Velg form. <span class="zh">先找名词，再看是 en、ei、et 还是复数，最后选形式。</span></div>`);
+})();
+</script>
+</body>
+</html>

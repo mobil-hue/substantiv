@@ -24,7 +24,7 @@ A.saveSettings = function(){ A.store.set('settings', A.settings); A.applyLang();
 
 // valg som gjelder ett fag (svarmåte: flervalg / skriv inn / tilfeldig, trinn for trinn)
 A.subject = window.SUBJECT || 'noun';
-const PREF_DEFAULT = {noun:{input:'mix'}, geo:{input:'choice'}, mult:{input:'mix', guide:true}};
+const PREF_DEFAULT = {noun:{input:'mix'}, geo:{input:'choice'}, mult:{input:'mix', guide:true}, adj:{input:'mix'}};
 A.prefs = Object.assign({input:'mix'}, PREF_DEFAULT[A.subject] || {}, A.store.get('prefs_' + A.subject, {}));
 A.savePrefs = function(){ A.store.set('prefs_' + A.subject, A.prefs); };
 

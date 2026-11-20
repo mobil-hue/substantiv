@@ -7,7 +7,8 @@ const SUBJ = A.subject;
 const CFG = {
   noun:{MODS:A.MODULES, ROOMS:A.ROOM, TERMS:A.TERMS, PKEY:'progress', TKEY:'termKnow'},
   geo:{MODS:A.GEO_MODULES, ROOMS:A.GEO_ROOM, TERMS:A.GEO_TERMS, PKEY:'progress_geo', TKEY:'termKnow_geo'},
-  mult:{MODS:A.MULT_MODULES, ROOMS:A.MULT_ROOM, TERMS:A.MULT_TERMS, PKEY:'progress_mult', TKEY:'termKnow_mult'}
+  mult:{MODS:A.MULT_MODULES, ROOMS:A.MULT_ROOM, TERMS:A.MULT_TERMS, PKEY:'progress_mult', TKEY:'termKnow_mult'},
+  adj:{MODS:A.ADJ_MODULES, ROOMS:A.ADJ_ROOM, TERMS:A.ADJ_TERMS, PKEY:'progress_adj', TKEY:'termKnow_adj'}
 }[SUBJ];
 const MODS = CFG.MODS, ROOMS = CFG.ROOMS, TERMS = CFG.TERMS, PKEY = CFG.PKEY, TKEY = CFG.TKEY;
 const termOf = k => TERMS.find(t => t.key === k);
@@ -19,6 +20,8 @@ const INFO = {
     links:lnk('ark.html', '📝 Skriveark (skriv ut)', '练习纸（打印）') + lnk('docs/substantiv-jukselapp.pdf', '🧾 Jukselapp (PDF)', '速查表（PDF）', true) + lnk('docs/substantiv-boyingstabell.pdf', '📊 Bøyingstabell (PDF)', '变形表（PDF）', true) + lnk('teacher.html', '👩‍🏫 Lærer / fasit', '教师页 / 答案') + lnk('index.html', '🏠 Meny', '主菜单')},
   geo:{emoji:'📐', no:'Lær geometri!', zh:'学习几何！', sub:['Se figurer, tegn, tell og øv!', '看图形、画一画、数一数、多练习！'], home:'figur', cls:'', test:['Hei! Dette er geometri. En trekant, en kube, en rett vinkel.', '你好！我们来学习几何。'],
     links:lnk('geo-ark.html', '📝 Skriveark (skriv ut)', '练习纸（打印）') + lnk('docs/geometri-jukselapp.pdf', '🧾 Jukselapp (PDF)', '速查表（PDF）', true) + lnk('geometri-laerer.html', '👩‍🏫 Lærer / fasit', '教师页 / 答案') + lnk('index.html', '🏠 Meny', '主菜单')},
+  adj:{emoji:'🌈', no:'Lær adjektiv!', zh:'学习形容词！', sub:['Hvordan er det? Se, hør, skriv og øv!', '它怎么样？看、听、写、练！'], home:'adjektiv', cls:'', test:['Hei! Dette er adjektiv. En stor hund, et stort hus, store hunder.', '你好！我们来学习形容词。'],
+    links:lnk('adjektiv-ark.html', '📝 Skriveark (skriv ut)', '练习纸（打印）') + lnk('docs/adjektiv-jukselapp.pdf', '🧾 Jukselapp (PDF)', '速查表（PDF）', true) + lnk('adjektiv-laerer.html', '👩‍🏫 Lærer / fasit', '教师页 / 答案') + lnk('index.html', '🏠 Meny', '主菜单')},
   mult:{emoji:'✖️', no:'Lær å gange!', zh:'学习乘法！', sub:['Lær knepene, regn trinn for trinn og øv mye!', '学会小窍门，一步一步地算，多多练习！'], home:'gange', cls:'', test:['Hei! Dette er gange. Tre ganger fire er tolv.', '你好！我们来学习乘法。三乘以四等于十二。'],
     hub:`<div class="card drillcard"><div class="grow"><h2 style="margin:0">🏋️ ${bi('Mengdetrening','大量练习')}</h2><div>${bi('Øv og øv! Velg tall, tekst eller tale, og flervalg eller skriv inn.','练了又练！选择数字、文字或语音，选择题或输入答案。')}</div></div>
       <div class="row"><a class="btn big" href="#/drill" style="text-decoration:none"><span class="bi"><span class="no">▶ Start</span><span class="zh">开始</span></span></a><a class="btn sec" href="#/stats" style="text-decoration:none"><span class="bi"><span class="no">📊 Statistikk</span><span class="zh">统计</span></span></a></div></div>`,
@@ -326,7 +329,7 @@ function settingsView(){
   root.querySelector('#sr').onchange = e => { S.rate = +e.target.value; A.saveSettings(); };
   root.querySelector('#t1').onclick = () => A.sayNo(INFO.test[0]);
   root.querySelector('#t2').onclick = () => A.say(A.parseSegs(INFO.test[1], 'zh'));
-  root.querySelector('#reset').onclick = () => { if(confirm('Nullstille all fremgang? / 要清除所有进度吗？')){ A.progress = {}; A.store.set(PKEY, {}); A.Ex.resetStats(SUBJ === 'mult' ? /^(mf|mm|md|m_)/ : SUBJ === 'geo' ? /^g_/ : undefined); location.hash = '#/'; route(); } };
+  root.querySelector('#reset').onclick = () => { if(confirm('Nullstille all fremgang? / 要清除所有进度吗？')){ A.progress = {}; A.store.set(PKEY, {}); A.Ex.resetStats(SUBJ === 'mult' ? /^(mf|mm|md|m_)/ : SUBJ === 'geo' ? /^g_/ : SUBJ === 'adj' ? /^aj_/ : undefined); location.hash = '#/'; route(); } };
   render(root);
 }
 
