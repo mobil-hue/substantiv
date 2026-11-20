@@ -3,19 +3,21 @@
 const A = window.App;
 const {h, bi, shuffle, pick} = A;
 const app = document.getElementById('app');
-const SUBJ = A.subject;
-const CFG = {
+const SUBJ = A.subject, BASIC = A.course === 'basic', SK = A.subjKey;
+const CFG0 = {
   noun:{MODS:A.MODULES, ROOMS:A.ROOM, TERMS:A.TERMS, PKEY:'progress', TKEY:'termKnow'},
   geo:{MODS:A.GEO_MODULES, ROOMS:A.GEO_ROOM, TERMS:A.GEO_TERMS, PKEY:'progress_geo', TKEY:'termKnow_geo'},
   mult:{MODS:A.MULT_MODULES, ROOMS:A.MULT_ROOM, TERMS:A.MULT_TERMS, PKEY:'progress_mult', TKEY:'termKnow_mult'},
   adj:{MODS:A.ADJ_MODULES, ROOMS:A.ADJ_ROOM, TERMS:A.ADJ_TERMS, PKEY:'progress_adj', TKEY:'termKnow_adj'}
 }[SUBJ];
+const BTERMS = {noun:['substantiv', 'artikkel', 'en-ord', 'ei-ord', 'et-ord', 'entall', 'flertall', 'ubestemt', 'bestemt', 'ue', 'be', 'uf', 'bf'], adj:['adjektiv', 'motsetning', 'grunnform', 'etform', 'flertallsform']};
+const CFG = !BASIC ? CFG0 : Object.assign({}, CFG0, {MODS:A.BASIC_MODULES[SUBJ], ROOMS:A.BASIC_ROOM[SUBJ], TERMS:CFG0.TERMS.filter(t => BTERMS[SUBJ].includes(t.key)), PKEY:CFG0.PKEY + '_basic', TKEY:CFG0.TKEY + '_basic'});
 const MODS = CFG.MODS, ROOMS = CFG.ROOMS, TERMS = CFG.TERMS, PKEY = CFG.PKEY, TKEY = CFG.TKEY;
 const termOf = k => TERMS.find(t => t.key === k);
 A.progress = A.store.get(PKEY, {});
 const termKnow = A.store.get(TKEY, {});
 const lnk = (href, no, zh, blank) => `<a class="btn sec" href="${href}"${blank ? ' target="_blank"' : ''} style="text-decoration:none"><span class="bi"><span class="no">${no}</span><span class="zh">${zh}</span></span></a>`;
-const INFO = {
+const INFO_ALL = {
   noun:{emoji:'📘', no:'Lær substantiv!', zh:'学习名词！', sub:['Litt hver dag. Se, hør, skriv og øv!', '每天一点点。看、听、写、练！'], home:'substantiv', cls:'', test:['Hei! Dette er substantiv. En hund, ei jente, et hus.', '你好！我们来学习名词。'],
     links:lnk('ark.html', '📝 Skriveark (skriv ut)', '练习纸（打印）') + lnk('docs/substantiv-jukselapp.pdf', '🧾 Jukselapp (PDF)', '速查表（PDF）', true) + lnk('docs/substantiv-boyingstabell.pdf', '📊 Bøyingstabell (PDF)', '变形表（PDF）', true) + lnk('teacher.html', '👩‍🏫 Lærer / fasit', '教师页 / 答案') + lnk('index.html', '🏠 Meny', '主菜单')},
   geo:{emoji:'📐', no:'Lær geometri!', zh:'学习几何！', sub:['Se figurer, tegn, tell og øv!', '看图形、画一画、数一数、多练习！'], home:'figur', cls:'', test:['Hei! Dette er geometri. En trekant, en kube, en rett vinkel.', '你好！我们来学习几何。'],
@@ -26,7 +28,13 @@ const INFO = {
     hub:`<div class="card drillcard"><div class="grow"><h2 style="margin:0">🏋️ ${bi('Mengdetrening','大量练习')}</h2><div>${bi('Øv og øv! Velg tall, tekst eller tale, og flervalg eller skriv inn.','练了又练！选择数字、文字或语音，选择题或输入答案。')}</div></div>
       <div class="row"><a class="btn big" href="#/drill" style="text-decoration:none"><span class="bi"><span class="no">▶ Start</span><span class="zh">开始</span></span></a><a class="btn sec" href="#/stats" style="text-decoration:none"><span class="bi"><span class="no">📊 Statistikk</span><span class="zh">统计</span></span></a></div></div>`,
     links:lnk('mult-ark.html', '📝 Skriveark (skriv ut)', '练习纸（打印）') + lnk('multiplikasjon-laerer.html', '👩‍🏫 Lærer / fasit', '教师页 / 答案') + lnk('docs/gange-jukselapp.pdf', '🧾 Jukselapp (PDF)', '速查表（PDF）', true) + lnk('index.html', '🏠 Meny', '主菜单')}
-}[SUBJ];
+};
+const grunnLinks = (full, ark, juks) => lnk(full, '📘 Fullstendig kurs', '完整课程') + lnk(ark, '📝 Skriveark (skriv ut)', '练习纸（打印）') + lnk(juks, '🧾 Jukselapp (PDF)', '速查表（PDF）', true) + lnk('index.html', '🏠 Meny', '主菜单');
+INFO_ALL.noun_b = Object.assign({}, INFO_ALL.noun, {emoji:'📗', no:'Substantiv – grunnkurs', zh:'名词——基础课', sub:['Start enkelt. Ett lite steg om gangen.', '从简单开始。一小步一小步来。'], links:grunnLinks('substantiv.html', 'ark.html', 'docs/substantiv-jukselapp.pdf')});
+INFO_ALL.adj_b = Object.assign({}, INFO_ALL.adj, {emoji:'🐱', no:'Adjektiv – grunnkurs', zh:'形容词——基础课', sub:['Start enkelt. Ett lite steg om gangen.', '从简单开始。一小步一小步来。'], links:grunnLinks('adjektiv.html', 'adjektiv-ark.html', 'docs/adjektiv-jukselapp.pdf')});
+INFO_ALL.noun.links += lnk('substantiv-grunnkurs.html', '📗 Grunnkurs (enklere)', '基础课（更简单）');
+INFO_ALL.adj.links += lnk('adjektiv-grunnkurs.html', '📗 Grunnkurs (enklere)', '基础课（更简单）');
+const INFO = INFO_ALL[SK];
 
 const key = (m, i) => `m${m}s${i}`;
 const star = n => '⭐'.repeat(n) + '☆'.repeat(3 - n);
@@ -40,7 +48,7 @@ function nextStep(){
 // sammendrag til rotmenyen
 function saveSummary(){
   const total = MODS.reduce((s, m) => s + m.steps.length, 0), done = MODS.reduce((s, m) => s + modDone(m.id), 0);
-  A.store.set('sum_' + A.subject, {done, total});
+  A.store.set('sum_' + SK, {done, total});
 }
 function markDone(m, i, stars){
   const k = key(m, i), p = A.progress[k] || {};
@@ -292,7 +300,7 @@ function practiceRoom(){
     const box = root.querySelector('#room');
     ROOMS.forEach(r => box.append(h('div', {class:'mod', style:'--c:#f97316', html:`<div class="em">${r.emoji}</div><h3>${bi(r.no, r.zh)}</h3>`, onclick:() => start(r)})));
   };
-  const start = r => Session({title:{no:r.no, zh:r.zh}, spec:{pools:r.pools, maxLvl:lvl}, goal:goalN, adaptive:true,
+  const start = r => Session({title:{no:r.no, zh:r.zh}, spec:{pools:r.pools, maxLvl:BASIC ? 1 : lvl, skip:r.skip}, goal:goalN, adaptive:true,
     onExit:() => { location.hash = '#/practice'; route(); }, onAgain:() => start(r), onFinish:() => { location.hash = '#/practice'; route(); }});
   render(root); draw();
 }
@@ -323,13 +331,13 @@ function settingsView(){
   root.querySelector('#sauto').onchange = e => { S.auto = e.target.checked; A.saveSettings(); syncPills(); };
   root.querySelector('#sr').onchange = e => { S.rate = +e.target.value; A.saveSettings(); };
   A.voicePicker(root.querySelector('#vpHost'));
-  root.querySelector('#reset').onclick = () => { if(confirm('Nullstille all fremgang? / 要清除所有进度吗？')){ A.progress = {}; A.store.set(PKEY, {}); A.Ex.resetStats(SUBJ === 'mult' ? /^(mf|mm|md|m_)/ : SUBJ === 'geo' ? /^g_/ : SUBJ === 'adj' ? /^aj_/ : undefined); location.hash = '#/'; route(); } };
+  root.querySelector('#reset').onclick = () => { if(confirm('Nullstille all fremgang? / 要清除所有进度吗？')){ A.progress = {}; A.store.set(PKEY, {}); A.Ex.resetStats(BASIC ? /^$/ : SUBJ === 'mult' ? /^(mf|mm|md|m_)/ : SUBJ === 'geo' ? /^g_/ : SUBJ === 'adj' ? /^aj_/ : undefined); location.hash = '#/'; route(); } };
   render(root);
 }
 
 /* ---------- ruter ---------- */
 function route(){
-  A.store.set('last', {s:A.subject, href:location.pathname.split('/').pop() || 'index.html'}); saveSummary();
+  A.store.set('last', {s:SK, href:location.pathname.split('/').pop() || 'index.html'}); saveSummary();
   const p = location.hash.replace(/^#\/?/, '').split('/');
   if(A.routes && A.routes[p[0]]) A.routes[p[0]](p);
   else if(p[0] === 'm' && MODS[+p[1]]) moduleView(+p[1]);

@@ -11,12 +11,20 @@ const SECTIONS = [
 ];
 // sum = nøkkel til fremgangen programmet lagrer (sub_sum_<sum>)
 const PROGRAMS = [
+  {section:'norsk', id:'substantiv-grunn', href:'substantiv-grunnkurs.html', sum:'noun_b', emoji:'📗', color:'#84cc16',
+   no:'Substantiv – grunnkurs', zh:'名词——基础课',
+   desc:['Enkel start: hva et substantiv er, en/ei/et, én eller flere, og bilen/hunden. Korte videoer og bare enkle ord.', '简单的开始：什么是名词、en/ei/et、一个或很多个、bilen/hunden。短视频，只有简单的词。'],
+   links:[['substantiv.html', '📘 Fullstendig kurs', '完整课程']]},
   {section:'norsk', id:'substantiv', href:'substantiv.html', sum:'noun', emoji:'📘', color:'#f97316',
-   no:'Substantiv', zh:'名词',
+   no:'Substantiv – fullstendig kurs', zh:'名词——完整课程',
    desc:['Hva et substantiv er, en/ei/et, entall og flertall, bestemt og ubestemt form.', '什么是名词、en/ei/et、单数和复数、定指和不定指。'],
    links:[['ark.html', '📝 Skriveark', '练习纸'], ['docs/substantiv-jukselapp.pdf', '🧾 Jukselapp', '速查表'], ['docs/substantiv-boyingstabell.pdf', '📊 Bøyingstabell', '变形表'], ['teacher.html', '👩‍🏫 Lærer', '教师页']]},
+  {section:'norsk', id:'adjektiv-grunn', href:'adjektiv-grunnkurs.html', sum:'adj_b', emoji:'📗', color:'#84cc16',
+   no:'Adjektiv – grunnkurs', zh:'形容词——基础课',
+   desc:['Enkel start: hva et adjektiv er, motsetninger, en stor hund / et stort hus, og store hunder. Korte videoer og bare enkle ord.', '简单的开始：什么是形容词、反义词、en stor hund / et stort hus、store hunder。短视频，只有简单的词。'],
+   links:[['adjektiv.html', '🐱 Fullstendig kurs', '完整课程']]},
   {section:'norsk', id:'adjektiv', href:'adjektiv.html', sum:'adj', emoji:'🐱', color:'#16a34a',
-   no:'Adjektiv', zh:'形容词',
+   no:'Adjektiv – fullstendig kurs', zh:'形容词——完整课程',
    desc:['Hva et adjektiv er, motsetninger, adjektiv med en/ei/et, flertall og bestemt form, liten og andre spesielle, og sammenligning (stor, større, størst).', '什么是形容词、反义词、形容词和 en/ei/et、复数和定指形式、liten 等特殊形容词，以及比较（stor、større、størst）。'],
    links:[['adjektiv-ark.html', '📝 Skriveark', '练习纸'], ['docs/adjektiv-jukselapp.pdf', '🧾 Jukselapp', '速查表'], ['adjektiv-laerer.html', '👩‍🏫 Lærer', '教师页']]},
   {section:'matte', id:'multiplikasjon', href:'multiplikasjon.html', sum:'mult', emoji:'✖️', color:'#16a34a',
