@@ -695,7 +695,7 @@ function renderFind(spec, host, ctx){
   const nMark = toks.filter(t => t.mark).length;
   let body = '';
   toks.forEach((t, i) => { body += t.word ? `<span class="tok" data-i="${i}">${t.t}</span>` : (t.sp ? ' ' : A.esc(t.t)); });
-  host.innerHTML = `<div class="qcard">${head(spec, `<div class="small-note">${caps ? bi(`Det er ${nMark} ord som må ha stor bokstav.`, `有 ${nMark} 个词必须大写。`) : bi(`Finn ${nMark} substantiv.`, `找出 ${nMark} 个名词。`)}</div>`)}
+  host.innerHTML = `<div class="qcard">${head(spec, `<div class="small-note">${caps ? bi(`Det er ${nMark} ord som må ha stor bokstav.`, `有 ${nMark} 个词必须大写。`) : spec.mode === 'adj' ? bi(`Finn ${nMark} adjektiv.`, `找出 ${nMark} 个形容词。`) : bi(`Finn ${nMark} substantiv.`, `找出 ${nMark} 个名词。`)}</div>`)}
     <div class="text" style="margin-top:10px">${body}</div><div class="zhtext zh">${spec.zh}</div><div class="hint"></div>
     <div class="typebox"><button class="spk readtxt" type="button">📖</button><button class="btn check" type="button"><span class="bi"><span class="no">Ferdig ✔</span><span class="zh">完成</span></span></button></div></div>`;
   const plain = A.plain(spec.text);

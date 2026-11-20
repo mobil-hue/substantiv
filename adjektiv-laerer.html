@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lærerside og fasit – Adjektiv</title>
+<link rel="stylesheet" href="css/style.css">
+<style>h2{margin-top:1.4em;border-bottom:3px solid var(--brand)}td,th{font-size:.9rem}.cols{columns:2 300px}.sc{break-inside:avoid;margin-bottom:6px}</style>
+</head>
+<body class="lang-both">
+<header class="top"><a class="logo" href="adjektiv.html" style="text-decoration:none">🌈 Adjektiv <small>形容词</small></a><div class="sp"></div><a class="pill noprint" href="adjektiv-ark.html" style="text-decoration:none;color:inherit">📝 Skriveark</a> <button class="pill noprint" onclick="window.print()">🖨</button></header>
+<main id="t"></main>
+<script>window.SUBJECT = 'adj';</script>
+<script src="js/util.js"></script>
+<script src="js/data.js"></script>
+<script src="js/graphics.js"></script>
+<script src="js/videos.js"></script>
+<script src="js/exercises.js"></script>
+<script src="js/adj-data.js"></script>
+<script src="js/adj-exercises.js"></script>
+<script src="js/adj-lessons.js"></script>
+<script>
+(function(){
+const A = window.App, E = A.Ex, out = [];
+const names = E.names().filter(n => n.startsWith('aj_'));
+const cnt = {}; let small = 0, task = 0;
+names.forEach(n => { const it = E.items(n), t = it.length && !['choice', 'type', 'num'].includes(it[0].kind); cnt[n] = {n:it.length, task:t}; if(t) task += it.length; else small += it.length; });
+out.push(`<h1>👩‍🏫 Lærerside og fasit – adjektiv / 教师页和答案</h1>
+<div class="card"><h3>Oversikt over oppgaver / 题目总览</h3>
+<p><b>Små oppgaver (unike spørsmål): ${small}</b> &nbsp;·&nbsp; <b>Omfattende oppgaver: ${task}</b> &nbsp;·&nbsp; <b>Moduler: ${A.ADJ_MODULES.length}</b> &nbsp;·&nbsp; <b>Videoer: ${A.ADJ_MODULES.filter(m => m.steps[0].t === 'video').length}</b></p>
+<p>Hver gang trekkes oppgavene tilfeldig, og svar-alternativene stokkes. Oppgaver eleven har bommet på kommer oftere. / 每次练习题目都是随机抽取，选项也会打乱；做错的题目会更常出现。</p>
+<table class="words"><tr><th>Bank</th><th>Type</th><th>Antall</th></tr>${names.map(n => `<tr><td>${n}</td><td>${cnt[n].task ? 'omfattende' : 'liten'}</td><td>${cnt[n].n}</td></tr>`).join('')}</table></div>`);
+
+out.push(`<h2>Moduler / 课程</h2><ol start="0">${A.ADJ_MODULES.map(m => `<li><b>${m.emoji} ${m.no}</b> <span class="zh">${m.zh}</span> – ${m.steps.length} steg</li>`).join('')}</ol>`);
+
+out.push(`<h2>Regler / 规则</h2><div class="cols">
+<div class="sc"><b>en / ei:</b> grunnformen (en stor hund · ei stor bok) <span class="zh">基本形式</span></div>
+<div class="sc"><b>et:</b> +t (stort), +tt (hvitt, blått, nytt, søtt), eller ingen endring (-ig, -sk, -st, billig, norsk, trist, svart, lett) <span class="zh">加 t / 加 tt / 不变</span></div>
+<div class="sc"><b>Flertall og bestemt form:</b> +e (store). blå og grå får ikke -e. -el/-en/-er: e-en forsvinner (gamle, åpne, vakre). -m: dobles (tomme). <span class="zh">加 e；blå、grå 不变；去掉 e；双写 m</span></div>
+<div class="sc"><b>liten:</b> liten · lita · lite · små · den/det lille · de små</div>
+<div class="sc"><b>Sammenligning:</b> +ere / +est (større, størst). Uregelmessige: god–bedre–best, liten–mindre–minst, gammel–eldre–eldst, dårlig–verre–verst, lang–lengre–lengst, tung–tyngre–tyngst, ung–yngre–yngst. Lange adjektiv: mer / mest. <span class="zh">比较级和最高级</span></div>
+<div class="sc"><b>Bokmål:</b> ei-ord kan også ha «en» (en bok), men vi øver på «ei». Foran ei-ord kan «liten» også skrives «liten» (ei liten jente); vi bruker «lita» og godtar begge. <span class="zh">书面挪威语里 ei 名词也可以用 en；ei liten jente 也被接受。</span></div></div>`);
+
+out.push(`<h2>Ordliste: alle adjektiv / 词表</h2><div class="tblwrap"><table class="words"><tr><th>nivå</th><th>en / ei</th><th>et</th><th>flertall</th><th>komparativ</th><th>superlativ</th><th>motsatt</th><th>gruppe</th><th>regel</th><th>中文</th><th>eksempler</th></tr>
+${A.ADJ.map(a => `<tr><td>${a.lvl}</td><td>${a.m}</td><td>${a.n}</td><td>${a.pl}</td><td>${a.cmp || ''}</td><td>${a.sup || ''}</td><td>${a.opp || ''}</td><td>${a.cat}</td><td>${a.rule}</td><td>${a.emoji} ${a.zh} (${a.py})</td><td>en ${a.nouns[0] ? (a.m === 'liten' ? 'liten' : a.m) + ' ' + a.nouns[0] : ''} · ei ${a.m === 'liten' ? 'lita' : a.m} ${a.nouns[1]} · et ${a.n} ${a.nouns[2]}</td></tr>`).join('')}</table></div>`);
+
+out.push('<h2>Begreper / 术语</h2><div class="cols">' + A.ADJ_TERMS.map(t => `<div class="sc"><b>${t.no}</b> – ${t.zh}<br>${t.defNo}<br><span class="zh">${t.defZh}</span></div>`).join('') + '</div>');
+out.push('<h2>Tekster: adjektivene er understreket / 文章：形容词已标出</h2><div class="cols">' + A.ADJ_TEXTS.map(t => `<div class="sc"><b>${t.id}</b> (nivå ${t.lvl}): ${t.no.replace(/\{([^}]+)\}/g, '<u><b>$1</b></u>')}<br><span class="zh">${t.zh}</span></div>`).join('') + '</div>');
+out.push('<h2>Setninger / 句子</h2><div class="cols">' + A.ADJ_SENTENCES.map(t => `<div class="sc">${t.no.replace(/\{([^}]+)\}/g, '<u><b>$1</b></u>')} — <span class="zh">${t.zh}</span></div>`).join('') + '</div>');
+
+const sortNames = names.filter(n => /^aj_sort/.test(n));
+out.push('<h2>Sorteringsoppgaver (fasit) / 分类题（答案）</h2><div class="cols">' + sortNames.map(n => E.items(n).map(it => {
+  const s = it.make(), by = {}; s.items.forEach(i => (by[i.bin] = by[i.bin] || []).push(i.fix || i.id));
+  return `<div class="sc"><b>${it.id}</b>: ` + Object.keys(by).map(k => `<i>${k}</i>: ${by[k].join(', ')}`).join(' &nbsp;|&nbsp; ') + '</div>';
+}).join('')).join('') + '</div>');
+out.push('<h2>Tabelloppgaver og diktat (fasit) / 表格题和听写（答案）</h2><div class="cols">' + names.filter(n => /^aj_(forms|opp_table|dict)/.test(n)).map(n => E.items(n).map(it => {
+  const s = it.make();
+  return `<div class="sc"><b>${it.id}</b>: ` + s.rows.map(r => r.cells.filter(x => x.answers).map(x => x.answers[0]).join(' / ')).join(' &nbsp;|&nbsp; ') + '</div>';
+}).join('')).join('') + '</div>');
+document.getElementById('t').innerHTML = out.join('');
+A.applyLang();
+})();
+</script>
+</body>
+</html>

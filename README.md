@@ -5,6 +5,7 @@ Læreopplegg i samme system, samlet i en **rotmeny** (`index.html`) med fagene *
 | Fag | Opplegg | Side |
 |---|---|---|
 | Norsk | **Substantiv 名词** | `substantiv.html` |
+| Norsk | **Adjektiv 形容词** (nytt) | `adjektiv.html` |
 | Matematikk | **Gange – lær og øv 乘法** (nytt) | `multiplikasjon.html` |
 | Matematikk | **Geometri 几何** (Matematikk 4 kap. 4) | `geometri.html` |
 | Matematikk | **Gangespill** (rask trening av gangetabellen) | `gange.html` |
@@ -43,6 +44,13 @@ Data (ord, former, oversettelser, eksempler og merknader) ligger i `js/vox-*.js`
 - **7 moduler** (0–6), **7 animerte lærevideoer**, begrepskort med tegninger, små og omfattende oppgaver, øvingsrom og «øv til du er trygg»-løkker.
 - **Skriveark** (`ark.html`), **Lærerside** (`teacher.html`), **Jukselapp** (`docs/substantiv-jukselapp.pdf`), **Bøyingstabell** (`docs/substantiv-boyingstabell.pdf`).
 
+## Adjektiv 形容词
+Bygger på samme system som substantiv (samme motor, svarmåte flervalg / skriv inn / tilfeldig, tospråklig tekst og opplesing).
+- **8 moduler** (0–7): hvorfor adjektiv · hva er et adjektiv (farge, størrelse, følelse, egenskap) · motsetninger · adjektiv med en/ei/et (+t, +tt, ingen endring) · flertall og bestemt form (store hunder, den store hunden, den/det/de) · spesielle adjektiv (liten – lita – lite – små, blå/grå, gammel → gamle, tom → tomme) · sammenligning (stor – større – størst, enn, like … som, mer/mest) · adjektiv i setninger (etter «er», to adjektiv, mesterprøve).
+- **8 animerte lærevideoer**, 16 begrepskort, 48 adjektiv med eksempler på en-, ei- og et-ord, over 1 900 små og over 130 omfattende oppgaver (flervalg, innskriving, sortering, tabeller, diktat, finn adjektivene, bygg setningen).
+- **Skriveark** (`adjektiv-ark.html`, 6 ark med fasit), **Lærerside** (`adjektiv-laerer.html`), **Jukselapp** (`docs/adjektiv-jukselapp.pdf`, bygges med `node docs/build-adjektiv.js`).
+- Data (adjektiv, former, motsetninger, gradbøying, begreper, tekster) ligger i `js/adj-data.js`.
+
 ## Gange – lær og øv 乘法
 - **8 moduler:** hva er gange · gangetabellen og knepene · gange med 10/100/1 000 · del opp tallet (utvidet form og rutenett) · runde av og rette opp (276 × 3 = 300 × 3 − 24 × 3), dobbelt og halvparten · gamlemåten (oppstilling med mente) · tekstoppgaver · utfordringer og mesterprøve.
 - **7 animerte videoer**, **16 begrepskort med tegninger**, over 700 små og 480 omfattende oppgaver.
@@ -66,9 +74,9 @@ Bruker nettleserens talesyntese (Web Speech API): norsk (`nb-NO`) og kinesisk (`
 ## Filer
 ```
 index.html                 rotmeny (js/hub.js: programmer og fag)
-substantiv.html, geometri.html, multiplikasjon.html, gange.html
-teacher.html, geometri-laerer.html, multiplikasjon-laerer.html
-ark.html, geo-ark.html, mult-ark.html     skriveark
+substantiv.html, adjektiv.html, geometri.html, multiplikasjon.html, gange.html
+teacher.html, adjektiv-laerer.html, geometri-laerer.html, multiplikasjon-laerer.html
+ark.html, adjektiv-ark.html, geo-ark.html, mult-ark.html     skriveark
 css/style.css, css/gange.css
 js/util.js                 innstillinger, tale, hjelpefunksjoner
 js/exercises.js            oppgavemotor (flervalg, skriv, tabell, sortering ...)
@@ -76,6 +84,8 @@ js/ex-num.js               tallsvar (flervalg/skriv), trinn-for-trinn-oppgaver
 js/app.js                  visninger, øktkjører, fremgang (alle fag)
 js/data.js, graphics.js, videos.js, lessons.js          substantiv
 js/geo-*.js                geometri
+js/adj-data.js             adjektiv, former, motsetninger, begreper, tekster
+js/adj-exercises.js, adj-lessons.js, adj-videos.js, adj-worksheets.js   adjektiv
 js/mult-data.js            tallord (norsk/kinesisk), tale av regnestykker
 js/mult-graphics.js        grupper, prikker, rutenett, oppstilling, tabell
 js/mult-calc.js            regneoppgaver og trinn for trinn
