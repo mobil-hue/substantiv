@@ -11,6 +11,8 @@ const onLeave = fn => cleanups.push(fn);
 function leave(){ A.Video.stop(); A.Speech.stop(); cleanups.forEach(f => { try{ f(); }catch(e){} }); cleanups = []; }
 const later = (fn, ms) => { const t = setTimeout(fn, ms); onLeave(() => clearTimeout(t)); return t; };
 const speechOn = () => A.speakKey() !== 'off';
+// tekst på støttespråket når eleven bare vil se støttespråket, ellers norsk
+const S = (no, zh) => A.settings.lang === 'zh' ? (A.tr(no, zh) || no) : no;
 
 /* ---------- valg og fremgang ---------- */
 const PREF = Object.assign({input:'mix', help:'ask', explain:false, n:20, sel:GIDS.slice()}, A.store.get('gs_prefs', {}));
@@ -41,13 +43,33 @@ function syncPills(){
   const s = document.getElementById('pSound'); s.textContent = A.SPEAK_OPTS.find(o => o[0] === A.speakKey())[1]; s.classList.toggle('on', A.settings.auto !== false);
   document.querySelectorAll('.optgrp').forEach(g => g.querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.k === (g.dataset.g === 'speak' ? A.speakKey() : A.settings.lang))));
 }
+document.querySelectorAll('.top .pt[data-no]').forEach(e => { e.innerHTML = ' <span class="bi-in">' + bi(e.dataset.no, e.dataset.zh) + '</span>'; });
 A.onSettings = syncPills;
 document.getElementById('pLang').onclick = () => A.setLangKey(cycle(A.LANG_OPTS, A.settings.lang));
+/* ---------- støttespråk: velg språk (siden lastes på nytt så alt bygges med det nye språket) ---------- */
+const pSup = document.getElementById('pSup');
+function syncSup(){ const l = A.langOf(A.supLang()); pSup.innerHTML = '🌍 <span class="pt">' + A.esc(l.name) + '</span>'; }
+function langModal(){
+  const m = h('div', {class:'modal', html:`<div class="box" style="max-height:90vh;overflow:auto;text-align:left;max-width:460px"><h2 style="margin-top:0">🌍 ${bi('Støttespråk', '辅助语言')}</h2>
+    <div class="small-note" style="text-align:left;margin-bottom:8px">Norsk er hovedspråket. Velg språket du vil ha som støtte (tekst og opplesing). · Norwegian is the main language. Choose your support language.</div>
+    <div id="lmList" class="lm-list"></div>
+    <div class="small-note" style="text-align:left;margin-top:8px">Oversettelsene er laget med AI. Si fra hvis noe er feil. · Translations are made with AI. Tell us if something is wrong.</div>
+    <div style="text-align:center;margin-top:12px"><button class="btn sec" id="lmClose" type="button">✕</button></div></div>`});
+  document.body.append(m);
+  const list = m.querySelector('#lmList');
+  const draw = () => { list.innerHTML = A.LANGS.map(l => { const v = A.Speech.has(l.c);
+    return `<button type="button" class="lm-b ${l.c === A.supLang() ? 'on' : ''}" data-c="${l.c}"><b${l.rtl ? ' dir="rtl"' : ''}>${A.esc(l.name)}</b><span>${A.esc(l.en)}</span><i title="${v ? 'Stemme finnes på denne enheten' : 'Ingen stemme funnet – bare tekst'}">${v ? '🔊' : '🔇'}</i></button>`; }).join(''); 
+    list.querySelectorAll('.lm-b').forEach(b => b.onclick = () => { A.settings.sup = b.dataset.c; if(A.settings.lang === 'no') A.settings.lang = 'both'; A.saveSettings(); location.reload(); }); };
+  draw(); A.Speech.onVoices(draw);
+  m.querySelector('#lmClose').onclick = () => m.remove();
+  m.addEventListener('click', e => { if(e.target === m) m.remove(); });
+}
+pSup.onclick = langModal; syncSup();
 document.getElementById('pSound').onclick = () => { const k = cycle(A.SPEAK_OPTS, A.speakKey()); A.setSpeakKey(k); if(k !== 'off') A.sayBi('Norsk opplesing', '中文朗读'); };
 
 /* ---------- små byggeklosser ---------- */
-const btn = (id, no, zh, cls) => `<button type="button" class="btn ${cls || ''}" id="${id}"><span class="bi"><span class="no">${no}</span><span class="zh">${zh}</span></span></button>`;
-const radio = (name, list, cur) => `<span class="optgrp" data-r="${name}">${list.map(o => `<button type="button" class="pill ${String(o[0]) === String(cur) ? 'on' : ''}" data-k="${o[0]}">${o[1]}</button>`).join('')}</span>`;
+const btn = (id, no, zh, cls) => `<button type="button" class="btn ${cls || ''}" id="${id}">${bi(no, zh)}</button>`;
+const radio = (name, list, cur) => `<span class="optgrp" data-r="${name}">${list.map(o => `<button type="button" class="pill ${String(o[0]) === String(cur) ? 'on' : ''}" data-k="${o[0]}">${o[2] ? `<span class="bi-in">${bi(o[1], o[2])}</span>` : o[1]}</button>`).join('')}</span>`;
 function bindRadio(root, name, cb){
   root.querySelectorAll(`.optgrp[data-r="${name}"] button`).forEach(b => b.onclick = () => {
     root.querySelectorAll(`.optgrp[data-r="${name}"] button`).forEach(x => x.classList.toggle('on', x === b)); cb(b.dataset.k);
@@ -55,7 +77,7 @@ function bindRadio(root, name, cb){
 }
 const crumb = (href, no, zh) => `<a class="crumb" href="${href}">← ${bi(no || 'Tilbake', zh || '返回')}</a>`;
 function ruleInto(host, a, b, full, onHow){
-  host.innerHTML = GS.ruleHTML(a, b, full) + (!full && onHow ? `<div style="text-align:center;margin-top:8px"><button type="button" class="btn sec" id="gHow"><span class="bi"><span class="no">Vis hvordan →</span><span class="zh">看怎么算 →</span></span></button></div>` : '');
+  host.innerHTML = GS.ruleHTML(a, b, full) + (!full && onHow ? `<div style="text-align:center;margin-top:8px"><button type="button" class="btn sec" id="gHow">${bi('Vis hvordan →', '看怎么算 →')}</button></div>` : '');
   const how = host.querySelector('#gHow'); if(how) how.onclick = onHow;
   const say = host.querySelector('.rb-say'); if(say) say.onclick = () => GS.sayExplain(a, b);
 }
@@ -72,7 +94,7 @@ function home(){
   root.innerHTML = `
   <div class="hero"><div class="big-emoji">🧩</div><div class="grow"><h1>${bi('Gangetabellen som system', '把乘法表当作一个系统')}</h1>
     <div>${bi('Fra 100 ruter til 10 regnestykker – ett steg om gangen.', '从 100 个格子到 10 道算式——一次学一步。')}</div></div>
-    <a class="btn big sec" href="#/video/gs_system" style="text-decoration:none"><span class="bi"><span class="no">🎬 Se oversiktsvideoen</span><span class="zh">看整体介绍视频</span></span></a></div>
+    <a class="btn big sec" href="#/video/gs_system" style="text-decoration:none">${bi('🎬 Se oversiktsvideoen', '看整体介绍视频')}</a></div>
 
   <div class="card gx" id="gx"><h2>${bi('Slik krymper tabellen', '乘法表是这样变小的')}</h2>
     <div class="gx-steps" id="gxSteps"></div>
@@ -96,8 +118,8 @@ function home(){
   const stepsEl = root.querySelector('#gxSteps'), capEl = root.querySelector('#gxCap'), tblEl = root.querySelector('#gxTbl'), legEl = root.querySelector('#gxLegend'), funEl = root.querySelector('#gxFun'), ruleEl = root.querySelector('#gxRule');
   onLeave(() => clearInterval(timer));
   stepsEl.innerHTML = GS.STEPS.map(s => `<button type="button" class="pill gx-st" data-n="${s.n}" style="--c:${s.bar}">${s.n}</button>`).join('') +
-    `<button type="button" class="pill gx-st" data-n="all" style="--c:#fde68a">🎨 <span class="bi" style="display:inline"><span class="no">Regler</span><span class="zh">规则</span></span></button>` +
-    `<button type="button" class="pill" id="gxPlay">▶ <span class="bi" style="display:inline"><span class="no">Spill av</span><span class="zh">播放</span></span></button>`;
+    `<button type="button" class="pill gx-st" data-n="all" style="--c:#fde68a">🎨 <span class="bi-in">${bi('Regler', '规则')}</span></button>` +
+    `<button type="button" class="pill" id="gxPlay">▶ <span class="bi-in">${bi('Spill av', '播放')}</span></button>`;
   legEl.innerHTML = GS.GROUPS.map(g => `<span class="gl" style="--c:${g.c};--bg:${g.bg}"><i></i>${bi(g.no, g.zh)}</span>`).join('');
   function paint(){
     const S = GS.STEPS[step - 1];
@@ -161,8 +183,8 @@ function videoPage(id){
   const i = PATH.findIndex(p => p.v === id), step = PATH[i];
   const nextV = PATH.slice(i + 1).find(p => p.v);
   app.innerHTML = `<div class="gs-vp">${crumb('#/')}<h1>${V.emoji} ${bi(V.no, V.zh)}</h1><div id="vh"></div>
-    <div class="gs-after">${step && step.practice ? `<a class="btn" href="${step.practice}" style="text-decoration:none"><span class="bi"><span class="no">✏️ Øv på dette</span><span class="zh">练习这个</span></span></a>` : ''}
-    ${nextV ? `<a class="btn sec" href="#/video/${nextV.v}" style="text-decoration:none"><span class="bi"><span class="no">Neste video ›</span><span class="zh">下一个视频 ›</span></span></a>` : ''}</div></div>`;
+    <div class="gs-after">${step && step.practice ? `<a class="btn" href="${step.practice}" style="text-decoration:none">${bi('✏️ Øv på dette', '练习这个')}</a>` : ''}
+    ${nextV ? `<a class="btn sec" href="#/video/${nextV.v}" style="text-decoration:none">${bi('Neste video ›', '下一个视频 ›')}</a>` : ''}</div></div>`;
   A.Video.play(app.querySelector('#vh'), id, () => { if(step) mark(step.id, 'v'); location.hash = step && step.practice ? step.practice : '#/'; });
 }
 
@@ -193,8 +215,8 @@ function setup(mode, gid){
     ${mode === 'speed' ? `<div class="small-note" style="text-align:left">${bi('Svar på så mange du kan på 60 sekunder. Ingen hjelp underveis.', '60 秒内尽量多答。中途没有提示。')}</div>` : ''}
     ${mode === 'cards' ? `<div class="small-note" style="text-align:left">${bi('Se på regnestykket, tenk på svaret, og snu kortet. Si så ærlig om du kunne den.', '看算式，想答案，然后翻卡片。再诚实地说你是否会。')}</div>` : ''}
     ${has('groups') ? row('Hvilke grupper?', '哪些组？', `<span class="optgrp" id="sGroups">${GS.GROUPS.map(g => `<button type="button" class="gchip ${cfg.sel.includes(g.id) ? 'on' : ''}" data-g="${g.id}" style="--c:${g.c};--bg:${g.bg}">${g.emoji} ${g.short} <small>${GS.FACTS[g.id].length}</small></button>`).join('')}</span>`) : ''}
-    ${has('help') ? row('Hjelp med regelen', '规则提示', radio('help', [['show', '👀 Vis regelen'], ['ask', '❓ Med knapp'], ['after', '🙈 Bare etter feil']], cfg.help)) : ''}
-    ${has('input') ? row('Svar', '回答方式', radio('input', [['choice', '✅ Flervalg'], ['type', '⌨️ Skriv inn'], ['mix', '🎲 Tilfeldig']], cfg.input)) : ''}
+    ${has('help') ? row('Hjelp med regelen', '规则提示', radio('help', [['show', '👀 Vis regelen', '👀 显示规则'], ['ask', '❓ Med knapp', '❓ 用按钮'], ['after', '🙈 Bare etter feil', '🙈 只在答错后']], cfg.help)) : ''}
+    ${has('input') ? row('Svar', '回答方式', radio('input', [['choice', '✅ Flervalg', '✅ 选择题'], ['type', '⌨️ Skriv inn', '⌨️ 输入答案'], ['mix', '🎲 Tilfeldig', '🎲 随机']], cfg.input)) : ''}
     ${has('n') ? row('Antall oppgaver', '题目数量', radio('n', [[10, '10'], [20, '20'], [40, '40']], cfg.n)) : ''}
     ${has('explain') ? row('Forklaring', '解释', `<label class="gs-chk"><input type="checkbox" id="sExplain" ${cfg.explain ? 'checked' : ''}> ${bi('Forklar etter hvert svar', '每次答完都解释')}</label>`) : ''}
     <div style="text-align:center;margin-top:16px">${btn('sStart', '▶ Start', '开始', 'big')}</div></div>`;
@@ -291,7 +313,7 @@ function runCalc(cfg){
     sh.host.innerHTML = `<div class="qcard gq" style="--c:${g.c};--bg:${g.bg}">
       <div class="gq-eq"><span>${a} × ${b} =</span> <span class="gq-q" id="gAns">?</span> <button class="spk" id="gSay" type="button" title="🔊">🔊</button></div>
       <div class="gq-in">${mode === 'choice' ? `<div class="gchoices">${options(a, b).map(o => `<button type="button" class="gchoice" data-v="${o}">${o}</button>`).join('')}</div>` : padHTML()}</div>
-      ${!timed && cfg.help === 'ask' ? `<div class="gq-ctl"><button type="button" class="btn sec" id="gAsk"><span class="bi"><span class="no">❓ Hvilken regel gjelder?</span><span class="zh">用哪条规则？</span></span></button></div>` : ''}
+      ${!timed && cfg.help === 'ask' ? `<div class="gq-ctl"><button type="button" class="btn sec" id="gAsk">${bi('❓ Hvilken regel gjelder?', '用哪条规则？')}</button></div>` : ''}
       <div id="gFb"></div><div class="gq-rule" id="gRule"></div></div>`;
     sh.host.querySelector('#gSay').onclick = () => GS.sayQ(a, b);
     sh.host.querySelectorAll('.gchoice').forEach(b => b.onclick = () => submit(+b.dataset.v, b));
@@ -310,7 +332,7 @@ function runCalc(cfg){
     else if(k === 'ok'){ if(typed) submit(+typed); return; }
     else if(typed.length < 3) typed += k;
     const d = sh.host.querySelector('#gDisp'); if(!d) return;
-    d.textContent = typed || (A.settings.lang === 'zh' ? '输入答案' : 'skriv svaret'); d.classList.toggle('empty', !typed);
+    d.textContent = typed || S('skriv svaret', '输入答案'); d.classList.toggle('empty', !typed);
   }
   function submit(v, btnEl){
     if(locked || !cur || cur.done) return;
@@ -465,7 +487,7 @@ function runMirror(cfg){
   function key(k){
     if(locked || !cur) return;
     if(k === 'del') typed = typed.slice(0, -1); else if(k === 'ok'){ if(typed) submit(+typed); return; } else if(typed.length < 3) typed += k;
-    const d = sh.host.querySelector('#gDisp'); if(!d) return; d.textContent = typed || (A.settings.lang === 'zh' ? '输入答案' : 'skriv svaret'); d.classList.toggle('empty', !typed);
+    const d = sh.host.querySelector('#gDisp'); if(!d) return; d.textContent = typed || S('skriv svaret', '输入答案'); d.classList.toggle('empty', !typed);
   }
   function submit(v, bt){
     if(locked || cur.done) return; locked = true; cur.done = true; tried++;
@@ -493,19 +515,19 @@ function statsPage(){
   const worst = GS.ALL.map(f => ({f, s:GS.stat(f[0], f[1])})).filter(x => x.s && x.s.w).sort((p, q) => p.s.b - q.s.b || q.s.w - p.s.w).slice(0, 8);
   const sp = spotStat();
   app.innerHTML = `<div class="gs-stats">${crumb('#/')}<div class="card"><h1 style="margin-top:0">📊 ${bi('Min fremgang', '我的进度')}</h1>
-    <div class="sum"><div><b>${sure}/${tot}</b><span>${A.settings.lang === 'zh' ? '已掌握' : 'sikre regnestykker'}</span></div><div><b>${seenN}</b><span>${A.settings.lang === 'zh' ? '已练习' : 'øvd'}</span></div><div><b>${r + w ? pct(r, r + w) + '%' : '–'}</b><span>${A.settings.lang === 'zh' ? '一次答对' : 'rett første gang'}</span></div><div><b>${A.store.get('gs_best', 0)}</b><span>${A.settings.lang === 'zh' ? '最佳速度' : 'beste fartsrunde'}</span></div></div>
+    <div class="sum"><div><b>${sure}/${tot}</b><span>${S('sikre regnestykker', '已掌握')}</span></div><div><b>${seenN}</b><span>${S('øvd', '已练习')}</span></div><div><b>${r + w ? pct(r, r + w) + '%' : '–'}</b><span>${S('rett første gang', '一次答对')}</span></div><div><b>${A.store.get('gs_best', 0)}</b><span>${S('beste fartsrunde', '最佳速度')}</span></div></div>
     <div class="small-note" style="text-align:left">${bi('Fargen viser hvor sikker du er. Trykk på en rute for å se regelen.', '颜色表示你掌握的程度。点一个格子看规则。')}</div>
     <div class="gx-tbl" id="stTbl">${GS.table({level:lv})}</div>
     <div class="gx-legend"><span class="gl lv-sure"><i></i>${bi('sikker', '已掌握')}</span><span class="gl lv-learning"><i></i>${bi('lærer', '在学')}</span><span class="gl lv-weak"><i></i>${bi('sliter', '困难')}</span><span class="gl lv-new"><i></i>${bi('ikke øvd', '未练习')}</span></div>
     <div id="stRule"></div></div>
     <div class="card"><h2 style="margin-top:0">${bi('Per gruppe', '按分组')}</h2>${GS.GROUPS.map(g => { const n = GS.FACTS[g.id].length, s = GS.sureCount(GS.FACTS[g.id]); return `<a class="gst-bar" href="#/train/${g.id}" style="--c:${g.c};--bg:${g.bg}"><span class="l">${GS.badge(g.id)} ${bi(g.no, g.zh)}</span><span class="b"><i style="width:${pct(s, n)}%"></i></span><span class="n">${s}/${n}</span></a>`; }).join('')}</div>
-    ${worst.length ? `<div class="card"><h2 style="margin-top:0">${bi('Sliter mest med', '最有困难的')}</h2><div class="row" style="justify-content:flex-start">${worst.map(x => `<button type="button" class="gfact" data-a="${x.f[0]}" data-b="${x.f[1]}" style="--c:${G[GS.classify(x.f[0], x.f[1]).g].c};--bg:${G[GS.classify(x.f[0], x.f[1]).g].bg}">${x.f[0]} × ${x.f[1]} = ${x.f[0] * x.f[1]} <small>${x.s.w}×${A.settings.lang === 'zh' ? '错' : 'feil'}</small></button>`).join('')}</div></div>` : ''}
+    ${worst.length ? `<div class="card"><h2 style="margin-top:0">${bi('Sliter mest med', '最有困难的')}</h2><div class="row" style="justify-content:flex-start">${worst.map(x => `<button type="button" class="gfact" data-a="${x.f[0]}" data-b="${x.f[1]}" style="--c:${G[GS.classify(x.f[0], x.f[1]).g].c};--bg:${G[GS.classify(x.f[0], x.f[1]).g].bg}">${x.f[0]} × ${x.f[1]} = ${x.f[0] * x.f[1]} <small>${x.s.w}×${S('feil', '错')}</small></button>`).join('')}</div></div>` : ''}
     <div class="card"><h2 style="margin-top:0">${bi('Regelspotter', '找规则')}</h2>${GS.GROUPS.map(g => { const s = sp[g.id] || {r:0, w:0}; return `<div class="gst-bar" style="--c:${g.c};--bg:${g.bg}"><span class="l">${GS.badge(g.id)}</span><span class="b"><i style="width:${pct(s.r, s.r + s.w)}%"></i></span><span class="n">${s.r + s.w ? pct(s.r, s.r + s.w) + '%' : '–'}</span></div>`; }).join('')}</div>
-    <div style="text-align:center;margin:14px 0"><button class="btn sec" id="stReset" type="button"><span class="bi"><span class="no">Nullstill fremgang</span><span class="zh">重置进度</span></span></button></div></div>`;
+    <div style="text-align:center;margin:14px 0"><button class="btn sec" id="stReset" type="button">${bi('Nullstill fremgang', '重置进度')}</button></div></div>`;
   const showRule = (a, b) => { const el = app.querySelector('#stRule'); ruleInto(el, a, b, true); el.insertAdjacentHTML('afterbegin', `<div class="gx-q">${a} × ${b} = ${a * b}</div>`); el.scrollIntoView({behavior:'smooth', block:'nearest'}); };
   app.querySelector('#stTbl').addEventListener('click', e => { const td = e.target.closest('td[data-a]'); if(td) showRule(+td.dataset.a, +td.dataset.b); });
   app.querySelectorAll('.gfact[data-a]').forEach(b => b.onclick = () => showRule(+b.dataset.a, +b.dataset.b));
-  app.querySelector('#stReset').onclick = () => { if(confirm('Slette all fremgang? / 删除所有进度？')){ GS.resetStats(); A.store.set('gs_path', {}); A.store.set('gs_spot', {}); A.store.set('gs_best', 0); statsPage(); } };
+  app.querySelector('#stReset').onclick = () => { if(confirm(A.tr('Slette all fremgang?', '删除所有进度？') ? 'Slette all fremgang? / ' + A.tr('Slette all fremgang?', '删除所有进度？') : 'Slette all fremgang?')){ GS.resetStats(); A.store.set('gs_path', {}); A.store.set('gs_spot', {}); A.store.set('gs_best', 0); statsPage(); } };
 }
 
 /* =====================================================================
@@ -513,6 +535,7 @@ function statsPage(){
    ===================================================================== */
 function route(again){
   if(!again) leave();
+  document.querySelectorAll('body > .modal').forEach(m => m.remove());
   const parts = (location.hash.replace(/^#\/?/, '') || '').split('/');
   const r = parts[0], arg = parts[1];
   window.scrollTo(0, 0);

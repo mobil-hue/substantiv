@@ -174,3 +174,13 @@ a.pill{color:inherit}
 a.gbadge{color:var(--c)}
 .gl .bi .zh,.gst-bar .l .bi .zh{margin-left:6px}
 .gbadge.big{white-space:normal;text-align:center;max-width:100%}
+
+/* språkvelger */
+.lm-list{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.lm-b{display:flex;flex-direction:column;align-items:flex-start;gap:0;background:#fff;border:3px solid var(--line);border-radius:14px;padding:8px 12px;position:relative;text-align:left}
+.lm-b b{font-size:1.15rem}.lm-b span{font-size:.78rem;color:var(--muted);font-weight:700}
+.lm-b i{position:absolute;right:10px;top:8px;font-style:normal;font-size:.9rem}
+.lm-b.on{border-color:var(--brand);background:#fff7ed}
+.zh[dir=rtl]{text-align:center}
+.bi-in .bi{display:inline}.bi-in .bi .zh{display:inline;margin-left:5px;font-size:.92em;color:inherit;opacity:.85}
+.btn .bi-in .bi .zh{opacity:.9}

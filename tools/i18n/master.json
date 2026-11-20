@@ -1,0 +1,1592 @@
+[
+ {
+  "id": 0,
+  "no": "# av # regnestykker er sikre",
+  "zh": "55 道算式中已掌握 0 道",
+  "ex": "0 av 55 regnestykker er sikre"
+ },
+ {
+  "id": 1,
+  "no": "# av # riktige (# %)",
+  "zh": "21 道中答对 20 道（95%）",
+  "ex": "20 av 21 riktige (95 %)"
+ },
+ {
+  "id": 2,
+  "no": "# er halvparten av #",
+  "zh": "5 是 10 的一半",
+  "ex": "5 er halvparten av 10"
+ },
+ {
+  "id": 3,
+  "no": "# igjen (# bort)",
+  "zh": "剩 21 个（去掉 7 个）",
+  "ex": "21 igjen (7 bort)"
+ },
+ {
+  "id": 4,
+  "no": "# igjen (# lette bort)",
+  "zh": "剩 28 个（27 个很容易）",
+  "ex": "28 igjen (27 lette bort)"
+ },
+ {
+  "id": 5,
+  "no": "# kvadrattall · # igjen",
+  "zh": "6 个平方数 · 剩 15 个",
+  "ex": "6 kvadrattall · 15 igjen"
+ },
+ {
+  "id": 6,
+  "no": "# kvadrattall → # igjen",
+  "zh": "6 个平方数 → 剩 15 个",
+  "ex": "6 kvadrattall → 15 igjen"
+ },
+ {
+  "id": 7,
+  "no": "# med #-regelen → # igjen",
+  "zh": "5 个用 9 的规则 → 剩 10 个",
+  "ex": "5 med 9-regelen → 10 igjen"
+ },
+ {
+  "id": 8,
+  "no": "# rader med # prikker. Snur vi rutenettet, får vi # rader med # prikker. Det er like mange prikker.",
+  "zh": "三行，每行七个点。把方阵转一下，就是七行，每行三个点。点的个数一样多。",
+  "ex": "3 rader med 7 prikker. Snur vi rutenettet, får vi 7 rader med 3 prikker. Det er like mange prikker."
+ },
+ {
+  "id": 9,
+  "no": "# rader med #. # rader med #. Prikkene blir en firkant, et kvadrat. Derfor heter det kvadrattall.",
+  "zh": "三行，每行三个。四行，每行四个。点排成一个正方形，所以叫平方数。",
+  "ex": "3 rader med 3. 4 rader med 4. Prikkene blir en firkant, et kvadrat. Derfor heter det kvadrattall."
+ },
+ {
+  "id": 10,
+  "no": "# regnestykker",
+  "zh": "10 道算式",
+  "ex": "10 regnestykker"
+ },
+ {
+  "id": 11,
+  "no": "# riktige på # sekunder!",
+  "zh": "60 秒答对 1 道！",
+  "ex": "1 riktige på 60 sekunder!"
+ },
+ {
+  "id": 12,
+  "no": "# ruter",
+  "zh": "100 个格子",
+  "ex": "100 ruter"
+ },
+ {
+  "id": 13,
+  "no": "# ruter er lette",
+  "zh": "27 个格子很容易",
+  "ex": "27 ruter er lette"
+ },
+ {
+  "id": 14,
+  "no": "# sekunder. Hvor mange rekker du?",
+  "zh": "60 秒。你能做对几道？",
+  "ex": "60 sekunder. Hvor mange rekker du?"
+ },
+ {
+  "id": 15,
+  "no": "# unike (# × # = # × #)",
+  "zh": "55 个不同的（5 × 6 = 6 × 5）",
+  "ex": "55 unike (5 × 6 = 6 × 5)"
+ },
+ {
+  "id": 16,
+  "no": "# · # · # · # · #",
+  "zh": "27 · 36 · 54 · 63 · 72",
+  "ex": "27 · 36 · 54 · 63 · 72"
+ },
+ {
+  "id": 17,
+  "no": "# · # · # · # · # · #",
+  "zh": "9 · 16 · 36 · 49 · 64 · 81",
+  "ex": "9 · 16 · 36 · 49 · 64 · 81"
+ },
+ {
+  "id": 18,
+  "no": "# × # = # er et kvadrattall. Pugg det sammen med de andre kvadrattallene.",
+  "zh": "3 × 3 = 9 是平方数。和其他平方数一起背下来。",
+  "ex": "3 × 3 = 9 er et kvadrattall. Pugg det sammen med de andre kvadrattallene."
+ },
+ {
+  "id": 19,
+  "no": "# × # = # × # · # igjen",
+  "zh": "3 × 7 = 7 × 3 · 剩 55 个",
+  "ex": "3 × 7 = 7 × 3 · 55 igjen"
+ },
+ {
+  "id": 20,
+  "no": "# × # er #. # × # er #. # × # er #.",
+  "zh": "7 × 7 等于 49，8 × 8 等于 64，9 × 9 等于 81。",
+  "ex": "7 × 7 er 49. 8 × 8 er 64. 9 × 9 er 81."
+ },
+ {
+  "id": 21,
+  "no": "# × # er #. # × # er også #. Svaret er det samme.",
+  "zh": "3 × 7 等于 21，7 × 3 也等于 21。答案相同。",
+  "ex": "3 × 7 er 21. 7 × 3 er også 21. Svaret er det samme."
+ },
+ {
+  "id": 22,
+  "no": "# × #, # × # og # × # kan du allerede, fra de lette gangene. Dem trenger vi ikke her.",
+  "zh": "2 × 2、5 × 5 和 10 × 10 你已经会了，它们属于简单的乘法，这里不用再背。",
+  "ex": "2 × 2, 5 × 5 og 10 × 10 kan du allerede, fra de lette gangene. Dem trenger vi ikke her."
+ },
+ {
+  "id": 23,
+  "no": "#, #, #, #, #, #",
+  "zh": "5、10、15、20、25、30",
+  "ex": "5, 10, 15, 20, 25, 30"
+ },
+ {
+  "id": 24,
+  "no": "#-, #- og #-gangen",
+  "zh": "1、2 和 10 的乘法",
+  "ex": "1-, 2- og 10-gangen"
+ },
+ {
+  "id": 25,
+  "no": "#-, #- og #-gangen ut → #",
+  "zh": "去掉 1、2、10 → 28",
+  "ex": "1-, 2- og 10-gangen ut → 28"
+ },
+ {
+  "id": 26,
+  "no": "#-gangen",
+  "zh": "1 的乘法",
+  "ex": "1-gangen"
+ },
+ {
+  "id": 27,
+  "no": "#-gangen med regel",
+  "zh": "9 的乘法（有规则）",
+  "ex": "9-gangen med regel"
+ },
+ {
+  "id": 28,
+  "no": "#-gangen ut → #",
+  "zh": "去掉 5 的乘法 → 21",
+  "ex": "5-gangen ut → 21"
+ },
+ {
+  "id": 29,
+  "no": "#-gangen: # × #, # × #, # × # og # × #. #-gangen: # × #, # × # og # × #. #-gangen: # × # og # × #. Og til slutt # × #.",
+  "zh": "3 的乘法：3 × 4、3 × 6、3 × 7、3 × 8。4 的乘法：4 × 6、4 × 7、4 × 8。6 的乘法：6 × 7、6 × 8。最后是 7 × 8。",
+  "ex": "3-gangen: 3 × 4, 3 × 6, 3 × 7 og 3 × 8. 4-gangen: 4 × 6, 4 × 7 og 4 × 8. 6-gangen: 6 × 7 og 6 × 8. Og til slutt 7 × 8."
+ },
+ {
+  "id": 30,
+  "no": "#-gangen: bruk det du kan. # × # er to ganger # og én # til: # + # er #. # × # er fem ganger # og én til: # + # er #.",
+  "zh": "7 的乘法：用你已经会的。3 × 7 是两个 7 再加一个 7：14 加 7 等于 21。6 × 7 是五个 7 再加一个 7：35 加 7 等于 42。",
+  "ex": "7-gangen: bruk det du kan. 3 × 7 er to ganger 7 og én 7 til: 14 + 7 er 21. 6 × 7 er fem ganger 7 og én til: 35 + 7 er 42."
+ },
+ {
+  "id": 31,
+  "no": "#-gangen: doble to ganger",
+  "zh": "4 的乘法：翻两倍",
+  "ex": "4-gangen: doble to ganger"
+ },
+ {
+  "id": 32,
+  "no": "#-gangen: doble tre ganger",
+  "zh": "8 的乘法：翻三倍",
+  "ex": "8-gangen: doble tre ganger"
+ },
+ {
+  "id": 33,
+  "no": "#-regelen",
+  "zh": "9 的规则",
+  "ex": "9-regelen"
+ },
+ {
+  "id": 34,
+  "no": "#-regelen → # igjen",
+  "zh": "9 的规则 → 剩 10 个",
+  "ex": "9-regelen → 10 igjen"
+ },
+ {
+  "id": 35,
+  "no": "+# · +# · +#",
+  "zh": "+7 · +9 · +11",
+  "ex": "+7 · +9 · +11"
+ },
+ {
+  "id": 36,
+  "no": "Alle regler i én tabell",
+  "zh": "一张表里的所有规则",
+  "ex": "Alle regler i én tabell"
+ },
+ {
+  "id": 37,
+  "no": "Alle regnestykker blandet. Trykk ❓ for å få vite hvilken regel som gjelder.",
+  "zh": "所有算式混在一起。点 ❓ 就能知道用哪条规则。",
+  "ex": "Alle regnestykker blandet. Trykk ❓ for å få vite hvilken regel som gjelder."
+ },
+ {
+  "id": 38,
+  "no": "Alt sammen",
+  "zh": "全部合起来",
+  "ex": "Alt sammen"
+ },
+ {
+  "id": 39,
+  "no": "Antall oppgaver",
+  "zh": "题目数量",
+  "ex": "Antall oppgaver"
+ },
+ {
+  "id": 40,
+  "no": "Beste fartsrunde: #",
+  "zh": "最好成绩：1",
+  "ex": "Beste fartsrunde: 1"
+ },
+ {
+  "id": 41,
+  "no": "Bra! Du kan allerede # regnestykker.",
+  "zh": "太棒了！你已经会 27 个算式了。",
+  "ex": "Bra! Du kan allerede 27 regnestykker."
+ },
+ {
+  "id": 42,
+  "no": "Bra! Nå vet du at du bare skal lære den halve tabellen.",
+  "zh": "很好！你现在知道只需要学半张乘法表。",
+  "ex": "Bra! Nå vet du at du bare skal lære den halve tabellen."
+ },
+ {
+  "id": 43,
+  "no": "Da vet du også:",
+  "zh": "那么你也知道：",
+  "ex": "Da vet du også:"
+ },
+ {
+  "id": 44,
+  "no": "De # som må pugges",
+  "zh": "要背的 10 个",
+  "ex": "De 10 som må pugges"
+ },
+ {
+  "id": 45,
+  "no": "De ti som må pugges",
+  "zh": "要背的 10 个",
+  "ex": "De ti som må pugges"
+ },
+ {
+  "id": 46,
+  "no": "Det som må læres",
+  "zh": "要背的",
+  "ex": "Det som må læres"
+ },
+ {
+  "id": 47,
+  "no": "Det som må læres: #",
+  "zh": "要背的：10 个",
+  "ex": "Det som må læres: 10"
+ },
+ {
+  "id": 48,
+  "no": "Dette er de ti som må pugges. Alt det andre har en regel.",
+  "zh": "这就是要背的 10 个。其余的都有规则。",
+  "ex": "Dette er de ti som må pugges. Alt det andre har en regel."
+ },
+ {
+  "id": 49,
+  "no": "Disse må vi pugge som en egen liten gruppe. # × # er #. # × # er #. # × # er #.",
+  "zh": "这些要作为一小组背下来。3 × 3 等于 9，4 × 4 等于 16，6 × 6 等于 36。",
+  "ex": "Disse må vi pugge som en egen liten gruppe. 3 × 3 er 9. 4 × 4 er 16. 6 × 6 er 36."
+ },
+ {
+  "id": 50,
+  "no": "Disse tre gjør at # ruter i tabellen er lette.",
+  "zh": "有了这三个，乘法表里 27 个格子都变得很简单。",
+  "ex": "Disse tre gjør at 27 ruter i tabellen er lette."
+ },
+ {
+  "id": 51,
+  "no": "Dobbelt: # × # = # + # = #.",
+  "zh": "两倍：2 × 2 = 2 + 2 = 4。",
+  "ex": "Dobbelt: 2 × 2 = 2 + 2 = 4."
+ },
+ {
+  "id": 52,
+  "no": "Dobbelt: tallet pluss tallet",
+  "zh": "两倍：这个数加这个数",
+  "ex": "Dobbelt: tallet pluss tallet"
+ },
+ {
+  "id": 53,
+  "no": "Du får et regnestykke. Velg hvilken regel (gruppe) det hører til. Husk de fire spørsmålene!",
+  "zh": "给你一道算式。选择它属于哪条规则（哪一组）。记住那四个问题！",
+  "ex": "Du får et regnestykke. Velg hvilken regel (gruppe) det hører til. Husk de fire spørsmålene!"
+ },
+ {
+  "id": 54,
+  "no": "Du kan allerede #!",
+  "zh": "你已经会 27 个了！",
+  "ex": "Du kan allerede 27!"
+ },
+ {
+  "id": 55,
+  "no": "Du vet # × # = #. Hva er # × #?",
+  "zh": "你知道 3 × 7 = 21。那 7 × 3 呢？",
+  "ex": "Du vet 3 × 7 = 21. Hva er 7 × 3?"
+ },
+ {
+  "id": 56,
+  "no": "Du vet:",
+  "zh": "你知道：",
+  "ex": "Du vet:"
+ },
+ {
+  "id": 57,
+  "no": "Eksempel: # × #. #, # eller #? Nei. #? Ja! Det er fem-gangen: halvparten av # er #. Se: # × # hører til fem-gangen, ikke til kvadrattallene.",
+  "zh": "例子：5 × 5。1、2 或 10？不是。5？是！用 5 的乘法：50 的一半是 25。注意：5 × 5 属于 5 的乘法，不属于平方数。",
+  "ex": "Eksempel: 5 × 5. 1, 2 eller 10? Nei. 5? Ja! Det er fem-gangen: halvparten av 50 er 25. Se: 5 × 5 hører til fem-gangen, ikke til kvadrattallene."
+ },
+ {
+  "id": 58,
+  "no": "Eksempel: # × #. #, # eller #? Nei. #? Nei. Like? Nei. #? Ja! Da er det ni-regelen: # − # er #.",
+  "zh": "例子：6 × 9。1、2 或 10？不是。5？不是。相同？不是。9？是！用 9 的规则：60 减 6 等于 54。",
+  "ex": "Eksempel: 6 × 9. 1, 2 eller 10? Nei. 5? Nei. Like? Nei. 9? Ja! Da er det ni-regelen: 60 − 6 er 54."
+ },
+ {
+  "id": 59,
+  "no": "Eksempel: # × #. Nei, nei, nei og nei. Da må du pugge den: #.",
+  "zh": "例子：7 × 8。四个问题的答案都是“不”。那就要背下来：56。",
+  "ex": "Eksempel: 7 × 8. Nei, nei, nei og nei. Da må du pugge den: 56."
+ },
+ {
+  "id": 60,
+  "no": "Eller: halvparten av # er #, og så en null bak: #.",
+  "zh": "或者：4 的一半是 2，后面加 0：20。",
+  "ex": "Eller: halvparten av 4 er 2, og så en null bak: 20."
+ },
+ {
+  "id": 61,
+  "no": "Er en av faktorene #, # eller #?",
+  "zh": "其中一个因数是 1、2 或 10 吗？",
+  "ex": "Er en av faktorene 1, 2 eller 10?"
+ },
+ {
+  "id": 62,
+  "no": "Er en av faktorene #?",
+  "zh": "其中一个因数是 5 吗？",
+  "ex": "Er en av faktorene 5?"
+ },
+ {
+  "id": 63,
+  "no": "Er faktorene like (like × like)?",
+  "zh": "两个因数相同吗（like × like）？",
+  "ex": "Er faktorene like (like × like)?"
+ },
+ {
+  "id": 64,
+  "no": "Er svaret nei på alle fire, må du pugge den. Men det er bare # regnestykker.",
+  "zh": "如果四个问题的答案都是“不”，就要背下来。但只有 10 个算式。",
+  "ex": "Er svaret nei på alle fire, må du pugge den. Men det er bare 10 regnestykker."
+ },
+ {
+  "id": 65,
+  "no": "Er tallet et partall, kan du halvere tallet og sette en null bak. # × #: halvparten av # er #, null bak, #.",
+  "zh": "如果是偶数，可以先取一半，再在后面加 0。8 × 5：8 的一半是 4，后面加 0，得到 40。",
+  "ex": "Er tallet et partall, kan du halvere tallet og sette en null bak. 8 × 5: halvparten av 8 er 4, null bak, 40."
+ },
+ {
+  "id": 66,
+  "no": "Et lite triks: Legg til neste oddetall. # + # er #. # + # er #. # + # er #.",
+  "zh": "一个小窍门：每次加下一个奇数。9 加 7 得 16，16 加 9 得 25，25 加 11 得 36。",
+  "ex": "Et lite triks: Legg til neste oddetall. 9 + 7 er 16. 16 + 9 er 25. 25 + 11 er 36."
+ },
+ {
+  "id": 67,
+  "no": "Ett-gangen: Å gange med # gir det samme tallet. # × # er #.",
+  "zh": "1 的乘法：乘 1，数不变。7 × 1 等于 7。",
+  "ex": "Ett-gangen: Å gange med 1 gir det samme tallet. 7 × 1 er 7."
+ },
+ {
+  "id": 68,
+  "no": "Fargen viser hvor sikker du er. Trykk på en rute for å se regelen.",
+  "zh": "颜色表示你掌握的程度。点一个格子看规则。",
+  "ex": "Fargen viser hvor sikker du er. Trykk på en rute for å se regelen."
+ },
+ {
+  "id": 69,
+  "no": "Fartsrunde",
+  "zh": "速度挑战",
+  "ex": "Fartsrunde"
+ },
+ {
+  "id": 70,
+  "no": "Fartsrunde (# sekunder)",
+  "zh": "速度挑战（60 秒）",
+  "ex": "Fartsrunde (60 sekunder)"
+ },
+ {
+  "id": 71,
+  "no": "Fem er halvparten av ti. Så fem-gangen er halvparten av ti-gangen. # × # er #, og halvparten er #.",
+  "zh": "5 是 10 的一半，所以 5 的乘法就是 10 的乘法的一半。7 × 10 等于 70，一半是 35。",
+  "ex": "Fem er halvparten av ti. Så fem-gangen er halvparten av ti-gangen. 7 × 10 er 70, og halvparten er 35."
+ },
+ {
+  "id": 72,
+  "no": "Fem-gangen er også lett. Da er det # igjen.",
+  "zh": "5 的乘法也很容易。还剩 21 个。",
+  "ex": "Fem-gangen er også lett. Da er det 21 igjen."
+ },
+ {
+  "id": 73,
+  "no": "Fem-gangen tar bort # regnestykker til. Nå er det # igjen.",
+  "zh": "5 的乘法又去掉 7 个算式。现在剩 21 个。",
+  "ex": "Fem-gangen tar bort 7 regnestykker til. Nå er det 21 igjen."
+ },
+ {
+  "id": 74,
+  "no": "Fem-gangen: halvparten av ti-gangen!",
+  "zh": "5 的乘法：就是 10 的乘法的一半！",
+  "ex": "Fem-gangen: halvparten av ti-gangen!"
+ },
+ {
+  "id": 75,
+  "no": "Ferdig!",
+  "zh": "看完了！",
+  "ex": "Ferdig!"
+ },
+ {
+  "id": 76,
+  "no": "Fire spørsmål i riktig rekkefølge",
+  "zh": "按顺序问四个问题",
+  "ex": "Fire spørsmål i riktig rekkefølge"
+ },
+ {
+  "id": 77,
+  "no": "Forklar etter hvert svar",
+  "zh": "每次答完都解释",
+  "ex": "Forklar etter hvert svar"
+ },
+ {
+  "id": 78,
+  "no": "Forklaring",
+  "zh": "解释",
+  "ex": "Forklaring"
+ },
+ {
+  "id": 79,
+  "no": "Fortsett ➜",
+  "zh": "继续",
+  "ex": "Fortsett ➜"
+ },
+ {
+  "id": 80,
+  "no": "Fra # ruter til # regnestykker – ett steg om gangen.",
+  "zh": "从 100 个格子到 10 道算式——一次学一步。",
+  "ex": "Fra 100 ruter til 10 regnestykker – ett steg om gangen."
+ },
+ {
+  "id": 81,
+  "no": "Fra # til #, steg for steg. Vi lærer ett steg om gangen. Er du klar?",
+  "zh": "从 100 个到 10 个，一步一步来。我们每次学一步。准备好了吗？",
+  "ex": "Fra 100 til 10, steg for steg. Vi lærer ett steg om gangen. Er du klar?"
+ },
+ {
+  "id": 82,
+  "no": "Fremgang",
+  "zh": "进度",
+  "ex": "Fremgang"
+ },
+ {
+  "id": 83,
+  "no": "Først #-gangen: # × # = #.",
+  "zh": "先算 10 的乘法：3 × 10 = 30。",
+  "ex": "Først 10-gangen: 3 × 10 = 30."
+ },
+ {
+  "id": 84,
+  "no": "Først tar vi bort de speilvendte. # × # er det samme som # × #. Da er det bare # igjen.",
+  "zh": "首先去掉对称的算式。5 × 6 和 6 × 5 的结果一样。这样只剩下 55 个。",
+  "ex": "Først tar vi bort de speilvendte. 5 × 6 er det samme som 6 × 5. Da er det bare 55 igjen."
+ },
+ {
+  "id": 85,
+  "no": "Gang med # og trekk fra tallet én gang",
+  "zh": "先乘 10，再减去这个数一次",
+  "ex": "Gang med 10 og trekk fra tallet én gang"
+ },
+ {
+  "id": 86,
+  "no": "Gang med #: # × # = #.",
+  "zh": "先乘 10：7 × 10 = 70。",
+  "ex": "Gang med 10: 7 × 10 = 70."
+ },
+ {
+  "id": 87,
+  "no": "Gange med # gir det samme tallet",
+  "zh": "乘 1，数不变",
+  "ex": "Gange med 1 gir det samme tallet"
+ },
+ {
+  "id": 88,
+  "no": "Gange – lær og øv",
+  "zh": "乘法：学习和练习",
+  "ex": "Gange – lær og øv"
+ },
+ {
+  "id": 89,
+  "no": "Gangespill",
+  "zh": "乘法小游戏",
+  "ex": "Gangespill"
+ },
+ {
+  "id": 90,
+  "no": "Gangetabellen som system",
+  "zh": "把乘法表当作一个系统",
+  "ex": "Gangetabellen som system"
+ },
+ {
+  "id": 91,
+  "no": "Halvparten av #-gangen · # igjen",
+  "zh": "10 的乘法的一半 · 剩 21 个",
+  "ex": "Halvparten av 10-gangen · 21 igjen"
+ },
+ {
+  "id": 92,
+  "no": "Halvparten av ti-gangen",
+  "zh": "10 的乘法的一半",
+  "ex": "Halvparten av ti-gangen"
+ },
+ {
+  "id": 93,
+  "no": "Hei! Gangetabellen har hundre ruter. Det høres mye ut. Men du trenger ikke pugge alle hundre!",
+  "zh": "你好！乘法表有一百个格子，听起来很多。但你不需要把一百个全部死记硬背！",
+  "ex": "Hei! Gangetabellen har hundre ruter. Det høres mye ut. Men du trenger ikke pugge alle hundre!"
+ },
+ {
+  "id": 94,
+  "no": "Hele tabellen",
+  "zh": "整个乘法表",
+  "ex": "Hele tabellen"
+ },
+ {
+  "id": 95,
+  "no": "Hele tabellen, alle regnestykker. Trykk ❓ under oppgaven for å få vite hvilken regel som gjelder.",
+  "zh": "整个乘法表，所有算式。点题目下面的 ❓，就能知道用哪条规则。",
+  "ex": "Hele tabellen, alle regnestykker. Trykk ❓ under oppgaven for å få vite hvilken regel som gjelder."
+ },
+ {
+  "id": 96,
+  "no": "Hele tabellen, med regelhjelp",
+  "zh": "整个乘法表，带规则提示",
+  "ex": "Hele tabellen, med regelhjelp"
+ },
+ {
+  "id": 97,
+  "no": "Her er alle fem: # × # er #. # × # er #. # × # er #. # × # er #. # × # er #.",
+  "zh": "五个都在这里：3 × 9 等于 27，4 × 9 等于 36，6 × 9 等于 54，7 × 9 等于 63，8 × 9 等于 72。",
+  "ex": "Her er alle fem: 3 × 9 er 27. 4 × 9 er 36. 6 × 9 er 54. 7 × 9 er 63. 8 × 9 er 72."
+ },
+ {
+  "id": 98,
+  "no": "Her er de ti. De ligger i et lite område i midten av tabellen.",
+  "zh": "这就是那十个，它们集中在乘法表中间的一小块。",
+  "ex": "Her er de ti. De ligger i et lite område i midten av tabellen."
+ },
+ {
+  "id": 99,
+  "no": "Her er hele gangetabellen. Hundre ruter. La oss se hvor mange vi egentlig må pugge.",
+  "zh": "这是整个乘法表，一百个格子。我们来看看到底有多少需要背。",
+  "ex": "Her er hele gangetabellen. Hundre ruter. La oss se hvor mange vi egentlig må pugge."
+ },
+ {
+  "id": 100,
+  "no": "Hjelp med regelen",
+  "zh": "规则提示",
+  "ex": "Hjelp med regelen"
+ },
+ {
+  "id": 101,
+  "no": "Hver farge er en regel. De lyse rutene er speilvendte.",
+  "zh": "每种颜色是一条规则。浅色格子是对称的。",
+  "ex": "Hver farge er en regel. De lyse rutene er speilvendte."
+ },
+ {
+  "id": 102,
+  "no": "Hvilke grupper?",
+  "zh": "哪些组？",
+  "ex": "Hvilke grupper?"
+ },
+ {
+  "id": 103,
+  "no": "Hvilken regel gjelder?",
+  "zh": "用哪条规则？",
+  "ex": "Hvilken regel gjelder?"
+ },
+ {
+  "id": 104,
+  "no": "Hvilken regel gjelder? (Husk de fire spørsmålene.)",
+  "zh": "用哪条规则？（记住那四个问题。）",
+  "ex": "Hvilken regel gjelder? (Husk de fire spørsmålene.)"
+ },
+ {
+  "id": 105,
+  "no": "Hvordan vet du hvilken regel du skal bruke? Still fire spørsmål, i riktig rekkefølge.",
+  "zh": "怎么知道该用哪条规则？按顺序问四个问题。",
+  "ex": "Hvordan vet du hvilken regel du skal bruke? Still fire spørsmål, i riktig rekkefølge."
+ },
+ {
+  "id": 106,
+  "no": "Hvorfor du ikke må pugge alle #",
+  "zh": "为什么不用背全部 100 个",
+  "ex": "Hvorfor du ikke må pugge alle 100"
+ },
+ {
+  "id": 107,
+  "no": "Hvorfor? Ni er én mindre enn ti. # rader med ti prikker er #. Vi tar bort én prikk i hver rad, sju prikker. # − # er #.",
+  "zh": "为什么？因为 9 比 10 少 1。七行，每行十个点，一共 70 个。每行去掉一个点，一共去掉 7 个。70 减 7 等于 63。",
+  "ex": "Hvorfor? Ni er én mindre enn ti. 7 rader med ti prikker er 70. Vi tar bort én prikk i hver rad, sju prikker. 70 − 7 er 63."
+ },
+ {
+  "id": 108,
+  "no": "I tabellen ligger de på hver sin side av diagonalen. Se: tre og sju her, og sju og tre her.",
+  "zh": "在乘法表里，它们分别在对角线的两侧。看：这里是 3 和 7，这里是 7 和 3。",
+  "ex": "I tabellen ligger de på hver sin side av diagonalen. Se: tre og sju her, og sju og tre her."
+ },
+ {
+  "id": 109,
+  "no": "Ikke helt – se spørsmålene over.",
+  "zh": "不对——看上面的问题。",
+  "ex": "Ikke helt – se spørsmålene over."
+ },
+ {
+  "id": 110,
+  "no": "Ikke helt. # × # = #",
+  "zh": "不对。10 × 4 = 40",
+  "ex": "Ikke helt. 10 × 4 = 40"
+ },
+ {
+  "id": 111,
+  "no": "Ingen av dem → må læres",
+  "zh": "都不是 → 要背下来",
+  "ex": "Ingen av dem → må læres"
+ },
+ {
+  "id": 112,
+  "no": "Ingen enkel regel – men du har triks",
+  "zh": "没有简单规则——但有小窍门",
+  "ex": "Ingen enkel regel – men du har triks"
+ },
+ {
+  "id": 113,
+  "no": "Ingen enkel regel – pugg # × # = #.",
+  "zh": "没有简单规则——背下 3 × 4 = 12。",
+  "ex": "Ingen enkel regel – pugg 3 × 4 = 12."
+ },
+ {
+  "id": 114,
+  "no": "Ingen feil – flott!",
+  "zh": "没有错——太棒了！",
+  "ex": "Ingen feil – flott!"
+ },
+ {
+  "id": 115,
+  "no": "Kunne du den?",
+  "zh": "你会吗？",
+  "ex": "Kunne du den?"
+ },
+ {
+  "id": 116,
+  "no": "Kvadrattall",
+  "zh": "平方数",
+  "ex": "Kvadrattall"
+ },
+ {
+  "id": 117,
+  "no": "Kvadrattallene ligger på diagonalen. Seks regnestykker. Nå er det # igjen.",
+  "zh": "平方数都在对角线上，一共 6 个算式。现在剩 15 个。",
+  "ex": "Kvadrattallene ligger på diagonalen. Seks regnestykker. Nå er det 15 igjen."
+ },
+ {
+  "id": 118,
+  "no": "Lett! # bort · # igjen",
+  "zh": "很简单！去掉 27 个 · 剩 28 个",
+  "ex": "Lett! 27 bort · 28 igjen"
+ },
+ {
+  "id": 119,
+  "no": "Like × like",
+  "zh": "相同两数相乘",
+  "ex": "Like × like"
+ },
+ {
+  "id": 120,
+  "no": "Like × like (kvadrattall)",
+  "zh": "相同两数相乘（平方数）",
+  "ex": "Like × like (kvadrattall)"
+ },
+ {
+  "id": 121,
+  "no": "Like × like (y × y)",
+  "zh": "相同两数相乘（y × y）",
+  "ex": "Like × like (y × y)"
+ },
+ {
+  "id": 122,
+  "no": "Like × like ut",
+  "zh": "去掉相同两数相乘",
+  "ex": "Like × like ut"
+ },
+ {
+  "id": 123,
+  "no": "Like × like: pugges som en egen liten gruppe",
+  "zh": "相同两数相乘：作为一小组背下来",
+  "ex": "Like × like: pugges som en egen liten gruppe"
+ },
+ {
+  "id": 124,
+  "no": "Lyd på. Skru opp volumet.",
+  "zh": "请打开声音。",
+  "ex": "Lyd på. Skru opp volumet."
+ },
+ {
+  "id": 125,
+  "no": "Lær bare halve tabellen",
+  "zh": "只学半张乘法表",
+  "ex": "Lær bare halve tabellen"
+ },
+ {
+  "id": 126,
+  "no": "Lær systemet – trinn for trinn",
+  "zh": "一步一步学这个系统",
+  "ex": "Lær systemet – trinn for trinn"
+ },
+ {
+  "id": 127,
+  "no": "Med triks: doble, #-#-#-#",
+  "zh": "有窍门：翻倍、5-6-7-8",
+  "ex": "Med triks: doble, 5-6-7-8"
+ },
+ {
+  "id": 128,
+  "no": "Meny",
+  "zh": "菜单",
+  "ex": "Meny"
+ },
+ {
+  "id": 129,
+  "no": "Min fremgang",
+  "zh": "我的进度",
+  "ex": "Min fremgang"
+ },
+ {
+  "id": 130,
+  "no": "Må læres",
+  "zh": "要背下来的",
+  "ex": "Må læres"
+ },
+ {
+  "id": 131,
+  "no": "Neste video ›",
+  "zh": "下一个视频 ›",
+  "ex": "Neste video ›"
+ },
+ {
+  "id": 132,
+  "no": "Neste ›",
+  "zh": "下一题 ›",
+  "ex": "Neste ›"
+ },
+ {
+  "id": 133,
+  "no": "Ni-gangen har en regel. Fem regnestykker til forsvinner. Nå er det bare # igjen!",
+  "zh": "9 的乘法有一个规则，又去掉 5 个算式。现在只剩 10 个了！",
+  "ex": "Ni-gangen har en regel. Fem regnestykker til forsvinner. Nå er det bare 10 igjen!"
+ },
+ {
+  "id": 134,
+  "no": "Ni-gangen har en regel. Gang med ti, og trekk fra tallet én gang.",
+  "zh": "9 的乘法有一个规则：先乘 10，再减去这个数一次。",
+  "ex": "Ni-gangen har en regel. Gang med ti, og trekk fra tallet én gang."
+ },
+ {
+  "id": 135,
+  "no": "Ni-gangen tar bort # regnestykker. Nå er det bare # igjen!",
+  "zh": "9 的乘法去掉 5 个算式。现在只剩 10 个了！",
+  "ex": "Ni-gangen tar bort 5 regnestykker. Nå er det bare 10 igjen!"
+ },
+ {
+  "id": 136,
+  "no": "Ni-regelen: gang med ti, og trekk fra tallet. Enkelt!",
+  "zh": "9 的规则：乘 10，再减去这个数。很简单！",
+  "ex": "Ni-regelen: gang med ti, og trekk fra tallet. Enkelt!"
+ },
+ {
+  "id": 137,
+  "no": "Nullstill fremgang",
+  "zh": "重置进度",
+  "ex": "Nullstill fremgang"
+ },
+ {
+  "id": 138,
+  "no": "Nå er det bare # regnestykker igjen. Dem må vi pugge. Men vi har gode triks!",
+  "zh": "现在只剩 10 个算式了。这些要背下来，但我们有好窍门！",
+  "ex": "Nå er det bare 10 regnestykker igjen. Dem må vi pugge. Men vi har gode triks!"
+ },
+ {
+  "id": 139,
+  "no": "Nå kommer tre veldig lette gangetabeller: ett-gangen, to-gangen og ti-gangen.",
+  "zh": "现在是三张非常简单的乘法表：1、2 和 10 的乘法。",
+  "ex": "Nå kommer tre veldig lette gangetabeller: ett-gangen, to-gangen og ti-gangen."
+ },
+ {
+  "id": 140,
+  "no": "Nå lærer vi det første trikset: speilvendte regnestykker.",
+  "zh": "现在学第一个窍门：对称的算式。",
+  "ex": "Nå lærer vi det første trikset: speilvendte regnestykker."
+ },
+ {
+  "id": 141,
+  "no": "Nå lærer vi fem-gangen. Den er også lett.",
+  "zh": "现在学 5 的乘法。它也很容易。",
+  "ex": "Nå lærer vi fem-gangen. Den er også lett."
+ },
+ {
+  "id": 142,
+  "no": "Nå skal vi lære like ganger like. De heter kvadrattall.",
+  "zh": "现在学相同两数相乘，叫做平方数，挪威语是 [kvadrattall]。",
+  "ex": "Nå skal vi lære like ganger like. De heter kvadrattall."
+ },
+ {
+  "id": 143,
+  "no": "Når du øver, kan du alltid trykke på spørsmålstegnet. Da får du vite hvilken regel som gjelder.",
+  "zh": "练习时，你随时可以点问号，看看用的是哪条规则。",
+  "ex": "Når du øver, kan du alltid trykke på spørsmålstegnet. Da får du vite hvilken regel som gjelder."
+ },
+ {
+  "id": 144,
+  "no": "Opplesing",
+  "zh": "朗读",
+  "ex": "Opplesing"
+ },
+ {
+  "id": 145,
+  "no": "Per gruppe",
+  "zh": "按分组",
+  "ex": "Per gruppe"
+ },
+ {
+  "id": 146,
+  "no": "Prøv selv: # × #, # × # og # × #. Svarene er #, # og #.",
+  "zh": "试一试：9 × 1、9 × 2 和 9 × 10。答案是 9、18 和 90。",
+  "ex": "Prøv selv: 9 × 1, 9 × 2 og 9 × 10. Svarene er 9, 18 og 90."
+ },
+ {
+  "id": 147,
+  "no": "Pugge-kort",
+  "zh": "背诵卡片",
+  "ex": "Pugge-kort"
+ },
+ {
+  "id": 148,
+  "no": "Regelen virker også for # × #: # − # er #. Men den hører til kvadrattallene.",
+  "zh": "这个规则对 9 × 9 也有效：90 减 9 等于 81。不过它属于平方数那一组。",
+  "ex": "Regelen virker også for 9 × 9: 90 − 9 er 81. Men den hører til kvadrattallene."
+ },
+ {
+  "id": 149,
+  "no": "Regelspotter",
+  "zh": "找规则",
+  "ex": "Regelspotter"
+ },
+ {
+  "id": 150,
+  "no": "Regler",
+  "zh": "规则",
+  "ex": "Regler"
+ },
+ {
+  "id": 151,
+  "no": "Resten av #-gangen ut",
+  "zh": "去掉 9 的乘法",
+  "ex": "Resten av 9-gangen ut"
+ },
+ {
+  "id": 152,
+  "no": "Riktig regel!",
+  "zh": "规则选对了！",
+  "ex": "Riktig regel!"
+ },
+ {
+  "id": 153,
+  "no": "Riktig!",
+  "zh": "对了！",
+  "ex": "Riktig!"
+ },
+ {
+  "id": 154,
+  "no": "Riktig: # av #",
+  "zh": "答对 1 道中的 1 道",
+  "ex": "Riktig: 1 av 1"
+ },
+ {
+  "id": 155,
+  "no": "Se hvilke regnestykker som sitter, og hva du sliter med.",
+  "zh": "看看哪些算式已经会了，哪些还有困难。",
+  "ex": "Se hvilke regnestykker som sitter, og hva du sliter med."
+ },
+ {
+  "id": 156,
+  "no": "Se på regnestykket, tenk på svaret, og snu kortet. Si så ærlig om du kunne den.",
+  "zh": "看算式，想答案，然后翻卡片。再诚实地说你是否会。",
+  "ex": "Se på regnestykket, tenk på svaret, og snu kortet. Si så ærlig om du kunne den."
+ },
+ {
+  "id": 157,
+  "no": "Se på svarene: #, #, #, # og #. Sifrene blir # til sammen! # + # er #. Bruk det som en sjekk.",
+  "zh": "看看答案：27、36、54、63、72。每个答案的两个数字加起来都是 9！2 加 7 等于 9。用它来检查。",
+  "ex": "Se på svarene: 27, 36, 54, 63 og 72. Sifrene blir 9 til sammen! 2 + 7 er 9. Bruk det som en sjekk."
+ },
+ {
+  "id": 158,
+  "no": "Se regnestykket og velg hvilken regel som gjelder.",
+  "zh": "看算式，选择用哪条规则。",
+  "ex": "Se regnestykket og velg hvilken regel som gjelder."
+ },
+ {
+  "id": 159,
+  "no": "Se, tenk, snu kortet. De # (og gjerne kvadrattallene).",
+  "zh": "看一看、想一想、翻卡片。那 10 个（还有平方数）。",
+  "ex": "Se, tenk, snu kortet. De 10 (og gjerne kvadrattallene)."
+ },
+ {
+  "id": 160,
+  "no": "Seks kvadrattall",
+  "zh": "六个平方数",
+  "ex": "Seks kvadrattall"
+ },
+ {
+  "id": 161,
+  "no": "Seks kvadrattall: #, #, #, #, # og #. Øv på dem som en egen gruppe!",
+  "zh": "六个平方数：9、16、36、49、64 和 81。把它们当作一小组来练！",
+  "ex": "Seks kvadrattall: 9, 16, 36, 49, 64 og 81. Øv på dem som en egen gruppe!"
+ },
+ {
+  "id": 162,
+  "no": "Sett en null bak #: # × # = #.",
+  "zh": "在 2 后面加一个 0：2 × 10 = 20。",
+  "ex": "Sett en null bak 2: 2 × 10 = 20."
+ },
+ {
+  "id": 163,
+  "no": "Sett en null bak tallet",
+  "zh": "在数的后面加一个 0",
+  "ex": "Sett en null bak tallet"
+ },
+ {
+  "id": 164,
+  "no": "Siste: # × #. Husk rekka #, #, #, #. # er # × #.",
+  "zh": "最后一个：7 × 8。记住数列 5、6、7、8：56 等于 7 × 8。",
+  "ex": "Siste: 7 × 8. Husk rekka 5, 6, 7, 8. 56 er 7 × 8."
+ },
+ {
+  "id": 165,
+  "no": "Sjekk: sifrene i # blir # til sammen: # + #.",
+  "zh": "检查：63 的两个数字加起来是 9：6 + 3。",
+  "ex": "Sjekk: sifrene i 63 blir 9 til sammen: 6 + 3."
+ },
+ {
+  "id": 166,
+  "no": "Slik finner du regelen:",
+  "zh": "这样找到规则：",
+  "ex": "Slik finner du regelen:"
+ },
+ {
+  "id": 167,
+  "no": "Slik krymper tabellen",
+  "zh": "乘法表是这样变小的",
+  "ex": "Slik krymper tabellen"
+ },
+ {
+  "id": 168,
+  "no": "Slik regner du:",
+  "zh": "这样计算：",
+  "ex": "Slik regner du:"
+ },
+ {
+  "id": 169,
+  "no": "Sliter mest med",
+  "zh": "最有困难的",
+  "ex": "Sliter mest med"
+ },
+ {
+  "id": 170,
+  "no": "Snu først: # × # er det samme som # × #.",
+  "zh": "先交换位置：2 × 1 和 1 × 2 的结果一样。",
+  "ex": "Snu først: 2 × 1 er det samme som 1 × 2."
+ },
+ {
+  "id": 171,
+  "no": "Snu rutenettet: # × # = # × # = #",
+  "zh": "把方阵转一下：3 × 6 = 6 × 3 = 18",
+  "ex": "Snu rutenettet: 3 × 6 = 6 × 3 = 18"
+ },
+ {
+  "id": 172,
+  "no": "Speilvendt!",
+  "zh": "对称！",
+  "ex": "Speilvendt!"
+ },
+ {
+  "id": 173,
+  "no": "Speilvendte",
+  "zh": "对称的算式",
+  "ex": "Speilvendte"
+ },
+ {
+  "id": 174,
+  "no": "Speilvendte regnestykker",
+  "zh": "对称的算式",
+  "ex": "Speilvendte regnestykker"
+ },
+ {
+  "id": 175,
+  "no": "Spill av",
+  "zh": "播放",
+  "ex": "Spill av"
+ },
+ {
+  "id": 176,
+  "no": "Spørsmål #: Er en av faktorene #, # eller #? Da bruker du de lette triksene.",
+  "zh": "第一问：其中一个因数是 1、2 或 10 吗？那就用简单的窍门。",
+  "ex": "Spørsmål 1: Er en av faktorene 1, 2 eller 10? Da bruker du de lette triksene."
+ },
+ {
+  "id": 177,
+  "no": "Spørsmål #: Er en av faktorene #? Da bruker du fem-gangen: halvparten av ti-gangen.",
+  "zh": "第二问：其中一个因数是 5 吗？那就用 5 的乘法：10 的乘法的一半。",
+  "ex": "Spørsmål 2: Er en av faktorene 5? Da bruker du fem-gangen: halvparten av ti-gangen."
+ },
+ {
+  "id": 178,
+  "no": "Spørsmål #: Er en av faktorene #? Da bruker du ni-regelen: gang med ti og trekk fra.",
+  "zh": "第四问：其中一个因数是 9 吗？那就用 9 的规则：先乘 10，再减去。",
+  "ex": "Spørsmål 4: Er en av faktorene 9? Da bruker du ni-regelen: gang med ti og trekk fra."
+ },
+ {
+  "id": 179,
+  "no": "Spørsmål #: Er faktorene like? Da er det et kvadrattall, og det pugger du.",
+  "zh": "第三问：两个因数相同吗？那是平方数，要背下来。",
+  "ex": "Spørsmål 3: Er faktorene like? Da er det et kvadrattall, og det pugger du."
+ },
+ {
+  "id": 180,
+  "no": "Svar",
+  "zh": "回答方式",
+  "ex": "Svar"
+ },
+ {
+  "id": 181,
+  "no": "Svar på så mange du kan på # sekunder. Ingen hjelp underveis.",
+  "zh": "60 秒内尽量多答。中途没有提示。",
+  "ex": "Svar på så mange du kan på 60 sekunder. Ingen hjelp underveis."
+ },
+ {
+  "id": 182,
+  "no": "Svarene i fem-gangen ender alltid på # eller #.",
+  "zh": "5 的乘法的答案，个位总是 0 或 5。",
+  "ex": "Svarene i fem-gangen ender alltid på 0 eller 5."
+ },
+ {
+  "id": 183,
+  "no": "Svaret i #-gangen ender alltid på # eller #.",
+  "zh": "5 的乘法的答案，个位总是 0 或 5。",
+  "ex": "Svaret i 5-gangen ender alltid på 0 eller 5."
+ },
+ {
+  "id": 184,
+  "no": "Systemet: fra # til #",
+  "zh": "整体思路：从 100 到 10",
+  "ex": "Systemet: fra 100 til 10"
+ },
+ {
+  "id": 185,
+  "no": "Så halvparten: # ÷ # = #.",
+  "zh": "再取一半：30 ÷ 2 = 15。",
+  "ex": "Så halvparten: 30 ÷ 2 = 15."
+ },
+ {
+  "id": 186,
+  "no": "Så kommer like ganger like. Det er kvadrattallene, og de er bare seks. Da er det # igjen.",
+  "zh": "接下来是相同两数相乘，也就是平方数，只有 6 个。还剩 15 个。",
+  "ex": "Så kommer like ganger like. Det er kvadrattallene, og de er bare seks. Da er det 15 igjen."
+ },
+ {
+  "id": 187,
+  "no": "Så tar vi bort ett-gangen, to-gangen og ti-gangen. De er veldig lette. Da er det # igjen.",
+  "zh": "接着去掉 1、2 和 10 的乘法，它们非常容易。这样还剩 28 个。",
+  "ex": "Så tar vi bort ett-gangen, to-gangen og ti-gangen. De er veldig lette. Da er det 28 igjen."
+ },
+ {
+  "id": 188,
+  "no": "Tavle og lærerinne",
+  "zh": "黑板和老师",
+  "ex": "Tavle og lærerinne"
+ },
+ {
+  "id": 189,
+  "no": "Tekst",
+  "zh": "文字",
+  "ex": "Tekst"
+ },
+ {
+  "id": 190,
+  "no": "Tell med fem: #, #, #, #, #, #. Hvert hopp er fem.",
+  "zh": "五个五个地数：5、10、15、20、25、30。每一跳是 5。",
+  "ex": "Tell med fem: 5, 10, 15, 20, 25, 30. Hvert hopp er fem."
+ },
+ {
+  "id": 191,
+  "no": "Tenk på svaret, så snur du kortet.",
+  "zh": "先想答案，再翻卡片。",
+  "ex": "Tenk på svaret, så snur du kortet."
+ },
+ {
+  "id": 192,
+  "no": "Ti regnestykker. Øv litt hver dag, så sitter de snart!",
+  "zh": "十个算式。每天练一点，很快就能记住！",
+  "ex": "Ti regnestykker. Øv litt hver dag, så sitter de snart!"
+ },
+ {
+  "id": 193,
+  "no": "Ti-gangen: Sett en null bak tallet. # × # er #. # × # er #.",
+  "zh": "10 的乘法：在数的后面加一个 0。7 × 10 等于 70。10 × 10 等于 100。",
+  "ex": "Ti-gangen: Sett en null bak tallet. 7 × 10 er 70. 10 × 10 er 100."
+ },
+ {
+  "id": 194,
+  "no": "Tilbake",
+  "zh": "返回",
+  "ex": "Tilbake"
+ },
+ {
+  "id": 195,
+  "no": "Tips: # × # = #, og # + # = #.",
+  "zh": "提示：2 × 2 = 4，4 + 5 = 9。",
+  "ex": "Tips: 2 × 2 = 4, og 4 + 5 = 9."
+ },
+ {
+  "id": 196,
+  "no": "Tips: Snu regnestykket, så det minste tallet kommer først. # × # blir # × #. Det er ofte lettere.",
+  "zh": "小提示：把算式交换一下，让小的数在前面。8 × 3 变成 3 × 8，通常更容易。",
+  "ex": "Tips: Snu regnestykket, så det minste tallet kommer først. 8 × 3 blir 3 × 8. Det er ofte lettere."
+ },
+ {
+  "id": 197,
+  "no": "To-gangen: Dobbelt! # × # er # + #. Det er #.",
+  "zh": "2 的乘法：就是两倍！8 × 2 等于 8 加 8，是 16。",
+  "ex": "To-gangen: Dobbelt! 8 × 2 er 8 + 8. Det er 16."
+ },
+ {
+  "id": 198,
+  "no": "Trekk fra # én gang: # − # = #.",
+  "zh": "再减去一个 7：70 − 7 = 63。",
+  "ex": "Trekk fra 7 én gang: 70 − 7 = 63."
+ },
+ {
+  "id": 199,
+  "no": "Treningsmodus",
+  "zh": "练习模式",
+  "ex": "Treningsmodus"
+ },
+ {
+  "id": 200,
+  "no": "Trikset for fire-gangen: doble to ganger. # × #: #, #, #.",
+  "zh": "4 的乘法的窍门：连续翻两倍。4 × 7：7、14、28。",
+  "ex": "Trikset for fire-gangen: doble to ganger. 4 × 7: 7, 14, 28."
+ },
+ {
+  "id": 201,
+  "no": "Trikset for åtte-gangen: doble tre ganger. # × #: #, #, #, #.",
+  "zh": "8 的乘法的窍门：连续翻三倍。6 × 8：6、12、24、48。",
+  "ex": "Trikset for åtte-gangen: doble tre ganger. 6 × 8: 6, 12, 24, 48."
+ },
+ {
+  "id": 202,
+  "no": "Trikset: # × # = #, og så dobbelt: # + # = #.",
+  "zh": "窍门：3 × 3 等于 9，再翻倍：9 + 9 = 18。",
+  "ex": "Trikset: 3 × 3 = 9, og så dobbelt: 9 + 9 = 18."
+ },
+ {
+  "id": 203,
+  "no": "Trikset: #-gangen er å doble to ganger: #, #, #.",
+  "zh": "窍门：4 的乘法就是连续翻两倍：3、6、12。",
+  "ex": "Trikset: 4-gangen er å doble to ganger: 3, 6, 12."
+ },
+ {
+  "id": 204,
+  "no": "Trikset: #-gangen er å doble tre ganger: #, #, #, #.",
+  "zh": "窍门：8 的乘法就是连续翻三倍：3、6、12、24。",
+  "ex": "Trikset: 8-gangen er å doble tre ganger: 3, 6, 12, 24."
+ },
+ {
+  "id": 205,
+  "no": "Trikset: Fem ganger # er #, og én # til: # + # = #.",
+  "zh": "窍门：五个 7 是 35，再加一个 7：35 + 7 = 42。",
+  "ex": "Trikset: Fem ganger 7 er 35, og én 7 til: 35 + 7 = 42."
+ },
+ {
+  "id": 206,
+  "no": "Trikset: Husk rekka #, #, #, #: # = # × #.",
+  "zh": "窍门：记住数列 5、6、7、8：56 = 7 × 8。",
+  "ex": "Trikset: Husk rekka 5, 6, 7, 8: 56 = 7 × 8."
+ },
+ {
+  "id": 207,
+  "no": "Trikset: To ganger # er #, og én # til: # + # = #.",
+  "zh": "窍门：两个 7 是 14，再加一个 7：14 + 7 = 21。",
+  "ex": "Trikset: To ganger 7 er 14, og én 7 til: 14 + 7 = 21."
+ },
+ {
+  "id": 208,
+  "no": "Trykk på ❓",
+  "zh": "点 ❓",
+  "ex": "Trykk på ❓"
+ },
+ {
+  "id": 209,
+  "no": "Uten #-, #- og #-gangen",
+  "zh": "去掉 1、2、10 的乘法",
+  "ex": "Uten 1-, 2- og 10-gangen"
+ },
+ {
+  "id": 210,
+  "no": "Uten #-gangen",
+  "zh": "去掉 5 的乘法",
+  "ex": "Uten 5-gangen"
+ },
+ {
+  "id": 211,
+  "no": "Uten speilvendte",
+  "zh": "去掉对称的",
+  "ex": "Uten speilvendte"
+ },
+ {
+  "id": 212,
+  "no": "Velg gruppen du vil øve på:",
+  "zh": "选择你想练习的一组：",
+  "ex": "Velg gruppen du vil øve på:"
+ },
+ {
+  "id": 213,
+  "no": "Vi trenger bare den ene halvdelen. Da er det # regnestykker igjen.",
+  "zh": "我们只需要其中的一半，还剩 55 个算式。",
+  "ex": "Vi trenger bare den ene halvdelen. Da er det 55 regnestykker igjen."
+ },
+ {
+  "id": 214,
+  "no": "Video",
+  "zh": "视频",
+  "ex": "Video"
+ },
+ {
+  "id": 215,
+  "no": "Vil du ha mer? ",
+  "zh": "想要更多？",
+  "ex": "Vil du ha mer? "
+ },
+ {
+  "id": 216,
+  "no": "Vis hvordan →",
+  "zh": "看怎么算 →",
+  "ex": "Vis hvordan →"
+ },
+ {
+  "id": 217,
+  "no": "bare halve tabellen → #",
+  "zh": "只学半张表 → 55",
+  "ex": "bare halve tabellen → 55"
+ },
+ {
+  "id": 218,
+  "no": "det minste tallet først",
+  "zh": "小的数放前面",
+  "ex": "det minste tallet først"
+ },
+ {
+  "id": 219,
+  "no": "diagonalen",
+  "zh": "对角线",
+  "ex": "diagonalen"
+ },
+ {
+  "id": 220,
+  "no": "en null bak",
+  "zh": "后面加一个 0",
+  "ex": "en null bak"
+ },
+ {
+  "id": 221,
+  "no": "ett steg om gangen",
+  "zh": "一次学一步",
+  "ex": "ett steg om gangen"
+ },
+ {
+  "id": 222,
+  "no": "gang med #, trekk fra tallet",
+  "zh": "乘 10，再减去这个数",
+  "ex": "gang med 10, trekk fra tallet"
+ },
+ {
+  "id": 223,
+  "no": "halvparten av #-gangen",
+  "zh": "10 的乘法的一半",
+  "ex": "halvparten av 10-gangen"
+ },
+ {
+  "id": 224,
+  "no": "hører til kvadrattallene",
+  "zh": "属于平方数那一组",
+  "ex": "hører til kvadrattallene"
+ },
+ {
+  "id": 225,
+  "no": "ikke øvd",
+  "zh": "未练习",
+  "ex": "ikke øvd"
+ },
+ {
+  "id": 226,
+  "no": "kan du fra før",
+  "zh": "你已经会了",
+  "ex": "kan du fra før"
+ },
+ {
+  "id": 227,
+  "no": "kvadrat = firkant",
+  "zh": "平方 = 正方形",
+  "ex": "kvadrat = firkant"
+ },
+ {
+  "id": 228,
+  "no": "like × like ut → #",
+  "zh": "去掉相同两数相乘 → 15",
+  "ex": "like × like ut → 15"
+ },
+ {
+  "id": 229,
+  "no": "lærer",
+  "zh": "在学",
+  "ex": "lærer"
+ },
+ {
+  "id": 230,
+  "no": "partall: halver, null bak",
+  "zh": "偶数：取一半，后面加 0",
+  "ex": "partall: halver, null bak"
+ },
+ {
+  "id": 231,
+  "no": "samme tall",
+  "zh": "数不变",
+  "ex": "samme tall"
+ },
+ {
+  "id": 232,
+  "no": "sikker",
+  "zh": "已掌握",
+  "ex": "sikker"
+ },
+ {
+  "id": 233,
+  "no": "skriv svaret",
+  "zh": "输入答案",
+  "ex": "skriv svaret"
+ },
+ {
+  "id": 234,
+  "no": "sliter",
+  "zh": "困难",
+  "ex": "sliter"
+ },
+ {
+  "id": 235,
+  "no": "slutter på # eller #",
+  "zh": "个位是 0 或 5",
+  "ex": "slutter på 0 eller 5"
+ },
+ {
+  "id": 236,
+  "no": "speilvendte ut → #",
+  "zh": "去掉对称的 → 55",
+  "ex": "speilvendte ut → 55"
+ },
+ {
+  "id": 237,
+  "no": "så får du vite hvilken regel som gjelder",
+  "zh": "就能知道用哪条规则",
+  "ex": "så får du vite hvilken regel som gjelder"
+ },
+ {
+  "id": 238,
+  "no": "y × # = (y × #) − y · # igjen",
+  "zh": "y × 9 = (y × 10) − y · 剩 10 个",
+  "ex": "y × 9 = (y × 10) − y · 10 igjen"
+ },
+ {
+  "id": 239,
+  "no": "Å gange med # gir det samme tallet: # × # = #.",
+  "zh": "乘 1，数不变：1 × 1 = 1。",
+  "ex": "Å gange med 1 gir det samme tallet: 1 × 1 = 1."
+ },
+ {
+  "id": 240,
+  "no": "Øv",
+  "zh": "练习",
+  "ex": "Øv"
+ },
+ {
+  "id": 241,
+  "no": "Øv mer på disse (trykk for å se regelen):",
+  "zh": "多练这些（点一下看规则）：",
+  "ex": "Øv mer på disse (trykk for å se regelen):"
+ },
+ {
+  "id": 242,
+  "no": "Øv på en gruppe",
+  "zh": "练习一组",
+  "ex": "Øv på en gruppe"
+ },
+ {
+  "id": 243,
+  "no": "øv litt hver dag",
+  "zh": "每天练一点",
+  "ex": "øv litt hver dag"
+ },
+ {
+  "id": 244,
+  "no": "↻ Se på nytt",
+  "zh": "再看一遍",
+  "ex": "↻ Se på nytt"
+ },
+ {
+  "id": 245,
+  "no": "↻ Øv igjen",
+  "zh": "再练一次",
+  "ex": "↻ Øv igjen"
+ },
+ {
+  "id": 246,
+  "no": "⌨️ Skriv inn",
+  "zh": "⌨️ 输入答案",
+  "ex": "⌨️ Skriv inn"
+ },
+ {
+  "id": 247,
+  "no": "▶ Start",
+  "zh": "开始",
+  "ex": "▶ Start"
+ },
+ {
+  "id": 248,
+  "no": "▶ Start videoen",
+  "zh": "开始看视频",
+  "ex": "▶ Start videoen"
+ },
+ {
+  "id": 249,
+  "no": "⚙️ Endre valg",
+  "zh": "更改设置",
+  "ex": "⚙️ Endre valg"
+ },
+ {
+  "id": 250,
+  "no": "✅ Flervalg",
+  "zh": "✅ 选择题",
+  "ex": "✅ Flervalg"
+ },
+ {
+  "id": 251,
+  "no": "✅ Kunne den",
+  "zh": "我会",
+  "ex": "✅ Kunne den"
+ },
+ {
+  "id": 252,
+  "no": "✏️ Øv på dette",
+  "zh": "练习这个",
+  "ex": "✏️ Øv på dette"
+ },
+ {
+  "id": 253,
+  "no": "❓ Hvilken regel gjelder?",
+  "zh": "用哪条规则？",
+  "ex": "❓ Hvilken regel gjelder?"
+ },
+ {
+  "id": 254,
+  "no": "❓ Med knapp",
+  "zh": "❓ 用按钮",
+  "ex": "❓ Med knapp"
+ },
+ {
+  "id": 255,
+  "no": "🎬 Se oversiktsvideoen",
+  "zh": "看整体介绍视频",
+  "ex": "🎬 Se oversiktsvideoen"
+ },
+ {
+  "id": 256,
+  "no": "🎲 Tilfeldig",
+  "zh": "🎲 随机",
+  "ex": "🎲 Tilfeldig"
+ },
+ {
+  "id": 257,
+  "no": "🏠 Til forsiden",
+  "zh": "回首页",
+  "ex": "🏠 Til forsiden"
+ },
+ {
+  "id": 258,
+  "no": "👀 Vis regelen",
+  "zh": "👀 显示规则",
+  "ex": "👀 Vis regelen"
+ },
+ {
+  "id": 259,
+  "no": "👀 Vis svaret",
+  "zh": "看答案",
+  "ex": "👀 Vis svaret"
+ },
+ {
+  "id": 260,
+  "no": "👆 Trykk på en rute for å se hvilken regel som gjelder.",
+  "zh": "👆 点一个格子，看看用哪条规则。",
+  "ex": "👆 Trykk på en rute for å se hvilken regel som gjelder."
+ },
+ {
+  "id": 261,
+  "no": "📝 Arbeidsark (skriv ut)",
+  "zh": "📝 练习纸（打印）",
+  "ex": "📝 Arbeidsark (skriv ut)"
+ },
+ {
+  "id": 262,
+  "no": "😕 Ikke ennå",
+  "zh": "还不会",
+  "ex": "😕 Ikke ennå"
+ },
+ {
+  "id": 263,
+  "no": "🙈 Bare etter feil",
+  "zh": "🙈 只在答错后",
+  "ex": "🙈 Bare etter feil"
+ },
+ {
+  "id": 264,
+  "no": "Støttespråk",
+  "zh": "辅助语言",
+  "ex": "Støttespråk"
+ }
+]

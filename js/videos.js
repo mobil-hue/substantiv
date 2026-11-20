@@ -181,7 +181,7 @@ A.Video = {
     host.innerHTML = `<div class="vwrap${V.board && A.settings.board !== false ? ' board' : ''}"><div class="stage"><div class="scenehost" style="width:100%"></div>${V.board && A.teacherHTML ? A.teacherHTML() : ''}
       <div class="startcard"><div class="big-emoji">${V.emoji}</div><h2>${A.bi(V.no, V.zh)}</h2>
       ${langBox()}
-      <button class="btn big start"><span class="bi"><span class="no">▶ Start videoen</span><span class="zh">开始看视频</span></span></button>
+      <button class="btn big start">${A.bi('▶ Start videoen','开始看视频')}</button>
       <div class="small-note">🔊 ${A.bi('Lyd på. Skru opp volumet.','请打开声音。')}</div></div></div>
       <div class="vcap"><div class="no"></div><div class="zh"></div></div>
       <div class="vctl"><button class="spk prev" title="Forrige">⏮</button><button class="spk pp" title="Pause">⏸</button><button class="spk next" title="Neste">⏭</button><button class="spk redo" title="Fra start">🔁</button>
@@ -202,15 +202,21 @@ A.Video = {
       }
       host.querySelectorAll('.vwarn').forEach(e => { e.innerHTML = w.map(x => '⚠️ ' + A.bi(x[0], x[1])).join(''); });
     }
+    // teksten på støttespråket (kinesisk, eller valgt språk på sider med støttespråk)
+    function zt(s){
+      if(!A.I18N) return {t:s.zh, l:'zh'};
+      const r = A.trx(s.no, s.zh); return {t:A.isRtl(r.l) ? A.ltrMath(r.t) : r.t, l:r.l};
+    }
     function show(i){
       idx = i; const s = V.scenes[i];
       sceneHost.innerHTML = s.html;
-      capNo.innerHTML = A.m(s.no); capZh.innerHTML = A.m(s.zh);
+      const z = zt(s);
+      capNo.innerHTML = A.m(s.no); capZh.innerHTML = A.m(z.t); capZh.lang = z.l; capZh.dir = A.isRtl(z.l) ? 'rtl' : '';
       dots.forEach((d, k) => d.classList.toggle('on', k <= i));
     }
     // uten lyd: gi tid til å lese teksten
     function readTime(s){
-      const L = A.settings.lang, chars = L === 'no' ? s.no.length : L === 'zh' ? s.zh.length * 2 : s.no.length + s.zh.length * 1.5;
+      const L = A.settings.lang, zl = zt(s).t.length * (A.supLang() === 'zh' ? 1 : .5), chars = L === 'no' ? s.no.length : L === 'zh' ? zl * 2 : s.no.length + zl * 1.5;
       return Math.min(16000, 3000 + chars * 55);
     }
     async function runScene(i){
@@ -227,8 +233,8 @@ A.Video = {
       playing = false; pp.textContent = '▶'; setTalk(false);
       const o = document.createElement('div'); o.className = 'startcard';
       o.innerHTML = `<div class="big-emoji">🎉</div><h2>${A.bi('Ferdig!','看完了！')}</h2>
-        <div class="row"><button class="btn sec again"><span class="bi"><span class="no">↻ Se på nytt</span><span class="zh">再看一遍</span></span></button>
-        <button class="btn go"><span class="bi"><span class="no">Fortsett ➜</span><span class="zh">继续</span></span></button></div>`;
+        <div class="row"><button class="btn sec again">${A.bi('↻ Se på nytt','再看一遍')}</button>
+        <button class="btn go">${A.bi('Fortsett ➜','继续')}</button></div>`;
       $('.stage').append(o);
       o.querySelector('.again').onclick = () => { o.remove(); playing = true; pp.textContent = '⏸'; runScene(0); };
       o.querySelector('.go').onclick = () => { A.Video.stop(); onEnd && onEnd(); };
