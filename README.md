@@ -73,12 +73,21 @@ Bygger på «Den lille gangetabellen – hva må egentlig pugges?»: tabellen be
 - Filer: `gangesystem.html`, `css/gs.css`, `js/gs-core.js` (grupper, regelklassifisering, forklaringer, fremgang, tabelltegning), `js/gs-videos.js`, `js/gs-app.js`. Bruker `A.Video`, tale og tallord fra resten av systemet.
 
 ### Introduksjonsvideo til YouTube (norsk og engelsk)
-`tools/video/build.js` setter sammen de 8 gangesystem-videoene til én mp4 (1280 × 720, tavle med kritt-skrift og lærerinne i hjørnet), med avslutning om at det er gratis, og lager `.srt`-undertekster, kapitler og ferdig YouTube-beskrivelse for hvert språk. Engelsk tekst ligger i `js/gs-en.js`. Talen lages med Azure Speech (norsk `nb-NO-PernilleNeural`, engelsk `en-GB-SoniaNeural`):
+`tools/video/build.js` setter sammen de 8 gangesystem-videoene til én mp4 (1280 × 720, tavle med kritt-skrift og lærerinne i hjørnet), med avslutning om at det er gratis, og lager `.srt`-undertekster, kapitler og ferdig YouTube-beskrivelse for hvert språk. Engelsk tekst hentes fra ordboka `js/i18n/en.js`. Videoen får en ny avslutning (gratis på adressen i `SITE`, liste over språkene, skjermbilder tatt automatisk av appen, arbeidsark med fasit og et sluttkort om at det er et hobbyprosjekt 100 % laget med AI). Talen lages med Piper (gratis, lokalt) eller Azure Speech:
 
 ```
-AZURE_SPEECH_KEY=… AZURE_SPEECH_REGION=westeurope SITE=ditt-domene.no node tools/video/build.js
+TTS=piper PIPER_PY=<python med piper-tts> PIPER_DIR=<mappe med .onnx-modeller> node tools/video/build.js
+AZURE_SPEECH_KEY=… AZURE_SPEECH_REGION=westeurope node tools/video/build.js
 ```
-Uten nøkkel lages en stum prøveversjon. Valg: `--lang no,en`, `--only gs_system,outro`, `--preview`. Resultatet havner i `tools/video/out/` (ikke i git). Krever node, playwright, ffmpeg og curl. Fonten Patrick Hand (OFL) ligger i `css/fonts/`.
+Standard adresse er `www.skoleboken.com` (`SITE=…` for å bytte). Piper-stemmer: `PIPER_NO_MODEL` / `PIPER_NO_SPEAKER` (standard `no_NO-nvcc-medium`, taler 0) og `PIPER_EN_MODEL` (standard `en_GB-cori-high`). Uten tale lages en stum prøveversjon. Valg: `--lang no,en`, `--only gs_system,outro`, `--preview`. Resultatet havner i `tools/video/out/` (ikke i git). Krever node, playwright, ffmpeg og curl. Fonten Patrick Hand (OFL) ligger i `css/fonts/`.
+
+## Språk (støttespråk) i gangesystemet
+Norsk er hovedspråket. Eleven velger **støttespråk** med 🌍-knappen øverst: **English, 中文, العربية, Español, Polski, Українська, ไทย, Tagalog og Soomaali**. Valget gjelder tekst, regelforklaringer, videoer (tekst og opplesing) og oppgaver, og lagres i nettleseren. Første gang velges språk ut fra nettleseren (ellers engelsk). Arabisk vises fra høyre mot venstre, og regnestykker snus ikke.
+- **Opplesing** bruker stemmene som finnes i nettleseren/på enheten. Tagalog og somali har ofte ingen stemme, og da vises bare tekst (språkvelgeren viser 🔊 eller 🔇 per språk).
+- **Slik fungerer det:** alle tekster står som `A.bi(norsk, kinesisk)`. For andre språk slås den norske teksten opp i en ordbok (`js/i18n/<språk>.js`, nøkkel = id fra `js/i18n/keys.js`; tall settes inn som `{1}`, `{2}` …). Mangler en oversettelse brukes engelsk, og til sist vises bare norsk. Slås på per side med `window.SUPPORT_LANGS = true` (nå `gangesystem.html`); de andre fagene er uendret.
+- **Oversettelsene er laget med AI** og bør leses av morsmålsbrukere, særlig somali, tagalog og thai. Rettelser gjøres direkte i språkfilen.
+- **Verktøy** (`tools/i18n/`): `node tools/i18n/collect.js` går gjennom appen og samler alle tekster (`master.json`, id-ene er stabile); `node tools/i18n/collect.js --check th` tester dekning i nettleseren; `node tools/i18n/validate.js` sjekker alle språkfilene (manglende id-er og tall). **Nytt språk:** legg til i `A.LANGS` i `js/util.js`, lag `js/i18n/<kode>.js` ut fra `master.json`, og kjør validate.
+- Arbeidsarkene (`gs-ark.html`) har foreløpig bare norsk + kinesisk.
 
 ## Gange – lær og øv 乘法
 - **8 moduler:** hva er gange · gangetabellen og knepene · gange med 10/100/1 000 · del opp tallet (utvidet form og rutenett) · runde av og rette opp (276 × 3 = 300 × 3 − 24 × 3), dobbelt og halvparten · gamlemåten (oppstilling med mente) · tekstoppgaver · utfordringer og mesterprøve.

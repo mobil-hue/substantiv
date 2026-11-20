@@ -20,13 +20,30 @@ html,body{margin:0;background:#000;overflow:hidden}
 #w .stage .gst{--cs:26px}
 .scene h2{font-size:2.3rem}
 .bigword{font-size:2.6rem}
-.url{font-size:3rem;font-weight:900;color:#ffe27a;letter-spacing:.02em}
+.url{font-size:3.1rem;font-weight:900;color:#ffe27a;letter-spacing:.02em}
+/* avslutning */
+.langs{max-width:760px;gap:10px 14px;justify-content:center}
+.phones{display:flex;gap:26px;align-items:flex-start;justify-content:center}
+.phone{background:#111;border:5px solid #e5e7eb;border-radius:22px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.45);width:150px}
+.phone img{display:block;width:100%;height:auto}
+.pcap{font-size:.95rem;font-weight:700;margin-top:6px;max-width:170px;text-align:center;line-height:1.15}
+.papers{display:flex;gap:30px;justify-content:center;margin-top:-6px}
+.paper{background:#fff;box-shadow:0 6px 18px rgba(0,0,0,.45);border-radius:3px;overflow:hidden;width:226px;height:320px}
+.paper img{display:block;width:100%}
+.final{font-size:1.9rem;line-height:1.3;max-width:660px}
+.final .bi .zh{display:block;margin-top:6px;font-size:1.5rem}
 </style>
+<script>/* engelsk som støttespråk: tavlen viser norsk (hvitt) og engelsk (gult), hentet fra ordbøkene */
+window.SUBJECT = 'gs'; window.SUPPORT_LANGS = true;
+try{ localStorage.setItem('sub_settings', JSON.stringify({lang:'both', speak:'no', rate:.85, pinyin:false, auto:false, v:2, sup:'en'})); }catch(e){}
+</script>
 </head>
 <body class="lang-both no-pinyin">
 <div class="vwrap board" id="w"><div class="stage"><div class="scenehost" id="sh"></div></div>
 <div class="vcap"><div class="no" id="cNo"></div><div class="zh" id="cEn"></div></div></div>
 <script src="../../js/util.js"></script>
+<script src="../../js/i18n/keys.js"></script>
+<script src="../../js/i18n/en.js"></script>
 <script src="../../js/data.js"></script>
 <script src="../../js/graphics.js"></script>
 <script src="../../js/board.js"></script>
@@ -35,50 +52,66 @@ html,body{margin:0;background:#000;overflow:hidden}
 <script src="../../js/mult-graphics.js"></script>
 <script src="../../js/gs-core.js"></script>
 <script src="../../js/gs-videos.js"></script>
-<script src="../../js/gs-en.js"></script>
 <script>
 (function(){
-  const A = window.App, EN = A.GS_EN;
+  const A = window.App;
   document.getElementById('w').querySelector('.stage').insertAdjacentHTML('beforeend', A.teacherHTML());
   const teacher = document.querySelector('.teacher');
   const ORDER = ['gs_system', 'gs_mirror', 'gs_easy', 'gs_five', 'gs_square', 'gs_nine', 'gs_learn', 'gs_which'];
   const strip = s => String(s).replace(/<[^>]+>/g, '').replace(/\[([^\]]+)\]/g, '$1');
-  const params = new URLSearchParams(location.search);
-  const SITE = params.get('site') || 'ditt-domene.no';
+  const SITE = new URLSearchParams(location.search).get('site') || 'www.skoleboken.com';
+  const two = (no, en) => `<span class="bi"><span class="no">${no}</span><span class="zh">${en}</span></span>`;
+  const sayUrl = (t, l) => t.split(SITE).join(l === 'no' ? 'skoleboken punkt com' : 'skoleboken dot com');
 
-  /* utroppet: [{id, video, i, no, en, noSpeech, enSpeech, html}] */
-  function outro(){
-    const html = `<div class="scene"><div class="big-emoji bounce">🎓</div><h2 class="up">${A.bi('Gratis å bruke!', 'Free to use!')}</h2>
-      <div class="url pop" style="--d:1s">${SITE}</div>
-      <div class="sub pop" style="--d:2s">${A.bi('Øv · se videoer · skriv ut arbeidsark', 'Practise · watch videos · print worksheets')}</div></div>`;
-    return {id:'outro', i:0, html,
-      no:`Dette er helt gratis. Du finner det på ${SITE}. Der kan du se alle videoene, øve på hver gruppe og på hele tabellen, og skrive ut arbeidsark med fasit. Lykke til!`,
-      en:`This is completely free. You can find it at ${SITE}. There you can watch all the videos, practise each group and the whole table, and print worksheets with answer keys. Good luck!`};
-  }
-  window.__scenes = () => {
+  /* avslutningen: gratis-info, språk, skjermbilder, arbeidsark og sluttkort */
+  const LANGCOL = ['#ffd99a', '#aef0da', '#ffc4de', '#d9d3ff', '#9cc4ff', '#c9ee94', '#ffb36b', '#9ef0b4', '#fcd28a'];
+  const OUTRO = [
+    {id:'o1', html:() => `<div class="scene"><div class="big-emoji bounce">🎓</div><h2 class="up">${two('Tren, øv og lær – helt gratis', 'Train, practise and learn – completely free')}</h2>
+        <div class="url pop" style="--d:1s">${SITE}</div><div class="sub pop" style="--d:2s">${two('Se videoene · øv · skriv ut arbeidsark', 'Watch the videos · practise · print worksheets')}</div></div>`,
+     no:`Vil du trene, øve og lære mer? Det er helt gratis på ${SITE}. Se alle videoene, øv på hver gruppe og på hele tabellen, og skriv ut arbeidsark med fasit.`,
+     en:`Want to train, practise and learn more? It is completely free at ${SITE}. Watch all the videos, practise each group and the whole table, and print worksheets with answer keys.`},
+    {id:'o2', html:() => `<div class="scene"><h2 class="up">${two('Norsk – med støtte på 9 språk', 'Norwegian – with support in 9 languages')}</h2>
+        <div class="row langs">${['Norsk', 'English', '中文', 'العربية', 'Español', 'Polski', 'Українська', 'ไทย', 'Tagalog', 'Soomaali'].map((l, i) => `<span class="chp pop" style="--c:${i ? LANGCOL[(i - 1) % LANGCOL.length] : '#f6f3e8'};--d:${.3 + i * .4}s;font-size:1.6rem;font-weight:900;color:var(--c)">${l}</span>`).join('')}</div></div>`,
+     no:'Appen er på norsk, med støtte på ni språk: engelsk, kinesisk, arabisk, spansk, polsk, ukrainsk, thai, tagalog og somali. Du velger selv språket du vil ha som støtte.',
+     en:'The app is in Norwegian, with support in nine languages: English, Chinese, Arabic, Spanish, Polish, Ukrainian, Thai, Tagalog and Somali. You choose the language you want as support.'},
+    {id:'o3', html:() => `<div class="scene"><div class="phones">${[['shot-en.png', 'The table that shrinks', 'Tabellen som krymper', 0], ['shot-ar.png', 'Help with the rule', 'Regelhjelp (العربية)', .8], ['shot-th.png', 'What has stuck', 'Min fremgang (ไทย)', 1.6]].map(p =>
+        `<div class="pop" style="--d:${p[3]}s"><div class="phone"><img src="out/shots/${p[0]}"></div><div class="pcap">${two(p[2], p[1])}</div></div>`).join('')}</div></div>`,
+     no:'Her er noen skjermbilder. Tabellen som krymper, regelhjelp når du svarer feil, og oversikt over hva som sitter. Alt kan leses opp av stemmen i nettleseren din.',
+     en:'Here are some screenshots. The table that shrinks, help with the rule when you answer wrong, and an overview of what has stuck. Everything can be read aloud by the voice in your browser.'},
+    {id:'o4', html:() => `<div class="scene"><div class="papers"><div class="pop" style="--d:0s"><div class="paper"><img src="out/shots/ark.png"></div><div class="pcap">${two('Arbeidsark', 'Worksheet')}</div></div>
+        <div class="pop" style="--d:1.2s"><div class="paper"><img src="out/shots/fasit.png"></div><div class="pcap">${two('Fasit', 'Answer key')}</div></div></div></div>`,
+     no:'Du kan også skrive ut arbeidsark med fasit: åtte ark, ett for hvert steg i systemet.',
+     en:'You can also print worksheets with answer keys: eight sheets, one for each step of the system.'},
+    {id:'o5', html:() => `<div class="scene"><div class="big-emoji">🤖</div><div class="final bigword pop" style="--d:.2s">${two('Dette er et hobbyprosjekt 100% laget med AI. Det har vært fokus på innhold og funksjonalitet.', 'This is a hobby project, 100% made with AI. The focus has been on content and functionality.')}</div>
+        <div class="url pop" style="--d:2.4s;font-size:2rem">${SITE}</div></div>`,
+     no:'Dette er et hobbyprosjekt 100% laget med AI. Det har vært fokus på innhold og funksjonalitet.',
+     en:'This is a hobby project, 100% made with AI. The focus has been on content and functionality.',
+     noSay:'Dette er et hobbyprosjekt, hundre prosent laget med A I. Det har vært fokus på innhold og funksjonalitet.',
+     enSay:'This is a hobby project, one hundred percent made with A I. The focus has been on content and functionality.'}
+  ];
+
+  function all(){
     const out = [];
-    ORDER.forEach(id => A.VIDEOS[id].scenes.forEach((s, i) => out.push({id, i, html:s.html, no:strip(s.no), en:EN.SCENES[id][i]})));
-    out.push(outro());
-    return out.map(s => ({id:s.id, i:s.i, no:s.no, en:s.en, noSpeech:A.spokenMath(s.no, 'no'), enSpeech:A.spokenMathEn(s.en)}));
-  };
-  const find = (id, i) => id === 'outro' ? outro() : {html:A.VIDEOS[id].scenes[i].html, no:strip(A.VIDEOS[id].scenes[i].no), en:EN.SCENES[id][i]};
+    ORDER.forEach(id => A.VIDEOS[id].scenes.forEach((s, i) => out.push({id, i, html:() => s.html, no:strip(s.no), en:strip(A.tr(s.no, s.zh))})));
+    OUTRO.forEach((o, i) => out.push({id:o.id, i, html:o.html, no:o.no, en:o.en, noSay:o.noSay, enSay:o.enSay}));
+    return out;
+  }
+  window.__scenes = () => all().map(s => ({id:s.id, i:s.i, no:s.no, en:s.en,
+    noSpeech:sayUrl(A.spokenMath(s.noSay || s.no, 'no'), 'no'), enSpeech:sayUrl(A.spokenMath(s.enSay || s.en, 'en'), 'en')}));
+  const find = (id, i) => all().find(s => s.id === id && s.i === i);
 
   /* viser en scene: norsk på tavla (hvit), engelsk som andrelinje (gul) */
   window.__show = (id, i) => {
     const s = find(id, i), sh = document.getElementById('sh');
-    sh.innerHTML = s.html;
-    sh.querySelectorAll('.bi').forEach(b => {
-      const n = b.querySelector('.no'), z = b.querySelector('.zh');
-      if(n && z){ const k = n.innerHTML.replace(/&amp;/g, '&'); z.innerHTML = EN.LABELS[k] != null ? EN.LABELS[k] : (/[一-鿿]/.test(z.textContent) ? '' : z.innerHTML); }
-    });
+    sh.innerHTML = s.html();
     document.getElementById('cNo').textContent = s.no;
     document.getElementById('cEn').textContent = s.en;
     teacher.classList.remove('talking');
-    return new Promise(r => requestAnimationFrame(() => requestAnimationFrame(() => {
-      // hvor lenge varer innsettingsanimasjonene?
+    const imgs = [...sh.querySelectorAll('img')];
+    return Promise.all(imgs.map(im => im.complete ? 0 : new Promise(r => { im.onload = im.onerror = r; }))).then(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(() => {
       let end = 0; sh.getAnimations({subtree:true}).forEach(a => { const t = a.effect.getComputedTiming(); if(isFinite(t.endTime)) end = Math.max(end, t.endTime); });
       r(end);
-    })));
+    }))));
   };
   window.__time = (ms, talking) => {
     teacher.classList.toggle('talking', !!talking);
