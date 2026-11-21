@@ -60,6 +60,7 @@ function genSub(r, na, nb, borrow, noZeroMid){
   }
   return borrow ? [52, 27] : [58, 23];
 }
+MT.arith = {genAdd, genSub, addInfo, subInfo, genAddWhere, dg};
 const blocksOf = n => ({h:Math.floor(n / 100), t:Math.floor(n / 10) % 10, e:n % 10});
 const col = (op, a, b, o) => G.col(op, a, b, Object.assign({nohead:false}, o || {}));
 

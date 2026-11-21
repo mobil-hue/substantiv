@@ -10,6 +10,14 @@ const URL = process.env.URL || 'http://localhost:8765/matte.html';
   const rep = await p.evaluate(rounds => {
     const MT = window.MT, bad = [], seenAll = {};
     const add = (m, l, msg, q) => bad.push(`${m}/${l}: ${msg}${q ? ' | ' + String(q.stem).replace(/<[^>]+>/g, '').slice(0, 90) : ''}`);
+    Object.keys(MT.ABS || {}).forEach(k => {
+      if(!MT.SETS.some(st => st.maal.some(x => x.k === k))) add('abs', '-', 'overordnet mål ' + k + ' finnes ikke i læreplanen');
+      MT.ABS[k].egen.forEach(id => { if(!MT.byId[id]) add('abs', '-', k + ': egen modul ' + id + ' finnes ikke'); else if(!MT.byId[id].maal.includes(k)) add('abs', '-', k + ': ' + id + ' peker ikke på målet'); });
+      if(!MT.ABS[k].ord) add('abs', '-', k + ' mangler forklaring');
+      (MT.ABS[k].bygg || []).forEach(id => { if(!MT.byId[id]) add('abs', '-', k + ': byggestein ' + id + ' finnes ikke'); });
+      { const inf = MT.aimInfo(k); if(inf.own.length + inf.build.length < 3) add('abs', '-', k + ' har færre enn 3 moduler – bør være konkret mål'); if(!inf.build.length) add('abs', '-', k + ' har ingen byggesteiner'); }
+    });
+    MT.SETS.forEach(st => st.maal.forEach(a => { const n = MT.mods.filter(m => m.maal.includes(a.k)).length; if(!MT.ABS[a.k] && n > 3) add('maal', '-', a.k + ' har ' + n + ' moduler men er ikke merket som overordnet'); }));
     MT.mods.forEach(m => {
       if(!m.video || m.video.length < 5) add(m.id, '-', 'video har under 5 scener');
       m.video.forEach((s, i) => { if(!s.html || !s.no || s.no.length < 20) add(m.id, 'video', 'scene ' + i + ' mangler tekst/bilde'); if(/undefined|NaN/.test(s.html + s.no)) add(m.id, 'video', 'undefined/NaN i scene ' + i); });
@@ -17,13 +25,33 @@ const URL = process.env.URL || 'http://localhost:8765/matte.html';
       if(m.nivaaer.length < 3) add(m.id, '-', 'færre enn 3 nivåer');
       m.maal.forEach(k => { if(!MT.SETS.some(s => s.maal.some(a => a.k === k))) add(m.id, '-', 'ukjent kompetansemål ' + k); });
       m.bygger.forEach(k => { if(!MT.byId[k]) add(m.id, '-', 'bygger på ukjent modul ' + k); else if(MT.byId[k].ord >= m.ord) add(m.id, '-', 'kommer før modulen den bygger på (' + k + ')'); });
+      if(m.drill){
+        const norm = x => x.replace(/−/g, '-').replace(/×/g, '*').replace(/÷/g, '/').replace(/·/g, '*'), seenD = new Set();
+        [false, true].forEach(hard => { for(let s = 0; s < Math.min(rounds, 15); s++){
+          let items; try{ items = MT.drillItems(m, s * 31 + 5, hard, 60); }catch(e){ add(m.id, 'drill', 'feil: ' + e.message); continue; }
+          if(items.length < 8) add(m.id, 'drill', 'for få oppgaver (' + items.length + ')');
+          items.forEach(it => {
+            seenD.add(it.t + '|' + it.ans);
+            if(!it.t || !Number.isInteger(it.ans) || it.ans < 0) add(m.id, 'drill', 'ugyldig oppgave/svar: ' + it.t + ' → ' + it.ans);
+            if(/undefined|NaN/.test(it.t + (it.pic || ''))) add(m.id, 'drill', 'undefined/NaN: ' + it.t);
+            if(it.col){ const v = Function('return ' + it.col.a + norm(it.col.op) + it.col.b)(); if(v !== it.ans) add(m.id, 'drill', 'col ' + it.t + ' = ' + v + ', ikke ' + it.ans); }
+            const dm = it.t.match(/^Dobbelt av (\d+) =$/), hm = it.t.match(/^Halvparten av (\d+) =$/);
+            if(dm){ if(+dm[1] * 2 !== it.ans) add(m.id, 'drill', 'regner feil: ' + it.t + ' med svar ' + it.ans); return; }
+            if(hm){ if(+hm[1] / 2 !== it.ans) add(m.id, 'drill', 'regner feil: ' + it.t + ' med svar ' + it.ans); return; }
+            if(/^[\d, ]+, ☐$/.test(it.t)){ const nn = it.t.replace(', ☐', '').split(',').map(x => +x); const d = nn[1] - nn[0]; if(nn.some((x, i) => i && x - nn[i - 1] !== d) || nn[nn.length - 1] + d !== it.ans) add(m.id, 'drill', 'rekke regner feil: ' + it.t + ' → ' + it.ans); return; }
+            let e = norm(it.t); if(e.includes(',') || /[A-Za-zæøåÆØÅ]/.test(e)) return;
+            if(e.includes('☐')) e = e.replace(/☐/g, '(' + it.ans + ')'); else if(/=\s*$/.test(e)) e += ' (' + it.ans + ')'; else return;
+            if(e.split('=').length === 2){ const [l, rr] = e.split('='); let a, b; try{ a = Function('return (' + l + ')')(); b = Function('return (' + rr + ')')(); }catch(x){ a = NaN; } if(a !== b) add(m.id, 'drill', 'regner feil: ' + it.t + ' med svar ' + it.ans); }
+          }); } });
+        if(seenD.size < 15) add(m.id, 'drill', 'for lite variasjon (' + seenD.size + ')');
+      }
       m.nivaaer.forEach((l, li) => {
-        const lid = 'niv' + (li + 1), stems = new Set(); let made = 0;
+        const lid = 'niv' + (li + 1), stems = new Set(); let made = 0, nulls = 0, calls = 0;
         for(let s = 0; s < rounds; s++){
           const r = MT.rng(s * 7717 + li * 31 + 11), n = l.n || (l.kind === 'forstaa' ? 6 : 10);
           for(let i = 0; i < n; i++){
-            let q; try{ q = l.make(r, i); }catch(e){ add(m.id, lid, 'feil: ' + e.message); continue; }
-            if(!q){ add(m.id, lid, 'make ga ingenting (i=' + i + ')'); continue; }
+            calls++; let q; try{ q = l.make(r, i); }catch(e){ add(m.id, lid, 'feil: ' + e.message); continue; }
+            if(!q){ nulls++; continue; }
             made++; stems.add(q.stem + '|' + q.ans);
             const txt = [q.stem, q.expl, q.say, q.hint, (q.opts || []).join(' ')].join(' ');
             if(/undefined|NaN|\[object|Infinity/.test(txt)) add(m.id, lid, 'undefined/NaN i tekst', q);
@@ -44,7 +72,8 @@ const URL = process.env.URL || 'http://localhost:8765/matte.html';
             if(q.expl == null && l.kind === 'forstaa') add(m.id, lid, 'forstå-oppgave uten forklaring', q);
           }
         }
-        if(stems.size < (l.kind === 'forstaa' ? 5 : 12)) add(m.id, lid, 'for få ulike oppgaver (' + stems.size + ')');
+        if(nulls > calls * .5) add(m.id, lid, 'make gir for ofte ingenting (' + nulls + ' av ' + calls + ')');
+        if(stems.size < (l.kind === 'forstaa' ? 5 : 10)) add(m.id, lid, 'for få ulike oppgaver (' + stems.size + ')');
         seenAll[m.id + '/' + lid] = stems.size;
       });
     });

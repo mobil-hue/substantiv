@@ -149,3 +149,53 @@ body.lang-zh .mt-note,body.lang-zh .mt-todo{font-size:.9rem}
 .mt-sec .bi .zh,.mt-page b .bi .zh{display:inline;margin-left:8px;font-size:.7em}
 .mt-aim .at .bi{display:block}
 .mt-page .crumb .bi,.mt-goal .km .bi,.mt-page .pill .bi{display:inline}
+
+.mtmini{display:inline-block;font-family:"Courier New",ui-monospace,monospace;font-weight:900;font-size:1.5rem;line-height:1.25;color:var(--mt-ink);text-align:left}
+.mtmini .r{display:block;white-space:nowrap}
+.mtmini .ln{display:block;border-top:3px solid currentColor;margin:1px 0 3px}
+.mtmini .bx2{display:inline-block;box-sizing:border-box;width:calc(1ch - 3px);height:1.1em;border:2px dashed #94a3b8;border-radius:4px;margin:0 1.5px;vertical-align:middle}
+.board .mtmini{color:var(--chalk)}
+
+.mtseq{display:inline-flex;gap:6px;flex-wrap:wrap;justify-content:center;align-items:center}
+.sq{min-width:2.6rem;height:2.7rem;display:inline-flex;align-items:center;justify-content:center;border:3px solid #cbd5e1;border-radius:10px;background:#fff;font-size:1.7rem;padding:0 4px;color:#1f2937}
+.sq .mtg{display:inline-flex}
+.sq.q{border-style:dashed;color:#9ca3af;font-weight:900}
+.mtdigi{display:inline-block;font-family:"Courier New",ui-monospace,monospace;font-weight:900;font-size:2.2rem;letter-spacing:.12em;background:#0f172a;color:#4ade80;border:4px solid #475569;border-radius:12px;padding:2px 14px}
+.mtcal{border-collapse:separate;border-spacing:3px;font-weight:800;background:#fff;border-radius:10px;padding:4px;color:#1f2937}
+.mtcal caption{font-weight:900;font-size:1.1rem;caption-side:top;padding-bottom:2px;color:inherit}
+.mtcal th{font-size:.75rem;color:#64748b;padding:2px}.mtcal th.we{color:#dc2626}
+.mtcal td{width:2.1rem;height:2.1rem;text-align:center;border-radius:6px;background:#f8fafc;font-size:.95rem}
+.mtcal td.we{background:#fee2e2}.mtcal td.hl{background:#fde68a;outline:3px solid #f59e0b;outline-offset:-3px}
+.board .mtcal caption{color:var(--chalk)}
+
+.mttbl{border-collapse:separate;border-spacing:0;font-weight:900;background:#fff;border:3px solid #cbd5e1;border-radius:12px;overflow:hidden;color:#1f2937}
+.mttbl th{background:#e0e7ff;padding:4px 12px;text-align:left;font-size:.95rem;border-bottom:2px solid #cbd5e1}
+.mttbl td{padding:4px 12px;text-align:center;font-size:1.25rem;border-bottom:2px solid #e5e7eb;min-width:2.2em}
+.mttbl tr:last-child th,.mttbl tr:last-child td{border-bottom:0}
+.mttbl .bx2.w{display:inline-block;box-sizing:border-box;width:1.6em;height:1.3em;border:2px dashed #94a3b8;border-radius:5px;vertical-align:middle}
+
+/* konkrete og overordnede (abstrakte) mål */
+.mt-legend{display:grid;gap:8px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:12px 16px;margin:8px 0 4px;font-size:.92rem}
+.mt-badge{display:inline-block;font-size:.74rem;font-weight:900;border-radius:999px;padding:2px 10px;white-space:nowrap}
+.mt-badge.kon{background:#ffedd5;color:#9a3412}
+.mt-badge.abs{background:#ede9fe;color:#5b21b6}
+.mt-aim.abs{background:linear-gradient(180deg,#faf5ff,#fff 60%)}
+.mt-abs-note{font-size:.86rem;color:#5b21b6;font-weight:700;margin:6px 0 2px}
+.mt-lab{font-size:.78rem;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin:10px 0 2px}
+.mt-bar{height:7px;border-radius:7px;background:#e5e7eb;margin:8px 0 2px;overflow:hidden}
+.mt-bar i{display:block;height:100%;background:var(--c,#f97316);border-radius:7px}
+.mt-pre{display:flex;flex-wrap:wrap;gap:6px}
+.mt-pre .pill{text-decoration:none;font-size:.8rem}
+details.mt-build{margin-top:10px}
+details.mt-build>summary{cursor:pointer;font-weight:900;color:#5b21b6;padding:6px 0}
+.mt-goal.abs{background:#faf5ff;border-left-color:#7c3aed}
+.mt-goal.abs .km{color:#5b21b6}
+.mt-goal .mt-abs-note a{color:#5b21b6}
+.mt-badge .bi,.mt-legend .bi,.mt-lab .bi,.mt-abs-note .bi,.mt-build summary .bi,.mt-pre .bi,.mt-goal .km .bi{display:inline}
+
+/* programkode */
+.mtcode{display:inline-flex;flex-direction:column;align-items:stretch;text-align:left;background:#fff;color:#1f2937;border:3px solid #cbd5e1;border-radius:12px;padding:8px 14px 8px 8px;font:800 1.05rem/1.55 ui-monospace,Menlo,Consolas,monospace;min-width:14em}
+.mtcode .ln{display:block;white-space:pre;border-radius:6px}
+.mtcode .ln i{display:inline-block;width:1.6em;color:#94a3b8;font-style:normal;font-weight:700;margin-right:.4em;text-align:right}
+.mtcode .ln b{color:#7c3aed}
+.mtcode .ln.hl{background:#fef08a}

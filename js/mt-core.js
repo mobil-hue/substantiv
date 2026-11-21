@@ -184,12 +184,20 @@ function hub(setId){
     body.insertAdjacentHTML('beforeend', legacyHTML());
     return;
   }
-  body.innerHTML = `<h2 class="mt-sec">${cur.label} <span class="mt-todo">${cur.maal.length} ${B('kompetansemål')}</span></h2>`;
+  body.innerHTML = `<h2 class="mt-sec">${cur.label} <span class="mt-todo">${cur.maal.length} ${B('kompetansemål')}</span></h2>
+    <div class="mt-legend"><div><span class="mt-badge kon">🎯 ${B('Konkret mål')}</span> ${B('Ett eller to moduler er laget direkte for målet. Når du har tatt dem, har du nådd målet.')}</div>
+    <div><span class="mt-badge abs">🧩 ${B('Overordnet mål')}</span> ${B('Et stort, abstrakt mål som ikke kan læres i én modul. Det bygges opp gjennom mange moduler – også fra tidligere temaer. Her ser du både de modulene som er laget særskilt for målet, og alle byggesteinene.')}</div></div>`;
   cur.maal.forEach(a => {
-    const allMs = MT.mods.filter(m => m.maal.includes(a.k)), ms = allMs.filter(inGrade), dn = ms.filter(m => state(m).st === 'done').length, leg = (MT.LEGACY[a.k] || []).map(k => MT.LEGACY_MODS[k]);
-    const el = h('div', {class:'mt-aim ' + (ms.length ? '' : 'todo'), style:ms.length ? `--c:${dn === ms.length ? '#16a34a' : '#f97316'}` : ''});
-    el.innerHTML = `<div class="mt-ah"><span class="km">${a.k}</span><span class="at">${B(a.t)}</span><span class="st">${ms.length ? (dn === ms.length ? '✅ ' : '') + dn + '/' + ms.length + ' ' + B('moduler') : (leg.length ? '' : allMs.length ? B('Ingen moduler for dette trinnet') : B('Ikke laget ennå'))}</span></div>` +
-      (ms.length ? `<div class="mt-mods">${ms.map(m => modLink(m)).join('')}</div>` : '') +
+    const info = MT.aimInfo(a.k), own = info.own.filter(inGrade), bld = info.build.filter(inGrade), pre = info.bygger.filter(inGrade), leg = (MT.LEGACY[a.k] || []).map(k => MT.LEGACY_MODS[k]);
+    const all = own.concat(bld), dn = all.filter(m => state(m).st === 'done').length, abs = info.type === 'abs', anyAll = info.own.length + info.build.length;
+    const el = h('div', {class:'mt-aim ' + (abs ? 'abs ' : '') + (all.length ? '' : 'todo'), style:all.length ? `--c:${dn === all.length ? '#16a34a' : abs ? '#7c3aed' : '#f97316'}` : ''});
+    const badge = abs ? `<span class="mt-badge abs">🧩 ${B('Overordnet mål')}</span>` : (all.length ? `<span class="mt-badge kon">🎯 ${B('Konkret mål')}</span>` : '');
+    el.innerHTML = `<div class="mt-ah">${badge}<span class="km">${a.k}</span><span class="at">${B(a.t)}</span><span class="st">${all.length ? (dn === all.length ? '✅ ' : '') + dn + '/' + all.length + ' ' + B('moduler') : (leg.length ? '' : anyAll ? B('Ingen moduler for dette trinnet') : B('Ikke laget ennå'))}</span></div>` +
+      (abs && all.length ? `<div class="mt-abs-note">${B(info.ord)}</div>` : '') +
+      (all.length ? `<div class="mt-bar"><i style="width:${Math.round(100 * dn / all.length)}%"></i></div>` : '') +
+      (own.length ? `<div class="mt-lab">${abs ? B('Laget særskilt for dette målet') : (own.length > 1 ? B('Modulene for dette målet') : B('Modulen for dette målet'))}</div><div class="mt-mods">${own.map(m => modLink(m)).join('')}</div>` : '') +
+      (abs && bld.length ? `<details class="mt-build"><summary>${B('Byggesteiner')} (${bld.length}) – ${B('moduler som bygger opp målet')}</summary><div class="mt-mods">${bld.map(m => modLink(m)).join('')}</div></details>` : '') +
+      (!abs && pre.length ? `<div class="mt-lab">${B('Bygger på')}</div><div class="mt-pre">${pre.map(m => `<a class="pill" href="#/m/${m.id}">${m.ikon} ${B(m.tittel)}${state(m).st === 'done' ? ' ✅' : ''}</a>`).join('')}</div>` : '') +
       (leg.length ? `<div class="mt-leg"><span class="mt-todo">${B('Finnes fra før:')}</span>${leg.map(l => `<a class="pill" href="${l.href}">${l.emoji} ${B(l.no)}</a>`).join('')}</div>` : '');
     body.append(el);
   });
@@ -212,14 +220,17 @@ function modulePage(id){
   app.innerHTML = `<div class="mt-page">${crumb('#/t/' + (set ? set.id : ''), 'Alle moduler')}
     <h1><span style="font-size:2.2rem">${m.ikon}</span> ${B(m.tittel)}</h1>
     <div class="mt-row"><span class="pill">${trinnTag(m)}</span>${m.maal.map(k => `<span class="pill" title="${A.esc(aimOf(k) ? aimOf(k).t : '')}">${k}</span>`).join('')}</div>
-    ${m.maal.map(k => aimOf(k) ? `<div class="mt-goal"><span class="km">${k} · ${B('Kompetansemål')}</span><div><b>${B(aimOf(k).t)}</b></div></div>` : '').join('')}
+    ${m.maal.map(k => { if(!aimOf(k)) return ''; const inf = MT.aimInfo(k), abs = inf.type === 'abs', own = inf.own.includes(m), n = inf.own.length + inf.build.length;
+      return `<div class="mt-goal ${abs ? 'abs' : ''}"><span class="km">${k} · ${abs ? '🧩 ' + B('Overordnet mål') : '🎯 ' + B('Konkret mål')}</span><div><b>${B(aimOf(k).t)}</b></div>` + (abs ? `<div class="mt-abs-note">${own ? B('Denne modulen er laget særskilt for målet.') : B('Denne modulen er én av byggesteinene.')} ${B('Hele målet bygges av ' + n + ' moduler.')} <a href="#/t/${setOf(k).id}">${B('Se alle')}</a></div>` : '') + `</div>`; }).join('')}
+    ${Object.keys(MT.ABS).filter(k => !m.maal.includes(k) && (MT.ABS[k].bygg || []).includes(m.id) && aimOf(k)).map(k => { const inf = MT.aimInfo(k); return `<div class="mt-goal abs"><span class="km">${k} · 🧩 ${B('Overordnet mål')} · ${B('denne modulen er en byggestein')}</span><div><b>${B(aimOf(k).t)}</b></div><div class="mt-abs-note">${B('Hele målet bygges av ' + (inf.own.length + inf.build.length) + ' moduler.')} <a href="#/t/${setOf(k).id}">${B('Se alle')}</a></div></div>`; }).join('')}
     ${m.bygger.length ? `<div><b>${B('Bygger på')}:</b></div><div class="mt-rel">${rel(m.bygger)}</div>` : ''}
     ${op.length ? `<div><b>${B('Åpner for')}:</b></div><div class="mt-rel">${rel(op)}</div>` : ''}
     <h2 class="mt-sec">🎬 1. ${B('Forstå først: se videoen')}</h2><div id="mtVid"></div>
     <h2 class="mt-sec">✏️ 2. ${B('Øv på flere nivåer')}</h2><div id="mtLv"></div>
+    ${m.drill ? `<h2 class="mt-sec">🏋️ ${B('Mengdetrening: mange oppgaver, rask regning')}</h2><div class="mt-note" style="margin-top:0">${B(m.drill.tittel)}. ${B('Når du har forstått, trenger du mange gjentakelser for å bli rask og sikker.')}</div><div class="mt-row"><a class="btn" href="#/m/${id}/drill" style="text-decoration:none">${B('▶ Mengdetrening på skjermen')}</a><a class="btn sec" href="#/m/${id}/drill/hard" style="text-decoration:none">${B('Utfordring')}</a><a class="btn sec" href="matte-ark.html#m=${id}&t=4" style="text-decoration:none">${B('🖨 Mengdetrening-ark')}</a></div>${(() => { const b = A.store.get('mt_drill', {})[id]; return b ? `<div class="mt-note">${B('Din beste runde: ' + b.best + ' riktige på ' + b.time + ' sekunder')}</div>` : ''; })()}` : ''}
     <h2 class="mt-sec">📖 3. ${B('Les og skriv ut')}</h2>
     <details class="mt-txt" open><summary style="font-weight:900;cursor:pointer">${B('Skriftlig forklaring')}</summary>${MT.textHTML(m, {teacher:false})}</details>
-    <div class="mt-row"><a class="btn sec" href="${mk('0')}">${B('📄 Forklaringsark')}</a><a class="btn sec" href="${mk('1')}">${B('📝 Nivå 1')}</a><a class="btn sec" href="${mk('2')}">${B('📝 Nivå 2')}</a><a class="btn sec" href="${mk('3')}">${B('📝 Nivå 3')}</a><a class="btn sec" href="${mk('all')}">${B('🖨️ Alt + fasit')}</a></div>
+    <div class="mt-row"><a class="btn sec" href="${mk('0')}">${B('📄 Forklaringsark')}</a><a class="btn sec" href="${mk('1')}">${B('📝 Nivå 1')}</a><a class="btn sec" href="${mk('2')}">${B('📝 Nivå 2')}</a><a class="btn sec" href="${mk('3')}">${B('📝 Nivå 3')}</a>${m.drill ? `<a class="btn sec" href="${mk('4')}">${B('📝 Mengdetrening')}</a>` : ''}<a class="btn sec" href="${mk('all')}">${B('🖨️ Alt + fasit')}</a></div>
     ${m.tekst && m.tekst.laerer ? `<details class="mt-txt"><summary style="font-weight:900;cursor:pointer">${B('Til voksne og lærere')}</summary><p>${m.tekst.laerer}</p></details>` : ''}</div>`;
   A.Video.play(app.querySelector('#mtVid'), 'mt_' + id, () => { markVideo(id); modulePage(id); window.scrollTo(0, app.querySelector('#mtLv').offsetTop - 80); });
   const lv = app.querySelector('#mtLv');
@@ -240,6 +251,14 @@ function genQuestions(m, li){
   return out;
 }
 MT.gen = genQuestions;
+/* ---------- mengdetrening (rene regneoppgaver, mange om gangen) ---------- */
+// m.drill = {tittel, layout:'row'|'pic'|'col', cols, n:[ark, skjerm], make:(r, i, hard) => ({t:'7 + 5 =', ans:12, pic?:html, col?:{op,a,b}})}
+MT.drillItems = (m, seed, hard, n) => {
+  const r = MT.rng(seed * 977 + m.ord * 13 + (hard ? 5 : 0) + 1), out = [], seen = new Set();
+  for(let k = 0; out.length < n && k < n * 40; k++){ const it = m.drill.make(r, k, !!hard); if(!it) continue; const key = it.t + '|' + it.ans; if(seen.has(key)) continue; seen.add(key); out.push(it); }
+  for(let k = 0; out.length < Math.min(n, 24) && k < n * 40; k++){ const it = m.drill.make(r, k, !!hard); if(it) out.push(it); }   // lite utvalg: tillat gjentakelser
+  return out;
+};
 const padHTML = () => `<div class="gdisp empty" id="gDisp">${B('skriv svaret')}</div><div class="gpad">${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(n => `<button type="button" class="gkey" data-k="${n}">${n}</button>`).join('')}<button type="button" class="gkey del" data-k="del">⌫</button><button type="button" class="gkey" data-k="0">0</button><button type="button" class="gkey ok" data-k="ok">OK</button></div>`;
 const fbar = (cls, emoji, msg, next) => `<div class="fbar ${cls}"><span class="em">${emoji}</span><div class="msg">${msg}</div>${next ? btn('gNext', next) : ''}</div>`;
 const stemHTML = q => String(q.stem).replace(/\{\?\}/g, '<span class="mtq" id="mtAns">?</span>');
@@ -316,6 +335,49 @@ function runLevel(id, li){
 }
 
 /* =====================================================================
+   MENGDETRENING PÅ SKJERMEN: mange rene regneoppgaver på rad, med tid
+   ===================================================================== */
+function runDrill(id, hard){
+  const m = MT.byId[id], d = m && m.drill; if(!d){ location.hash = '#/m/' + id; return; }
+  const c = col(m), N = (d.n && d.n[1]) || 30, items = MT.drillItems(m, (Math.random() * 1e6) | 0, hard, N), total = items.length;
+  const root = h('div', {class:'session mt-sess', html:`<div class="sbar"><button class="x" type="button" title="Avslutt">✕</button><div class="stitle" style="color:${c}">🏋️ ${B(d.tittel)}${hard ? ' · ' + B('utfordring') : ''}</div><div class="prog"><i></i></div><div class="streak" id="dTimer">0:00</div></div><div class="qhost"></div>`});
+  app.innerHTML = ''; app.append(root);
+  const host = root.querySelector('.qhost'), prog = root.querySelector('.prog i'), tEl = root.querySelector('#dTimer');
+  root.querySelector('.x').onclick = () => { location.hash = '#/m/' + id; };
+  let i = 0, typed = '', right = 0, locked = false, cur = null; const wrong = [], t0 = Date.now();
+  const tick = setInterval(() => { const s = Math.floor((Date.now() - t0) / 1000); tEl.textContent = Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }, 500); onLeave(() => clearInterval(tick));
+  const keyH = e => { if(!cur || locked) return; if(/^\d$/.test(e.key)) key(e.key); else if(e.key === 'Backspace') key('del'); else if(e.key === 'Enter') key('ok'); };
+  document.addEventListener('keydown', keyH); onLeave(() => document.removeEventListener('keydown', keyH));
+  function next(){
+    if(i >= total) return finish();
+    cur = items[i++]; typed = ''; locked = false; prog.style.width = ((i - 1) / total * 100) + '%';
+    host.innerHTML = `<div class="qcard" style="--c:${c}"><div class="mt-stem" style="--c:${c}">${cur.pic ? cur.pic + '<br>' : ''}<span class="big">${cur.col ? G_col(cur.col) : (cur.t.includes('☐') ? cur.t.replace('☐', '{?}') : cur.t + ' {?}')}</span></div><div class="mt-in">${padHTML()}</div><div id="gFb"></div></div>`.replace('{?}', '<span class="mtq" id="mtAns">?</span>');
+    host.querySelectorAll('.gkey').forEach(b => b.onclick = () => key(b.dataset.k));
+  }
+  const G_col = o => MT.G.colMini(o.op, o.a, o.b).replace(/<span class="r bxs">.*<\/span><\/span>$/, '</span>') + '<br><span class="mtq" id="mtAns">?</span>';
+  function key(k){
+    if(locked) return;
+    if(k === 'del') typed = typed.slice(0, -1); else if(k === 'ok'){ if(typed) submit(); return; } else if(typed.length < 4) typed += k;
+    const dsp = host.querySelector('#gDisp'), a = host.querySelector('#mtAns'); if(dsp){ dsp.textContent = typed || 'skriv svaret'; dsp.classList.toggle('empty', !typed); } if(a) a.textContent = typed || '?';
+  }
+  function submit(){
+    locked = true; const ok = +typed === cur.ans, a = host.querySelector('#mtAns');
+    if(a){ a.textContent = cur.ans; a.classList.add(ok ? 'good' : 'bad'); }
+    if(ok){ right++; later(next, 260); } else { wrong.push(cur); host.querySelector('#gFb').innerHTML = fbar('bad', '❌', B('Riktig svar: ') + '<b>' + cur.ans + '</b>'); later(next, 1300); }
+  }
+  function finish(){
+    clearInterval(tick); const sec = Math.round((Date.now() - t0) / 1000), all = A.store.get('mt_drill', {}), b = all[id];
+    const better = !b || right > b.best || (right === b.best && sec < b.time); if(better && !hard){ all[id] = {best:right, time:sec}; A.store.set('mt_drill', all); }
+    prog.style.width = '100%';
+    host.innerHTML = `<div class="end"><div class="big-emoji">${right >= total * .9 ? '🏆' : right >= total * .7 ? '🎉' : '💪'}</div><h2>${B(right + ' av ' + total + ' riktige på ' + sec + ' sekunder')}</h2>
+      ${wrong.length ? `<div class="gs-miss"><div class="rb-tt">${B('Øv mer på disse:')}</div><div class="row">${wrong.slice(0, 12).map(x => `<span class="gfact" style="--c:${c};--bg:#fff">${x.col ? x.col.a + ' ' + x.col.op + ' ' + x.col.b : x.t} ${x.ans}</span>`).join('')}</div></div>` : `<div class="small-note">${B('Ingen feil – flott!')}</div>`}
+      <div class="row" style="margin-top:16px;justify-content:center">${btn('eAgain', '↻ Ny runde')}<a class="btn sec" href="#/m/${id}/drill${hard ? '' : '/hard'}" style="text-decoration:none">${B(hard ? 'Vanlig' : 'Utfordring')}</a><a class="btn sec" href="#/m/${id}" style="text-decoration:none">${B('Til modulen')}</a></div></div>`;
+    host.querySelector('#eAgain').onclick = () => runDrill(id, hard);
+  }
+  next();
+}
+
+/* =====================================================================
    RUTING
    ===================================================================== */
 function route(){
@@ -324,7 +386,7 @@ function route(){
   const p = (location.hash.replace(/^#\/?/, '') || '').split('/');
   window.scrollTo(0, 0);
   A.store.set('last', {s:'mt', href:'matte.html'});
-  if(p[0] === 'm' && p[1] && MT.byId[p[1]]){ if(p[2] === 'niv') return runLevel(p[1], Math.max(0, (+p[3] || 1) - 1)); return modulePage(p[1]); }
+  if(p[0] === 'm' && p[1] && MT.byId[p[1]]){ if(p[2] === 'drill') return runDrill(p[1], p[3] === 'hard'); if(p[2] === 'niv') return runLevel(p[1], Math.max(0, (+p[3] || 1) - 1)); return modulePage(p[1]); }
   if(p[0] === 't') return hub(p[1]);
   hub();
 }
