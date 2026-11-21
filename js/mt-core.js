@@ -105,14 +105,16 @@ const modLink = (m, extra) => { const s = state(m); return `<a class="mt-m ${s.s
 /* =====================================================================
    Skriftlig forklaring (brukes på modulsiden og på arbeidsark)
    ===================================================================== */
+/* oversettelse (støttespråk) under en norsk tekst, hvis den finnes i ordboka – ellers ingenting */
+const TX = (s, inline) => { if(!A.I18N || A.settings.lang === 'no') return ''; const r = A.trx(s, ''); if(!r.t) return ''; const rtl = A.isRtl(r.l); return `<${inline ? 'span' : 'div'} class="mt-tx${inline ? ' in' : ''}" lang="${r.l}"${rtl ? ' dir="rtl"' : ''}>${rtl ? A.ltrMath(r.t) : r.t}</${inline ? 'span' : 'div'}>`; };
 MT.textHTML = (m, o) => {
   o = o || {}; const t = m.tekst || {}; let s = '';
-  if(t.mal) s += `<h3>${B('Dette skal du lære')}</h3><p>${t.mal}</p>`;
-  if(t.steg && t.steg.length) s += `<h3>${B('Slik gjør du')}</h3><ol>${t.steg.map(x => `<li>${x}</li>`).join('')}</ol>`;
-  if(t.eks && t.eks.length) s += `<h3>${B('Eksempler')}</h3>${t.eks.map(x => `<div class="ex">${x}</div>`).join('')}`;
-  if(t.ord && t.ord.length) s += `<h3>${B('Ord du må kunne')}</h3><dl>${t.ord.map(x => `<dt>${x[0]}</dt><dd>${x[1]}</dd>`).join('')}</dl>`;
-  if(t.feil && t.feil.length) s += `<h3>${B('Vanlige feil')}</h3>${t.feil.map(x => `<div class="wrong">${x}</div>`).join('')}`;
-  if(m.refleksjon && !o.noRef) s += `<h3>${B('Tenk og forklar')}</h3><p>${m.refleksjon}</p>`;
+  if(t.mal) s += `<h3>${B('Dette skal du lære')}</h3><p>${t.mal}</p>${TX(t.mal)}`;
+  if(t.steg && t.steg.length) s += `<h3>${B('Slik gjør du')}</h3><ol>${t.steg.map(x => `<li>${x}${TX(x)}</li>`).join('')}</ol>`;
+  if(t.eks && t.eks.length) s += `<h3>${B('Eksempler')}</h3>${t.eks.map(x => `<div class="ex">${x}${TX(x)}</div>`).join('')}`;
+  if(t.ord && t.ord.length) s += `<h3>${B('Ord du må kunne')}</h3><dl>${t.ord.map(x => `<dt>${x[0]}${TX(x[0], true)}</dt><dd>${x[1]}${TX(x[1])}</dd>`).join('')}</dl>`;
+  if(t.feil && t.feil.length) s += `<h3>${B('Vanlige feil')}</h3>${t.feil.map(x => `<div class="wrong">${x}${TX(x)}</div>`).join('')}`;
+  if(m.refleksjon && !o.noRef) s += `<h3>${B('Tenk og forklar')}</h3><p>${m.refleksjon}</p>${TX(m.refleksjon)}`;
   if(t.laerer && o.teacher !== false) s += `<h3>${B('Til voksne og lærere')}</h3><p>${t.laerer}</p>`;
   return s;
 };
