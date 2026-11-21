@@ -4,7 +4,7 @@
 const fs = require('fs'), path = require('path'), vm = require('vm');
 const ROOT = path.resolve(__dirname, '..', '..'), DIR = path.join(ROOT, 'js', 'i18n');
 const master = JSON.parse(fs.readFileSync(path.join(__dirname, 'master.json'), 'utf8'));
-const langs = process.argv.slice(2).length ? process.argv.slice(2) : fs.readdirSync(DIR).filter(f => f !== 'keys.js').map(f => f.replace('.js', ''));
+const langs = process.argv.slice(2).length ? process.argv.slice(2) : fs.readdirSync(DIR).filter(f => /^[a-z]{2}\.js$/.test(f)).map(f => f.replace('.js', ''));
 // tekster som bare er tall (like på alle språk) trenger ikke oversettelse
 const digitsOnly = e => !/[A-Za-zÆØÅæøå]/.test(e.no.replace(/y/g, ''));
 let bad = 0;

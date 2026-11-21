@@ -21,9 +21,10 @@
 <main id="app"></main>
 <script>window.SUBJECT = 'mt'; window.SUPPORT_LANGS = true;</script>
 <script src="js/util.js"></script>
-<script>/* ordbøker: norsk nøkkel-liste + engelsk (reserve) + valgt støttespråk */
-(function(){ const l = window.App.supLang(); if(l === 'zh') return;
-  ['keys', 'en'].concat(l === 'en' ? [] : [l]).forEach(f => document.write('<script src="js/i18n/' + f + '.js"><\/script>')); })();</script>
+<script>/* ordbøker: tekstnøkler og oversatte faste tekster (mt-*), ordhjelp (mtw-*) – engelsk er reserve for alle språk */
+(function(){ const l = window.App.supLang(), f = ['keys', 'mt-keys'];
+  if(l === 'zh') f.push('mt-zh', 'mtw-zh'); else { f.push('en', 'mt-en', 'mtw-en'); if(l !== 'en') f.push(l, 'mt-' + l, 'mtw-' + l); }
+  f.forEach(x => document.write('<script src="js/i18n/' + x + '.js"><\/script>')); })();</script>
 <script src="js/data.js"></script>
 <script src="js/graphics.js"></script>
 <script src="js/board.js"></script>
@@ -55,6 +56,7 @@
 <script src="js/mt-m-4c.js"></script>
 <script src="js/mt-m-4d.js"></script>
 <script src="js/mt-m-4e.js"></script>
+<script src="js/mt-gloss.js"></script>
 <script src="js/mt-drill.js"></script>
 <script>window.MT.start();</script>
 </body>

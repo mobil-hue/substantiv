@@ -42,6 +42,11 @@ Moduler laget så langt (68 stk, 368 nivåer; dekker alle kompetansemål i 1.–
 
 **Mengdetrening:** moduler med rene regneoppgaver (nå 32 av 68) har i tillegg *mengdetrening*: mange oppgaver på rad, både **på skjermen** (`#/m/<id>/drill`, med tid og tall på riktige) og som **eget ark** (del «Mengdetrening» i `matte-ark.html`: ark A = vanlig, ark B = utfordring, med fasit). Tidlige moduler viser mengdebilder (tierrammer, grupper) ved siden av regnestykkene; senere moduler har rene regnestykker eller oppstilling i rutenett. Registreres med `drill:{tittel, layout:'row'|'pic'|'col', cols, n:[ark, skjerm], make:(r, i, hard) => ({t:'7 + 5 =', ans:12, pic?, col?})}` i `js/mt-drill.js` (eldre moduler) eller direkte i modulen. `☐` i teksten er et tomt felt midt i regnestykket.
 
+**Støttespråk i matematikk (10 språk):** matematikkdelen er flerspråklig på to måter, begge KI-oversatt og ikke lest av morsmålsbrukere.
+1. **Faste tekster og modultitler** (meny, knapper, overskrifter, 68 modultitler) er oversatt som hele setninger. De ligger i `tools/i18n/mt/chrome.tsv` (norsk nøkkel med tall som `#`, tall som `{1}` i oversettelsene).
+2. **Ordhjelp:** i oppgaver, forklaringer, hjelpetekster og skriftlige forklaringer kan eleven trykke på et ord med prikkete strek og se hva det betyr på støttespråket (`js/mt-gloss.js`). Ordlisten ligger i `tools/i18n/mt/words.tsv` (nå 955 ord, ca. 97 % av alle ordene i matematikkteksten).
+Hele setninger i de ca. 18 000 oppgave- og forklaringsmalene, videoene, kompetansemålene og nivåbeskrivelsene oversettes ikke automatisk. Automatisk maskinoversettelse ble prøvd og forkastet (den bytter ut og dropper ord og gir misvisende matematikk). Etter endring i `words.tsv` eller `chrome.tsv`: `node tools/i18n/build-mt.js` (lager `js/i18n/mtw-*.js`, `mt-*.js` og `mt-keys.js`). Kolonner: no, en, sv, zh, ar, es, pl, uk, th, tl, so.
+
 **Oversikt:** `docs/matte-oversikt.md` (moduler, mål, forkunnskaper, nivåer; generert med `tools/mt-oversikt.js`).
 
 **Filer:** `js/mt-core.js` (register, oppgavebyggere, fremgang, meny, øvingsløper), `js/mt-maaltype.js` (konkrete og overordnede mål), `js/mt-gfx.js`–`mt-gfx4.js` (tierramme, klosser, tallinje, oppstilling, balansevekt, tabell, koordinatsystem, vinkler, blokker, målebeger, programkode …), `js/mt-m-*.js` (modulene), `js/mt-ark.js` + `matte-ark.html` (arbeidsark), `css/mt.css`.

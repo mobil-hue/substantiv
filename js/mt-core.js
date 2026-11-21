@@ -161,8 +161,8 @@ function hub(setId){
   const inGrade = m => gsel === 'all' || m.trinn.includes(+gsel);
   root.innerHTML = `<div class="hero" style="background:linear-gradient(135deg,#fb923c,#ea580c)"><div class="big-emoji">🔢</div><div class="grow"><h1>${B('Matematikk')}</h1>
       <div>${B('Etter kompetansemålene i læreplanen (LK20), trinn for trinn. Først forstå – så øve på flere nivåer.')}</div></div>
-      ${first ? `<a class="btn big sec" href="#/m/${first.id}" style="text-decoration:none">${B('▶ ' + (sum.done ? 'Fortsett: ' : 'Start: ') + first.tittel)}</a>` : ''}</div>
-    <div class="card" style="margin-top:12px"><div class="small-note" style="text-align:left"><b>${B('Slik er det bygd opp')}</b><br>${B('Hver modul tar for seg ett lite tema. Du ser en video som forklarer grundig, svarer på noen spørsmål for å sjekke at du har forstått, og trener deretter på flere nivåer – fra enkelt til vanskelig. Du kan også skrive ut forklaring og arbeidsark på tre nivåer, med fasit.')}</div></div>
+      ${first ? `<a class="btn big sec" href="#/m/${first.id}" style="text-decoration:none"><div>▶ ${B(sum.done ? 'Fortsett' : 'Start')}</div><div style="font-weight:700;font-size:.9em">${B(first.tittel)}</div></a>` : ''}</div>
+    <div class="card" style="margin-top:12px"><div class="small-note" style="text-align:left"><b>${B('Slik er det bygd opp')}</b><br>${B('Hver modul tar for seg ett lite tema. Du ser en video som forklarer grundig, svarer på noen spørsmål for å sjekke at du har forstått, og trener deretter på flere nivåer – fra enkelt til vanskelig. Du kan også skrive ut forklaring og arbeidsark på tre nivåer, med fasit.')}<br><br>${B('Trykk på et ord med prikkete strek for å se hva det betyr på ditt språk.')}</div></div>
     <div class="mt-tabs" id="mtTabs"></div>
     ${grades ? `<div class="mt-view" id="mtGrade"><b style="align-self:center">${B('Vis trinn')}:</b>${['all'].concat(grades).map(g => `<button type="button" class="pill ${String(g) === gsel ? 'on' : ''}" data-g="${g}">${g === 'all' ? B('Alle') : g + '. trinn'}</button>`).join('')}</div>` : ''}
     <div class="mt-view"><button type="button" class="pill ${view === 'maal' ? 'on' : ''}" data-v="maal">🎯 ${B('Etter kompetansemål')}</button><button type="button" class="pill ${view === 'rekke' ? 'on' : ''}" data-v="rekke">🧭 ${B('Anbefalt rekkefølge')}</button></div>
@@ -315,7 +315,7 @@ function runLevel(id, li){
       streak = 0; streakEl.textContent = '';
       if(!q._again){ results.push(0); wrong.push(q); const q2 = Object.assign({}, q, {_again:true}); queue.splice(Math.min(queue.length, i + 2), 0, q2); }
       setProg(i / queue.length);
-      fb.innerHTML = fbar('bad', '❌', B('Ikke helt. Riktig svar: ') + `<b>${q.key != null ? q.key : q.ans}</b>` + expl, 'Neste ›');
+      fb.innerHTML = fbar('bad', '❌', B('Ikke helt. Riktig svar:') + ' ' + `<b>${q.key != null ? q.key : q.ans}</b>` + expl, 'Neste ›');
       fb.querySelector('#gNext').onclick = next;
       if(speechOn() && q.expl) A.sayBi(plain(q.expl), '');
     }
@@ -363,7 +363,7 @@ function runDrill(id, hard){
   function submit(){
     locked = true; const ok = +typed === cur.ans, a = host.querySelector('#mtAns');
     if(a){ a.textContent = cur.ans; a.classList.add(ok ? 'good' : 'bad'); }
-    if(ok){ right++; later(next, 260); } else { wrong.push(cur); host.querySelector('#gFb').innerHTML = fbar('bad', '❌', B('Riktig svar: ') + '<b>' + cur.ans + '</b>'); later(next, 1300); }
+    if(ok){ right++; later(next, 260); } else { wrong.push(cur); host.querySelector('#gFb').innerHTML = fbar('bad', '❌', B('Riktig svar:') + ' ' + '<b>' + cur.ans + '</b>'); later(next, 1300); }
   }
   function finish(){
     clearInterval(tick); const sec = Math.round((Date.now() - t0) / 1000), all = A.store.get('mt_drill', {}), b = all[id];
