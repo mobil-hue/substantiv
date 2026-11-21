@@ -142,4 +142,6 @@ js/vox-p1..p2.js           hverdagssetninger
 docs/vox-format.md         dataformat for ord og setninger
 docs/vox-validate.js       validator for datafilene
 docs/                      jukselapper og eksempler (PDF)
+docs/laereplan-moduler.md   hvilke moduler som kan lages til hvilke trinn (LK20, gyldig fra 2026-08-01), med vurdering
+docs/laereplan/            kompetansemål 1.–10. trinn (JSON, hentet fra Udir); tools/laereplan/fetch.py henter på nytt
 ```
