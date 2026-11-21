@@ -173,3 +173,29 @@ body.lang-zh .mt-note,body.lang-zh .mt-todo{font-size:.9rem}
 .mttbl td{padding:4px 12px;text-align:center;font-size:1.25rem;border-bottom:2px solid #e5e7eb;min-width:2.2em}
 .mttbl tr:last-child th,.mttbl tr:last-child td{border-bottom:0}
 .mttbl .bx2.w{display:inline-block;box-sizing:border-box;width:1.6em;height:1.3em;border:2px dashed #94a3b8;border-radius:5px;vertical-align:middle}
+
+/* konkrete og overordnede (abstrakte) mål */
+.mt-legend{display:grid;gap:8px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:12px 16px;margin:8px 0 4px;font-size:.92rem}
+.mt-badge{display:inline-block;font-size:.74rem;font-weight:900;border-radius:999px;padding:2px 10px;white-space:nowrap}
+.mt-badge.kon{background:#ffedd5;color:#9a3412}
+.mt-badge.abs{background:#ede9fe;color:#5b21b6}
+.mt-aim.abs{background:linear-gradient(180deg,#faf5ff,#fff 60%)}
+.mt-abs-note{font-size:.86rem;color:#5b21b6;font-weight:700;margin:6px 0 2px}
+.mt-lab{font-size:.78rem;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin:10px 0 2px}
+.mt-bar{height:7px;border-radius:7px;background:#e5e7eb;margin:8px 0 2px;overflow:hidden}
+.mt-bar i{display:block;height:100%;background:var(--c,#f97316);border-radius:7px}
+.mt-pre{display:flex;flex-wrap:wrap;gap:6px}
+.mt-pre .pill{text-decoration:none;font-size:.8rem}
+details.mt-build{margin-top:10px}
+details.mt-build>summary{cursor:pointer;font-weight:900;color:#5b21b6;padding:6px 0}
+.mt-goal.abs{background:#faf5ff;border-left-color:#7c3aed}
+.mt-goal.abs .km{color:#5b21b6}
+.mt-goal .mt-abs-note a{color:#5b21b6}
+.mt-badge .bi,.mt-legend .bi,.mt-lab .bi,.mt-abs-note .bi,.mt-build summary .bi,.mt-pre .bi,.mt-goal .km .bi{display:inline}
+
+/* programkode */
+.mtcode{display:inline-flex;flex-direction:column;align-items:stretch;text-align:left;background:#fff;color:#1f2937;border:3px solid #cbd5e1;border-radius:12px;padding:8px 14px 8px 8px;font:800 1.05rem/1.55 ui-monospace,Menlo,Consolas,monospace;min-width:14em}
+.mtcode .ln{display:block;white-space:pre;border-radius:6px}
+.mtcode .ln i{display:inline-block;width:1.6em;color:#94a3b8;font-style:normal;font-weight:700;margin-right:.4em;text-align:right}
+.mtcode .ln b{color:#7c3aed}
+.mtcode .ln.hl{background:#fef08a}

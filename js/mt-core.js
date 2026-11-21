@@ -184,12 +184,20 @@ function hub(setId){
     body.insertAdjacentHTML('beforeend', legacyHTML());
     return;
   }
-  body.innerHTML = `<h2 class="mt-sec">${cur.label} <span class="mt-todo">${cur.maal.length} ${B('kompetansemål')}</span></h2>`;
+  body.innerHTML = `<h2 class="mt-sec">${cur.label} <span class="mt-todo">${cur.maal.length} ${B('kompetansemål')}</span></h2>
+    <div class="mt-legend"><div><span class="mt-badge kon">🎯 ${B('Konkret mål')}</span> ${B('Ett eller to moduler er laget direkte for målet. Når du har tatt dem, har du nådd målet.')}</div>
+    <div><span class="mt-badge abs">🧩 ${B('Overordnet mål')}</span> ${B('Et stort, abstrakt mål som ikke kan læres i én modul. Det bygges opp gjennom mange moduler – også fra tidligere temaer. Her ser du både de modulene som er laget særskilt for målet, og alle byggesteinene.')}</div></div>`;
   cur.maal.forEach(a => {
-    const allMs = MT.mods.filter(m => m.maal.includes(a.k)), ms = allMs.filter(inGrade), dn = ms.filter(m => state(m).st === 'done').length, leg = (MT.LEGACY[a.k] || []).map(k => MT.LEGACY_MODS[k]);
-    const el = h('div', {class:'mt-aim ' + (ms.length ? '' : 'todo'), style:ms.length ? `--c:${dn === ms.length ? '#16a34a' : '#f97316'}` : ''});
-    el.innerHTML = `<div class="mt-ah"><span class="km">${a.k}</span><span class="at">${B(a.t)}</span><span class="st">${ms.length ? (dn === ms.length ? '✅ ' : '') + dn + '/' + ms.length + ' ' + B('moduler') : (leg.length ? '' : allMs.length ? B('Ingen moduler for dette trinnet') : B('Ikke laget ennå'))}</span></div>` +
-      (ms.length ? `<div class="mt-mods">${ms.map(m => modLink(m)).join('')}</div>` : '') +
+    const info = MT.aimInfo(a.k), own = info.own.filter(inGrade), bld = info.build.filter(inGrade), pre = info.bygger.filter(inGrade), leg = (MT.LEGACY[a.k] || []).map(k => MT.LEGACY_MODS[k]);
+    const all = own.concat(bld), dn = all.filter(m => state(m).st === 'done').length, abs = info.type === 'abs', anyAll = info.own.length + info.build.length;
+    const el = h('div', {class:'mt-aim ' + (abs ? 'abs ' : '') + (all.length ? '' : 'todo'), style:all.length ? `--c:${dn === all.length ? '#16a34a' : abs ? '#7c3aed' : '#f97316'}` : ''});
+    const badge = abs ? `<span class="mt-badge abs">🧩 ${B('Overordnet mål')}</span>` : (all.length ? `<span class="mt-badge kon">🎯 ${B('Konkret mål')}</span>` : '');
+    el.innerHTML = `<div class="mt-ah">${badge}<span class="km">${a.k}</span><span class="at">${B(a.t)}</span><span class="st">${all.length ? (dn === all.length ? '✅ ' : '') + dn + '/' + all.length + ' ' + B('moduler') : (leg.length ? '' : anyAll ? B('Ingen moduler for dette trinnet') : B('Ikke laget ennå'))}</span></div>` +
+      (abs && all.length ? `<div class="mt-abs-note">${B(info.ord)}</div>` : '') +
+      (all.length ? `<div class="mt-bar"><i style="width:${Math.round(100 * dn / all.length)}%"></i></div>` : '') +
+      (own.length ? `<div class="mt-lab">${abs ? B('Laget særskilt for dette målet') : (own.length > 1 ? B('Modulene for dette målet') : B('Modulen for dette målet'))}</div><div class="mt-mods">${own.map(m => modLink(m)).join('')}</div>` : '') +
+      (abs && bld.length ? `<details class="mt-build"><summary>${B('Byggesteiner')} (${bld.length}) – ${B('moduler som bygger opp målet')}</summary><div class="mt-mods">${bld.map(m => modLink(m)).join('')}</div></details>` : '') +
+      (!abs && pre.length ? `<div class="mt-lab">${B('Bygger på')}</div><div class="mt-pre">${pre.map(m => `<a class="pill" href="#/m/${m.id}">${m.ikon} ${B(m.tittel)}${state(m).st === 'done' ? ' ✅' : ''}</a>`).join('')}</div>` : '') +
       (leg.length ? `<div class="mt-leg"><span class="mt-todo">${B('Finnes fra før:')}</span>${leg.map(l => `<a class="pill" href="${l.href}">${l.emoji} ${B(l.no)}</a>`).join('')}</div>` : '');
     body.append(el);
   });
@@ -212,7 +220,9 @@ function modulePage(id){
   app.innerHTML = `<div class="mt-page">${crumb('#/t/' + (set ? set.id : ''), 'Alle moduler')}
     <h1><span style="font-size:2.2rem">${m.ikon}</span> ${B(m.tittel)}</h1>
     <div class="mt-row"><span class="pill">${trinnTag(m)}</span>${m.maal.map(k => `<span class="pill" title="${A.esc(aimOf(k) ? aimOf(k).t : '')}">${k}</span>`).join('')}</div>
-    ${m.maal.map(k => aimOf(k) ? `<div class="mt-goal"><span class="km">${k} · ${B('Kompetansemål')}</span><div><b>${B(aimOf(k).t)}</b></div></div>` : '').join('')}
+    ${m.maal.map(k => { if(!aimOf(k)) return ''; const inf = MT.aimInfo(k), abs = inf.type === 'abs', own = inf.own.includes(m), n = inf.own.length + inf.build.length;
+      return `<div class="mt-goal ${abs ? 'abs' : ''}"><span class="km">${k} · ${abs ? '🧩 ' + B('Overordnet mål') : '🎯 ' + B('Konkret mål')}</span><div><b>${B(aimOf(k).t)}</b></div>` + (abs ? `<div class="mt-abs-note">${own ? B('Denne modulen er laget særskilt for målet.') : B('Denne modulen er én av byggesteinene.')} ${B('Hele målet bygges av ' + n + ' moduler.')} <a href="#/t/${setOf(k).id}">${B('Se alle')}</a></div>` : '') + `</div>`; }).join('')}
+    ${Object.keys(MT.ABS).filter(k => !m.maal.includes(k) && (MT.ABS[k].bygg || []).includes(m.id) && aimOf(k)).map(k => { const inf = MT.aimInfo(k); return `<div class="mt-goal abs"><span class="km">${k} · 🧩 ${B('Overordnet mål')} · ${B('denne modulen er en byggestein')}</span><div><b>${B(aimOf(k).t)}</b></div><div class="mt-abs-note">${B('Hele målet bygges av ' + (inf.own.length + inf.build.length) + ' moduler.')} <a href="#/t/${setOf(k).id}">${B('Se alle')}</a></div></div>`; }).join('')}
     ${m.bygger.length ? `<div><b>${B('Bygger på')}:</b></div><div class="mt-rel">${rel(m.bygger)}</div>` : ''}
     ${op.length ? `<div><b>${B('Åpner for')}:</b></div><div class="mt-rel">${rel(op)}</div>` : ''}
     <h2 class="mt-sec">🎬 1. ${B('Forstå først: se videoen')}</h2><div id="mtVid"></div>

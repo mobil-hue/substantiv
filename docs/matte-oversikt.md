@@ -61,52 +61,70 @@ Generert av `tools/mt-oversikt.js`. Rekkefølgen er et forslag; «bygger på» v
 | 53 | Delingsdivisjon og målingsdivisjon | 4 | KM13255 | Dele likt: divisjon som motsatt av gange; Gange og deling i fortellinger | 6 | 8 | ja |
 | 54 | Divisjon på mange måter: tegning, tallinje, stang og tabell | 4 | KM13256 | Delingsdivisjon og målingsdivisjon; Gange på mange måter: ting, tegning, tall, tekst og tabell | 6 | 8 | – |
 | 55 | Divisjonsstrategier: tenk gange, halver og del opp | 4 | KM13257 | Divisjon på mange måter: tegning, tallinje, stang og tabell; Gange: dele opp og regne lurt; Dobling og halvering | 6 | 8 | ja |
+| 56 | De fire regneartene hører sammen | 4 | KM13258 | Pluss og minus hører sammen; Divisjonsstrategier: tenk gange, halver og del opp | 6 | 8 | ja |
+| 57 | Sjekk svaret: bruk den motsatte regnearten | 4 | KM13258 | De fire regneartene hører sammen; Subtraksjon med veksling | 6 | 7 | – |
+| 58 | Overslag: omtrent hvor mye? | 4 | KM13259 | De fire regneartene hører sammen; Tall til 100: tallord, rekkefølge og hundrerutenett; Hundrere, tiere og enere (til 999); Strategier for pluss: velg den lure måten | 7 | 9 | ja |
+| 59 | Er løsningen rimelig? Vurder tenkemåter og modeller | 4 | KM13259 | Overslag: omtrent hvor mye?; Sjekk svaret: bruk den motsatte regnearten | 7 | 8 | – |
+| 60 | Fra fortelling til regneuttrykk | 4 | KM13260 | Regnefortellinger: lage og løse problemer; Gange og deling i fortellinger; Delingsdivisjon og målingsdivisjon | 6 | 8 | – |
+| 61 | Fra regneuttrykk til fortelling | 4 | KM13260 | Fra fortelling til regneuttrykk | 5 | 8 | – |
+| 62 | Kanter, hjørner og flater | 4 | KM13261 | Romfigurer: kule, terning, sylinder og flere; Figurer rundt oss: sirkel, trekant, firkant og flere | 6 | 7 | – |
+| 63 | Vinkler: rett, spiss og stump | 4 | KM13261 | Figurer rundt oss: sirkel, trekant, firkant og flere; Kanter, hjørner og flater; Klokka: kvarter og minutter | 6 | 8 | – |
+| 64 | Måle volum: hvor mye plass? | 4 | KM13264 | Måle areal: hvor mye flate?; Romfigurer: kule, terning, sylinder og flere; Måle lengde: binders, linjal, centimeter og meter | 7 | 8 | ja |
+| 65 | Mønstre som vokser | 4 | KM13262 | Mønster: den delen som gjentar seg; Telle framover og bakover; Hopptelling: telle med 2, 5 og 10 | 6 | 7 | ja |
+| 66 | Mønstre i spill: finn vinnerstrategien | 4 | KM13262 | Mønstre som vokser; Dobling og halvering | 5 | 8 | – |
+| 67 | Algoritmer og løkker: gjenta uten å skrive om igjen | 4 | KM13263 | Regler og trinnvise instruksjoner; Regler og instruksjoner i koordinatsystemet | 5 | 7 | – |
+| 68 | Variabler og vilkår: lagre og velg | 4 | KM13263 | Algoritmer og løkker: gjenta uten å skrive om igjen; Likevekt: tall som mangler på vekta | 6 | 7 | – |
+
+## Typer av kompetansemål
+
+- **🎯 Konkret mål**: ett til to moduler er laget direkte for målet.
+- **🧩 Overordnet (abstrakt) mål**: et stort mål som bygges opp gjennom mange moduler. Oversikten skiller mellom modulene som er laget særskilt for målet og byggesteinene.
 
 ## Kompetansemål 1.–2. trinn og modulene som dekker dem
 
-- **KM13228** Gruppere tall og mengder ut fra egenskaper og reflektere over om dette kan gjøres på flere måter: Gruppere etter egenskaper
-- **KM13229** Utforske tall, mengder og telling i lek, natur, billedkunst, musikk og barnelitteratur: Tall rundt oss: lek, natur, kunst, musikk og bøker
-- **KM13241** Bruke tallsymboler, tallord, tegning og konkreter til å representere tall og mengder på ulike måter og oversette mellom de ulike representasjonene: Tall og mengder 0–10; Tall 11–20: ti og litt til; Tiere og enere: plassen bestemmer verdien; Tall til 100: tallord, rekkefølge og hundrerutenett
-- **KM13230** Telle både framlengs og baklengs, velge ulike startpunkter og ulik differanse og forklare mønstre i tellinger: Telle framover og bakover; Hopptelling: telle med 2, 5 og 10
-- **KM13231** Beskrive og utforske egenskaper ved partall og oddetall: Partall og oddetall
-- **KM13232** Bruke tallsymboler, tallord, tegning og konkreter til å representere posisjonssystemet og oversette mellom de ulike representasjonene: Tall 11–20: ti og litt til; Tiere og enere: plassen bestemmer verdien; Tall til 100: tallord, rekkefølge og hundrerutenett; Hundrere, tiere og enere (til 999); Addisjon med veksling (mente); Subtraksjon med veksling
-- **KM13233** Plassere tall på tallinjen og bruke tallinjen i regning og problemløsing: Tallinjen: plassere og lese av tall; Tallinjen i regning og problemløsing
-- **KM13234** Bruke addisjon og subtraksjon til å lage og løse problemer fra lek og hverdag: Legge sammen: hva addisjon betyr; Addisjon til 10: summer, manglende tall og tiervenner; Trekke fra: hva subtraksjon betyr; Regnefortellinger: lage og løse problemer; Addisjon over 10: fyll tieren først; Subtraksjon til 20: gå ned til 10 først; Tallinjen i regning og problemløsing; Legge sammen tosifrede tall i hodet; Trekke fra tosifrede tall i hodet; Oppstilling: legge sammen kolonne for kolonne; Oppstilling: trekke fra kolonne for kolonne; Addisjon med veksling (mente); Subtraksjon med veksling
-- **KM13235** Bruke kommutative og assosiative egenskaper ved addisjon i hoderegning og skriftlig regning: Bytte rekkefølge i addisjon; Legge sammen tre tall: velg lette par
-- **KM13242** Bruke likhetstegnet som et relasjonelt symbol som viser at to uttrykk har samme verdi: Likhetstegnet: begge sider er like mye
-- **KM13236** Kjenne igjen og beskrive repeterende enheter i mønstre og lage egne mønstre: Mønster: den delen som gjentar seg
-- **KM13237** Utforske, tegne og beskrive geometriske figurer fra sitt eget nærmiljø og argumentere for måter å sortere dem på etter egenskaper: Figurer rundt oss: sirkel, trekant, firkant og flere; Romfigurer: kule, terning, sylinder og flere
-- **KM13240** Måle lengde og masse i praktiske situasjoner med ikke-standardiserte og standardiserte måleenheter og samtale om resultatene: Måle lengde: binders, linjal, centimeter og meter; Måle masse: tyngre, lettere, gram og kilogram
-- **KM13238** Beskrive tid ved hjelp av kalender og analog og digital klokke: Klokka: hele og halve timer; Kalender: dager, uker og måneder; Klokka: kvarter og minutter
-- **KM13239** Lage og følge regler og trinnvise instruksjoner i lek og spill: Regler og trinnvise instruksjoner
+- 🎯 **KM13228** Gruppere tall og mengder ut fra egenskaper og reflektere over om dette kan gjøres på flere måter: Gruppere etter egenskaper
+- 🎯 **KM13229** Utforske tall, mengder og telling i lek, natur, billedkunst, musikk og barnelitteratur: Tall rundt oss: lek, natur, kunst, musikk og bøker
+- 🧩 **KM13241** Bruke tallsymboler, tallord, tegning og konkreter til å representere tall og mengder på ulike måter og oversette mellom de ulike representasjonene: _overordnet mål_. Laget særskilt for målet: Tall og mengder 0–10. Byggesteiner (3): Tall 11–20: ti og litt til; Tiere og enere: plassen bestemmer verdien; Tall til 100: tallord, rekkefølge og hundrerutenett
+- 🎯 **KM13230** Telle både framlengs og baklengs, velge ulike startpunkter og ulik differanse og forklare mønstre i tellinger: Telle framover og bakover; Hopptelling: telle med 2, 5 og 10
+- 🎯 **KM13231** Beskrive og utforske egenskaper ved partall og oddetall: Partall og oddetall
+- 🧩 **KM13232** Bruke tallsymboler, tallord, tegning og konkreter til å representere posisjonssystemet og oversette mellom de ulike representasjonene: _overordnet mål_. Laget særskilt for målet: Tiere og enere: plassen bestemmer verdien; Hundrere, tiere og enere (til 999). Byggesteiner (4): Tall 11–20: ti og litt til; Tall til 100: tallord, rekkefølge og hundrerutenett; Addisjon med veksling (mente); Subtraksjon med veksling
+- 🎯 **KM13233** Plassere tall på tallinjen og bruke tallinjen i regning og problemløsing: Tallinjen: plassere og lese av tall; Tallinjen i regning og problemløsing
+- 🧩 **KM13234** Bruke addisjon og subtraksjon til å lage og løse problemer fra lek og hverdag: _overordnet mål_. Laget særskilt for målet: Regnefortellinger: lage og løse problemer. Byggesteiner (12): Legge sammen: hva addisjon betyr; Addisjon til 10: summer, manglende tall og tiervenner; Trekke fra: hva subtraksjon betyr; Addisjon over 10: fyll tieren først; Subtraksjon til 20: gå ned til 10 først; Tallinjen i regning og problemløsing; Legge sammen tosifrede tall i hodet; Trekke fra tosifrede tall i hodet; Oppstilling: legge sammen kolonne for kolonne; Oppstilling: trekke fra kolonne for kolonne; Addisjon med veksling (mente); Subtraksjon med veksling
+- 🎯 **KM13235** Bruke kommutative og assosiative egenskaper ved addisjon i hoderegning og skriftlig regning: Bytte rekkefølge i addisjon; Legge sammen tre tall: velg lette par
+- 🎯 **KM13242** Bruke likhetstegnet som et relasjonelt symbol som viser at to uttrykk har samme verdi: Likhetstegnet: begge sider er like mye
+- 🎯 **KM13236** Kjenne igjen og beskrive repeterende enheter i mønstre og lage egne mønstre: Mønster: den delen som gjentar seg
+- 🎯 **KM13237** Utforske, tegne og beskrive geometriske figurer fra sitt eget nærmiljø og argumentere for måter å sortere dem på etter egenskaper: Figurer rundt oss: sirkel, trekant, firkant og flere; Romfigurer: kule, terning, sylinder og flere
+- 🎯 **KM13240** Måle lengde og masse i praktiske situasjoner med ikke-standardiserte og standardiserte måleenheter og samtale om resultatene: Måle lengde: binders, linjal, centimeter og meter; Måle masse: tyngre, lettere, gram og kilogram
+- 🎯 **KM13238** Beskrive tid ved hjelp av kalender og analog og digital klokke: Klokka: hele og halve timer; Kalender: dager, uker og måneder; Klokka: kvarter og minutter
+- 🎯 **KM13239** Lage og følge regler og trinnvise instruksjoner i lek og spill: Regler og trinnvise instruksjoner
 
 ## Kompetansemål 3. trinn og modulene som dekker dem
 
-- **KM13243** Bruke hensiktsmessige strategier for addisjon og subtraksjon til å lage og løse problemer fra lek og hverdag: Strategier for pluss: velg den lure måten; Strategier for minus: telle opp, runde og dele
-- **KM13244** Forklare og utforske sammenhenger mellom addisjon og subtraksjon i hoderegning og skriftlig regning: Pluss og minus hører sammen
-- **KM13245** Beskrive og utforske multiplikasjon ved telling og gruppering: Gange: like store grupper; Gange og hopptelling: 2-, 5- og 10-gangen
-- **KM13254** Bruke dobling og halvering i hoderegning og skriftlig regning: Dobling og halvering
-- **KM13246** Bruke multiplikasjon og divisjon til å lage og løse problemer fra lek og hverdag: Dele likt: divisjon som motsatt av gange; Gange og deling i fortellinger
-- **KM13247** Bruke tallsymboler, tekst, tabeller, tegning og konkreter til å representere multiplikasjon på ulike måter og oversette mellom de ulike representasjonene: Gange på mange måter: ting, tegning, tall, tekst og tabell
-- **KM13248** Bruke kommutative, assosiative og distributive egenskaper ved multiplikasjon i hoderegning og skriftlig regning: Gange: bytte rekkefølge og velge lette par; Gange: dele opp og regne lurt
-- **KM13249** Bruke likhets- og ulikhetstegn som relasjonelle symboler for å sammenligne størrelser, mengder, uttrykk og tall: Større enn, mindre enn og lik
-- **KM13250** Bruke tallsymboler, tegning og konkreter for å utforske likevekt og oversette mellom de ulike representasjonene: Likevekt: tall som mangler på vekta
-- **KM13253** Måle arealer i praktiske situasjoner med ikke-standardiserte og standardiserte måleenheter: Måle areal: hvor mye flate?
-- **KM13251** Eksperimentere med, navngi og plassere punkter i koordinatsystemet: Koordinatsystem: navngi og plassere punkter
-- **KM13252** Lage og følge regler og trinnvise instruksjoner i lek og spill knyttet til koordinatsystemet: Regler og instruksjoner i koordinatsystemet
+- 🎯 **KM13243** Bruke hensiktsmessige strategier for addisjon og subtraksjon til å lage og løse problemer fra lek og hverdag: Strategier for pluss: velg den lure måten; Strategier for minus: telle opp, runde og dele
+- 🎯 **KM13244** Forklare og utforske sammenhenger mellom addisjon og subtraksjon i hoderegning og skriftlig regning: Pluss og minus hører sammen
+- 🎯 **KM13245** Beskrive og utforske multiplikasjon ved telling og gruppering: Gange: like store grupper; Gange og hopptelling: 2-, 5- og 10-gangen
+- 🎯 **KM13254** Bruke dobling og halvering i hoderegning og skriftlig regning: Dobling og halvering
+- 🎯 **KM13246** Bruke multiplikasjon og divisjon til å lage og løse problemer fra lek og hverdag: Dele likt: divisjon som motsatt av gange; Gange og deling i fortellinger
+- 🎯 **KM13247** Bruke tallsymboler, tekst, tabeller, tegning og konkreter til å representere multiplikasjon på ulike måter og oversette mellom de ulike representasjonene: Gange på mange måter: ting, tegning, tall, tekst og tabell
+- 🎯 **KM13248** Bruke kommutative, assosiative og distributive egenskaper ved multiplikasjon i hoderegning og skriftlig regning: Gange: bytte rekkefølge og velge lette par; Gange: dele opp og regne lurt
+- 🎯 **KM13249** Bruke likhets- og ulikhetstegn som relasjonelle symboler for å sammenligne størrelser, mengder, uttrykk og tall: Større enn, mindre enn og lik
+- 🎯 **KM13250** Bruke tallsymboler, tegning og konkreter for å utforske likevekt og oversette mellom de ulike representasjonene: Likevekt: tall som mangler på vekta
+- 🎯 **KM13253** Måle arealer i praktiske situasjoner med ikke-standardiserte og standardiserte måleenheter: Måle areal: hvor mye flate?
+- 🎯 **KM13251** Eksperimentere med, navngi og plassere punkter i koordinatsystemet: Koordinatsystem: navngi og plassere punkter
+- 🎯 **KM13252** Lage og følge regler og trinnvise instruksjoner i lek og spill knyttet til koordinatsystemet: Regler og instruksjoner i koordinatsystemet
 
 ## Kompetansemål 4. trinn og modulene som dekker dem
 
-- **KM13255** Utforske og bruke målings- og delingsdivisjon i praktiske situasjoner: Delingsdivisjon og målingsdivisjon
-- **KM13256** Bruke tall, tekst, tegning og konkreter for å utforske divisjon på ulike måter og oversette mellom de ulike representasjonene: Divisjon på mange måter: tegning, tallinje, stang og tabell
-- **KM13257** Bruke og forklare ulike divisjonsstrategier: Divisjonsstrategier: tenk gange, halver og del opp
-- **KM13258** Bruke hoderegning og skriftlig regning til å utforske og forklare sammenhenger mellom de fire regneartene: _ikke laget ennå_
-- **KM13259** Estimere, gjøre overslag, forklare tenkemåter og vurdere kritisk egne og andres modeller og løsninger i arbeid med praktiske situasjoner: _ikke laget ennå_
-- **KM13260** Lage regneuttrykk til praktiske situasjoner og finne praktiske situasjoner som passer til oppgitte regneuttrykk: _ikke laget ennå_
-- **KM13261** Beskrive og utforske egenskaper ved to- og tredimensjonale figurer ved å bruke vinkler, kanter, hjørner og flater: _ikke laget ennå_
-- **KM13264** Måle volum i praktiske situasjoner med ikke-standardiserte og standardiserte måleenheter og samtale om resultatene: _ikke laget ennå_
-- **KM13262** Beskrive og utforske strukturer og mønstre i lek og spill: _ikke laget ennå_
-- **KM13263** Lage algoritmer og uttrykke dem ved bruk av variabler, vilkår og løkker: _ikke laget ennå_
+- 🎯 **KM13255** Utforske og bruke målings- og delingsdivisjon i praktiske situasjoner: Delingsdivisjon og målingsdivisjon
+- 🎯 **KM13256** Bruke tall, tekst, tegning og konkreter for å utforske divisjon på ulike måter og oversette mellom de ulike representasjonene: Divisjon på mange måter: tegning, tallinje, stang og tabell
+- 🎯 **KM13257** Bruke og forklare ulike divisjonsstrategier: Divisjonsstrategier: tenk gange, halver og del opp
+- 🧩 **KM13258** Bruke hoderegning og skriftlig regning til å utforske og forklare sammenhenger mellom de fire regneartene: _overordnet mål_. Laget særskilt for målet: De fire regneartene hører sammen; Sjekk svaret: bruk den motsatte regnearten. Byggesteiner (13): Legge sammen: hva addisjon betyr; Trekke fra: hva subtraksjon betyr; Strategier for minus: telle opp, runde og dele; Pluss og minus hører sammen; Gange: like store grupper; Gange og hopptelling: 2-, 5- og 10-gangen; Dobling og halvering; Dele likt: divisjon som motsatt av gange; Gange: bytte rekkefølge og velge lette par; Gange: dele opp og regne lurt; Delingsdivisjon og målingsdivisjon; Divisjon på mange måter: tegning, tallinje, stang og tabell; Divisjonsstrategier: tenk gange, halver og del opp
+- 🧩 **KM13259** Estimere, gjøre overslag, forklare tenkemåter og vurdere kritisk egne og andres modeller og løsninger i arbeid med praktiske situasjoner: _overordnet mål_. Laget særskilt for målet: Overslag: omtrent hvor mye?; Er løsningen rimelig? Vurder tenkemåter og modeller. Byggesteiner (12): Regnefortellinger: lage og løse problemer; Måle lengde: binders, linjal, centimeter og meter; Måle masse: tyngre, lettere, gram og kilogram; Tallinjen i regning og problemløsing; Strategier for pluss: velg den lure måten; Strategier for minus: telle opp, runde og dele; Gange og deling i fortellinger; Større enn, mindre enn og lik; Måle areal: hvor mye flate?; Delingsdivisjon og målingsdivisjon; Sjekk svaret: bruk den motsatte regnearten; Måle volum: hvor mye plass?
+- 🧩 **KM13260** Lage regneuttrykk til praktiske situasjoner og finne praktiske situasjoner som passer til oppgitte regneuttrykk: _overordnet mål_. Laget særskilt for målet: Fra fortelling til regneuttrykk; Fra regneuttrykk til fortelling. Byggesteiner (10): Legge sammen: hva addisjon betyr; Trekke fra: hva subtraksjon betyr; Likhetstegnet: begge sider er like mye; Regnefortellinger: lage og løse problemer; Gange: like store grupper; Dele likt: divisjon som motsatt av gange; Gange og deling i fortellinger; Gange på mange måter: ting, tegning, tall, tekst og tabell; Delingsdivisjon og målingsdivisjon; Divisjon på mange måter: tegning, tallinje, stang og tabell
+- 🎯 **KM13261** Beskrive og utforske egenskaper ved to- og tredimensjonale figurer ved å bruke vinkler, kanter, hjørner og flater: Kanter, hjørner og flater; Vinkler: rett, spiss og stump
+- 🎯 **KM13264** Måle volum i praktiske situasjoner med ikke-standardiserte og standardiserte måleenheter og samtale om resultatene: Måle volum: hvor mye plass?
+- 🎯 **KM13262** Beskrive og utforske strukturer og mønstre i lek og spill: Mønstre som vokser; Mønstre i spill: finn vinnerstrategien
+- 🎯 **KM13263** Lage algoritmer og uttrykke dem ved bruk av variabler, vilkår og løkker: Algoritmer og løkker: gjenta uten å skrive om igjen; Variabler og vilkår: lagre og velg
 
 ## Nivåer per modul
 
@@ -509,4 +527,108 @@ Generert av `tools/mt-oversikt.js`. Rekkefølgen er et forslag; «bygger på» v
 4. Del opp i tiere og enere
 5. Del opp smart
 6. Velg strategi og sjekk
+
+**De fire regneartene hører sammen**
+1. Forstå: tre tall – fire regnestykker
+2. Regnefamilien
+3. Hvilket hører ikke hjemme?
+4. Gjentatt addisjon og subtraksjon
+5. Bruk det du kan
+6. Tiere og hundrere
+
+**Sjekk svaret: bruk den motsatte regnearten**
+1. Forstå: sjekk med motsatt regneart
+2. Sjekk addisjon
+3. Sjekk subtraksjon
+4. Sjekk gange og deling
+5. Divisjon med rest – sjekk
+6. Finn feilen
+
+**Overslag: omtrent hvor mye?**
+1. Forstå: hva er et overslag?
+2. Avrund til nærmeste tier
+3. Avrund til nærmeste hundre
+4. Overslag: pluss og minus
+5. Overslag: gange
+6. Er svaret rimelig?
+7. Overslag i hverdagen
+
+**Er løsningen rimelig? Vurder tenkemåter og modeller**
+1. Forstå: tenk kritisk
+2. Hvem har regnet riktig?
+3. Passer tegningen til historien?
+4. Er dette rimelig?
+5. Rimelig svar i regneoppgaver
+6. Moteksempel
+7. Forklar tenkemåten
+
+**Fra fortelling til regneuttrykk**
+1. Forstå: hva skjer i historien?
+2. Velg riktig regneuttrykk
+3. Skriv uttrykk og regn ut
+4. Flere, færre, forskjell og pris
+5. To steg: velg uttrykket
+6. To steg: regn ut
+
+**Fra regneuttrykk til fortelling**
+1. Forstå: en historie, mange uttrykk
+2. Hvilken historie passer?
+3. Hvilken historie passer IKKE?
+4. Tallet som mangler
+5. To steg: hvilken historie?
+
+**Kanter, hjørner og flater**
+1. Forstå: flate, kant og hjørne
+2. Flate figurer: sider og hjørner
+3. Romfigurer: tell flater, kanter og hjørner
+4. Tabell: fyll ut
+5. Hvilken figur er jeg?
+6. Egenskaper og sortering
+
+**Vinkler: rett, spiss og stump**
+1. Forstå: rett, spiss og stump
+2. Rett, spiss eller stump?
+3. Rette vinkler i figurer
+4. Hvilken vinkel er størst?
+5. Vinkler på klokka
+6. Rette vinkler rundt oss
+
+**Måle volum: hvor mye plass?**
+1. Forstå: hva er volum?
+2. Tell klosser i ett lag
+3. Tell klosser i blokken
+4. Les av målebegeret
+5. Liter og desiliter
+6. Hvor mange passer?
+7. Sammenlign volum
+
+**Mønstre som vokser**
+1. Forstå: hva er et vekstmønster?
+2. Tallrekker: finn neste
+3. Fyrstikkfirkanter
+4. Tårn og trapper
+5. Forklar regelen
+6. Hopp langt fram
+
+**Mønstre i spill: finn vinnerstrategien**
+1. Forstå: mønstre i spill
+2. Terninger
+3. Brett og kort
+4. Nim: hvor mange skal du ta?
+5. Nim: hvem vinner?
+
+**Algoritmer og løkker: gjenta uten å skrive om igjen**
+1. Forstå: algoritmer og løkker
+2. Hvor mange steg?
+3. Skriv med løkke
+4. Hvor ender roboten?
+5. Fyll inn løkken
+
+**Variabler og vilkår: lagre og velg**
+1. Forstå: variabel og vilkår
+2. Hva er x?
+3. Variabel og løkke
+4. Vilkår: hvis og ellers
+5. Vilkår og løkke sammen
+6. Hvilket program?
 

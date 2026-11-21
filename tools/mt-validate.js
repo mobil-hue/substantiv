@@ -10,6 +10,14 @@ const URL = process.env.URL || 'http://localhost:8765/matte.html';
   const rep = await p.evaluate(rounds => {
     const MT = window.MT, bad = [], seenAll = {};
     const add = (m, l, msg, q) => bad.push(`${m}/${l}: ${msg}${q ? ' | ' + String(q.stem).replace(/<[^>]+>/g, '').slice(0, 90) : ''}`);
+    Object.keys(MT.ABS || {}).forEach(k => {
+      if(!MT.SETS.some(st => st.maal.some(x => x.k === k))) add('abs', '-', 'overordnet mål ' + k + ' finnes ikke i læreplanen');
+      MT.ABS[k].egen.forEach(id => { if(!MT.byId[id]) add('abs', '-', k + ': egen modul ' + id + ' finnes ikke'); else if(!MT.byId[id].maal.includes(k)) add('abs', '-', k + ': ' + id + ' peker ikke på målet'); });
+      if(!MT.ABS[k].ord) add('abs', '-', k + ' mangler forklaring');
+      (MT.ABS[k].bygg || []).forEach(id => { if(!MT.byId[id]) add('abs', '-', k + ': byggestein ' + id + ' finnes ikke'); });
+      { const inf = MT.aimInfo(k); if(inf.own.length + inf.build.length < 3) add('abs', '-', k + ' har færre enn 3 moduler – bør være konkret mål'); if(!inf.build.length) add('abs', '-', k + ' har ingen byggesteiner'); }
+    });
+    MT.SETS.forEach(st => st.maal.forEach(a => { const n = MT.mods.filter(m => m.maal.includes(a.k)).length; if(!MT.ABS[a.k] && n > 3) add('maal', '-', a.k + ' har ' + n + ' moduler men er ikke merket som overordnet'); }));
     MT.mods.forEach(m => {
       if(!m.video || m.video.length < 5) add(m.id, '-', 'video har under 5 scener');
       m.video.forEach((s, i) => { if(!s.html || !s.no || s.no.length < 20) add(m.id, 'video', 'scene ' + i + ' mangler tekst/bilde'); if(/undefined|NaN/.test(s.html + s.no)) add(m.id, 'video', 'undefined/NaN i scene ' + i); });
