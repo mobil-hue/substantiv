@@ -155,11 +155,16 @@ function hub(setId){
   const first = MT.mods.find(m => !state(m).v || state(m).n < state(m).total), sum = A.store.get('sum_mt', {done:0, total:0});
   const root = h('div', {class:'mt-page'});
   const modsOf = s => MT.mods.filter(m => m.maal.some(k => s.maal.some(a => a.k === k)));
+  // sett som dekker flere trinn (1.–2. trinn) kan filtreres på ett trinn; modulene har anbefalt trinn i m.trinn
+  const grades = cur.id.includes('-') ? cur.id.split('-').map(Number) : null;
+  let gsel = A.store.get('mt_grade', 'all'); if(!grades || (gsel !== 'all' && !grades.includes(+gsel))) gsel = 'all';
+  const inGrade = m => gsel === 'all' || m.trinn.includes(+gsel);
   root.innerHTML = `<div class="hero" style="background:linear-gradient(135deg,#fb923c,#ea580c)"><div class="big-emoji">🔢</div><div class="grow"><h1>${B('Matematikk')}</h1>
       <div>${B('Etter kompetansemålene i læreplanen (LK20), trinn for trinn. Først forstå – så øve på flere nivåer.')}</div></div>
       ${first ? `<a class="btn big sec" href="#/m/${first.id}" style="text-decoration:none">${B('▶ ' + (sum.done ? 'Fortsett: ' : 'Start: ') + first.tittel)}</a>` : ''}</div>
     <div class="card" style="margin-top:12px"><div class="small-note" style="text-align:left"><b>${B('Slik er det bygd opp')}</b><br>${B('Hver modul tar for seg ett lite tema. Du ser en video som forklarer grundig, svarer på noen spørsmål for å sjekke at du har forstått, og trener deretter på flere nivåer – fra enkelt til vanskelig. Du kan også skrive ut forklaring og arbeidsark på tre nivåer, med fasit.')}</div></div>
     <div class="mt-tabs" id="mtTabs"></div>
+    ${grades ? `<div class="mt-view" id="mtGrade"><b style="align-self:center">${B('Vis trinn')}:</b>${['all'].concat(grades).map(g => `<button type="button" class="pill ${String(g) === gsel ? 'on' : ''}" data-g="${g}">${g === 'all' ? B('Alle') : g + '. trinn'}</button>`).join('')}</div>` : ''}
     <div class="mt-view"><button type="button" class="pill ${view === 'maal' ? 'on' : ''}" data-v="maal">🎯 ${B('Etter kompetansemål')}</button><button type="button" class="pill ${view === 'rekke' ? 'on' : ''}" data-v="rekke">🧭 ${B('Anbefalt rekkefølge')}</button></div>
     <div id="mtBody"></div>
     <div class="mt-note">${B('Kompetansemålene er hentet fra læreplanen i matematikk (gyldig fra 1. august 2026). Moduler som ikke er laget ennå er merket. Alt innhold er laget med KI og bør leses gjennom av en lærer før det brukes i undervisningen.')}</div>`;
@@ -167,20 +172,23 @@ function hub(setId){
   const tabs = root.querySelector('#mtTabs');
   sets.forEach(s => { const ms = modsOf(s), d = ms.filter(m => state(m).st === 'done').length;
     tabs.insertAdjacentHTML('beforeend', `<a class="pill ${s.id === cur.id ? 'on' : ''} ${ms.length ? 'has' : ''}" href="#/t/${s.id}" style="text-decoration:none">${s.label}${ms.length ? ` <small>${d}/${ms.length}</small>` : ''}</a>`); });
-  root.querySelectorAll('.mt-view .pill').forEach(b => b.onclick = () => { view = b.dataset.v; A.store.set('mt_view', view); hub(cur.id); });
+  root.querySelectorAll('.mt-view .pill[data-v]').forEach(b => b.onclick = () => { view = b.dataset.v; A.store.set('mt_view', view); hub(cur.id); });
+  root.querySelectorAll('#mtGrade .pill').forEach(b => b.onclick = () => { A.store.set('mt_grade', b.dataset.g); hub(cur.id); });
   const body = root.querySelector('#mtBody');
   if(view === 'rekke'){
-    const all = MT.mods.slice().sort((a, b) => a.ord - b.ord);
-    body.innerHTML = `<div class="mt-note" style="margin-top:0">${B('Rekkefølgen er et forslag. Hver modul sier hva den bygger på – hopp over det du kan fra før.')}</div><div class="mt-path">${all.map((m, i) => { const s = state(m);
-      return `<a class="mt-pi ${s.st === 'done' ? 'done' : ''}" href="#/m/${m.id}"><span class="n">${i + 1}</span><span class="ic">${m.ikon}</span><span class="tx"><b>${B(m.tittel)}</b><small>${trinnTag(m)}${m.bygger.length ? ' · ' + B('bygger på') + ' ' + m.bygger.map(b => (MT.byId[b] ? MT.byId[b].tittel : b)).join(', ') : ''}</small></span><span>${s.st === 'done' ? '✅' : s.st === 'part' ? '🟡' : ''}</span></a>`; }).join('')}</div>`;
+    const all = modsOf(cur).filter(inGrade).sort((a, b) => a.ord - b.ord);
+    const leg = [...new Set([].concat(...cur.maal.map(a => MT.LEGACY[a.k] || [])))].map(k => MT.LEGACY_MODS[k]);
+    body.innerHTML = `<h2 class="mt-sec">${cur.label}${grades && gsel !== 'all' ? ' · ' + gsel + '. trinn' : ''} <span class="mt-todo">${B('anbefalt rekkefølge')}</span></h2>` + (all.length ? `<div class="mt-note" style="margin-top:0">${B('Rekkefølgen er et forslag. Hver modul sier hva den bygger på – hopp over det du kan fra før.')}</div><div class="mt-path">${all.map((m, i) => { const s = state(m);
+      return `<a class="mt-pi ${s.st === 'done' ? 'done' : ''}" href="#/m/${m.id}"><span class="n">${i + 1}</span><span class="ic">${m.ikon}</span><span class="tx"><b>${B(m.tittel)}</b><small>${trinnTag(m)}${m.bygger.length ? ' · ' + B('bygger på') + ' ' + m.bygger.map(b => (MT.byId[b] ? MT.byId[b].tittel : b)).join(', ') : ''}</small></span><span>${s.st === 'done' ? '✅' : s.st === 'part' ? '🟡' : ''}</span></a>`; }).join('')}</div>`
+      : `<div class="mt-aim todo"><b>${B('Ingen moduler er laget for dette trinnet ennå.')}</b>${leg.length ? `<div class="mt-leg"><span class="mt-todo">${B('Finnes fra før:')}</span>${leg.map(l => `<a class="pill" href="${l.href}">${l.emoji} ${B(l.no)}</a>`).join('')}</div>` : ''}</div>`);
     body.insertAdjacentHTML('beforeend', legacyHTML());
     return;
   }
   body.innerHTML = `<h2 class="mt-sec">${cur.label} <span class="mt-todo">${cur.maal.length} ${B('kompetansemål')}</span></h2>`;
   cur.maal.forEach(a => {
-    const ms = MT.mods.filter(m => m.maal.includes(a.k)), dn = ms.filter(m => state(m).st === 'done').length, leg = (MT.LEGACY[a.k] || []).map(k => MT.LEGACY_MODS[k]);
+    const allMs = MT.mods.filter(m => m.maal.includes(a.k)), ms = allMs.filter(inGrade), dn = ms.filter(m => state(m).st === 'done').length, leg = (MT.LEGACY[a.k] || []).map(k => MT.LEGACY_MODS[k]);
     const el = h('div', {class:'mt-aim ' + (ms.length ? '' : 'todo'), style:ms.length ? `--c:${dn === ms.length ? '#16a34a' : '#f97316'}` : ''});
-    el.innerHTML = `<div class="mt-ah"><span class="km">${a.k}</span><span class="at">${B(a.t)}</span><span class="st">${ms.length ? (dn === ms.length ? '✅ ' : '') + dn + '/' + ms.length + ' ' + B('moduler') : (leg.length ? '' : B('Ikke laget ennå'))}</span></div>` +
+    el.innerHTML = `<div class="mt-ah"><span class="km">${a.k}</span><span class="at">${B(a.t)}</span><span class="st">${ms.length ? (dn === ms.length ? '✅ ' : '') + dn + '/' + ms.length + ' ' + B('moduler') : (leg.length ? '' : allMs.length ? B('Ingen moduler for dette trinnet') : B('Ikke laget ennå'))}</span></div>` +
       (ms.length ? `<div class="mt-mods">${ms.map(m => modLink(m)).join('')}</div>` : '') +
       (leg.length ? `<div class="mt-leg"><span class="mt-todo">${B('Finnes fra før:')}</span>${leg.map(l => `<a class="pill" href="${l.href}">${l.emoji} ${B(l.no)}</a>`).join('')}</div>` : '');
     body.append(el);
