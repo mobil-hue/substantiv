@@ -46,7 +46,15 @@ body{font-size:11pt}
 .txt dl{margin:0}.txt dt{font-weight:900;float:left;clear:left;margin-right:2mm}.txt dd{margin:0 0 .8mm}
 .sheet h3{margin:4mm 0 2mm;font-size:12pt}
 .kts{display:block}.kt{margin-bottom:4mm}.kt h4{margin:0 0 1.5mm;font-size:11.5pt}
-.kg{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2mm 5mm;font-size:10.5pt}.kc .ka{color:#dc2626;font-weight:900}
+.kg{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2mm 5mm;font-size:10.5pt}.kg6{grid-template-columns:repeat(6,1fr);font-size:9.5pt}
+.dg{display:grid;gap:1.5mm 5mm;align-items:end}
+.dc{min-width:0;padding:.8mm 0;border-bottom:1px dotted #bbb}
+.dl{display:flex;align-items:flex-end;gap:2mm;white-space:nowrap}
+.dn{flex:none;font-size:8pt;color:#777;min-width:5mm}
+.dt{font-size:13pt;font-weight:800}
+.dc .aln.s{min-width:11mm;height:5mm}
+.dpic{text-align:center;padding:1.5mm 0}.dpic .dl{justify-content:center}.dpi svg{max-width:100%;height:auto}
+.dcol{display:block;border:0;text-align:center;padding:1mm 0 2mm}.dcol .dn{display:block;text-align:left}.dcol .mtg{display:flex;justify-content:center}.dcol .mtmini{font-size:14pt}.kc .ka{color:#dc2626;font-weight:900}
 @page{size:A4;margin:10mm}
 @media print{
   body{background:#fff;font-size:10.5pt}.top,.noprint,.bar{display:none!important}
@@ -66,7 +74,7 @@ body{font-size:11pt}
  <h1 class="noprint">📝 Arbeidsark – matematikk</h1>
  <div class="bar noprint">
   <select id="mod" aria-label="Velg modul"></select>
-  <span id="parts"><label><input type="checkbox" value="0"> Forklaring</label> <label><input type="checkbox" value="1"> Nivå 1</label> <label><input type="checkbox" value="2"> Nivå 2</label> <label><input type="checkbox" value="3"> Nivå 3</label></span>
+  <span id="parts"><label><input type="checkbox" value="0"> Forklaring</label> <label><input type="checkbox" value="1"> Nivå 1</label> <label><input type="checkbox" value="2"> Nivå 2</label> <label><input type="checkbox" value="3"> Nivå 3</label> <label id="drillLab"><input type="checkbox" value="4"> 🏋️ Mengdetrening</label></span>
   <button class="btn" id="new" type="button">🔄 Nye oppgaver</button>
   <button class="btn sec" id="printSheets" type="button">🖨 Skriv ut ark</button>
   <button class="btn sec" id="printKeys" type="button">🖨 Skriv ut fasit</button>
@@ -84,6 +92,7 @@ body{font-size:11pt}
 <script src="js/mult-data.js"></script>
 <script src="js/mt-maal.js"></script>
 <script src="js/mt-gfx.js"></script>
+<script src="js/mt-gfx2.js"></script>
 <script src="js/mt-core.js"></script>
 <script src="js/mt-m-tall.js"></script>
 <script src="js/mt-m-tall2.js"></script>
@@ -92,6 +101,11 @@ body{font-size:11pt}
 <script src="js/mt-m-regning1.js"></script>
 <script src="js/mt-m-regning2.js"></script>
 <script src="js/mt-m-regning3.js"></script>
+<script src="js/mt-m-ny1.js"></script>
+<script src="js/mt-m-ny2.js"></script>
+<script src="js/mt-m-3a.js"></script>
+<script src="js/mt-m-3b.js"></script>
+<script src="js/mt-drill.js"></script>
 <script src="js/mt-ark.js"></script>
 </body>
 </html>

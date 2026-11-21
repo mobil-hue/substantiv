@@ -151,6 +151,13 @@ G.col = (op, a, b, o) => {
   return `<span class="mtg"><table class="mtcol">${o.nohead ? '' : row(head)}${row(top)}${row(r1)}${rb.map(c => row(c, op)).join('')}${line}${o.noans ? '' : row(r3)}</table></span>`;
 };
 
+/* oppstilling som ren tekst (til mengdetrening: mange små stykker, tåler trange celler) */
+G.colMini = (op, a, b, o) => {
+  o = o || {}; const la = String(a).length, lb = String(b).length, ans = op === '+' ? a + b : a - b, w = Math.max(la, lb, String(ans).length) + 1;
+  const pad = (v, k) => '&nbsp;'.repeat(Math.max(0, k - String(v).length)) + v;
+  return `<span class="mtmini"><span class="r">${pad(a, w)}</span><span class="r">${op}${pad(b, w - 1)}</span><span class="ln"></span><span class="r bxs">${'&nbsp;'.repeat(w - String(ans).length)}${Array.from({length:String(ans).length}, () => '<i class="bx2"></i>').join('')}</span></span>`;
+};
+
 /* ---------- tallrute (hundrerutenett) 1–100: o.hl, o.hl2, o.hl3 = tall som farges; o.hide = tall som skjules; o.from/o.to; o.cols ---------- */
 G.grid = (o) => {
   o = o || {}; const from = o.from == null ? 1 : o.from, to = o.to || 100, cols = o.cols || 10, cs = o.cs || 28;

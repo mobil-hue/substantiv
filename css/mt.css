@@ -149,3 +149,21 @@ body.lang-zh .mt-note,body.lang-zh .mt-todo{font-size:.9rem}
 .mt-sec .bi .zh,.mt-page b .bi .zh{display:inline;margin-left:8px;font-size:.7em}
 .mt-aim .at .bi{display:block}
 .mt-page .crumb .bi,.mt-goal .km .bi,.mt-page .pill .bi{display:inline}
+
+.mtmini{display:inline-block;font-family:"Courier New",ui-monospace,monospace;font-weight:900;font-size:1.5rem;line-height:1.25;color:var(--mt-ink);text-align:left}
+.mtmini .r{display:block;white-space:nowrap}
+.mtmini .ln{display:block;border-top:3px solid currentColor;margin:1px 0 3px}
+.mtmini .bx2{display:inline-block;box-sizing:border-box;width:calc(1ch - 3px);height:1.1em;border:2px dashed #94a3b8;border-radius:4px;margin:0 1.5px;vertical-align:middle}
+.board .mtmini{color:var(--chalk)}
+
+.mtseq{display:inline-flex;gap:6px;flex-wrap:wrap;justify-content:center;align-items:center}
+.sq{min-width:2.6rem;height:2.7rem;display:inline-flex;align-items:center;justify-content:center;border:3px solid #cbd5e1;border-radius:10px;background:#fff;font-size:1.7rem;padding:0 4px;color:#1f2937}
+.sq .mtg{display:inline-flex}
+.sq.q{border-style:dashed;color:#9ca3af;font-weight:900}
+.mtdigi{display:inline-block;font-family:"Courier New",ui-monospace,monospace;font-weight:900;font-size:2.2rem;letter-spacing:.12em;background:#0f172a;color:#4ade80;border:4px solid #475569;border-radius:12px;padding:2px 14px}
+.mtcal{border-collapse:separate;border-spacing:3px;font-weight:800;background:#fff;border-radius:10px;padding:4px;color:#1f2937}
+.mtcal caption{font-weight:900;font-size:1.1rem;caption-side:top;padding-bottom:2px;color:inherit}
+.mtcal th{font-size:.75rem;color:#64748b;padding:2px}.mtcal th.we{color:#dc2626}
+.mtcal td{width:2.1rem;height:2.1rem;text-align:center;border-radius:6px;background:#f8fafc;font-size:.95rem}
+.mtcal td.we{background:#fee2e2}.mtcal td.hl{background:#fde68a;outline:3px solid #f59e0b;outline-offset:-3px}
+.board .mtcal caption{color:var(--chalk)}

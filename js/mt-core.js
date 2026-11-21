@@ -217,9 +217,10 @@ function modulePage(id){
     ${op.length ? `<div><b>${B('Åpner for')}:</b></div><div class="mt-rel">${rel(op)}</div>` : ''}
     <h2 class="mt-sec">🎬 1. ${B('Forstå først: se videoen')}</h2><div id="mtVid"></div>
     <h2 class="mt-sec">✏️ 2. ${B('Øv på flere nivåer')}</h2><div id="mtLv"></div>
+    ${m.drill ? `<h2 class="mt-sec">🏋️ ${B('Mengdetrening: mange oppgaver, rask regning')}</h2><div class="mt-note" style="margin-top:0">${B(m.drill.tittel)}. ${B('Når du har forstått, trenger du mange gjentakelser for å bli rask og sikker.')}</div><div class="mt-row"><a class="btn" href="#/m/${id}/drill" style="text-decoration:none">${B('▶ Mengdetrening på skjermen')}</a><a class="btn sec" href="#/m/${id}/drill/hard" style="text-decoration:none">${B('Utfordring')}</a><a class="btn sec" href="matte-ark.html#m=${id}&t=4" style="text-decoration:none">${B('🖨 Mengdetrening-ark')}</a></div>${(() => { const b = A.store.get('mt_drill', {})[id]; return b ? `<div class="mt-note">${B('Din beste runde: ' + b.best + ' riktige på ' + b.time + ' sekunder')}</div>` : ''; })()}` : ''}
     <h2 class="mt-sec">📖 3. ${B('Les og skriv ut')}</h2>
     <details class="mt-txt" open><summary style="font-weight:900;cursor:pointer">${B('Skriftlig forklaring')}</summary>${MT.textHTML(m, {teacher:false})}</details>
-    <div class="mt-row"><a class="btn sec" href="${mk('0')}">${B('📄 Forklaringsark')}</a><a class="btn sec" href="${mk('1')}">${B('📝 Nivå 1')}</a><a class="btn sec" href="${mk('2')}">${B('📝 Nivå 2')}</a><a class="btn sec" href="${mk('3')}">${B('📝 Nivå 3')}</a><a class="btn sec" href="${mk('all')}">${B('🖨️ Alt + fasit')}</a></div>
+    <div class="mt-row"><a class="btn sec" href="${mk('0')}">${B('📄 Forklaringsark')}</a><a class="btn sec" href="${mk('1')}">${B('📝 Nivå 1')}</a><a class="btn sec" href="${mk('2')}">${B('📝 Nivå 2')}</a><a class="btn sec" href="${mk('3')}">${B('📝 Nivå 3')}</a>${m.drill ? `<a class="btn sec" href="${mk('4')}">${B('📝 Mengdetrening')}</a>` : ''}<a class="btn sec" href="${mk('all')}">${B('🖨️ Alt + fasit')}</a></div>
     ${m.tekst && m.tekst.laerer ? `<details class="mt-txt"><summary style="font-weight:900;cursor:pointer">${B('Til voksne og lærere')}</summary><p>${m.tekst.laerer}</p></details>` : ''}</div>`;
   A.Video.play(app.querySelector('#mtVid'), 'mt_' + id, () => { markVideo(id); modulePage(id); window.scrollTo(0, app.querySelector('#mtLv').offsetTop - 80); });
   const lv = app.querySelector('#mtLv');
@@ -240,6 +241,14 @@ function genQuestions(m, li){
   return out;
 }
 MT.gen = genQuestions;
+/* ---------- mengdetrening (rene regneoppgaver, mange om gangen) ---------- */
+// m.drill = {tittel, layout:'row'|'pic'|'col', cols, n:[ark, skjerm], make:(r, i, hard) => ({t:'7 + 5 =', ans:12, pic?:html, col?:{op,a,b}})}
+MT.drillItems = (m, seed, hard, n) => {
+  const r = MT.rng(seed * 977 + m.ord * 13 + (hard ? 5 : 0) + 1), out = [], seen = new Set();
+  for(let k = 0; out.length < n && k < n * 40; k++){ const it = m.drill.make(r, k, !!hard); if(!it) continue; const key = it.t + '|' + it.ans; if(seen.has(key)) continue; seen.add(key); out.push(it); }
+  for(let k = 0; out.length < Math.min(n, 24) && k < n * 40; k++){ const it = m.drill.make(r, k, !!hard); if(it) out.push(it); }   // lite utvalg: tillat gjentakelser
+  return out;
+};
 const padHTML = () => `<div class="gdisp empty" id="gDisp">${B('skriv svaret')}</div><div class="gpad">${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(n => `<button type="button" class="gkey" data-k="${n}">${n}</button>`).join('')}<button type="button" class="gkey del" data-k="del">⌫</button><button type="button" class="gkey" data-k="0">0</button><button type="button" class="gkey ok" data-k="ok">OK</button></div>`;
 const fbar = (cls, emoji, msg, next) => `<div class="fbar ${cls}"><span class="em">${emoji}</span><div class="msg">${msg}</div>${next ? btn('gNext', next) : ''}</div>`;
 const stemHTML = q => String(q.stem).replace(/\{\?\}/g, '<span class="mtq" id="mtAns">?</span>');
@@ -316,6 +325,49 @@ function runLevel(id, li){
 }
 
 /* =====================================================================
+   MENGDETRENING PÅ SKJERMEN: mange rene regneoppgaver på rad, med tid
+   ===================================================================== */
+function runDrill(id, hard){
+  const m = MT.byId[id], d = m && m.drill; if(!d){ location.hash = '#/m/' + id; return; }
+  const c = col(m), N = (d.n && d.n[1]) || 30, items = MT.drillItems(m, (Math.random() * 1e6) | 0, hard, N), total = items.length;
+  const root = h('div', {class:'session mt-sess', html:`<div class="sbar"><button class="x" type="button" title="Avslutt">✕</button><div class="stitle" style="color:${c}">🏋️ ${B(d.tittel)}${hard ? ' · ' + B('utfordring') : ''}</div><div class="prog"><i></i></div><div class="streak" id="dTimer">0:00</div></div><div class="qhost"></div>`});
+  app.innerHTML = ''; app.append(root);
+  const host = root.querySelector('.qhost'), prog = root.querySelector('.prog i'), tEl = root.querySelector('#dTimer');
+  root.querySelector('.x').onclick = () => { location.hash = '#/m/' + id; };
+  let i = 0, typed = '', right = 0, locked = false, cur = null; const wrong = [], t0 = Date.now();
+  const tick = setInterval(() => { const s = Math.floor((Date.now() - t0) / 1000); tEl.textContent = Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }, 500); onLeave(() => clearInterval(tick));
+  const keyH = e => { if(!cur || locked) return; if(/^\d$/.test(e.key)) key(e.key); else if(e.key === 'Backspace') key('del'); else if(e.key === 'Enter') key('ok'); };
+  document.addEventListener('keydown', keyH); onLeave(() => document.removeEventListener('keydown', keyH));
+  function next(){
+    if(i >= total) return finish();
+    cur = items[i++]; typed = ''; locked = false; prog.style.width = ((i - 1) / total * 100) + '%';
+    host.innerHTML = `<div class="qcard" style="--c:${c}"><div class="mt-stem" style="--c:${c}">${cur.pic ? cur.pic + '<br>' : ''}<span class="big">${cur.col ? G_col(cur.col) : (cur.t.includes('☐') ? cur.t.replace('☐', '{?}') : cur.t + ' {?}')}</span></div><div class="mt-in">${padHTML()}</div><div id="gFb"></div></div>`.replace('{?}', '<span class="mtq" id="mtAns">?</span>');
+    host.querySelectorAll('.gkey').forEach(b => b.onclick = () => key(b.dataset.k));
+  }
+  const G_col = o => MT.G.colMini(o.op, o.a, o.b).replace(/<span class="r bxs">.*<\/span><\/span>$/, '</span>') + '<br><span class="mtq" id="mtAns">?</span>';
+  function key(k){
+    if(locked) return;
+    if(k === 'del') typed = typed.slice(0, -1); else if(k === 'ok'){ if(typed) submit(); return; } else if(typed.length < 4) typed += k;
+    const dsp = host.querySelector('#gDisp'), a = host.querySelector('#mtAns'); if(dsp){ dsp.textContent = typed || 'skriv svaret'; dsp.classList.toggle('empty', !typed); } if(a) a.textContent = typed || '?';
+  }
+  function submit(){
+    locked = true; const ok = +typed === cur.ans, a = host.querySelector('#mtAns');
+    if(a){ a.textContent = cur.ans; a.classList.add(ok ? 'good' : 'bad'); }
+    if(ok){ right++; later(next, 260); } else { wrong.push(cur); host.querySelector('#gFb').innerHTML = fbar('bad', '❌', B('Riktig svar: ') + '<b>' + cur.ans + '</b>'); later(next, 1300); }
+  }
+  function finish(){
+    clearInterval(tick); const sec = Math.round((Date.now() - t0) / 1000), all = A.store.get('mt_drill', {}), b = all[id];
+    const better = !b || right > b.best || (right === b.best && sec < b.time); if(better && !hard){ all[id] = {best:right, time:sec}; A.store.set('mt_drill', all); }
+    prog.style.width = '100%';
+    host.innerHTML = `<div class="end"><div class="big-emoji">${right >= total * .9 ? '🏆' : right >= total * .7 ? '🎉' : '💪'}</div><h2>${B(right + ' av ' + total + ' riktige på ' + sec + ' sekunder')}</h2>
+      ${wrong.length ? `<div class="gs-miss"><div class="rb-tt">${B('Øv mer på disse:')}</div><div class="row">${wrong.slice(0, 12).map(x => `<span class="gfact" style="--c:${c};--bg:#fff">${x.col ? x.col.a + ' ' + x.col.op + ' ' + x.col.b : x.t} ${x.ans}</span>`).join('')}</div></div>` : `<div class="small-note">${B('Ingen feil – flott!')}</div>`}
+      <div class="row" style="margin-top:16px;justify-content:center">${btn('eAgain', '↻ Ny runde')}<a class="btn sec" href="#/m/${id}/drill${hard ? '' : '/hard'}" style="text-decoration:none">${B(hard ? 'Vanlig' : 'Utfordring')}</a><a class="btn sec" href="#/m/${id}" style="text-decoration:none">${B('Til modulen')}</a></div></div>`;
+    host.querySelector('#eAgain').onclick = () => runDrill(id, hard);
+  }
+  next();
+}
+
+/* =====================================================================
    RUTING
    ===================================================================== */
 function route(){
@@ -324,7 +376,7 @@ function route(){
   const p = (location.hash.replace(/^#\/?/, '') || '').split('/');
   window.scrollTo(0, 0);
   A.store.set('last', {s:'mt', href:'matte.html'});
-  if(p[0] === 'm' && p[1] && MT.byId[p[1]]){ if(p[2] === 'niv') return runLevel(p[1], Math.max(0, (+p[3] || 1) - 1)); return modulePage(p[1]); }
+  if(p[0] === 'm' && p[1] && MT.byId[p[1]]){ if(p[2] === 'drill') return runDrill(p[1], p[3] === 'hard'); if(p[2] === 'niv') return runLevel(p[1], Math.max(0, (+p[3] || 1) - 1)); return modulePage(p[1]); }
   if(p[0] === 't') return hub(p[1]);
   hub();
 }

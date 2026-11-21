@@ -39,6 +39,16 @@ function keyText(q){
 const esc = A.esc;
 const head = (m, title, color) => `<div class="shead"><div class="stitle"><span class="mi">${m.ikon}</span><div><h2>${esc(m.tittel)}</h2><div class="sub" style="color:${color || '#111'}">${title}</div></div></div><div class="who">Navn: <span class="ln"></span><br>Dato: <span class="ln s"></span></div></div>`;
 
+function drillSheet(m, seed, hard){
+  const d = m.drill, pk = v => (v && typeof v === 'object') ? v[hard ? 'b' : 'a'] : v, lay = pk(d.layout) || 'row', cols = pk(d.cols) || (lay === 'col' ? 5 : lay === 'pic' ? 3 : 4), big = lay === 'row' ? 80 : lay === 'pic' ? 66 : 40;
+  const items = MT.drillItems(m, seed, hard, big);
+  const cell = (it, i) => lay === 'col' && it.col ? `<div class="dc dcol"><span class="dn">${i + 1}</span>${MT.G.colMini(it.col.op, it.col.a, it.col.b)}</div>`
+    : `<div class="dc${it.pic ? ' dpic' : ''}">${it.pic ? `<div class="dpi">${it.pic}</div>` : ''}<div class="dl"><span class="dn">${i + 1}</span><span class="dt">${it.t.includes('☐') ? it.t.replace('☐', '<span class="aln s"></span>') : it.t}</span>${it.t.includes('☐') ? '' : '<span class="aln s"></span>'}</div></div>`;
+  const html = `<section class="sheet fit dsheet" data-dr="${hard ? 1 : 0}">${head(m, 'Mengdetrening ' + (hard ? 'B – utfordring' : 'A'), hard ? '#dc2626' : '#16a34a')}<div class="instr"><b>${esc(d.tittel)}.</b> Regn så mange du rekker. Tid: ________ min &nbsp; Riktige: ______ av <span class="dtot">${items.length}</span></div><div class="dg dg-${lay}" style="grid-template-columns:repeat(${cols},1fr)">${items.map(cell).join('')}</div></section>`;
+  const key = `<div class="kt" data-dr="${hard ? 1 : 0}"><h4 style="color:${hard ? '#dc2626' : '#16a34a'}">Mengdetrening ${hard ? 'B' : 'A'}</h4><div class="kg kg6">${items.map((it, i) => `<div class="kc"><b>${i + 1}.</b> <span class="ka">${it.ans}</span></div>`).join('')}</div></div>`;
+  return {html, key};
+}
+
 function build(m, seed, parts){
   let sheets = '', keys = '', no = 0;
   const T = tierRanges(m);
@@ -53,24 +63,27 @@ function build(m, seed, parts){
     sheets += `<section class="sheet fit" data-tier="${t}" data-seed="${seed}">${head(m, TIER_NAMES[t], TIER_COL[t])}<div class="instr"><b>Øv på:</b> ${esc(lvNames)}. Skriv svaret på streken eller sett ring rundt riktig alternativ.</div><div class="qg">${qs.map((q, i) => qHTML(q, i + 1)).join('')}</div>${t === 2 ? `<div class="refl"><b>Tenk og forklar:</b> ${m.refleksjon}<div class="wl"></div><div class="wl"></div></div>` : ''}</section>`;
     sheets = sheets; keys += `<div class="kt" data-tier="${t}" data-n="${qs.length}"><h4 style="color:${TIER_COL[t]}">${TIER_NAMES[t]}</h4><div class="kg">${qs.map((q, i) => `<div class="kc" data-i="${i}"><b>${i + 1}.</b> <span class="ka">${keyText(q)}</span></div>`).join('')}</div></div>`;
   });
+  if(parts.includes(4) && m.drill){ [false, true].forEach(hd => { const w = drillSheet(m, seed, hd); sheets += w.html; keys += w.key; }); }
   return {sheets, keys};
 }
 
 /* fit: fjern spørsmål til arket ikke renner over (målt på skjermen, som har mindre plass enn utskriften) */
 function fit(root){
   root.querySelectorAll('.sheet.fit').forEach(sh => {
-    const qg = sh.querySelector('.qg'), tier = sh.dataset.tier;
+    const qg = sh.querySelector('.qg') || sh.querySelector('.dg'), tier = sh.dataset.tier, dr = sh.dataset.dr, isD = dr != null;
     const bottom = () => { const last = sh.querySelector('.refl') || qg, r = last.getBoundingClientRect(); return r.bottom; };
     const limit = () => { const r = sh.getBoundingClientRect(), pb = parseFloat(getComputedStyle(sh).paddingBottom) || 0; return r.bottom - pb - 14; };
     let guard = 0;
-    while(bottom() > limit() && qg.children.length > 3 && guard++ < 40) qg.removeChild(qg.lastElementChild);
+    while(bottom() > limit() && qg.children.length > (isD ? 8 : 3) && guard++ < 120) qg.removeChild(qg.lastElementChild);
+    // på mengdetreningsark: hold hele rader
+    if(isD){ const cols = getComputedStyle(qg).gridTemplateColumns.split(' ').length; while(qg.children.length > cols && qg.children.length % cols) qg.removeChild(qg.lastElementChild); const t = sh.querySelector('.dtot'); if(t) t.textContent = qg.children.length; }
     sh.dataset.n = qg.children.length;
-    const kt = root.querySelector(`.kt[data-tier="${tier}"]`);
+    const kt = root.querySelector(isD ? `.kt[data-dr="${dr}"]` : `.kt[data-tier="${tier}"]`);
     if(kt) [...kt.querySelectorAll('.kc')].forEach((c, i) => { if(i >= qg.children.length) c.remove(); });
   });
 }
 
-function parts(t){ if(!t || t === 'all') return [0, 1, 2, 3]; return t.split(',').map(Number).filter(x => x >= 0 && x <= 3); }
+function parts(t){ if(!t || t === 'all') return [0, 1, 2, 3, 4]; return t.split(',').map(Number).filter(x => x >= 0 && x <= 4); }
 function params(){ const o = {}; location.hash.replace(/^#/, '').split('&').forEach(p => { const [k, v] = p.split('='); if(k) o[k] = decodeURIComponent(v || ''); }); return o; }
 function setHash(o){ history.replaceState(null, '', '#' + Object.keys(o).map(k => k + '=' + encodeURIComponent(o[k])).join('&')); }
 
@@ -80,6 +93,7 @@ function render(){
   const pt = parts(P.t);
   document.querySelectorAll('#parts input').forEach(c => { c.checked = pt.includes(+c.value); });
   document.getElementById('mod').value = m.id;
+  const dl = document.getElementById('drillLab'); if(dl) dl.style.display = m.drill ? '' : 'none';
   const w = build(m, seed, pt);
   out.innerHTML = `<div class="sheetwrap">${w.sheets}</div><div class="keywrap"><section class="sheet key flow">${head(m, 'Fasit (for voksne)', '#6b7280')}<div class="kts">${w.keys}</div></section></div>`;
   const doFit = () => fit(out);
