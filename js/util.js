@@ -46,9 +46,12 @@ const normKey = s => String(s).replace(/\d+/g, '#');
 A.trx = function(no, zh){
   const L = A.supLang();
   if(window.COLLECT_KEYS) { const c = (A.collected = A.collected || {}); const k = normKey(no); if(!c[k]) c[k] = {zh, ex:String(no)}; }   // verktøy: samler alle tekster
-  if(L === 'zh') return {t:zh, l:'zh'};
   const key = normKey(no), id = A.KEYS[key], nums = String(no).match(/\d+/g) || [];
   const fill = t => String(t).replace(/\{(\d+)\}/g, (m, i) => nums[i - 1] != null ? nums[i - 1] : m);
+  if(L === 'zh'){   // kinesisk står vanligvis i selve A.bi-kallet; sider uten (matematikk) bruker ordbok
+    if(zh) return {t:zh, l:'zh'};
+    const t0 = (A.dict.zh || {})[id]; return {t:t0 != null ? fill(t0) : '', l:'zh'};
+  }
   let t = (A.dict[L] || {})[id];
   if(t != null) return {t:fill(t), l:L};
   A.missingKeys[L + '|' + key] = 1;

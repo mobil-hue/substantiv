@@ -199,3 +199,9 @@ details.mt-build>summary{cursor:pointer;font-weight:900;color:#5b21b6;padding:6p
 .mtcode .ln i{display:inline-block;width:1.6em;color:#94a3b8;font-style:normal;font-weight:700;margin-right:.4em;text-align:right}
 .mtcode .ln b{color:#7c3aed}
 .mtcode .ln.hl{background:#fef08a}
+
+/* ordhjelp: trykk på et ord for oversettelse */
+.mtw{border-bottom:1.5px dotted #94a3b8;cursor:help}
+.board .mtw{border-bottom-color:rgba(255,255,255,.55)}
+.mt-tip{position:absolute;z-index:300;background:#1f2937;color:#fff;border-radius:10px;padding:6px 12px;font:700 1rem/1.35 system-ui,sans-serif;max-width:min(280px,82vw);box-shadow:0 6px 18px rgba(0,0,0,.3)}
+.mt-tip .ar{opacity:.6}
