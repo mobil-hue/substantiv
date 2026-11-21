@@ -47,7 +47,7 @@ Alle moduler får samme språkstøtte (ti språk) og arbeidsark. Oversettelsene 
 
 ## 4. Matematikk (størst potensial)
 
-Her kan jeg gjøre mest. Rundt tre av fire mål (grovt, mitt skjønn) lar seg trene med eksakte svar og trinnvis forklaring. De som ikke lar seg trene er de som handler om å utforske, argumentere og vurdere kritisk.
+Her kan jeg gjøre mest. **Se `docs/laereplan-matematikk-per-maal.md` for gjennomgangen av alle 101 mål, ett for ett, med nivåtrapp og vurdering. Den erstatter tabellen under, som er grovere og hoppet over 11 mål.** Telt mål for mål kan ferdighetsdelen trenes helt eller i hovedsak for rundt 90 % av målene, men appen dekker bare en del av det planen ber om (utforsking, modellering og resonnering må læreren ta).
 
 | Trinn | Modul | Forankring | Vurd. | Str. | Merknad |
 |---|---|---|---|---|---|
