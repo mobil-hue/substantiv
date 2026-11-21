@@ -5,7 +5,7 @@
 const A = window.App, app = document.getElementById('app');
 if(!A || !app) return;
 const WORD = /[A-Za-zÆØÅæøåéü]+(?:-[A-Za-zÆØÅæøå]+)*/g;
-const SKIP = 'button,a,svg,script,style,textarea,input,select,.mtq,.mtw,.zh,.gpad,.gdisp,.sbar,.mt-tip,#mtVid,.mtg,.mttbl,.vwrap,.mt-view,.mt-tabs,.gs-miss .rb-tt';
+const SKIP = 'button,a,svg,script,style,textarea,input,select,.mtq,.mtw,.zh,.gpad,.gdisp,.sbar,.mt-tip,.mtg,.mttbl,.vctl,.mt-view,.mt-tabs,.gs-miss .rb-tt';
 const dicts = () => { const W = window.MTW || {}, L = A.supLang(); return {L, d:W[L] || {}, en:W.en || {}}; };
 const on = () => A.I18N && A.settings.lang !== 'no';
 const lookup = w => { const {L, d, en} = dicts(), k = w.toLowerCase(); if(d[k] != null) return {t:d[k], l:L}; if(en[k] != null) return {t:en[k], l:'en'}; return null; };
@@ -46,7 +46,7 @@ window.addEventListener('scroll', hide, {passive:true});
 
 let pending = new Set(), raf = 0;
 const obs = new MutationObserver(ms => {
-  ms.forEach(m => m.addedNodes.forEach(n => { if(n.nodeType === 1 && !n.classList.contains('mtw') && !n.classList.contains('mt-tip')) pending.add(n); }));
+  ms.forEach(m => m.addedNodes.forEach(n => { if(n.nodeType === 3 && n.parentElement) pending.add(n.parentElement); else if(n.nodeType === 1 && !n.classList.contains('mtw') && !n.classList.contains('mt-tip')) pending.add(n); }));
   if(pending.size && !raf) raf = requestAnimationFrame(() => { raf = 0; const list = [...pending]; pending = new Set(); obs.disconnect(); list.forEach(n => { if(n.isConnected) wrap(n); }); obs.observe(app, {childList:true, subtree:true}); });
 });
 obs.observe(app, {childList:true, subtree:true});
