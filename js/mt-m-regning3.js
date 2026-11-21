@@ -39,14 +39,14 @@ function subInfo(a, b){
   const da = dg(a), db = dg(b), cur = da.slice(), n = String(a).length, bor = {}, steps = []; let any = false;
   for(let i = 0; i < n; i++){
     if(cur[i] < db[i]){
-      any = true; let j = i + 1; while(cur[j] === 0) j++;
+      any = true; const before = cur[i]; let j = i + 1; while(cur[j] === 0) j++;
       cur[j]--; for(let k = j - 1; k > i; k--) cur[k] = 9; cur[i] += 10;
-      steps.push(`${NAMES3[i][0].toUpperCase() + NAMES3[i].slice(1)}: ${da[i]} − ${db[i]} går ikke. Veksle: ta 1 fra ${NAMES3[j]} (blir ${cur[j]}), ${NAMES3[i]} blir ${cur[i]}`);
+      steps.push(`${NAMES3[i][0].toUpperCase() + NAMES3[i].slice(1)}: ${before} − ${db[i]} går ikke. Veksle: ta 1 fra ${NAMES3[j]} (blir ${cur[j]}), ${NAMES3[i]} blir ${cur[i]}`);
     }
   }
   for(let i = 0; i < n; i++) if(cur[i] !== da[i]) bor[ORD[i]] = {cross:true, show:cur[i]};
   const res = [];
-  for(let i = 0; i < n; i++) res.push(`${NAMES3[i]}: ${cur[i]} − ${db[i]} = ${cur[i] - db[i]}`);
+  for(let i = 0; i < n; i++) res.push(`${NAMES3[i][0].toUpperCase() + NAMES3[i].slice(1)}: ${cur[i]} − ${db[i]} = ${cur[i] - db[i]}`);
   return {any, bor, steps, res, cur};
 }
 const subExpl = (a, b) => { const x = subInfo(a, b); return (x.steps.length ? x.steps.join('. ') + '. ' : '') + x.res.join('. ') + `. Svar: ${a - b}.`; };
@@ -96,14 +96,14 @@ MT.module({
   nivaaer:[
    {t:'Forstå: tiere og enere', d:'Sjekk at du har forstått metoden.', kind:'forstaa', make:(r, i) => {
      const t = int(r, 2, 6), e = int(r, 1, 4), b = int(r, 1, 4), k = i % 6, n = t * 10 + e;
-     if(k === 0) return Q.choice(r, `I ${n} + ${b}: hvilket siffer endrer seg?`, 'Enerne', ['Tierne', 'Begge', 'Ingen'], {say:`I ${n} pluss ${b}: hvilket siffer endrer seg?`, expl:`Vi legger til ${b} enere. Tierne er de samme: ${n + b}.`});
+     if(k === 0) return Q.choice(r, `I ${n} + ${b}: hvilket siffer endrer seg?`, 'Enerne', ['Tierne', 'Begge', 'Ingen'], {say:`I ${n} pluss ${b}: hvilket siffer endrer seg?`, expl:`Vi legger til ${MT.e1(b)}. Tierne er de samme: ${n + b}.`});
      if(k === 1) return Q.choice(r, `I ${n} + 20: hvilket siffer endrer seg?`, 'Tierne', ['Enerne', 'Begge', 'Ingen'], {say:`I ${n} pluss 20: hvilket siffer endrer seg?`, expl:`20 er 2 tiere. Tierne blir ${t + 2}. ${n + 20}.`});
-     if(k === 2) return Q.num(`${t} tiere + 2 tiere = {?} tiere`, t + 2, {expl:`${t} + 2 = ${t + 2} tiere = ${(t + 2) * 10}.`});
+     if(k === 2) return Q.num(`${MT.t1(t)} + 2 tiere = {?} tiere`, t + 2, {expl:`${t} + 2 = ${MT.t1(t + 2)} = ${(t + 2) * 10}.`});
      if(k === 3) return Q.yn(`Er ${n} + ${b + 10} det samme som ${n} + 10 + ${b}?`, true, {expl:'Ja: vi kan dele tallet i tiere og enere.'});
      if(k === 4) return Q.num(`${t * 10} + ${(t % 3 + 1) * 10} = {?}`, t * 10 + (t % 3 + 1) * 10, {calc:`${t * 10}+${(t % 3 + 1) * 10}`, expl:`Tiere regnes som enkelttall av tiere.`});
      return Q.choice(r, 'Hva er lurt for 38 + 5?', 'Fylle tieren: 38 + 2 = 40, så 3 til', ['Legge sammen alle sifrene', 'Bare gjette', 'Telle fra 1'], {expl:'38 + 2 = 40, og 3 til gir 43.'});
    }},
-   {t:'Tiere og tiere', d:'Hele tiere pluss hele tiere.', n:10, make:(r, i) => { const a = int(r, 1, 8), b = int(r, 1, 9 - a + 1 > 9 ? 9 : 10 - a); return Q.num(`${a * 10} + ${b * 10} = {?}`, (a + b) * 10, {calc:`${a * 10}+${b * 10}`, expl:`${a} tiere + ${b} tiere = ${a + b} tiere = ${(a + b) * 10}.`, hint:G.blocks({t:a}, {u:6}) + ' + ' + G.blocks({t:b}, {u:6})}); }},
+   {t:'Tiere og tiere', d:'Hele tiere pluss hele tiere.', n:10, make:(r, i) => { const a = int(r, 1, 8), b = int(r, 1, 9 - a + 1 > 9 ? 9 : 10 - a); return Q.num(`${a * 10} + ${b * 10} = {?}`, (a + b) * 10, {calc:`${a * 10}+${b * 10}`, expl:`${MT.t1(a)} + ${MT.t1(b)} = ${MT.t1(a + b)} = ${(a + b) * 10}.`, hint:G.blocks({t:a}, {u:6}) + ' + ' + G.blocks({t:b}, {u:6})}); }},
    {t:'Tosifret + ensifret', d:'Bare enerne endres (uten veksling).', n:10, make:(r, i) => { const t = int(r, 1, 9), e = int(r, 0, 8), b = int(r, 1, 9 - e), n = t * 10 + e; return Q.num(`${n} + ${b} = {?}`, n + b, {calc:`${n}+${b}`, expl:`${e} + ${b} = ${e + b}. Tierne er de samme: ${n + b}.`, hint:G.blocks(blocksOf(n), {u:6}) + ' + ' + G.blocks({e:b}, {u:6})}); }},
    {t:'Tosifret + tiere og tosifret', d:'Legg til tiere, og legg sammen to tosifrede tall (uten veksling).', n:10, make:(r, i) => {
      const t = int(r, 1, 5), e = int(r, 0, 8), n = t * 10 + e, b = int(r, 1, 4);
@@ -152,14 +152,14 @@ MT.module({
   nivaaer:[
    {t:'Forstå: tiere og enere', d:'Sjekk at du har forstått metoden.', kind:'forstaa', make:(r, i) => {
      const t = int(r, 3, 8), e = int(r, 5, 9), b = int(r, 1, 4), k = i % 6, n = t * 10 + e;
-     if(k === 0) return Q.choice(r, `I ${n} − ${b}: hvilket siffer endrer seg?`, 'Enerne', ['Tierne', 'Begge', 'Ingen'], {say:`I ${n} minus ${b}: hvilket siffer endrer seg?`, expl:`Vi tar bort ${b} enere. Tierne er de samme: ${n - b}.`});
+     if(k === 0) return Q.choice(r, `I ${n} − ${b}: hvilket siffer endrer seg?`, 'Enerne', ['Tierne', 'Begge', 'Ingen'], {say:`I ${n} minus ${b}: hvilket siffer endrer seg?`, expl:`Vi tar bort ${MT.e1(b)}. Tierne er de samme: ${n - b}.`});
      if(k === 1) return Q.choice(r, `I ${n} − 20: hvilket siffer endrer seg?`, 'Tierne', ['Enerne', 'Begge', 'Ingen'], {say:`I ${n} minus 20: hvilket siffer endrer seg?`, expl:`20 er 2 tiere. Tierne blir ${t - 2}: ${n - 20}.`});
-     if(k === 2) return Q.num(`${t} tiere − 2 tiere = {?} tiere`, t - 2, {expl:`${t} − 2 = ${t - 2} tiere = ${(t - 2) * 10}.`});
+     if(k === 2) return Q.num(`${MT.t1(t)} − 2 tiere = {?} tiere`, t - 2, {expl:`${t} − 2 = ${MT.t1(t - 2)} = ${(t - 2) * 10}.`});
      if(k === 3) return Q.yn(`Er ${n} − ${b + 10} det samme som ${n} − 10 − ${b}?`, true, {expl:'Ja: vi kan ta bort tiere og enere hver for seg.'});
      if(k === 4) return Q.yn(`${n - b} + ${b} = ${n}. Stemmer ${n} − ${b} = ${n - b}?`, true, {expl:'Ja. Vi kan sjekke subtraksjon med addisjon.'});
      return Q.choice(r, 'Hva er lurt for 43 − 5?', 'Gå ned til 40 først: 43 − 3 = 40, så 2 til', ['Trekke 5 fra tierne', 'Bytte rekkefølge: 5 − 43', 'Bare gjette'], {expl:'43 − 3 = 40, og 2 til gir 38.'});
    }},
-   {t:'Tiere minus tiere', d:'Hele tiere minus hele tiere.', n:10, make:(r, i) => { const a = int(r, 3, 10), b = int(r, 1, a - 1); return Q.num(`${a * 10} − ${b * 10} = {?}`, (a - b) * 10, {calc:`${a * 10}-${b * 10}`, expl:`${a} tiere − ${b} tiere = ${a - b} tiere = ${(a - b) * 10}.`, hint:G.blocks({t:a}, {u:6})}); }},
+   {t:'Tiere minus tiere', d:'Hele tiere minus hele tiere.', n:10, make:(r, i) => { const a = int(r, 3, 10), b = int(r, 1, a - 1); return Q.num(`${a * 10} − ${b * 10} = {?}`, (a - b) * 10, {calc:`${a * 10}-${b * 10}`, expl:`${MT.t1(a)} − ${MT.t1(b)} = ${MT.t1(a - b)} = ${(a - b) * 10}.`, hint:G.blocks({t:a}, {u:6})}); }},
    {t:'Tosifret − ensifret', d:'Bare enerne endres (uten veksling).', n:10, make:(r, i) => { const t = int(r, 1, 9), e = int(r, 2, 9), b = int(r, 1, e), n = t * 10 + e; return Q.num(`${n} − ${b} = {?}`, n - b, {calc:`${n}-${b}`, expl:`${e} − ${b} = ${e - b}. Tierne er de samme: ${n - b}.`, hint:G.blocks(blocksOf(n), {u:6})}); }},
    {t:'Minus tiere og tosifret', d:'Trekk fra tiere og tosifrede tall (uten veksling).', n:10, make:(r, i) => {
      const t = int(r, 3, 9), e = int(r, 2, 9), n = t * 10 + e;
@@ -212,7 +212,7 @@ MT.module({
      if(k === 0) return Q.choice(r, 'Hvilken kolonne regner vi først i oppstilling?', 'Enerne (til høyre)', ['Tierne (til venstre)', 'Det er likegyldig', 'Midten'], {expl:'Vi starter med enerne, helt til høyre.'});
      if(k === 1) return Q.yn(`${rawAdd}<br>Står sifrene på riktig plass i denne oppstillingen av 34 + 5?`, false, {say:'Står sifrene på riktig plass i denne oppstillingen av 34 pluss 5?', expl:'Nei. 5 er enere og må stå under 4, ikke under 3.'});
      if(k === 2) return Q.choice(r, 'Hvorfor må enerne stå under enerne?', 'Så vi legger sammen riktige plassverdier', ['Det ser pent ut', 'Fordi enerne er størst', 'Det spiller ingen rolle'], {expl:'Enere og tiere er ikke verdt like mye. Vi må legge sammen like ting.'});
-     if(k === 3) return Q.num(`I ${a1 + 10} + ${b1 + 10}: hva er 0 + ... – hva er enerne lagt sammen: ${(a1 + 10) % 10} + ${(b1 + 10) % 10} = {?}`, (a1 + 10) % 10 + (b1 + 10) % 10, {say:`Hva er enerne lagt sammen?`, expl:'Vi legger enerne sammen først.'});
+     if(k === 3) return Q.num(`Oppstilling av ${a1 + 10} + ${b1 + 10}: hva er enerne lagt sammen? ${(a1 + 10) % 10} + ${(b1 + 10) % 10} = {?}`, (a1 + 10) % 10 + (b1 + 10) % 10, {say:`Hva er enerne lagt sammen?`, expl:'Vi legger enerne sammen først.'});
      return Q.yn('Er 34 + 25 omtrent 30 + 20?', true, {expl:'Ja: runder vi av, regner vi 30 + 20 = 50. Det gir et overslag.'});
    }},
    {t:'To-sifrede tall', d:'Regn i oppstilling uten veksling.', n:10, make:(r, i) => { const [a, b] = genAdd(r, 2, 2, false); return Q.num(`${col('+', a, b, {})}<br>Hva er svaret? {?}`, a + b, {say:`${a} pluss ${b}`, calc:`${a}+${b}`, expl:addExpl(a, b), hint:G.blocks(blocksOf(a), {u:5}) + ' + ' + G.blocks(blocksOf(b), {u:5})}); }},
@@ -311,16 +311,16 @@ MT.module({
   nivaaer:[
    {t:'Forstå: hvorfor veksler vi?', d:'Sjekk at du har forstått mente.', kind:'forstaa', make:(r, i) => {
      const [a, b] = genAddWhere(r, 2, 2, (x, p, q) => p % 10 + q % 10 >= 10 && x.sums[1] < 10, [47, 36]), ones = a % 10 + b % 10, k = i % 6;
-     if(k === 0) return Q.choice(r, `I ${a} + ${b}: ${a % 10} + ${b % 10} = ${ones}. Hva gjør vi med ${ones}?`, `Skriver ${ones % 10} under enerne og tar med 1 til tierne`, [`Skriver ${ones} under enerne`, `Skriver ${ones % 10} og glemmer resten`, `Skriver 1 under enerne`], {say:`I ${a} pluss ${b}: ${a % 10} pluss ${b % 10} er ${ones}. Hva gjør vi med ${ones}?`, expl:`${ones} enere = 1 tier og ${ones % 10} enere. Eneren skrives, tieren tas med.`});
+     if(k === 0) return Q.choice(r, `I ${a} + ${b}: ${a % 10} + ${b % 10} = ${ones}. Hva gjør vi med ${ones}?`, `Skriver ${ones % 10} under enerne og tar med 1 til tierne`, [`Skriver ${ones} under enerne`, `Skriver ${ones % 10} og glemmer resten`, `Skriver 1 under enerne`], {say:`I ${a} pluss ${b}: ${a % 10} pluss ${b % 10} er ${ones}. Hva gjør vi med ${ones}?`, expl:`${MT.e1(ones)} = 1 tier og ${MT.e1(ones % 10)}. Eneren skrives, tieren tas med.`});
      if(k === 1) return Q.num(`10 enere veksles til {?} tier`, 1, {expl:'10 enere er like mye som 1 tier.'});
      if(k === 2) return Q.choice(r, 'Hva betyr den lille 1-eren over tierne (menten)?', '1 tier fra enerne', ['1 ener', '1 hundrer', 'Ingenting'], {expl:'Menten er den ene tieren vi fikk da vi vekslet 10 enere.'});
      if(k === 3) return Q.yn(`Må du veksle i 23 + 14?`, false, {expl:'3 + 4 = 7. Det er under 10, så ingen veksling.'});
      if(k === 4) return Q.yn(`Må du veksle i 27 + 15?`, true, {expl:'7 + 5 = 12. Det er 10 eller mer, så vi veksler.'});
-     return Q.num(`${ones} enere = 1 tier og {?} enere`, ones - 10, {expl:`${ones} − 10 = ${ones - 10}.`});
+     return Q.num(`${MT.e1(ones)} = 1 tier og {?} enere`, ones - 10, {expl:`${ones} − 10 = ${ones - 10}.`});
    }},
-   {t:'Trenger du mente?', d:'Se på enerne: veksling eller ikke?', n:10, make:(r, i) => { const need = i % 2 === 0, [a, b] = genAdd(r, 2, 2, need); const o = a % 10 + b % 10; return Q.yn(`Må du veksle i <b>${a} + ${b}</b>? &nbsp; (${a % 10} + ${b % 10} = ${o})`, need, {say:`Må du veksle i ${a} pluss ${b}?`, expl:o >= 10 ? `${o} er 10 eller mer: ja, veksle.` : `${o} er under 10: ingen veksling.`}); }},
+   {t:'Trenger du mente?', d:'Se på enerne: veksling eller ikke?', n:10, make:(r, i) => { const need = i % 2 === 0, [a, b] = genAddWhere(r, 2, 2, (x, p, q) => ((p % 10 + q % 10) >= 10) === need && x.sums[1] < 10 && p + q <= 99, [38, 27]); const o = a % 10 + b % 10; return Q.yn(`Må du veksle i enerne i <b>${a} + ${b}</b>? &nbsp; (${a % 10} + ${b % 10} = ${o})`, need, {say:`Må du veksle i ${a} pluss ${b}?`, expl:o >= 10 ? `${o} er 10 eller mer: ja, veksle.` : `${o} er under 10: ingen veksling.`}); }},
    {t:'Veksle enerne', d:'Del enerne i tier og ener.', n:10, make:(r, i) => { const [a, b] = genAddWhere(r, 2, 2, (x, p, q) => p % 10 + q % 10 >= 10 && x.sums[1] < 10, [47, 36]), o = a % 10 + b % 10; const k = i % 3;
-     if(k === 0) return Q.num(`${a} + ${b}: enerne er ${a % 10} + ${b % 10} = ${o}. Hvilket siffer skriver du under enerne? {?}`, o % 10, {say:`${a} pluss ${b}: enerne er ${a % 10} pluss ${b % 10}, ${o}. Hvilket siffer skriver du under enerne?`, expl:`${o} = 1 tier og ${o % 10} enere.`});
+     if(k === 0) return Q.num(`${a} + ${b}: enerne er ${a % 10} + ${b % 10} = ${o}. Hvilket siffer skriver du under enerne? {?}`, o % 10, {say:`${a} pluss ${b}: enerne er ${a % 10} pluss ${b % 10}, ${o}. Hvilket siffer skriver du under enerne?`, expl:`${o} = 1 tier og ${MT.e1(o % 10)}.`});
      if(k === 1) return Q.num(`${G.col('+', a, b, {carry:{t:'1'}, ans:a + b, blank:[1, 2]})}<br>Tierne: ${Math.floor(a / 10)} + ${Math.floor(b / 10)} + 1 (mente) = {?}`, Math.floor(a / 10) + Math.floor(b / 10) + 1, {say:'Tierne: legg sammen med menten.', expl:`${Math.floor(a / 10)} + ${Math.floor(b / 10)} + 1 = ${Math.floor(a / 10) + Math.floor(b / 10) + 1}.`});
      return Q.num(`${a} + ${b} = {?}`, a + b, {calc:`${a}+${b}`, expl:addExpl(a, b), hint:G.col('+', a, b, {carry:a % 10 + b % 10 >= 10 ? {t:'1'} : {}, noans:true})}); }},
    {t:'Mente: tosifrede tall', d:'Regn i oppstilling med veksling.', n:10, make:(r, i) => { const [a, b] = genAddWhere(r, 2, 2, (x, p, q) => p % 10 + q % 10 >= 10 && x.sums[1] < 10 && p + q <= 99, [38, 27]); return Q.num(`${col('+', a, b, {})}<br>Hva er svaret? {?}`, a + b, {say:`${a} pluss ${b}`, calc:`${a}+${b}`, expl:addExpl(a, b), hint:G.blocks(blocksOf(a), {u:5}) + ' + ' + G.blocks(blocksOf(b), {u:5})}); }},
@@ -363,14 +363,14 @@ MT.module({
      const [a, b] = genSub(r, 2, 2, true), ea = a % 10, k = i % 6, ta = Math.floor(a / 10);
      if(k === 0) return Q.choice(r, `I ${a} − ${b}: ${ea} − ${b % 10} går ikke. Hva gjør vi?`, 'Veksler 1 tier til 10 enere', ['Bytter plass på tallene', 'Trekker det minste fra det største', 'Gir opp'], {say:`I ${a} minus ${b}: ${ea} minus ${b % 10} går ikke. Hva gjør vi?`, expl:'Vi tar 1 tier og veksler den til 10 enere.'});
      if(k === 1) return Q.num(`1 tier veksles til {?} enere`, 10, {expl:'1 tier = 10 enere.'});
-     if(k === 2) return Q.num(`${a} = ${ta - 1} tiere og {?} enere`, ea + 10, {say:`${a} er ${ta - 1} tiere og hvor mange enere?`, expl:`${ta} tiere og ${ea} enere = ${ta - 1} tiere og ${ea + 10} enere.`});
+     if(k === 2) return Q.num(`${a} = ${MT.t1(ta - 1)} og {?} enere`, ea + 10, {say:`${a} er ${MT.t1(ta - 1)} og hvor mange enere?`, expl:`${MT.te(ta, ea)} = ${MT.te(ta - 1, ea + 10)}.`});
      if(k === 3) return Q.yn('Må du veksle i 47 − 23?', false, {expl:'7 − 3 går fint. Ingen veksling.'});
      if(k === 4) return Q.yn('Må du veksle i 42 − 27?', true, {expl:'2 − 7 går ikke. Vi må veksle.'});
      return Q.num(`${a} − ${b} = ${a - b}. Sjekk: ${a - b} + ${b} = {?}`, a, {chk:`${a - b}+${b}===_`, say:`${a} minus ${b} er ${a - b}. Sjekk: ${a - b} pluss ${b} er?`, expl:`${a - b} + ${b} = ${a}.`});
    }},
    {t:'Må du veksle?', d:'Se på enerne: veksling eller ikke?', n:10, make:(r, i) => { const need = i % 2 === 0, [a, b] = genSub(r, 2, 2, need); return Q.yn(`Må du veksle i <b>${a} − ${b}</b>? &nbsp; (${a % 10} − ${b % 10})`, need, {say:`Må du veksle i ${a} minus ${b}?`, expl:a % 10 < b % 10 ? `${a % 10} er mindre enn ${b % 10}: ja, veksle.` : `${a % 10} er ${a % 10 === b % 10 ? 'lik' : 'større enn'} ${b % 10}: ingen veksling.`}); }},
    {t:'Veksle først', d:'Skriv tallet med veksling.', n:10, make:(r, i) => { const [a, b] = genSub(r, 2, 2, true), ta = Math.floor(a / 10), ea = a % 10, k = i % 3;
-     if(k === 0) return Q.num(`${a} = ${ta - 1} tiere og {?} enere`, ea + 10, {say:`${a} er ${ta - 1} tiere og hvor mange enere?`, expl:`1 tier veksles til 10 enere: ${ea} + 10 = ${ea + 10}.`, hint:G.blocks({t:ta, e:ea}, {u:6})});
+     if(k === 0) return Q.num(`${a} = ${MT.t1(ta - 1)} og {?} enere`, ea + 10, {say:`${a} er ${MT.t1(ta - 1)} og hvor mange enere?`, expl:`1 tier veksles til 10 enere: ${ea} + 10 = ${ea + 10}.`, hint:G.blocks({t:ta, e:ea}, {u:6})});
      if(k === 1) return Q.num(`Etter veksling: ${ea + 10} − ${b % 10} = {?}`, ea + 10 - b % 10, {calc:`${ea + 10}-${b % 10}`, say:`Etter veksling: ${ea + 10} minus ${b % 10} er?`, expl:`${ea + 10} − ${b % 10} = ${ea + 10 - b % 10}.`});
      return Q.num(`${a} − ${b}: tierne blir ${ta - 1} − ${Math.floor(b / 10)} = {?}`, ta - 1 - Math.floor(b / 10), {calc:`${ta - 1}-${Math.floor(b / 10)}`, say:`${a} minus ${b}. Tierne blir ${ta - 1} minus ${Math.floor(b / 10)}. Hva er det?`, expl:`${ta - 1} − ${Math.floor(b / 10)} = ${ta - 1 - Math.floor(b / 10)}.`}); }},
    {t:'Veksling: tosifrede tall', d:'Regn i oppstilling med veksling.', n:10, make:(r, i) => { const [a, b] = genSub(r, 2, 2, true), si = subInfo(a, b); return Q.num(`${col('−', a, b, {})}<br>Hva er svaret? {?}`, a - b, {say:`${a} minus ${b}`, calc:`${a}-${b}`, expl:subExpl(a, b), hint:G.col('−', a, b, {bor:si.bor, noans:true}) + '<br>' + G.blocks(blocksOf(a), {u:5})}); }},

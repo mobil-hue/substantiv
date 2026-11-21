@@ -47,7 +47,7 @@ MT.module({
   nivaaer:[
    {t:'Forstå: ti og litt til', d:'Sjekk at du har forstått tier og ener.', kind:'forstaa', make:(r, i) => {
      const n = int(r, 11, 19), k = i % 4;
-     if(k === 0) return Q.choice(r, `Hva betyr tallet <b>${n}</b>?`, `1 tier og ${n - 10} enere`, [`${n - 10} tiere og 1 ener`, `1 tier og ${n} enere`, `${n} tiere`], {keep:false, say:`Hva betyr tallet ${n}?`, expl:`${n} er ti og ${n - 10}: 1 tier og ${n - 10} enere.`});
+     if(k === 0) return Q.choice(r, `Hva betyr tallet <b>${n}</b>?`, `1 tier og ${MT.e1(n - 10)}`, [`${MT.t1(n - 10)} og 1 ener`, `1 tier og ${MT.e1(n)}`, `${MT.t1(n)}`], {keep:false, say:`Hva betyr tallet ${n}?`, expl:`${n} er ti og ${n - 10}: 1 tier og ${MT.e1(n - 10)}.`});
      if(k === 1) return Q.near(r, `Her er 1 full tierramme og ${n - 10} prikker til.<br>${G.frame(10, n - 10, {s:24})}<br>Hvilket tall er det?`, n, {say:`En full tierramme og ${n - 10} prikker til. Hvilket tall er det?`, expl:`10 og ${n - 10} er ${n}.`});
      if(k === 2) return Q.num(`I tallet <b>${n}</b>: hvor mange tiere er det? {?}`, 1, {say:`I tallet ${n}: hvor mange tiere er det?`, expl:`Alle tall fra 10 til 19 har 1 tier.`});
      return Q.yn(`Er 10 + ${n - 10} det samme som ${n}?`, true, {expl:`Ja. Ti og ${n - 10} er ${n}.`});
@@ -68,7 +68,7 @@ MT.module({
      const n = int(r, 11, 19), k = i % 4;
      if(k === 0) return Q.num(`10 + ${n - 10} = {?}`, n, {calc:`10+${n - 10}`, expl:`Ti og ${n - 10} er ${n}.`});
      if(k === 1) return Q.num(`${n} = 10 + {?}`, n - 10, {expl:`${n} er ti og ${n - 10}.`});
-     if(k === 2) return Q.num(`${G.blocks({t:1, e:n - 10}, {u:7})}<br>Hvilket tall viser tegningen? {?}`, n, {say:'Hvilket tall viser tegningen?', expl:`1 tier og ${n - 10} enere er ${n}.`});
+     if(k === 2) return Q.num(`${G.blocks({t:1, e:n - 10}, {u:7})}<br>Hvilket tall viser tegningen? {?}`, n, {say:'Hvilket tall viser tegningen?', expl:`1 tier og ${MT.e1(n - 10)} er ${n}.`});
      return Q.num(`I tallet ${n}: hvor mange enere er det <b>utenom</b> tieren? {?}`, n - 10, {say:`I tallet ${n}: hvor mange enere er det utenom tieren?`, expl:`${n} − 10 = ${n - 10}.`});
    }}
   ]
@@ -109,35 +109,35 @@ MT.module({
   nivaaer:[
    {t:'Forstå: plassen bestemmer verdien', d:'Sjekk at du har forstått tiere og enere.', kind:'forstaa', make:(r, i) => {
      const t = int(r, 2, 9), e = int(r, 1, 9), n = t * 10 + e, k = i % 5;
-     if(k === 0) return Q.choice(r, `I tallet <b>${n}</b>: hva betyr sifferet ${t}?`, `${t} tiere (${t * 10})`, [`${t} enere`, `${t * 100}`, `${e} tiere`], {keep:false, say:`I tallet ${n}: hva betyr sifferet ${t}?`, expl:`${t} står på tierplassen, så det betyr ${t} tiere, altså ${t * 10}.`});
-     if(k === 1) return Q.yn(`Er <b>${n}</b> og <b>${swapd(n)}</b> det samme tallet?`, false, {expl:`Nei. ${n} = ${t} tiere og ${e} enere. ${swapd(n)} = ${e} tiere og ${t} enere.`});
+     if(k === 0) return Q.choice(r, `I tallet <b>${n}</b>: hva betyr sifferet ${t}?`, `${MT.t1(t)} (${t * 10})`, [`${MT.e1(t)}`, `${t * 100}`, `${MT.t1(e)}`], {keep:false, say:`I tallet ${n}: hva betyr sifferet ${t}?`, expl:`${t} står på tierplassen, så det betyr ${MT.t1(t)}, altså ${t * 10}.`});
+     if(k === 1) return Q.yn(`Er <b>${n}</b> og <b>${swapd(n)}</b> det samme tallet?`, false, {expl:`Nei. ${n} = ${MT.te(t, e)}. ${swapd(n)} = ${MT.te(e, t)}.`});
      if(k === 2) return Q.choice(r, `Hva gjør nullen i <b>${t * 10}</b>?`, 'Den holder enerplassen', ['Den betyr ti til', 'Den gjør tallet mindre', 'Den kan fjernes'], {say:`Hva gjør nullen i ${t * 10}?`, expl:`Nullen sier at det er 0 enere og holder plassen, så ${t} blir stående på tierplassen.`});
-     if(k === 3) return Q.num(`Hvor mange tiere kan du pakke av ${t * 10 + e} kuler? {?}`, t, {say:`Hvor mange tiere kan du pakke av ${t * 10 + e} kuler?`, expl:`${t * 10 + e} = ${t} tiere og ${e} enere.`});
+     if(k === 3) return Q.num(`Hvor mange tiere kan du pakke av ${t * 10 + e} kuler? {?}`, t, {say:`Hvor mange tiere kan du pakke av ${t * 10 + e} kuler?`, expl:`${t * 10 + e} = ${MT.te(t, e)}.`});
      return Q.yn(`Kan 10 enere byttes mot 1 tier?`, true, {expl:'Ja! Ti enere er like mye verdt som én tier. Det kalles å veksle.'});
    }},
    {t:'Klosser til tall', d:'Hvilket tall viser tegningen?', n:10, make:(r, i) => {
      const t = int(r, 1, 9), e = i % 4 === 0 ? 0 : int(r, 0, 9), n = t * 10 + e;
-     return (i % 2 ? Q.num : (a, b, o) => Q.near(r, a, b, o))(`${G.blocks({t, e}, {u:6})}<br>Hvilket tall viser tegningen? {?}`, n, {say:'Hvilket tall viser tegningen?', expl:`${t} tiere og ${e} enere: ${t * 10} + ${e} = ${n}.`, hint:`Tell tierne først (hver er 10), så enerne.`});
+     return (i % 2 ? Q.num : (a, b, o) => Q.near(r, a, b, o))(`${G.blocks({t, e}, {u:6})}<br>Hvilket tall viser tegningen? {?}`, n, {say:'Hvilket tall viser tegningen?', expl:`${MT.te(t, e)}: ${t * 10} + ${e} = ${n}.`, hint:`Tell tierne først (hver er 10), så enerne.`});
    }},
    {t:'Tall til tiere og enere', d:'Del tallet i tiere og enere.', n:10, make:(r, i) => {
      const t = int(r, 1, 9), e = int(r, 0, 9), n = t * 10 + e, k = i % 4;
-     if(k === 0) return Q.num(`${n} = {?} tiere og ${e} enere`, t, {say:`${n} er hvor mange tiere og ${e} enere?`, expl:`${n} har ${t} tiere.`});
-     if(k === 1) return Q.num(`${n} = ${t} tiere og {?} enere`, e, {say:`${n} er ${t} tiere og hvor mange enere?`, expl:`${n} har ${e} enere.`});
+     if(k === 0) return Q.num(`${n} = {?} tiere og ${MT.e1(e)}`, t, {say:`${n} er hvor mange tiere og ${MT.e1(e)}?`, expl:`${n} har ${MT.t1(t)}.`});
+     if(k === 1) return Q.num(`${n} = ${MT.t1(t)} og {?} enere`, e, {say:`${n} er ${MT.t1(t)} og hvor mange enere?`, expl:`${n} har ${MT.e1(e)}.`});
      if(k === 2) return Q.choice(r, `Hvilket siffer står på <b>tierplassen</b> i ${n}?`, t, [e, t + 1 > 9 ? 1 : t + 1, (t + 3) % 9 + 1].filter(x => x !== t), {sort:true, nums:true, say:`Hvilket siffer står på tierplassen i ${n}?`, expl:`I ${n} er tierplassen til venstre: ${t}.`});
      return Q.choice(r, `Hvilket siffer står på <b>enerplassen</b> i ${n}?`, e, [t, (e + 2) % 10, (e + 5) % 10].filter(x => x !== e), {sort:true, nums:true, say:`Hvilket siffer står på enerplassen i ${n}?`, expl:`I ${n} er enerplassen til høyre: ${e}.`});
    }},
    {t:'Bygg tallet', d:'Skriv tallet ut fra tiere, enere og utvidet form.', n:10, make:(r, i) => {
      const t = int(r, 1, 9), e = int(r, 0, 9), n = t * 10 + e, k = i % 4;
-     if(k === 0) return Q.num(`${t} tiere og ${e} enere = {?}`, n, {calc:`${t}*10+${e}`, expl:`${t} tiere er ${t * 10}. ${t * 10} + ${e} = ${n}.`});
+     if(k === 0) return Q.num(`${MT.te(t, e)} = {?}`, n, {calc:`${t}*10+${e}`, expl:`${MT.t1(t)} er ${t * 10}. ${t * 10} + ${e} = ${n}.`});
      if(k === 1) return Q.num(`${t * 10} + ${e} = {?}`, n, {calc:`${t * 10}+${e}`, expl:`${t * 10} og ${e} er ${n}.`});
      if(k === 2) return Q.num(`${n} = ${t * 10} + {?}`, e, {expl:`${n} − ${t * 10} = ${e}.`});
-     return Q.num(`${G.pv({t:t, e:e})}<br>Hvilket tall? {?}`, n, {say:'Hvilket tall viser plasstabellen?', expl:`${t} tiere og ${e} enere er ${n}.`});
+     return Q.num(`${G.pv({t:t, e:e})}<br>Hvilket tall? {?}`, n, {say:'Hvilket tall viser plasstabellen?', expl:`${MT.te(t, e)} er ${n}.`});
    }},
    {t:'Pakke og veksle', d:'Pakk om enere til tiere.', n:10, make:(r, i) => {
      const e = int(r, 11, 39), t = Math.floor(e / 10), rest = e % 10, k = i % 3;
-     if(k === 0) return Q.num(`${G.objs('🟡', e, {per:10, s:'1rem'})}<br>Hvor mange tiere kan du pakke? {?}`, t, {say:`Hvor mange tiere kan du pakke av ${e}?`, expl:`${e} = ${t} tiere og ${rest} enere.`});
-     if(k === 1) return Q.num(`Du har ${e} enere. Hvor mange enere blir til overs når du har pakket så mange tiere som mulig? {?}`, rest, {say:`Du har ${e} enere. Hvor mange enere blir til overs når du har pakket så mange tiere som mulig?`, expl:`${e} = ${t} tiere og ${rest} enere.`});
-     return Q.choice(r, `Du har ${e} enere. Veksler du ti enere mot en tier, hva har du da?`, `${t} tiere og ${rest} enere`, [`${t + 1} tiere og ${rest} enere`, `${t} tiere og ${e} enere`, `${t - 1} tiere og ${rest + 10} enere`].filter(x => x !== `${t} tiere og ${rest} enere`), {say:`Du har ${e} enere. Veksler du så mange tiere du kan, hva har du da?`, expl:`${e} enere = ${t} tiere og ${rest} enere.`});
+     if(k === 0) return Q.num(`${G.objs('🟡', e, {per:10, s:'1rem'})}<br>Hvor mange tiere kan du pakke? {?}`, t, {say:`Hvor mange tiere kan du pakke av ${e}?`, expl:`${e} = ${MT.te(t, rest)}.`});
+     if(k === 1) return Q.num(`Du har ${MT.e1(e)}. Hvor mange enere blir til overs når du har pakket så mange tiere som mulig? {?}`, rest, {say:`Du har ${MT.e1(e)}. Hvor mange enere blir til overs når du har pakket så mange tiere som mulig?`, expl:`${e} = ${MT.te(t, rest)}.`});
+     return Q.choice(r, `Du har ${MT.e1(e)}. Veksler du ti enere mot en tier, hva har du da?`, `${MT.te(t, rest)}`, [`${MT.te(t + 1, rest)}`, `${MT.te(t, e)}`, `${MT.te(t - 1, rest + 10)}`].filter(x => x !== `${MT.te(t, rest)}`), {say:`Du har ${MT.e1(e)}. Veksler du så mange tiere du kan, hva har du da?`, expl:`${MT.e1(e)} = ${MT.te(t, rest)}.`});
    }}
   ]
 });

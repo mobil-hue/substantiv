@@ -32,6 +32,8 @@ Moduler laget så langt (1.–2. trinn, 27 stk, dekker KM13228, KM13229, KM13230
 - **Addisjon og subtraksjon:** legge sammen · addisjon til 10 · trekke fra · regnefortellinger · addisjon over 10 · subtraksjon til 20 · tosifrede tall i hodet (pluss og minus) · oppstilling (pluss og minus) · veksling i addisjon (mente) · veksling i subtraksjon · tallinjen i regning.
 - **Regneegenskaper og likhetstegn:** bytte rekkefølge · legge sammen tre tall · likhetstegnet.
 
+**Oversikt:** `docs/matte-oversikt.md` (moduler, mål, forkunnskaper, nivåer; generert med `tools/mt-oversikt.js`).
+
 **Filer:** `js/mt-core.js` (register, oppgavebyggere, fremgang, meny, øvingsløper), `js/mt-gfx.js` (tierramme, klosser, tallinje, oppstilling, balansevekt …), `js/mt-m-*.js` (modulene), `js/mt-ark.js` + `matte-ark.html` (arbeidsark), `css/mt.css`.
 
 **Legge til en modul:** `MT.module({id, rek, trinn, maal:['KM…'], tittel, ikon, bygger:[...], video:[{html, no}], tekst, refleksjon, nivaaer:[{t, d, kind:'forstaa'|'tren', n, make:(r, i) => Q.num(...)|Q.choice(...)|Q.yn(...)}]})`. `{?}` i stemmen er svarplassen. `calc` (uttrykk som skal være lik svaret) eller `chk` (uttrykk med `_` for svaret) lar valideringen regne etter.

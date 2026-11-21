@@ -166,7 +166,7 @@ MT.module({
    }},
    {t:'Ta bort (til 10)', d:'Bilder: hvor mange er igjen?', n:10, make:(r, i) => {
      const a = int(r, 3, 10), b = int(r, 1, a - 1), e = pick(r, MT.THINGS)[0];
-     return (i % 2 ? Q.num : (x, y, o) => Q.near(r, x, y, o))(`${takePic(a, b, e)}<br>Hvor mange er <b>igjen</b> når de krysset-ut tas bort? {?}`, a - b, {say:'Hvor mange er igjen når de krysset ut tas bort?', calc:`${a}-${b}`, expl:`${a} − ${b} = ${a - b}.`});
+     return (i % 2 ? Q.num : (x, y, o) => Q.near(r, x, y, o))(`${takePic(a, b, e)}<br>Hvor mange er <b>igjen</b> når du tar bort de som er krysset ut? {?}`, a - b, {say:'Hvor mange er igjen når du tar bort de som er krysset ut?', calc:`${a}-${b}`, expl:`${a} − ${b} = ${a - b}.`});
    }},
    {t:'Trekke fra (til 10)', d:'Minusstykker med tall til 10.', n:10, make:(r, i) => {
      const a = int(r, 3, 10), b = int(r, 0, a), k = i % 3;

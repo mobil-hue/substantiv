@@ -148,3 +148,4 @@ body.lang-zh .mt-note,body.lang-zh .mt-todo{font-size:.9rem}
 .mt-sec .bi,.mt-page b .bi,.mt-row .pill .bi,.mt-aim .st .bi,.mt-ah .bi,.mt-view .pill .bi,.mt-rel a .bi,.mt-m .tx b .bi,.mt-pi .tx b .bi,.mt-lv .tx b .bi,.mt-lv .tx small .bi{display:inline}
 .mt-sec .bi .zh,.mt-page b .bi .zh{display:inline;margin-left:8px;font-size:.7em}
 .mt-aim .at .bi{display:block}
+.mt-page .crumb .bi,.mt-goal .km .bi,.mt-page .pill .bi{display:inline}

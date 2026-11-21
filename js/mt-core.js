@@ -16,6 +16,13 @@ MT.shuf = (r, a) => { a = a.slice(); for(let i = a.length - 1; i > 0; i--){ cons
 MT.NAMES = ['Mia', 'Ola', 'Sara', 'Lars', 'Kari', 'Jon', 'Nora', 'Emil', 'Ida', 'Ali'];
 MT.THINGS = [['🍎', 'epler', 'eple'], ['⭐', 'stjerner', 'stjerne'], ['🐟', 'fisker', 'fisk'], ['⚽', 'baller', 'ball'], ['🍪', 'kjeks', 'kjeks'], ['🚗', 'biler', 'bil'], ['🌸', 'blomster', 'blomst'], ['🐞', 'marihøner', 'marihøne'], ['📚', 'bøker', 'bok'], ['🍓', 'jordbær', 'jordbær']];
 
+/* ---------- bøyning: 1 tier / 2 tiere, 1 ener / 2 enere, 1 hundrer / 2 hundrere ---------- */
+MT.t1 = n => n === 1 ? '1 tier' : n + ' tiere';
+MT.e1 = n => n === 1 ? '1 ener' : n + ' enere';
+MT.h1 = n => n === 1 ? '1 hundrer' : n + ' hundrere';
+MT.te = (t, e) => MT.t1(t) + ' og ' + MT.e1(e);
+MT.hte = (h, t, e) => MT.h1(h) + ', ' + MT.t1(t) + ' og ' + MT.e1(e);
+
 /* ---------- scenehjelpere til videoene ---------- */
 const S = MT.S = {};
 S.sc = (...p) => `<div class="scene">${p.join('')}</div>`;

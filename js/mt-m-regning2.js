@@ -14,7 +14,7 @@ const two = (r, a) => { const x = pick(r, MT.NAMES); return [x, pick(r, MT.NAMES
 // historier: {text, eq, ans, kind}
 const stories = {
   plus(r, big){ const [n] = two(r), t = pick(r, MT.THINGS), a = int(r, 2, big ? 12 : 8), b = int(r, 2, big ? 20 - a : 9 - a < 2 ? 2 : 9 - a); const s = pick(r, [0, 1]);
-    return s ? {text:`${n} har ${cnt(a, t)}. ${n} får ${b} til. Hvor mange har ${n} nå?`, eq:`${a} + ${b}`, ans:a + b} : {text:`I en kurv er det ${cnt(a, t)}. I en annen kurv er det ${cnt(b, t)}. Hvor mange er det til sammen?`, eq:`${a} + ${b}`, ans:a + b}; },
+    return s ? {text:`${n} har ${cnt(a, t)}. ${n} får ${b} til. Hvor mange har ${n} nå?`, eq:`${a} + ${b}`, ans:a + b} : {text:`I den ene boksen er det ${cnt(a, t)}. I den andre boksen er det ${cnt(b, t)}. Hvor mange er det til sammen?`, eq:`${a} + ${b}`, ans:a + b}; },
   minus(r, big){ const [n, m] = two(r), t = pick(r, MT.THINGS), a = int(r, 5, big ? 20 : 10), b = int(r, 1, a - 1); const s = pick(r, [0, 1]);
     return s ? {text:`${n} har ${cnt(a, t)}. ${n} gir bort ${b}. Hvor mange er igjen?`, eq:`${a} − ${b}`, ans:a - b} : {text:`Det er ${cnt(a, t)} på bordet. ${b} blir tatt bort. Hvor mange er igjen?`, eq:`${a} − ${b}`, ans:a - b}; },
   compare(r){ const [n, m] = two(r), t = pick(r, MT.THINGS), a = int(r, 5, 15), b = int(r, 1, a - 1); return {text:`${n} har ${cnt(a, t)}. ${m} har ${b}. Hvor mange flere har ${n}?`, eq:`${a} − ${b}`, ans:a - b}; },
@@ -350,8 +350,9 @@ MT.module({
      return Q.num(`Fra ${a} til ${a + b}: hvor mange steg? {?}`, b, {expl:`${a + b} − ${a} = ${b}.`});
    }},
    {t:'Les hoppet', d:'Hvilket regnestykke viser hoppet?', n:10, make:(r, i) => {
-     const a = int(r, 3, 10), b = int(r, 2, 6), plus = r() < .5, e = plus ? a + b : a - b, st = plus ? `${a} + ${b} = ${e}` : `${a} − ${b} = ${e}`;
-     return Q.choice(r, `${hop(a, plus ? '+' : '-', b, {w:520})}<br>Hvilket regnestykke viser hoppet?`, st, [plus ? `${a} − ${b} = ${a - b}` : `${a} + ${b} = ${a + b}`, `${b} + ${a} = ${a + b + 1}`.replace(/= .*/, '= ' + (plus ? e + 1 : e - 1)), `${a} ${plus ? '+' : '−'} ${b + 1} = ${plus ? e + 1 : e - 1}`].filter(x => x !== st), {say:'Hvilket regnestykke viser hoppet?', expl:`Start på ${a}, hopp ${b} mot ${plus ? 'høyre' : 'venstre'}: ${st}.`});
+     const plus = r() < .5, a = int(r, 4, 10), b = plus ? int(r, 2, 6) : int(r, 2, Math.min(6, a - 2)), e = plus ? a + b : a - b, op = plus ? '+' : '−', sg = plus ? 1 : -1, st = `${a} ${op} ${b} = ${e}`;
+     const d = [`${a} ${op} ${b + 1} = ${e + sg}`, `${a} ${op} ${b > 1 ? b - 1 : b + 2} = ${e - sg * (b > 1 ? 1 : -2)}`, `${a + 1} ${op} ${b} = ${e + 1}`, `${a} ${plus ? '−' : '+'} ${b} = ${plus ? a - b : a + b}`].filter(x => x !== st && !/= -/.test(x));
+     return Q.choice(r, `${hop(a, plus ? '+' : '-', b, {w:520})}<br>Hvilket regnestykke viser hoppet?`, st, shuf(r, d).slice(0, 3), {say:'Hvilket regnestykke viser hoppet?', expl:`Start på ${a}, hopp ${b} mot ${plus ? 'høyre' : 'venstre'}: ${st}.`});
    }},
    {t:'Regn med hopp', d:'Regn pluss og minus på tallinjen.', n:10, make:(r, i) => {
      const plus = i % 2 === 0, a = int(r, 5, 14), b = plus ? int(r, 2, 6) : int(r, 2, Math.min(6, a - 1)), e = plus ? a + b : a - b;

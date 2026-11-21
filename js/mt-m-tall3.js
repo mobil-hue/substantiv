@@ -46,14 +46,14 @@ MT.module({
      const k = i % 4;
      if(k === 0){ const a = int(r, 11, 49), b = (int(r, 5, 9)) * 10 + int(r, 0, 9) ; const x = a, y = b > a ? b : 90 - int(r, 0, 5); return Q.choice(r, `Hva ser du på <b>først</b> når du sammenligner ${x} og ${y}?`, 'Tierne', ['Enerne', 'Det siste sifferet', 'Summen av sifrene'], {say:`Hva ser du på først når du sammenligner ${x} og ${y}?`, expl:'Tierne er mest verdt, så vi ser på dem først.'}); }
      if(k === 1){ const n = int(r, 11, 80); return Q.num(`Hva er 10 mer enn ${n}? {?}`, n + 10, {say:`Hva er ti mer enn ${n}?`, calc:`${n}+10`, expl:`I hundrerutenettet står tallet rett under. ${n} + 10 = ${n + 10}.`}); }
-     if(k === 2){ const a = int(r, 2, 8) * 10 + int(r, 5, 9), b = (Math.floor(a / 10) + 1) * 10 + int(r, 0, 3); return Q.yn(`Er <b>${a}</b> større enn <b>${b}</b>?`, false, {expl:`${a} har ${Math.floor(a / 10)} tiere, ${b} har ${Math.floor(b / 10)} tiere. ${b} er størst.`}); }
+     if(k === 2){ const a = int(r, 2, 8) * 10 + int(r, 5, 9), b = (Math.floor(a / 10) + 1) * 10 + int(r, 0, 3); return Q.yn(`Er <b>${a}</b> større enn <b>${b}</b>?`, false, {expl:`${a} har ${MT.t1(Math.floor(a / 10))}, ${b} har ${MT.t1(Math.floor(b / 10))}. ${b} er størst.`}); }
      return Q.choice(r, 'Ti tiere er like mye som …', 'hundre', ['ti', 'tusen', 'tjue'], {keep:false, expl:'Ti tiere er 100.'});
    }},
    {t:'Tallord og tall', d:'Oversett mellom tallord og siffer.', n:10, make:(r, i) => {
      const n = int(r, 21, 99), w = word(n), k = i % 3, o = nbrs(r, n, 21, 99, 15);
      if(k === 0) return Q.choice(r, `Hvilket tall er <b>${w}</b>?`, n, o, {sort:true, nums:true, say:`Hvilket tall er ${w}?`, expl:`${w} = ${n}.`});
      if(k === 1) return Q.choice(r, `Hva heter <b>${n}</b>?`, w, o.map(word), {say:`Hva heter ${n}?`, expl:`${n} heter ${w}.`});
-     return Q.num(`Skriv tallet: <b>${w}</b> = {?}`, n, {say:`Skriv tallet: ${w}`, expl:`${w} er ${Math.floor(n / 10)} tiere og ${n % 10} enere: ${n}.`});
+     return Q.num(`Skriv tallet: <b>${w}</b> = {?}`, n, {say:`Skriv tallet: ${w}`, expl:`${w} er ${MT.te(Math.floor(n / 10), n % 10)}: ${n}.`});
    }},
    {t:'Før, etter og mellom', d:'Finn nabotall og tall som er 10 mer eller mindre.', n:10, make:(r, i) => {
      const n = int(r, 12, 98), k = i % 5;
@@ -112,19 +112,19 @@ MT.module({
   nivaaer:[
    {t:'Forstå: hundrere, tiere og enere', d:'Sjekk at du har forstått plassverdi.', kind:'forstaa', make:(r, i) => {
      const h = int(r, 2, 9), t = int(r, 1, 9), e = int(r, 1, 9), n = h * 100 + t * 10 + e, k = i % 5;
-     if(k === 0) return Q.choice(r, `I tallet <b>${n}</b>: hva er verdien til sifferet ${h}?`, h * 100, [h * 10, h, h * 1000], {sort:true, nums:true, say:`I tallet ${n}: hva er verdien til sifferet ${h}?`, expl:`${h} står på hundrerplassen: ${h} hundrere = ${h * 100}.`});
-     if(k === 1) return Q.yn(`Er ${h * 100 + e} det samme som ${h * 10 + e}?`, false, {expl:`${h * 100 + e} er ${h} hundrere og ${e} enere. ${h * 10 + e} er ${h} tiere og ${e} enere.`});
+     if(k === 0) return Q.choice(r, `I tallet <b>${n}</b>: hva er verdien til sifferet ${h}?`, h * 100, [h * 10, h, h * 1000], {sort:true, nums:true, say:`I tallet ${n}: hva er verdien til sifferet ${h}?`, expl:`${h} står på hundrerplassen: ${MT.h1(h)} = ${h * 100}.`});
+     if(k === 1) return Q.yn(`Er ${h * 100 + e} det samme som ${h * 10 + e}?`, false, {expl:`${h * 100 + e} er ${MT.h1(h)} og ${MT.e1(e)}. ${h * 10 + e} er ${MT.te(h, e)}.`});
      if(k === 2) return Q.num(`Hvor mange tiere er 1 hundrer? {?}`, 10, {say:'Hvor mange tiere er én hundrer?', expl:'1 hundrer = 10 tiere.'});
      if(k === 3) return Q.choice(r, `Hva betyr nullen i <b>${h}0${e}</b>?`, 'Ingen tiere', ['Ingen enere', 'Ingen hundrere', 'Ti tiere'], {say:`Hva betyr nullen i ${h}0${e}?`, expl:`Nullen står på tierplassen: det er 0 tiere.`});
      return Q.yn(`Er ${n} og ${e * 100 + t * 10 + h} det samme tallet?`, e === h, {expl:`Sifrene står på ulike plasser, så tallene er ulike.`});
    }},
    {t:'Klosser til tall', d:'Hvilket tall viser tegningen?', n:10, make:(r, i) => {
      const h = int(r, 1, 4), t = int(r, 0, 5), e = int(r, 0, 6), n = h * 100 + t * 10 + e;
-     return Q.num(`${G.blocks({h, t, e}, {u:4})}<br>Hvilket tall viser tegningen? {?}`, n, {say:'Hvilket tall viser tegningen?', expl:`${h} hundrere, ${t} tiere og ${e} enere: ${n}.`, hint:'Tell flatene (100), stavene (10) og klossene (1).'});
+     return Q.num(`${G.blocks({h, t, e}, {u:4})}<br>Hvilket tall viser tegningen? {?}`, n, {say:'Hvilket tall viser tegningen?', expl:`${MT.hte(h, t, e)}: ${n}.`, hint:'Tell flatene (100), stavene (10) og klossene (1).'});
    }},
    {t:'Plassverdi og tallord', d:'Finn verdien til sifrene og les tallord.', n:10, make:(r, i) => {
      const h = int(r, 1, 9), t = int(r, 0, 9), e = int(r, 0, 9), n = h * 100 + t * 10 + e, k = i % 4;
-     if(k === 0) return Q.num(`${n} = {?} hundrere, ${t} tiere og ${e} enere`, h, {expl:`${n} har ${h} hundrere.`});
+     if(k === 0) return Q.num(`${n} = {?} hundrere, ${MT.te(t, e)}`, h, {expl:`${n} har ${MT.h1(h)}.`});
      if(k === 1){ const pos = pick(r, [['hundrerplassen', h], ['tierplassen', t], ['enerplassen', e]]); return Q.choice(r, `Hvilket siffer står på ${pos[0]} i ${n}?`, pos[1], [h, t, e, (pos[1] + 3) % 10], {sort:true, nums:true, say:`Hvilket siffer står på ${pos[0]} i ${n}?`, expl:`Les plassene fra venstre: hundrere ${h}, tiere ${t}, enere ${e}.`}); }
      if(k === 2){ const o = nbrs(r, n, 101, 999, 60); return Q.choice(r, `Hvilket tall er <b>${wordFull(n)}</b>?`, n, o, {sort:true, nums:true, say:`Hvilket tall er ${wordFull(n)}?`, expl:`${wordFull(n)} = ${n}.`}); }
      const val = pick(r, [['hundrerplassen', h * 100], ['tierplassen', t * 10], ['enerplassen', e]]); return Q.num(`I tallet ${n}: hva er verdien av sifferet på ${val[0]}? {?}`, val[1], {say:`I tallet ${n}: hva er verdien av sifferet på ${val[0]}?`, expl:`Verdien er ${val[1]}.`});
@@ -133,7 +133,7 @@ MT.module({
      const h = int(r, 1, 9), t = i % 3 === 0 ? 0 : int(r, 1, 9), e = i % 4 === 1 ? 0 : int(r, 1, 9), n = h * 100 + t * 10 + e, k = i % 3;
      if(k === 0) return Q.num(`${h * 100} + ${t * 10} + ${e} = {?}`, n, {calc:`${h * 100}+${t * 10}+${e}`, expl:`${h * 100} + ${t * 10} + ${e} = ${n}.`});
      if(k === 1) return Q.num(`${n} = ${h * 100} + ${t * 10} + {?}`, e, {expl:`Enerne i ${n} er ${e}.`});
-     return Q.num(`${h} hundrere og ${e} enere (og ${t} tiere) = {?}`, n, {say:`${h} hundrere, ${t} tiere og ${e} enere er?`, expl:`${h} hundrere, ${t} tiere og ${e} enere: ${n}.`});
+     return Q.num(`${MT.h1(h)} og ${MT.e1(e)} (og ${MT.t1(t)}) = {?}`, n, {say:`${MT.hte(h, t, e)} er?`, expl:`${MT.hte(h, t, e)}: ${n}.`});
    }},
    {t:'Sammenlign og ordne', d:'Større, mindre og rekkefølge for tall til 999.', n:10, make:(r, i) => {
      const k = i % 3; let a = int(r, 101, 999), b = int(r, 101, 999); if(a === b) b = a + 1;

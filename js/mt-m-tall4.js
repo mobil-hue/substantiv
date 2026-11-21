@@ -48,7 +48,7 @@ MT.module({
    }},
    {t:'Par eller ikke?', d:'Partall eller oddetall: se på tegningen.', n:10, make:(r, i) => {
      const n = int(r, 1, 20), em = pick(r, ['🧦', '⭐', '🍎', '🐞', '🚗']);
-     return Q.choice(r, `${pairs(n, em)}<br>Er det partall eller oddetall (${n})?`, n % 2 ? 'Oddetall' : 'Partall', ['Partall', 'Oddetall'], {keep:true, say:`Er det et partall eller et oddetall?`, expl:n % 2 ? `${Math.floor(n / 2)} par og 1 til overs: oddetall.` : `${n / 2} par og ingen til overs: partall.`});
+     return Q.choice(r, `${pairs(n, em)}<br>Er det partall eller oddetall?`, n % 2 ? 'Oddetall' : 'Partall', ['Partall', 'Oddetall'], {keep:true, say:`Er det et partall eller et oddetall?`, expl:n % 2 ? `${Math.floor(n / 2)} par og 1 til overs: oddetall.` : `${n / 2} par og ingen til overs: partall.`});
    }},
    {t:'Partall og oddetall til 100', d:'Se på sifferet helt til høyre.', n:10, make:(r, i) => {
      const n = int(r, 11, 99), k = i % 2;
