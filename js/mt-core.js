@@ -61,7 +61,7 @@ let ordN = 0;
 MT.module = function(d){
   d.ord = d.rek != null ? d.rek : ordN++; d.bygger = d.bygger || []; d.maal = d.maal || [];
   MT.mods.push(d); MT.byId[d.id] = d;
-  A.VIDEOS['mt_' + d.id] = {no:d.tittel, zh:'', emoji:d.ikon, board:true, scenes:d.video.map(s => ({html:s.html, no:s.no, zh:''}))};
+  A.VIDEOS['mt_' + d.id] = {no:d.tittel, zh:'', emoji:d.ikon, board:true, pause:2200, scenes:d.video.map(s => ({html:s.html, no:s.no, zh:''}))};
   return d;
 };
 MT.opens = id => MT.mods.filter(m => m.bygger.includes(id));

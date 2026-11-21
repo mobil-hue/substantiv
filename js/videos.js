@@ -222,10 +222,16 @@ A.Video = {
     async function runScene(i){
       const my = ++run; show(i);
       if(!playing) return;
-      const s = V.scenes[i];
-      if(A.speakKey() === 'off') await A.sleep(readTime(s)); else { setTalk(true); await A.sayBi(s.no, s.zh); if(my === run) setTalk(false); }
+      const s = V.scenes[i], t0 = Date.now(), rt = readTime(s);
+      // når tegningene på tavla er ferdig animert (scenen skal ikke byttes før alt er skrevet opp)
+      let animEnd = 0; try{ sceneHost.getAnimations({subtree:true}).forEach(a => { const t = a.effect && a.effect.getComputedTiming && a.effect.getComputedTiming(); if(t && isFinite(t.endTime)) animEnd = Math.max(animEnd, t.endTime); }); }catch(e){}
+      if(A.speakKey() === 'off') await A.sleep(rt); else { setTalk(true); await A.sayBi(s.no, s.zh); if(my === run) setTalk(false); }
       if(!alive || my !== run || !playing) return;
-      await A.sleep(900);
+      // ingen stemme på enheten (opplesingen blir ferdig med en gang): gi tid til å lese teksten
+      const used = Date.now() - t0, need = Math.max(animEnd + 1200, used < rt * .5 ? rt : 0) - used;
+      if(need > 0) await A.sleep(Math.min(need, 20000));
+      if(!alive || my !== run || !playing) return;
+      await A.sleep(V.pause || 900);
       if(!alive || my !== run || !playing) return;
       if(i < n - 1) runScene(i + 1); else finish();
     }
