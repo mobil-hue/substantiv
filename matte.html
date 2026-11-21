@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Matematikk etter kompetansemål</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/gs.css">
+<link rel="stylesheet" href="css/board.css">
+<link rel="stylesheet" href="css/mt.css">
+</head>
+<body class="lang-both">
+<header class="top">
+  <div class="logo" id="logo" onclick="location.hash='#/'">🔢 Matematikk <small>etter kompetansemål</small></div>
+  <div class="sp"></div>
+  <a class="pill" id="pHome" href="index.html" title="Til menyen">🏠<span class="pt"> Meny</span></a>
+  <button class="pill" id="pSup" title="Støttespråk / Language">🌍</button>
+  <button class="pill" id="pLang" title="Tekst">🌐</button>
+  <button class="pill" id="pSound" title="Opplesing">🔊</button>
+</header>
+<main id="app"></main>
+<script>window.SUBJECT = 'mt'; window.SUPPORT_LANGS = true;</script>
+<script src="js/util.js"></script>
+<script>/* ordbøker: norsk nøkkel-liste + engelsk (reserve) + valgt støttespråk */
+(function(){ const l = window.App.supLang(); if(l === 'zh') return;
+  ['keys', 'en'].concat(l === 'en' ? [] : [l]).forEach(f => document.write('<script src="js/i18n/' + f + '.js"><\/script>')); })();</script>
+<script src="js/data.js"></script>
+<script src="js/graphics.js"></script>
+<script src="js/board.js"></script>
+<script src="js/videos.js"></script>
+<script src="js/mult-data.js"></script>
+<script src="js/mt-maal.js"></script>
+<script src="js/mt-gfx.js"></script>
+<script src="js/mt-core.js"></script>
+<!--MODULER-->
+<script src="js/mt-m-tall.js"></script>
+<script src="js/mt-m-tall2.js"></script>
+<script src="js/mt-m-tall3.js"></script>
+<script src="js/mt-m-tall4.js"></script>
+<script src="js/mt-m-regning1.js"></script>
+<script src="js/mt-m-regning2.js"></script>
+<script src="js/mt-m-regning3.js"></script>
+<script>window.MT.start();</script>
+</body>
+</html>

@@ -229,6 +229,7 @@ A.sayBi = function(no, zh){
     let l = 'zh';
     if(A.I18N){ const r = A.trx(no, zh); zh = r.t; l = r.l; }
     if(zh) segs.push(...A.parseSegs(zh, l));
+    else if(sp === 'zh' && no) segs.push(...A.parseSegs(no, 'no'));   // ingen oversettelse ennå: les norsk i stedet for stillhet
   }
   return A.say(segs);
 };

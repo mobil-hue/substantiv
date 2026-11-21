@@ -8,13 +8,40 @@ Læreopplegg i samme system, samlet i en **rotmeny** (`index.html`) med fagene *
 | Norsk | **Substantiv 名词** (fullstendig kurs) | `substantiv.html` |
 | Norsk | **Adjektiv – grunnkurs 形容词基础课** (nytt, enklere start) | `adjektiv-grunnkurs.html` |
 | Norsk | **Adjektiv 形容词** (fullstendig kurs) | `adjektiv.html` |
-| Matematikk | **Gangetabellen som system 乘法系统** (nytt) | `gangesystem.html` |
+| Matematikk | **Matematikk etter kompetansemål** (nytt: 1.–2. trinn, 27 moduler) | `matte.html` |
+| Matematikk | **Gangetabellen som system 乘法系统** | `gangesystem.html` |
 | Matematikk | **Gange – lær og øv 乘法** | `multiplikasjon.html` |
 | Matematikk | **Geometri 几何** (Matematikk 4 kap. 4) | `geometri.html` |
 | Matematikk | **Gangespill** (rask trening av gangetabellen) | `gange.html` |
 | Norsk Voksenopplæring | **Norsk for voksne** – norsk · English · 中文 | `voksen.html` |
 
 Norsk er hovedspråket. Kinesisk er støtte, både som tekst og som opplesing.
+
+## Matematikk etter kompetansemål (`matte.html`)
+Egen meny for matematikk, ordnet etter **trinn og kompetansemål** i LK20 (gyldig fra 1.8.2026; alle 101 mål ligger i `js/mt-maal.js`, generert fra `docs/laereplan/lk20-grunnskole.json`). Fra rotmenyen er matematikk nå ett kort. Gange, gangesystemet og geometri ligger fortsatt i egne sider og lenkes fra matematikkmenyen.
+
+**Modell** (annen metode enn gangesystemet): først *forståelse* (grundig video: konkret → bilde → symbol), så *trening på flere nivåer*. Hver modul har:
+- en video på tavle med lærerinne (5–9 scener, norsk tale og tekst),
+- et **forstå-sjekk-nivå** (begrepsspørsmål med forklaring) og 3–5 treningsnivåer (bestått ved 80 %),
+- en skriftlig forklaring (mål, steg, eksempler, ord, vanlige feil, til voksne) og en refleksjonsoppgave,
+- **arbeidsark** (`matte-ark.html`): forklaringsark + tre differensierte ark (Nivå 1 start, Nivå 2 videre, Nivå 3 utfordring) + fasit, med seedede oppgaver og tilpasning til A4,
+- `bygger` (forkunnskaper) som vises som «Bygger på» / «Åpner for» på modulsiden og i «Anbefalt rekkefølge».
+
+Moduler laget så langt (1.–2. trinn, 27 stk, dekker KM13228, KM13229, KM13230, KM13231, KM13232, KM13233, KM13234, KM13235, KM13241, KM13242):
+- **Tall og mengder:** tall 0–10 · tall 11–20 · tiere og enere · tall til 100 · hundrere (til 999) · telle framover/bakover · hopptelling · partall og oddetall · tallinjen · gruppere etter egenskaper · tall i hverdagen.
+- **Addisjon og subtraksjon:** legge sammen · addisjon til 10 · trekke fra · regnefortellinger · addisjon over 10 · subtraksjon til 20 · tosifrede tall i hodet (pluss og minus) · oppstilling (pluss og minus) · veksling i addisjon (mente) · veksling i subtraksjon · tallinjen i regning.
+- **Regneegenskaper og likhetstegn:** bytte rekkefølge · legge sammen tre tall · likhetstegnet.
+
+**Filer:** `js/mt-core.js` (register, oppgavebyggere, fremgang, meny, øvingsløper), `js/mt-gfx.js` (tierramme, klosser, tallinje, oppstilling, balansevekt …), `js/mt-m-*.js` (modulene), `js/mt-ark.js` + `matte-ark.html` (arbeidsark), `css/mt.css`.
+
+**Legge til en modul:** `MT.module({id, rek, trinn, maal:['KM…'], tittel, ikon, bygger:[...], video:[{html, no}], tekst, refleksjon, nivaaer:[{t, d, kind:'forstaa'|'tren', n, make:(r, i) => Q.num(...)|Q.choice(...)|Q.yn(...)}]})`. `{?}` i stemmen er svarplassen. `calc` (uttrykk som skal være lik svaret) eller `chk` (uttrykk med `_` for svaret) lar valideringen regne etter.
+
+**Kontroll (krever `python3 -m http.server 8765` og Playwright):**
+```
+NODE_PATH=$(npm root -g) node tools/mt-validate.js 60     # alle generatorer: svar, alternativer, calc/chk, video og tekst
+NODE_PATH=$(npm root -g) node tools/mt-ark-check.js        # alle arbeidsark får plass på A4 (PDF-sidetall)
+```
+**Språk:** Matematikkdelen er foreløpig bare på norsk (opplesing og tekst). Støttespråkene (`js/i18n/*`) har ikke oversettelser av disse tekstene ennå; de kan samles og oversettes med `tools/i18n` på samme måte som for gangesystemet. Innholdet er laget med KI og bør gjennomleses av en lærer.
 
 ## Språk og opplesing
 - **Vis tekst på:** norsk + 中文 (standard), bare norsk eller bare 中文.
