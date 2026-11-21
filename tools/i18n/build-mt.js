@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /* Bygger språkfilene for matematikk fra tabellene i tools/i18n/mt/:
  *   words.tsv   ordhjelp: norsk ord (liten bokstav) + 10 kolonner  → js/i18n/mtw-<språk>.js
- *   chrome.tsv  faste tekster (meny, knapper, modultitler): norsk tekst med tall som # + 10 kolonner, tall som {1} {2} i oversettelsene
+ *   chrome.tsv, narration.tsv, tekst.tsv  faste tekster (meny, knapper, modultitler, nivåer), fortellertekst i videoene og skriftlige forklaringer:
+ *               norsk tekst med tall som # + 10 kolonner, tall som {1} {2} i oversettelsene
  *               → js/i18n/mt-keys.js og js/i18n/mt-<språk>.js (id-er fra 100000)
  * Kolonner: no, en, sv, zh, ar, es, pl, uk, th, tl, so.  Kjør fra repo-roten: node tools/i18n/build-mt.js
  */
@@ -20,7 +21,7 @@ words.forEach(r => { if(r.length !== 11){ warn(`ord «${r[0]}»: ${r.length} kol
 LANGS.forEach(l => fs.writeFileSync(path.join(OUT, `mtw-${l}.js`), `/* Generert av tools/i18n/build-mt.js fra tools/i18n/mt/words.tsv. Ordhjelp (norsk → ${l}); KI-oversatt, ikke lest av morsmålsbruker. */\n(window.MTW = window.MTW || {}).${l} = ${JSON.stringify(W[l])};\n`));
 
 // ---- faste tekster
-const chrome = rd('chrome.tsv'), keys = {}, D = {}; LANGS.forEach(l => D[l] = {}); let id = 100000;
+const chrome = ['chrome.tsv', 'narration.tsv', 'tekst.tsv'].flatMap(rd), keys = {}, D = {}; LANGS.forEach(l => D[l] = {}); let id = 100000;
 chrome.forEach(r => { if(r.length !== 11){ warn(`tekst «${r[0].slice(0, 40)}»: ${r.length} kolonner`); return; }
   const key = r[0].trim(), n = (key.match(/#/g) || []).length; if(keys[key] != null){ warn('dobbel: ' + key.slice(0, 40)); return; }
   keys[key] = id;

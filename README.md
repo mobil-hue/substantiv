@@ -42,10 +42,11 @@ Moduler laget så langt (68 stk, 368 nivåer; dekker alle kompetansemål i 1.–
 
 **Mengdetrening:** moduler med rene regneoppgaver (nå 32 av 68) har i tillegg *mengdetrening*: mange oppgaver på rad, både **på skjermen** (`#/m/<id>/drill`, med tid og tall på riktige) og som **eget ark** (del «Mengdetrening» i `matte-ark.html`: ark A = vanlig, ark B = utfordring, med fasit). Tidlige moduler viser mengdebilder (tierrammer, grupper) ved siden av regnestykkene; senere moduler har rene regnestykker eller oppstilling i rutenett. Registreres med `drill:{tittel, layout:'row'|'pic'|'col', cols, n:[ark, skjerm], make:(r, i, hard) => ({t:'7 + 5 =', ans:12, pic?, col?})}` i `js/mt-drill.js` (eldre moduler) eller direkte i modulen. `☐` i teksten er et tomt felt midt i regnestykket.
 
-**Støttespråk i matematikk (10 språk):** matematikkdelen er flerspråklig på to måter, begge KI-oversatt og ikke lest av morsmålsbrukere.
+**Støttespråk i matematikk (10 språk):** matematikkdelen er flerspråklig på flere måter, alle KI-oversatt og ikke lest av morsmålsbrukere.
 1. **Faste tekster** er oversatt som hele setninger: meny, knapper, overskrifter, de 68 modultitlene og titlene og beskrivelsene av alle nivåene (847 tekster). De ligger i `tools/i18n/mt/chrome.tsv` (norsk nøkkel med tall som `#`, tall som `{1}` i oversettelsene).
-2. **Ordhjelp:** i oppgaver, forklaringer, hjelpetekster, skriftlige forklaringer og fortellerteksten i videoene kan eleven trykke på et ord med prikkete strek og se hva det betyr på støttespråket (`js/mt-gloss.js`). Ordlisten ligger i `tools/i18n/mt/words.tsv` (nå 1185 ord, ca. 96 % av ordene i oppgave-, forklarings- og videotekstene).
-Ikke oversatt som setninger: de ca. 18 000 oppgave- og forklaringsmalene, fortellerteksten i videoene, de skriftlige forklaringene og kompetansemålene (de beholdes på norsk med vilje). Automatisk maskinoversettelse ble prøvd og forkastet (den bytter ut og dropper ord og gir misvisende matematikk). Etter endring i `words.tsv` eller `chrome.tsv`: `node tools/i18n/build-mt.js` (lager `js/i18n/mtw-*.js`, `mt-*.js` og `mt-keys.js`). Kolonner: no, en, sv, zh, ar, es, pl, uk, th, tl, so.
+2. **Fortellertekst og skriftlige forklaringer:** fortellerteksten i videoene (513 scener, `tools/i18n/mt/narration.tsv`) og de skriftlige forklaringene (mål, trinn, eksempler, ordforklaringer, vanlige feil og refleksjon, 985 tekster, `tools/i18n/mt/tekst.tsv`) er oversatt. Oversettelsen vises som en egen linje under norsk tekst når et støttespråk er valgt (`TX()` i `js/mt-core.js`). Noen få kodeblokker og fargeruter med tall bare i HTML er ikke oversatt.
+3. **Ordhjelp:** i oppgaver, forklaringer, hjelpetekster, skriftlige forklaringer og fortellerteksten i videoene kan eleven trykke på et ord med prikkete strek og se hva det betyr på støttespråket (`js/mt-gloss.js`). Ordlisten ligger i `tools/i18n/mt/words.tsv` (nå 1185 ord, ca. 96 % av ordene i oppgave-, forklarings- og videotekstene).
+Ikke oversatt som setninger: de ca. 18 000 oppgave- og forklaringsmalene (dekket av ordhjelpen) og kompetansemålene (de beholdes på norsk med vilje). Automatisk maskinoversettelse ble prøvd og forkastet (den bytter ut og dropper ord og gir misvisende matematikk). Etter endring i `words.tsv`, `chrome.tsv`, `narration.tsv` eller `tekst.tsv`: `node tools/i18n/build-mt.js` (lager `js/i18n/mtw-*.js`, `mt-*.js` og `mt-keys.js`). Kolonner: no, en, sv, zh, ar, es, pl, uk, th, tl, so.
 
 **Oversikt:** `docs/matte-oversikt.md` (moduler, mål, forkunnskaper, nivåer; generert med `tools/mt-oversikt.js`).
 
@@ -58,7 +59,7 @@ Ikke oversatt som setninger: de ca. 18 000 oppgave- og forklaringsmalene, fortel
 NODE_PATH=$(npm root -g) node tools/mt-validate.js 60     # alle generatorer: svar, alternativer, calc/chk, video og tekst
 NODE_PATH=$(npm root -g) node tools/mt-ark-check.js        # alle arbeidsark får plass på A4 (PDF-sidetall)
 ```
-**Språk:** Matematikkdelen er foreløpig bare på norsk (opplesing og tekst). Støttespråkene (`js/i18n/*`) har ikke oversettelser av disse tekstene ennå; de kan samles og oversettes med `tools/i18n` på samme måte som for gangesystemet. Innholdet er laget med KI og bør gjennomleses av en lærer.
+**Språk:** Matematikken er på norsk, med KI-oversatt støtte på 10 språk (se «Støttespråk i matematikk» over). Innholdet er laget med KI og bør gjennomleses av en lærer og morsmålsbrukere.
 
 ## Språk og opplesing
 - **Vis tekst på:** norsk + 中文 (standard), bare norsk eller bare 中文.

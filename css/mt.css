@@ -205,3 +205,8 @@ details.mt-build>summary{cursor:pointer;font-weight:900;color:#5b21b6;padding:6p
 .board .mtw{border-bottom-color:rgba(255,255,255,.55)}
 .mt-tip{position:absolute;z-index:300;background:#1f2937;color:#fff;border-radius:10px;padding:6px 12px;font:700 1rem/1.35 system-ui,sans-serif;max-width:min(280px,82vw);box-shadow:0 6px 18px rgba(0,0,0,.3)}
 .mt-tip .ar{opacity:.6}
+
+/* oversettelse under skriftlige forklaringer */
+.mt-tx{font-size:.9em;font-weight:600;color:#475569;margin:3px 0 10px;border-left:3px solid #cbd5e1;padding-left:8px}
+.mt-tx.in{display:inline;border:0;padding:0;margin:0 0 0 .5em;font-weight:700}
+.mt-txt dt .mt-tx.in::before{content:"· "}
