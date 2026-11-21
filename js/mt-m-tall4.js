@@ -136,7 +136,7 @@ MT.module({
 /* ======================================================================
    10. Gruppere etter egenskaper
    ====================================================================== */
-const SH = [{s:'c', c:'#ef4444', n:'rød'}, {s:'c', c:'#3b82f6', n:'blå'}, {s:'q', c:'#ef4444', n:'rød'}, {s:'q', c:'#3b82f6', n:'blå'}, {s:'t', c:'#ef4444', n:'rød'}, {s:'t', c:'#3b82f6', n:'blå'}];
+const SH = [{s:'c', c:'#ef4444', cn:'rød'}, {s:'c', c:'#3b82f6', cn:'blå'}, {s:'q', c:'#ef4444', cn:'rød'}, {s:'q', c:'#3b82f6', cn:'blå'}, {s:'t', c:'#ef4444', cn:'rød'}, {s:'t', c:'#3b82f6', cn:'blå'}];
 const mkShapes = (r, n) => Array.from({length:n}, () => { const b = pick(r, SH); return Object.assign({big:r() < .5}, b); });
 const FORM = {c:'sirkler', q:'firkanter', t:'trekanter'};
 MT.module({
@@ -178,10 +178,10 @@ MT.module({
    }},
    {t:'Sorter figurer', d:'Tell figurer med en bestemt egenskap.', n:10, make:(r, i) => {
      const sh = mkShapes(r, 8), k = i % 4; let cnt, q;
-     if(k === 0){ const c = pick(r, ['rød', 'blå']); cnt = sh.filter(x => x.n === c).length; q = `Hvor mange figurer er ${c}e?`.replace('røde', 'røde'); q = `Hvor mange ${c === 'rød' ? 'røde' : 'blå'} figurer er det?`; }
+     if(k === 0){ const c = pick(r, ['rød', 'blå']); cnt = sh.filter(x => x.cn === c).length; q = `Hvor mange figurer er ${c}e?`.replace('røde', 'røde'); q = `Hvor mange ${c === 'rød' ? 'røde' : 'blå'} figurer er det?`; }
      else if(k === 1){ const f = pick(r, ['c', 'q', 't']); cnt = sh.filter(x => x.s === f).length; q = `Hvor mange ${FORM[f]} er det?`; }
      else if(k === 2){ const b = r() < .5; cnt = sh.filter(x => !!x.big === b).length; q = `Hvor mange ${b ? 'store' : 'små'} figurer er det?`; }
-     else { const f = pick(r, ['c', 'q', 't']), c = pick(r, ['rød', 'blå']); cnt = sh.filter(x => x.s === f && x.n === c).length; q = `Hvor mange ${FORM[f]} er ${c === 'rød' ? 'røde' : 'blå'}?`; }
+     else { const f = pick(r, ['c', 'q', 't']), c = pick(r, ['rød', 'blå']); cnt = sh.filter(x => x.s === f && x.cn === c).length; q = `Hvor mange ${FORM[f]} er ${c === 'rød' ? 'røde' : 'blå'}?`; }
      return Q.num(`${G.shapes(sh, {s:42})}<br>${q} {?}`, cnt, {say:q.replace('?', ''), expl:`Tell bare de som passer til egenskapen. Det er ${cnt}.`});
    }},
    {t:'Hva passer ikke?', d:'Finn den som ikke passer i gruppa.', n:10, make:(r, i) => {
@@ -203,7 +203,7 @@ MT.module({
    }},
    {t:'Flere måter å sortere på', d:'Tenk over ulike måter å gruppere samme ting.', n:10, make:(r, i) => {
      const sh = mkShapes(r, 8), k = i % 3;
-     if(k === 0){ const cs = uniq(sh.map(x => x.n)).length; return Q.num(`${G.shapes(sh, {s:42})}<br>Sorterer du etter <b>farge</b>: hvor mange grupper får du? {?}`, cs, {say:'Sorterer du etter farge: hvor mange grupper får du?', expl:`Det er ${cs} farger, så ${cs} grupper.`}); }
+     if(k === 0){ const cs = uniq(sh.map(x => x.cn)).length; return Q.num(`${G.shapes(sh, {s:42})}<br>Sorterer du etter <b>farge</b>: hvor mange grupper får du? {?}`, cs, {say:'Sorterer du etter farge: hvor mange grupper får du?', expl:`Det er ${cs} farger, så ${cs} grupper.`}); }
      if(k === 1){ const fs = uniq(sh.map(x => x.s)).length; return Q.num(`${G.shapes(sh, {s:42})}<br>Sorterer du etter <b>form</b>: hvor mange grupper får du? {?}`, fs, {say:'Sorterer du etter form: hvor mange grupper får du?', expl:`Det er ${fs} ulike former, så ${fs} grupper.`}); }
      return Q.yn(`Tallene <b>2, 4, 6, 8</b>: kan de sorteres både som «partall» og som «tall under 10»?`, true, {say:'Kan tallene 2, 4, 6 og 8 sorteres både som partall og som tall under 10?', expl:'Ja! Samme tall kan passe til flere regler.'});
    }}

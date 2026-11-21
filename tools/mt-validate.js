@@ -16,7 +16,7 @@ const URL = process.env.URL || 'http://localhost:8765/matte.html';
       if(!m.tekst || !m.tekst.mal || !m.tekst.steg || !m.refleksjon) add(m.id, '-', 'mangler skriftlig tekst/refleksjon');
       if(m.nivaaer.length < 3) add(m.id, '-', 'færre enn 3 nivåer');
       m.maal.forEach(k => { if(!MT.SETS.some(s => s.maal.some(a => a.k === k))) add(m.id, '-', 'ukjent kompetansemål ' + k); });
-      m.bygger.forEach(k => { if(!MT.byId[k]) add(m.id, '-', 'bygger på ukjent modul ' + k); });
+      m.bygger.forEach(k => { if(!MT.byId[k]) add(m.id, '-', 'bygger på ukjent modul ' + k); else if(MT.byId[k].ord >= m.ord) add(m.id, '-', 'kommer før modulen den bygger på (' + k + ')'); });
       m.nivaaer.forEach((l, li) => {
         const lid = 'niv' + (li + 1), stems = new Set(); let made = 0;
         for(let s = 0; s < rounds; s++){
