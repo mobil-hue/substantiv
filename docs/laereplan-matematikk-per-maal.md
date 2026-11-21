@@ -7,6 +7,7 @@ Utarbeidet 2026-11-21. Grunnlag: `MAT01-06` (gyldig fra 2026-08-01), alle **101*
 Hvert mål er vurdert **for seg**, som en egen øvingsmodul med en **nivåtrapp**: fra enklest til vanskeligst, slik elevene faktisk møter stoffet. Eksempel for addisjon: tall under 10 + tall under 10 → til 20 → tosifret uten veksling → oppstilling uten veksling → oppstilling med veksling → tresifrede tall. Det er ingen felles «system» eller triks på tvers av mål.
 
 Hvert mål har:
+
 - **Nivåer**: trappen jeg ville bygget, med automatisk rett/galt og forklaring av svaret.
 - **Går ikke**: den delen av målet en app ikke kan trene eller vurdere. Typisk er det «forklare», «argumentere», «lage egne problemer», «utforske praktisk» og fysiske konkreter.
 - **Vurdering**: **A**/**A–** = hele kjernen kan trenes automatisk. **B+**/**B** = det meste, men en del faller utenfor. **B–**/**C+**/**C** = bare delvis eller som støtte. **D** = ikke egnet (ingen mål havnet her).
