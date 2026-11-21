@@ -27,14 +27,16 @@ Egen meny for matematikk, ordnet etter **trinn og kompetansemål** i LK20 (gyldi
 - **arbeidsark** (`matte-ark.html`): forklaringsark + tre differensierte ark (Nivå 1 start, Nivå 2 videre, Nivå 3 utfordring) + fasit, med seedede oppgaver og tilpasning til A4,
 - `bygger` (forkunnskaper) som vises som «Bygger på» / «Åpner for» på modulsiden og i «Anbefalt rekkefølge».
 
-Moduler laget så langt (44 stk, dekker de 20 første kompetansemålene: 1.–2. trinn KM13228–KM13242 og 3. trinn KM13243–KM13245, KM13254, KM13246):
+Moduler laget så langt (55 stk, dekker de 30 første kompetansemålene: 1.–2. trinn KM13228–KM13242, 3. trinn KM13243–KM13254 og de tre første i 4. trinn KM13255–KM13257):
 - **Tall og mengder:** tall 0–10 · tall 11–20 · tiere og enere · tall til 100 · hundrere (til 999) · telle framover/bakover · hopptelling · partall og oddetall · tallinjen · gruppere etter egenskaper · tall i hverdagen.
 - **Addisjon og subtraksjon (1.–2. trinn):** legge sammen · addisjon til 10 · trekke fra · regnefortellinger · addisjon over 10 · subtraksjon til 20 · tosifrede tall i hodet (pluss og minus) · oppstilling (pluss og minus) · veksling i addisjon (mente) · veksling i subtraksjon · tallinjen i regning.
 - **Regneegenskaper og likhetstegn:** bytte rekkefølge · legge sammen tre tall · likhetstegnet.
 - **Mønster, figurer, måling, tid og regler:** mønster (repeterende enheter) · figurer rundt oss (2D) · romfigurer · måle lengde · måle masse · klokka (hele og halve timer) · klokka (kvarter og minutter) · kalender · regler og trinnvise instruksjoner.
 - **3. trinn:** strategier for pluss · strategier for minus · pluss og minus hører sammen · gange: like store grupper · gange og hopptelling (2-, 5-, 10-gangen) · dobling og halvering · dele likt (divisjon) · gange og deling i fortellinger.
+- **3. trinn (forts.):** gange på mange måter (representasjoner) · gange: bytte rekkefølge og velge lette par · gange: dele opp (distributiv) · større enn, mindre enn og lik · likevekt (tall som mangler på vekta) · måle areal · koordinatsystem · regler og instruksjoner i koordinatsystemet.
+- **4. trinn:** delingsdivisjon og målingsdivisjon · divisjon på mange måter (tegning, tallinje, stang, tabell) · divisjonsstrategier (tenk gange, halver, del opp).
 
-**Mengdetrening:** moduler med rene regneoppgaver har i tillegg *mengdetrening*: mange oppgaver på rad, både **på skjermen** (`#/m/<id>/drill`, med tid og tall på riktige) og som **eget ark** (del «Mengdetrening» i `matte-ark.html`: ark A = vanlig, ark B = utfordring, med fasit). Tidlige moduler viser mengdebilder (tierrammer, grupper) ved siden av regnestykkene; senere moduler har rene regnestykker eller oppstilling i rutenett. Registreres med `drill:{tittel, layout:'row'|'pic'|'col', cols, n:[ark, skjerm], make:(r, i, hard) => ({t:'7 + 5 =', ans:12, pic?, col?})}` i `js/mt-drill.js` (eldre moduler) eller direkte i modulen. `☐` i teksten er et tomt felt midt i regnestykket.
+**Mengdetrening:** moduler med rene regneoppgaver (nå 28 av 55) har i tillegg *mengdetrening*: mange oppgaver på rad, både **på skjermen** (`#/m/<id>/drill`, med tid og tall på riktige) og som **eget ark** (del «Mengdetrening» i `matte-ark.html`: ark A = vanlig, ark B = utfordring, med fasit). Tidlige moduler viser mengdebilder (tierrammer, grupper) ved siden av regnestykkene; senere moduler har rene regnestykker eller oppstilling i rutenett. Registreres med `drill:{tittel, layout:'row'|'pic'|'col', cols, n:[ark, skjerm], make:(r, i, hard) => ({t:'7 + 5 =', ans:12, pic?, col?})}` i `js/mt-drill.js` (eldre moduler) eller direkte i modulen. `☐` i teksten er et tomt felt midt i regnestykket.
 
 **Oversikt:** `docs/matte-oversikt.md` (moduler, mål, forkunnskaper, nivåer; generert med `tools/mt-oversikt.js`).
 

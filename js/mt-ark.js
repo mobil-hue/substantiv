@@ -74,7 +74,7 @@ function fit(root){
     const bottom = () => { const last = sh.querySelector('.refl') || qg, r = last.getBoundingClientRect(); return r.bottom; };
     const limit = () => { const r = sh.getBoundingClientRect(), pb = parseFloat(getComputedStyle(sh).paddingBottom) || 0; return r.bottom - pb - 14; };
     let guard = 0;
-    while(bottom() > limit() && qg.children.length > (isD ? 8 : 3) && guard++ < 120) qg.removeChild(qg.lastElementChild);
+    while(bottom() > limit() && qg.children.length > (isD ? 8 : 2) && guard++ < 120) qg.removeChild(qg.lastElementChild);
     // på mengdetreningsark: hold hele rader
     if(isD){ const cols = getComputedStyle(qg).gridTemplateColumns.split(' ').length; while(qg.children.length > cols && qg.children.length % cols) qg.removeChild(qg.lastElementChild); const t = sh.querySelector('.dtot'); if(t) t.textContent = qg.children.length; }
     sh.dataset.n = qg.children.length;

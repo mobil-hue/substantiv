@@ -167,3 +167,9 @@ body.lang-zh .mt-note,body.lang-zh .mt-todo{font-size:.9rem}
 .mtcal td{width:2.1rem;height:2.1rem;text-align:center;border-radius:6px;background:#f8fafc;font-size:.95rem}
 .mtcal td.we{background:#fee2e2}.mtcal td.hl{background:#fde68a;outline:3px solid #f59e0b;outline-offset:-3px}
 .board .mtcal caption{color:var(--chalk)}
+
+.mttbl{border-collapse:separate;border-spacing:0;font-weight:900;background:#fff;border:3px solid #cbd5e1;border-radius:12px;overflow:hidden;color:#1f2937}
+.mttbl th{background:#e0e7ff;padding:4px 12px;text-align:left;font-size:.95rem;border-bottom:2px solid #cbd5e1}
+.mttbl td{padding:4px 12px;text-align:center;font-size:1.25rem;border-bottom:2px solid #e5e7eb;min-width:2.2em}
+.mttbl tr:last-child th,.mttbl tr:last-child td{border-bottom:0}
+.mttbl .bx2.w{display:inline-block;box-sizing:border-box;width:1.6em;height:1.3em;border:2px dashed #94a3b8;border-radius:5px;vertical-align:middle}

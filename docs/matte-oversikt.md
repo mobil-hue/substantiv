@@ -50,6 +50,17 @@ Generert av `tools/mt-oversikt.js`. Rekkefølgen er et forslag; «bygger på» v
 | 42 | Dobling og halvering | 3 | KM13254 | Gange: like store grupper; Legge sammen tosifrede tall i hodet; Partall og oddetall | 6 | 8 | ja |
 | 43 | Dele likt: divisjon som motsatt av gange | 3 | KM13246 | Gange: like store grupper; Trekke fra: hva subtraksjon betyr | 6 | 8 | ja |
 | 44 | Gange og deling i fortellinger | 3 | KM13246 | Gange: like store grupper; Dele likt: divisjon som motsatt av gange; Regnefortellinger: lage og løse problemer | 6 | 8 | – |
+| 45 | Gange på mange måter: ting, tegning, tall, tekst og tabell | 3 | KM13247 | Gange: like store grupper; Gange og hopptelling: 2-, 5- og 10-gangen | 6 | 8 | ja |
+| 46 | Gange: bytte rekkefølge og velge lette par | 3 | KM13248 | Gange på mange måter: ting, tegning, tall, tekst og tabell | 6 | 7 | ja |
+| 47 | Gange: dele opp og regne lurt | 3 | KM13248 | Gange: bytte rekkefølge og velge lette par; Gange og hopptelling: 2-, 5- og 10-gangen; Legge sammen tosifrede tall i hodet | 5 | 8 | ja |
+| 48 | Større enn, mindre enn og lik | 3 | KM13249 | Likhetstegnet: begge sider er like mye; Tall til 100: tallord, rekkefølge og hundrerutenett | 6 | 7 | – |
+| 49 | Likevekt: tall som mangler på vekta | 3 | KM13250 | Likhetstegnet: begge sider er like mye; Større enn, mindre enn og lik | 5 | 8 | – |
+| 50 | Måle areal: hvor mye flate? | 3 | KM13253 | Måle lengde: binders, linjal, centimeter og meter; Gange: like store grupper | 6 | 8 | ja |
+| 51 | Koordinatsystem: navngi og plassere punkter | 3 | KM13251 | Tallinjen: plassere og lese av tall | 6 | 8 | – |
+| 52 | Regler og instruksjoner i koordinatsystemet | 3 | KM13252 | Koordinatsystem: navngi og plassere punkter; Regler og trinnvise instruksjoner | 6 | 7 | – |
+| 53 | Delingsdivisjon og målingsdivisjon | 4 | KM13255 | Dele likt: divisjon som motsatt av gange; Gange og deling i fortellinger | 6 | 8 | ja |
+| 54 | Divisjon på mange måter: tegning, tallinje, stang og tabell | 4 | KM13256 | Delingsdivisjon og målingsdivisjon; Gange på mange måter: ting, tegning, tall, tekst og tabell | 6 | 8 | – |
+| 55 | Divisjonsstrategier: tenk gange, halver og del opp | 4 | KM13257 | Divisjon på mange måter: tegning, tallinje, stang og tabell; Gange: dele opp og regne lurt; Dobling og halvering | 6 | 8 | ja |
 
 ## Kompetansemål 1.–2. trinn og modulene som dekker dem
 
@@ -76,13 +87,26 @@ Generert av `tools/mt-oversikt.js`. Rekkefølgen er et forslag; «bygger på» v
 - **KM13245** Beskrive og utforske multiplikasjon ved telling og gruppering: Gange: like store grupper; Gange og hopptelling: 2-, 5- og 10-gangen
 - **KM13254** Bruke dobling og halvering i hoderegning og skriftlig regning: Dobling og halvering
 - **KM13246** Bruke multiplikasjon og divisjon til å lage og løse problemer fra lek og hverdag: Dele likt: divisjon som motsatt av gange; Gange og deling i fortellinger
-- **KM13247** Bruke tallsymboler, tekst, tabeller, tegning og konkreter til å representere multiplikasjon på ulike måter og oversette mellom de ulike representasjonene: _ikke laget ennå_
-- **KM13248** Bruke kommutative, assosiative og distributive egenskaper ved multiplikasjon i hoderegning og skriftlig regning: _ikke laget ennå_
-- **KM13249** Bruke likhets- og ulikhetstegn som relasjonelle symboler for å sammenligne størrelser, mengder, uttrykk og tall: _ikke laget ennå_
-- **KM13250** Bruke tallsymboler, tegning og konkreter for å utforske likevekt og oversette mellom de ulike representasjonene: _ikke laget ennå_
-- **KM13253** Måle arealer i praktiske situasjoner med ikke-standardiserte og standardiserte måleenheter: _ikke laget ennå_
-- **KM13251** Eksperimentere med, navngi og plassere punkter i koordinatsystemet: _ikke laget ennå_
-- **KM13252** Lage og følge regler og trinnvise instruksjoner i lek og spill knyttet til koordinatsystemet: _ikke laget ennå_
+- **KM13247** Bruke tallsymboler, tekst, tabeller, tegning og konkreter til å representere multiplikasjon på ulike måter og oversette mellom de ulike representasjonene: Gange på mange måter: ting, tegning, tall, tekst og tabell
+- **KM13248** Bruke kommutative, assosiative og distributive egenskaper ved multiplikasjon i hoderegning og skriftlig regning: Gange: bytte rekkefølge og velge lette par; Gange: dele opp og regne lurt
+- **KM13249** Bruke likhets- og ulikhetstegn som relasjonelle symboler for å sammenligne størrelser, mengder, uttrykk og tall: Større enn, mindre enn og lik
+- **KM13250** Bruke tallsymboler, tegning og konkreter for å utforske likevekt og oversette mellom de ulike representasjonene: Likevekt: tall som mangler på vekta
+- **KM13253** Måle arealer i praktiske situasjoner med ikke-standardiserte og standardiserte måleenheter: Måle areal: hvor mye flate?
+- **KM13251** Eksperimentere med, navngi og plassere punkter i koordinatsystemet: Koordinatsystem: navngi og plassere punkter
+- **KM13252** Lage og følge regler og trinnvise instruksjoner i lek og spill knyttet til koordinatsystemet: Regler og instruksjoner i koordinatsystemet
+
+## Kompetansemål 4. trinn og modulene som dekker dem
+
+- **KM13255** Utforske og bruke målings- og delingsdivisjon i praktiske situasjoner: Delingsdivisjon og målingsdivisjon
+- **KM13256** Bruke tall, tekst, tegning og konkreter for å utforske divisjon på ulike måter og oversette mellom de ulike representasjonene: Divisjon på mange måter: tegning, tallinje, stang og tabell
+- **KM13257** Bruke og forklare ulike divisjonsstrategier: Divisjonsstrategier: tenk gange, halver og del opp
+- **KM13258** Bruke hoderegning og skriftlig regning til å utforske og forklare sammenhenger mellom de fire regneartene: _ikke laget ennå_
+- **KM13259** Estimere, gjøre overslag, forklare tenkemåter og vurdere kritisk egne og andres modeller og løsninger i arbeid med praktiske situasjoner: _ikke laget ennå_
+- **KM13260** Lage regneuttrykk til praktiske situasjoner og finne praktiske situasjoner som passer til oppgitte regneuttrykk: _ikke laget ennå_
+- **KM13261** Beskrive og utforske egenskaper ved to- og tredimensjonale figurer ved å bruke vinkler, kanter, hjørner og flater: _ikke laget ennå_
+- **KM13264** Måle volum i praktiske situasjoner med ikke-standardiserte og standardiserte måleenheter og samtale om resultatene: _ikke laget ennå_
+- **KM13262** Beskrive og utforske strukturer og mønstre i lek og spill: _ikke laget ennå_
+- **KM13263** Lage algoritmer og uttrykke dem ved bruk av variabler, vilkår og løkker: _ikke laget ennå_
 
 ## Nivåer per modul
 
@@ -399,4 +423,90 @@ Generert av `tools/mt-oversikt.js`. Rekkefølgen er et forslag; «bygger på» v
 4. Velg regnestykket
 5. To-stegs-historier
 6. Lag fortellingen
+
+**Gange på mange måter: ting, tegning, tall, tekst og tabell**
+1. Forstå: samme gange – mange måter
+2. Fra tegning til gangestykke
+3. Fra gangestykke til tekst
+4. Tabeller
+5. Fra tekst til tegning
+6. Oversett mellom alle
+
+**Gange: bytte rekkefølge og velge lette par**
+1. Forstå: hva kan byttes?
+2. Snu rutenettet
+3. Bytt og regn
+4. Tre tall: velg lette par
+5. Parenteser
+6. Sant eller usant?
+
+**Gange: dele opp og regne lurt**
+1. Forstå: hvorfor virker oppdeling?
+2. Del opp rutenettet
+3. Dele opp et gangestykke
+4. Regn med oppdeling
+5. Tosifret × ensifret
+
+**Større enn, mindre enn og lik**
+1. Forstå: hva betyr tegnene?
+2. Mengder
+3. Tall
+4. Uttrykk
+5. Størrelser
+6. Finn tall som passer
+
+**Likevekt: tall som mangler på vekta**
+1. Forstå: likevekt
+2. Les vekta
+3. Fra vekt til likning
+4. Få vekta i likevekt
+5. Det samme på begge sider
+
+**Måle areal: hvor mye flate?**
+1. Forstå: hva er areal?
+2. Tell rutene
+3. Rektangel: rader × ruter
+4. Sammensatte figurer
+5. Sammenlign arealer
+6. cm² og m²
+
+**Koordinatsystem: navngi og plassere punkter**
+1. Forstå: x og y
+2. Les av punktet
+3. Hvilket punkt?
+4. Flytt punktet
+5. Figurer i koordinatsystemet
+6. Tallene i koordinatene
+
+**Regler og instruksjoner i koordinatsystemet**
+1. Forstå: instruksjon og koordinater
+2. Følg instruksjonen
+3. Lag instruksjonen
+4. Spillet «senke skip»
+5. Tegn figuren
+6. Tell stegene
+
+**Delingsdivisjon og målingsdivisjon**
+1. Forstå: deling eller måling?
+2. Delingsdivisjon
+3. Målingsdivisjon
+4. Hvilken type?
+5. Når det ikke går opp
+6. Praktiske situasjoner
+
+**Divisjon på mange måter: tegning, tallinje, stang og tabell**
+1. Forstå: samme divisjon – mange måter
+2. Fra tegning til divisjon
+3. Tallinje: hvor mange hopp?
+4. Stangmodell
+5. Fra tekst til regnestykke
+6. Tabell
+
+**Divisjonsstrategier: tenk gange, halver og del opp**
+1. Forstå: hvorfor virker strategiene?
+2. Tenk gange
+3. Halvere (÷ 2 og ÷ 4)
+4. Del opp i tiere og enere
+5. Del opp smart
+6. Velg strategi og sjekk
 
