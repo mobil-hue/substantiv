@@ -1,0 +1,151 @@
+/* Matematikk etter kompetansemål (matte.html) – kommer i tillegg til style.css, gs.css og board.css */
+:root{--mt-a:#3b82f6;--mt-b:#f97316;--mt-g:#16a34a;--mt-ink:#1f2937}
+
+/* ---------- grafikk ---------- */
+.mtg{display:inline-flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;vertical-align:middle;max-width:100%}
+.mtg svg{display:block;max-width:100%;height:auto}
+.mtfr{display:inline-flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.mtobj{display:inline-flex;flex-direction:column;gap:2px;align-items:center}
+.mtobj .r{display:flex;gap:2px;justify-content:center}
+.mtobj .o{font-size:var(--os,1.9rem);line-height:1.1;position:relative}
+.mtobj .o.x::after{content:"✕";position:absolute;inset:0;color:#dc2626;font-size:1.1em;line-height:1;display:flex;align-items:center;justify-content:center;font-weight:900}
+.mtobj .o.x{opacity:.55}
+.mtobj .o.gap{opacity:.18;filter:grayscale(1)}
+.mtobj.grp{border:3px dashed #94a3b8;border-radius:14px;padding:4px 8px;background:rgba(255,255,255,.5)}
+.mtb{display:inline-flex;gap:8px;align-items:flex-end;flex-wrap:wrap;justify-content:center}
+.mtb svg{display:block}
+.mtcol{display:inline-block;border-collapse:collapse;font-weight:900;font-size:2rem;font-family:"Courier New",ui-monospace,monospace;text-align:center;color:var(--mt-ink)}
+.mtcol td,.mtcol th{padding:0 8px;min-width:1.5em;line-height:1.15;position:relative}
+.mtcol th{font-size:.62rem;font-family:inherit;font-family:system-ui,sans-serif;color:#64748b;font-weight:800;padding-bottom:2px}
+.mtcol td.sm{font-size:.95rem;color:#dc2626;height:1.2em;line-height:1}
+.mtcol td.op{text-align:left;padding-right:0}
+.mtcol tr.ln td{border-top:4px solid var(--mt-ink);height:0;padding:0}
+.mtcol td.cr{text-decoration:line-through;text-decoration-color:#dc2626;text-decoration-thickness:3px;color:#9ca3af}
+.mtcol td.q{color:#1d4ed8}
+.mtcol td.hl,.mtcol th.hl{background:rgba(250,204,21,.45);border-radius:8px}
+.mtcol .bx{display:inline-block;width:1.1em;height:1.3em;border:3px dashed #94a3b8;border-radius:6px;vertical-align:middle}
+.mtpv{border-collapse:separate;border-spacing:6px;margin:0 auto;text-align:center;font-weight:900}
+.mtpv th{font-size:.78rem;color:#fff;border-radius:10px;padding:4px 12px}
+.mtpv td{font-size:2.2rem;background:#fff;color:#1f2937;border:3px solid #cbd5e1;border-radius:12px;min-width:2.2em;padding:2px 6px}
+.mtpv th.h{background:#dc2626}.mtpv th.t{background:#2563eb}.mtpv th.e{background:#16a34a}
+.mtpv td.q{color:#9ca3af}
+.mtgrid{border-collapse:separate;border-spacing:2px;margin:0 auto}
+.mtgrid td{width:var(--cs,28px);height:var(--cs,28px);padding:0;text-align:center;font-weight:800;font-size:var(--fs,.78rem);border-radius:5px;background:#fff;color:#334155;box-shadow:inset 0 0 0 1px #e2e8f0}
+.mtgrid td.hl{background:#fde68a;color:#78350f}
+.mtgrid td.hl2{background:#bfdbfe;color:#1e3a8a}
+.mtgrid td.hl3{background:#bbf7d0;color:#14532d}
+.mtgrid td.st{outline:3px solid #ea580c;outline-offset:-2px}
+.mtgrid td.hid{background:#fff7ed;color:#f97316;font-weight:900;box-shadow:inset 0 0 0 2px #fdba74}
+.mtchips{display:inline-flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.mtchip{display:inline-flex;align-items:center;justify-content:center;min-width:2.4em;height:2.4em;padding:0 8px;border-radius:12px;background:#fff;border:3px solid var(--c,#94a3b8);font-weight:900;font-size:1.5rem;color:#1f2937}
+.mtchip.q{border-style:dashed;color:#9ca3af}
+.mtchip.on{background:var(--c,#fde68a)}
+.mtcard{display:inline-block;background:#fff;border:3px solid var(--c,#94a3b8);border-radius:14px;padding:6px 12px;font-weight:900;color:#1f2937;text-align:center}
+.board .mtcard,.board .mtchip{color:#1f2937}
+.mtsay{font-size:1.15rem;font-weight:800}
+.mtbig{font-size:2.6rem;font-weight:900}
+.mtsm{font-size:1.1rem;font-weight:800;color:var(--muted)}
+.board .mtsm{color:var(--chalk2)}
+.mtsp{display:inline-block;width:.5em}
+
+/* ---------- øving ---------- */
+.mt-sess .qcard{border-top:8px solid var(--c,#f97316)}
+.mt-stem{font-size:1.45rem;font-weight:800;text-align:center;line-height:1.5;margin:4px 0 12px}
+.mt-stem .mtg{margin:6px 4px}
+.mt-stem .mtq{display:inline-block;min-width:1.6em;padding:0 8px;border-bottom:5px solid var(--c,#f97316);color:var(--c,#f97316);text-align:center;font-weight:900}
+.mt-stem .mtq.good{color:var(--good);border-color:var(--good)}
+.mt-stem .mtq.bad{color:var(--bad);border-color:var(--bad)}
+.mt-stem .big{font-size:2.2rem}
+.mt-in{max-width:420px;margin:0 auto}
+.mt-hint{margin-top:10px;background:#fffbeb;border:3px solid #fde68a;border-radius:14px;padding:8px 12px;text-align:center}
+.mt-ctl{text-align:center;margin-top:8px}
+.mt-chs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mt-chs.one{grid-template-columns:1fr}
+.mt-chs .gchoice{font-size:1.35rem;padding:12px 8px;line-height:1.25}
+.mt-chs.nums .gchoice{font-size:2rem}
+.mt-pass{display:inline-block;background:#dcfce7;border:3px solid #86efac;border-radius:999px;padding:2px 14px;font-weight:900;color:#14532d}
+.mt-fail{display:inline-block;background:#fee2e2;border:3px solid #fca5a5;border-radius:999px;padding:2px 14px;font-weight:900;color:#7f1d1d}
+
+/* ---------- forside og modulside ---------- */
+.mt-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 4px}
+.mt-tabs .pill.has{border-color:#f97316}
+.mt-tabs .pill small{opacity:.7;font-weight:700}
+.mt-view{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 12px}
+.mt-aim{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px;margin:12px 0;border-left:10px solid var(--c,#cbd5e1)}
+.mt-aim.todo{--c:#cbd5e1;opacity:.85}
+.mt-aim .mt-ah{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.mt-aim .km{font-size:.72rem;font-weight:900;color:#475569;background:#f1f5f9;border-radius:6px;padding:1px 8px}
+.mt-aim .at{font-weight:800;flex:1;min-width:200px}
+.mt-aim .st{font-size:.8rem;font-weight:800;color:var(--muted)}
+.mt-mods{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin-top:10px}
+.mt-m{display:flex;gap:10px;align-items:center;background:#f8fafc;border:3px solid #e2e8f0;border-radius:14px;padding:8px 10px;text-decoration:none;color:inherit;position:relative}
+.mt-m:hover{border-color:var(--c,#f97316)}
+.mt-m .ic{font-size:1.9rem}
+.mt-m .tx{flex:1;min-width:0}
+.mt-m .tx b{display:block;line-height:1.2}
+.mt-m .tx span.s{font-size:.74rem;color:var(--muted);font-weight:700}
+.mt-m .mk{font-size:1.2rem}
+.mt-m.done{background:#f0fdf4;border-color:#86efac}
+.mt-m.part{background:#fffbeb;border-color:#fde68a}
+.mt-m .tr{position:absolute;top:-9px;right:10px;background:#1e293b;color:#fff;border-radius:999px;font-size:.68rem;font-weight:800;padding:0 8px}
+.mt-leg{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.mt-leg a{font-size:.85rem}
+.mt-path{counter-reset:p}
+.mt-pi{display:flex;gap:10px;align-items:center;background:#fff;border-radius:14px;box-shadow:var(--shadow);padding:8px 12px;margin:8px 0;text-decoration:none;color:inherit}
+.mt-pi .n{width:30px;height:30px;border-radius:50%;background:#f97316;color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;flex:none}
+.mt-pi.done .n{background:#16a34a}
+.mt-pi .ic{font-size:1.7rem}
+.mt-pi .tx{flex:1}
+.mt-pi .tx small{display:block;color:var(--muted);font-weight:700}
+.mt-page h1{margin:6px 0}
+.mt-goal{background:#fff7ed;border-left:8px solid #f97316;border-radius:12px;padding:10px 14px;margin:10px 0}
+.mt-goal .km{font-size:.72rem;font-weight:900;color:#9a3412}
+.mt-rel{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
+.mt-rel a{display:inline-flex;gap:6px;align-items:center;text-decoration:none;border-radius:999px;border:2px solid #cbd5e1;background:#fff;padding:3px 12px;font-weight:800;font-size:.9rem;color:inherit}
+.mt-rel a.ok{background:#dcfce7;border-color:#86efac}
+.mt-rel a.no{background:#fff7ed;border-color:#fdba74}
+.mt-lv{display:flex;gap:12px;align-items:center;background:#fff;border-radius:14px;box-shadow:var(--shadow);padding:10px 14px;margin:8px 0;border-left:8px solid var(--c,#f97316)}
+.mt-lv .n{font-size:1.4rem;font-weight:900;width:2em;text-align:center;color:var(--c,#f97316)}
+.mt-lv .tx{flex:1}
+.mt-lv .tx small{display:block;color:var(--muted);font-weight:700}
+.mt-lv .sc{font-weight:900;font-size:.9rem}
+.mt-lv.done{border-left-color:#16a34a}
+.mt-lv.done .n{color:#16a34a}
+.mt-lv.forstaa{--c:#7c3aed}
+.mt-txt{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 18px;margin:14px 0;text-align:left}
+.mt-txt h3{margin:12px 0 4px;color:var(--brand-d)}
+.mt-txt h3:first-child{margin-top:0}
+.mt-txt ol,.mt-txt ul{margin:4px 0 4px 22px;padding:0}
+.mt-txt li{margin:3px 0}
+.mt-txt .ex{background:#f8fafc;border-radius:12px;padding:8px 12px;margin:6px 0;text-align:center}
+.mt-txt dl{margin:0}
+.mt-txt dt{font-weight:900;float:left;clear:left;margin-right:8px}
+.mt-txt dd{margin:0 0 3px}
+.mt-txt .wrong{background:#fef2f2;border-left:6px solid #f87171;border-radius:8px;padding:4px 10px;margin:4px 0}
+.mt-sec{margin:20px 0 4px;font-size:1.3rem}
+.mt-row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.mt-todo{color:var(--muted);font-weight:700;font-size:.85rem}
+.mt-note{font-size:.82rem;color:var(--muted);font-weight:700;margin:6px 0}
+body.lang-zh .mt-note,body.lang-zh .mt-todo{font-size:.9rem}
+@media (max-width:560px){.mt-stem{font-size:1.2rem}.mtcol{font-size:1.6rem}}
+
+.mtmono{margin:0;font-family:"Courier New",ui-monospace,monospace;font-weight:900;font-size:2rem;line-height:1.2;text-align:left;display:inline-block;color:var(--mt-ink);background:#fff;border:3px solid #cbd5e1;border-radius:12px;padding:6px 14px}
+
+/* ---------- tavla (video): lys skrift og linjer ---------- */
+.board .mtcol{color:var(--chalk)}
+.board .mtcol th{color:var(--chalk2)}
+.board .mtcol tr.ln td{border-top-color:var(--chalk)}
+.board .mtcol td.sm{color:#fca5a5}
+.board .mtcol td.cr{color:#9ca3af;text-decoration-color:#fca5a5}
+.board .mtcol td.hl,.board .mtcol th.hl{background:rgba(250,204,21,.38);color:#fff}
+.board .mtcol .bx{border-color:var(--chalk2)}
+.board .mtg svg text{paint-order:stroke;stroke:#f6f3e8;stroke-width:4px;stroke-linejoin:round}
+.board .mtg svg line[stroke="#1f2937"],.board .mtg svg path[stroke="#1f2937"]{stroke:#f6f3e8}
+.board .mtg svg [fill="#1f2937"]{fill:#1f2937}
+.board .mtpv td{color:#1f2937}
+
+/* små tekster i overskrifter og rader skal stå på samme linje */
+.mt-sec .bi,.mt-page b .bi,.mt-row .pill .bi,.mt-aim .st .bi,.mt-ah .bi,.mt-view .pill .bi,.mt-rel a .bi,.mt-m .tx b .bi,.mt-pi .tx b .bi,.mt-lv .tx b .bi,.mt-lv .tx small .bi{display:inline}
+.mt-sec .bi .zh,.mt-page b .bi .zh{display:inline;margin-left:8px;font-size:.7em}
+.mt-aim .at .bi{display:block}
+.mt-page .crumb .bi,.mt-goal .km .bi,.mt-page .pill .bi{display:inline}
