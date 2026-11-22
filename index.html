@@ -3,18 +3,98 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Lær – norsk og matematikk 学习</title>
-<link rel="stylesheet" href="css/style.css">
+<title>Skoleboken – gratis læring i norsk og matte</title>
+<meta name="description" content="Tre ferdige moduler du kan bruke gratis: Gangesystemet, Adjektiv og Substantiv. Korte videoer, trening trinn for trinn og ingen innlogging.">
+<link rel="stylesheet" href="css/skole.css">
+<script src="js/gate-config.js"></script><script src="js/gate.js"></script>
 </head>
-<body class="lang-both">
-<header class="top">
-  <div class="logo" id="logo">🎓 Lær <small>学习</small></div>
-  <div class="sp"></div>
-  <button class="pill" id="pLang" title="Tekst / 文字">🌐 NO + 中文</button>
-  <button class="pill" id="pSound" title="Opplesing / 朗读">🔊</button>
-</header>
-<main id="app"></main>
-<script src="js/util.js"></script>
-<script src="js/hub.js"></script>
+<body class="sk">
+<main class="sk-wrap">
+  <section class="sk-hero">
+    <h1>Lær norsk og matte – <em>helt gratis</em></h1>
+    <p>Tre ferdige moduler. Se en kort video, øv trinn for trinn og se at du blir bedre. Velg ett og start.</p>
+    <div class="sk-chips"><span>✅ Gratis</span><span>🚫 Ingen innlogging</span><span>🔐 Ingenting lagres hos oss</span></div>
+  </section>
+
+  <h2 class="sk-h2" id="start">Velg en modul <small>klar til å brukes nå</small></h2>
+  <div class="sk-grid">
+
+    <article class="sk-card" style="--c:#7c3aed">
+      <div class="sk-art" style="--c1:#ede9fe;--c2:#ddd6fe">
+        <svg viewBox="0 0 300 150" role="img" aria-label="Tre rader med fire prikker: 3 ganger 4 er 12">
+          <g fill="#7c3aed"><circle cx="40" cy="28" r="12"/><circle cx="76" cy="28" r="12"/><circle cx="112" cy="28" r="12"/><circle cx="148" cy="28" r="12"/></g>
+          <g fill="#a855f7"><circle cx="40" cy="64" r="12"/><circle cx="76" cy="64" r="12"/><circle cx="112" cy="64" r="12"/><circle cx="148" cy="64" r="12"/></g>
+          <g fill="#ec4899"><circle cx="40" cy="100" r="12"/><circle cx="76" cy="100" r="12"/><circle cx="112" cy="100" r="12"/><circle cx="148" cy="100" r="12"/></g>
+          <text x="248" y="70" font-size="40" font-weight="900" fill="#4c1d95" text-anchor="middle" font-family="Nunito,system-ui,sans-serif">3 × 4</text>
+          <text x="248" y="112" font-size="34" font-weight="900" fill="#7c3aed" text-anchor="middle" font-family="Nunito,system-ui,sans-serif">= 12</text>
+          <rect x="20" y="124" width="150" height="8" rx="4" fill="#c4b5fd"/><rect x="20" y="124" width="104" height="8" rx="4" fill="#7c3aed"/>
+        </svg>
+      </div>
+      <div class="sk-body">
+        <span class="sk-tag">Matte</span>
+        <h3>Gangesystemet</h3>
+        <p>Gangetabellen som system i stedet for pugging: se mønstrene, bruk knepene og tren til du er rask.</p>
+        <div class="sk-go"><a class="sk-btn" style="--c:#7c3aed" href="gangesystem.html">▶ Start gratis</a></div>
+        <div class="sk-sub"><a href="gs-ark.html">📝 Skriveark</a></div>
+      </div>
+    </article>
+
+    <article class="sk-card" style="--c:#16a34a">
+      <div class="sk-art" style="--c1:#dcfce7;--c2:#bbf7d0">
+        <svg viewBox="0 0 300 150" role="img" aria-label="Tre sirkler som vokser: stor, større, størst">
+          <g font-family="Nunito,system-ui,sans-serif" font-weight="900" text-anchor="middle">
+            <circle cx="52" cy="78" r="30" fill="#86efac"/><text x="52" y="84" font-size="22" fill="#14532d">🐱</text><text x="52" y="132" font-size="17" fill="#166534">stor</text>
+            <circle cx="140" cy="70" r="42" fill="#4ade80"/><text x="140" y="80" font-size="34" fill="#14532d">🐱</text><text x="140" y="132" font-size="17" fill="#166534">større</text>
+            <circle cx="238" cy="62" r="54" fill="#16a34a"/><text x="238" y="76" font-size="48" fill="#fff">🐱</text><text x="238" y="132" font-size="17" fill="#166534">størst</text>
+          </g>
+        </svg>
+      </div>
+      <div class="sk-body">
+        <span class="sk-tag">Norsk</span>
+        <h3>Adjektiv</h3>
+        <p>Beskrivende ord: motsetninger, en stor hund – et stort hus, flertall og å sammenligne (stor, større, størst).</p>
+        <div class="sk-go"><a class="sk-btn" style="--c:#16a34a" href="adjektiv-grunnkurs.html">▶ Start grunnkurs</a><a class="sk-btn sec" href="adjektiv.html">Fullt kurs</a></div>
+        <div class="sk-sub"><a href="adjektiv-ark.html">📝 Skriveark</a><a href="docs/adjektiv-jukselapp.pdf" target="_blank" rel="noopener">🧾 Jukselapp</a></div>
+      </div>
+    </article>
+
+    <article class="sk-card" style="--c:#2563eb">
+      <div class="sk-art" style="--c1:#dbeafe;--c2:#bfdbfe">
+        <svg viewBox="0 0 300 150" role="img" aria-label="en bil, ei dør, et hus">
+          <g font-family="Nunito,system-ui,sans-serif" font-weight="900" text-anchor="middle">
+            <rect x="12" y="24" width="86" height="96" rx="16" fill="#fff"/><rect x="12" y="24" width="86" height="30" rx="16" fill="#2563eb"/><rect x="12" y="40" width="86" height="14" fill="#2563eb"/>
+            <text x="55" y="46" font-size="20" fill="#fff">en</text><text x="55" y="96" font-size="40">🚗</text><text x="55" y="116" font-size="14" fill="#1e3a8a">bil</text>
+            <rect x="107" y="24" width="86" height="96" rx="16" fill="#fff"/><rect x="107" y="24" width="86" height="30" rx="16" fill="#db2777"/><rect x="107" y="40" width="86" height="14" fill="#db2777"/>
+            <text x="150" y="46" font-size="20" fill="#fff">ei</text><text x="150" y="96" font-size="40">🚪</text><text x="150" y="116" font-size="14" fill="#831843">dør</text>
+            <rect x="202" y="24" width="86" height="96" rx="16" fill="#fff"/><rect x="202" y="24" width="86" height="30" rx="16" fill="#16a34a"/><rect x="202" y="40" width="86" height="14" fill="#16a34a"/>
+            <text x="245" y="46" font-size="20" fill="#fff">et</text><text x="245" y="96" font-size="40">🏠</text><text x="245" y="116" font-size="14" fill="#14532d">hus</text>
+          </g>
+        </svg>
+      </div>
+      <div class="sk-body">
+        <span class="sk-tag">Norsk</span>
+        <h3>Substantiv</h3>
+        <p>Navneord: en, ei eller et, én eller flere, og bestemt form (bilen, hunden). Korte videoer og enkle ord.</p>
+        <div class="sk-go"><a class="sk-btn" style="--c:#2563eb" href="substantiv-grunnkurs.html">▶ Start grunnkurs</a><a class="sk-btn sec" href="substantiv.html">Fullt kurs</a></div>
+        <div class="sk-sub"><a href="ark.html">📝 Skriveark</a><a href="docs/substantiv-jukselapp.pdf" target="_blank" rel="noopener">🧾 Jukselapp</a><a href="docs/substantiv-boyingstabell.pdf" target="_blank" rel="noopener">📊 Bøyingstabell</a></div>
+      </div>
+    </article>
+  </div>
+
+  <h2 class="sk-h2">Slik fungerer det</h2>
+  <div class="sk-steps">
+    <div>Velg en modul<small>Alle tre er åpne for alle.</small></div>
+    <div>Se en kort video<small>Forstå først, så øve.</small></div>
+    <div>Øv på flere nivåer<small>Du ser fremgangen din underveis.</small></div>
+  </div>
+
+  <h2 class="sk-h2">Mer på Skoleboken</h2>
+  <div class="sk-teasers">
+    <a class="sk-teaser" href="boker.html" style="--c:#0f766e"><span class="ic">📚</span><div><b>Bøker</b><span>Lesebøker, oppgavebøker og mer. Se hva som finnes.</span></div><span class="sk-lockpill">🔒 passord</span></a>
+    <a class="sk-teaser" href="matte.html" style="--c:#ea580c"><span class="ic">🔢</span><div><b>Matematikk etter kompetansemål</b><span>Hele læreplanen for 1.–4. trinn, mål for mål.</span></div><span class="sk-lockpill">🔒 passord</span></a>
+  </div>
+</main>
+<script src="js/skole.js"></script>
+<script>SKB.init('index.html')</script>
 </body>
 </html>

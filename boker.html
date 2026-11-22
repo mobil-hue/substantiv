@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bøker – Skoleboken</title>
+<meta name="description" content="Bøkene på Skoleboken: kort beskrivelse og forside. For å lese må du taste inn passord.">
+<link rel="stylesheet" href="css/skole.css">
+<script src="js/gate-config.js"></script><script src="js/gate.js"></script>
+</head>
+<body class="sk">
+<main class="sk-wrap">
+  <section class="sk-hero">
+    <h1>📚 <em>Bøker</em></h1>
+    <p>Se hva som finnes. For å åpne en bok må du taste inn passord.</p>
+  </section>
+  <div class="sk-bar" id="bar"></div>
+  <h2 class="sk-h2">Alle bøker</h2>
+  <div class="sk-books" id="books"></div>
+</main>
+<script src="js/skole.js"></script>
+<script>
+SKB.init('boker.html');
+const bar = document.getElementById('bar'), wrap = document.getElementById('books');
+function render(){
+  const ok = Gate.ok();
+  bar.innerHTML = ok
+    ? '<span class="ic">🔓</span><div class="t"><b>Åpnet</b>Du kan åpne alle bøkene.</div><button class="sk-btn sec" id="lockBtn" type="button">Lås igjen</button>'
+    : '<span class="ic">🔒</span><div class="t"><b>Bøkene er stengt for gjennomsyn</b>Beskrivelsene er åpne, men for å lese må du ha passord.</div><button class="sk-btn" style="--c:#0f766e" id="openBtn" type="button">🔓 Skriv inn passord</button>';
+  const o = document.getElementById('openBtn'); if(o) o.onclick = () => Gate.ask(render);
+  const l = document.getElementById('lockBtn'); if(l) l.onclick = () => { Gate.lock(); render(); };
+  wrap.innerHTML = SKB.BOOKS.map(b => `<article class="sk-book" style="--c:${b.c1}">
+    <div class="sk-cover" style="--c1:${b.c1};--c2:${b.c2}" role="img" aria-label="Forside: ${b.title}"><span class="em">${b.emoji}</span><div><h3>${b.title}</h3><small>${b.sub || ''}</small></div></div>
+    <p>${b.desc}</p>
+    <div class="sk-go" style="padding-top:0"><button class="sk-btn" style="--c:${b.c1}" data-go="${b.href}" type="button">${ok ? '▶ Åpne' : '🔒 Åpne med passord'}</button>${(b.extra || []).map(e => ok ? `<a class="sk-btn sec" href="${e[0]}">${e[1]}</a>` : '').join('')}</div>
+  </article>`).join('');
+  wrap.querySelectorAll('[data-go]').forEach(btn => btn.onclick = () => { const go = () => { location.href = btn.dataset.go; }; Gate.ok() ? go() : Gate.ask(go); });
+}
+render();
+</script>
+</body>
+</html>
