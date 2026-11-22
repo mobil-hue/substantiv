@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Om – Skoleboken</title>
+<meta name="description" content="Skoleboken er et hobbyprosjekt: lek med hva AI kan bli i undervisning. Laget med AI, ikke kvalitetskontrollert av mennesker, og uten sporing.">
+<link rel="stylesheet" href="css/skole.css">
+<script src="js/gate-config.js"></script><script src="js/gate.js"></script>
+</head>
+<body class="sk">
+<main class="sk-wrap"><div class="sk-prose">
+  <h1>Om Skoleboken</h1>
+  <p class="lead">Et hobbyprosjekt: en lek med hva AI kan bli i undervisningen i nær framtid, og et forsøk på å vise at AI kan brukes til mer enn fjas.</p>
+
+  <div class="sk-fact"><span class="ic">🧪</span><div><h2>Et hobbyprosjekt</h2><p>Dette er ikke et produkt fra et forlag eller en skole. Det er en hobby og et eksperiment, laget for å utforske hva som er mulig.</p></div></div>
+  <div class="sk-fact"><span class="ic">🤖</span><div><h2>Laget med AI, uten menneskelig kvalitetskontroll</h2><p>Alt innhold er laget av AI, med et menneske som «kaptein» i bakgrunnen som styrer retningen. Ingen didaktiker, lærer eller språkperson har gått gjennom det. <b>Feil vil forekomme</b>, i fag, forklaringer og språk. Oversettelsene er laget av AI og ikke hørt over av mennesker. Bruk gjerne et kritisk blikk, og si fra om du finner noe.</p></div></div>
+  <div class="sk-fact"><span class="ic">🔐</span><div><h2>Personvern: alt blir hos deg</h2><p>Det finnes ingen innlogging og ingen sporing i sidene. Fremgang og poeng lagres bare lokalt i din egen nettleser på din egen maskin av hensyn til personvernet. Ingenting sendes til eller lagres på våre servere. Tømmer du nettleserdata, forsvinner fremgangen.</p></div></div>
+
+  <div class="sk-quote">AI er mer enn en prompt som gir svaret.</div>
+  <div class="sk-fact"><span class="ic">💡</span><div><h2>Hva jeg mener med det</h2><p>Mange tenker at AI i skolen betyr en chatbot som gir elevene svaret. Jeg tror på noe annet: et tilpasset løp for hver elev, med forståelse først og så øving, i eget tempo. Det krever struktur, en tydelig pedagogisk idé og mange små valg underveis, ikke bare én spørsmålsboks. Her er AI et verktøy som bygger opp hele læringsløpet.</p></div></div>
+  <div class="sk-fact"><span class="ic">👩‍🏫</span><div><h2>Lærerne trengs</h2><p>Tanken er at AI kan ta det mekaniske og administrative, slik at lærerne får mer tid til det bare de kan: det praktiske, det sosiale og helheten. AI skal avlaste lærerne, ikke erstatte dem.</p></div></div>
+
+  <div class="sk-fact" id="kontakt"><span class="ic">🤝</span><div><h2>Er du fagperson?</h2><p>Hvis du vil komme med tilbakemeldinger, hjelpe til, justere eller veilede, ta gjerne kontakt. Da kan de øvrige delene åpnes for gjennomsyn: bøkene og hele matematikkmodulen, kompetansemål for kompetansemål.</p>
+    <p id="ct" style="margin-top:8px"></p></div></div>
+
+  <p style="text-align:center;margin-top:26px"><a class="sk-btn" href="index.html#start">▶ Prøv de gratis modulene</a></p>
+</div></main>
+<script src="js/skole.js"></script>
+<script>
+SKB.init('om.html');
+if(SKB.contact){ const c = SKB.contact, a = document.createElement('a'); a.href = /@/.test(c) && !/^mailto:|^https?:/.test(c) ? 'mailto:' + c : c; a.textContent = c.replace(/^mailto:/, ''); a.style.cssText = 'color:#c2410c;font-weight:800'; const p = document.getElementById('ct'); p.append('Kontakt: ', a); }
+</script>
+</body>
+</html>

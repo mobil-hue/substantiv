@@ -210,3 +210,9 @@ details.mt-build>summary{cursor:pointer;font-weight:900;color:#5b21b6;padding:6p
 .mt-tx{font-size:.9em;font-weight:600;color:#475569;margin:3px 0 10px;border-left:3px solid #cbd5e1;padding-left:8px}
 .mt-tx.in{display:inline;border:0;padding:0;margin:0 0 0 .5em;font-weight:700}
 .mt-txt dt .mt-tx.in::before{content:"· "}
+
+/* passordlås: modulene er låst, oversikten er åpen */
+.skb-locked .mt-m .mk::after{content:"🔒"}
+.skb-locked .mt-pi > span:last-child::after{content:"🔒"}
+.lockbanner{background:#fef3c7;border:2px solid #fcd34d;color:#78350f;font-weight:700}
+.lockbanner a{color:#c2410c;font-weight:900}

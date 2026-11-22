@@ -165,6 +165,7 @@ function hub(setId){
       <div>${B('Etter kompetansemålene i læreplanen (LK20), trinn for trinn. Først forstå – så øve på flere nivåer.')}</div></div>
       ${first ? `<a class="btn big sec" href="#/m/${first.id}" style="text-decoration:none"><div>▶ ${B(sum.done ? 'Fortsett' : 'Start')}</div><div style="font-weight:700;font-size:.9em">${B(first.tittel)}</div></a>` : ''}</div>
     <div class="card" style="margin-top:12px"><div class="small-note" style="text-align:left"><b>${B('Slik er det bygd opp')}</b><br>${B('Hver modul tar for seg ett lite tema. Du ser en video som forklarer grundig, svarer på noen spørsmål for å sjekke at du har forstått, og trener deretter på flere nivåer – fra enkelt til vanskelig. Du kan også skrive ut forklaring og arbeidsark på tre nivåer, med fasit.')}<br><br>${B('Trykk på et ord med prikkete strek for å se hva det betyr på ditt språk.')}</div></div>
+    ${window.Gate && !Gate.ok() ? `<div class="mt-note lockbanner">🔒 <b>Oversikten er åpen.</b> For å starte modulene må du ha passord. <a href="#" id="mtAsk">Skriv inn passord</a></div>` : ''}
     <div class="mt-tabs" id="mtTabs"></div>
     ${grades ? `<div class="mt-view" id="mtGrade"><b style="align-self:center">${B('Vis trinn')}:</b>${['all'].concat(grades).map(g => `<button type="button" class="pill ${String(g) === gsel ? 'on' : ''}" data-g="${g}">${g === 'all' ? B('Alle') : g + '. trinn'}</button>`).join('')}</div>` : ''}
     <div class="mt-view"><button type="button" class="pill ${view === 'maal' ? 'on' : ''}" data-v="maal">🎯 ${B('Etter kompetansemål')}</button><button type="button" class="pill ${view === 'rekke' ? 'on' : ''}" data-v="rekke">🧭 ${B('Anbefalt rekkefølge')}</button></div>
@@ -388,9 +389,15 @@ function route(){
   const p = (location.hash.replace(/^#\/?/, '') || '').split('/');
   window.scrollTo(0, 0);
   A.store.set('last', {s:'mt', href:'matte.html'});
+  if(p[0] === 'm' && window.Gate && !Gate.ok()){
+    app.innerHTML = `<div class="mt-page"><div class="card" style="text-align:center;padding:34px 20px"><div style="font-size:3rem">🔒</div><h2>Modulene er låst</h2><p>Du kan se hele oversikten, men må ha passord for å starte modulene.</p><div class="row" style="justify-content:center;gap:10px;margin-top:14px"><button class="btn big" id="mtUnlock" type="button">🔓 Skriv inn passord</button><a class="btn sec" href="#/" style="text-decoration:none">‹ Til oversikten</a></div></div></div>`;
+    const ask = () => Gate.ask(route, () => { location.hash = '#/'; });
+    document.getElementById('mtUnlock').onclick = ask; ask(); return;
+  }
   if(p[0] === 'm' && p[1] && MT.byId[p[1]]){ if(p[2] === 'drill') return runDrill(p[1], p[3] === 'hard'); if(p[2] === 'niv') return runLevel(p[1], Math.max(0, (+p[3] || 1) - 1)); return modulePage(p[1]); }
   if(p[0] === 't') return hub(p[1]);
   hub();
 }
+document.addEventListener('click', e => { if(e.target && e.target.id === 'mtAsk'){ e.preventDefault(); Gate.ask(route); } });
 MT.start = () => { window.addEventListener('hashchange', route); A.applyLang(); if(A.onSettings) A.onSettings(); summary(); route(); };
 })();

@@ -1,6 +1,6 @@
 # Lær norsk og matte med kinesisk støtte (norsk + 中文)
 
-Læreopplegg i samme system, samlet i en **rotmeny** (`index.html`) med fagene **Norsk**, **Matematikk** og **Norsk Voksenopplæring**. Flere fag kan legges til i `js/hub.js`.
+Læreopplegg i samme system. Nettstedet (**Skoleboken**) har en forside (`index.html`) med tre gratis moduler (Gangesystemet, Adjektiv, Substantiv), en side for **Bøker** (`boker.html`, passord), **Matematikk etter kompetansemål** (`matte.html`, oversikt åpen, moduler låst) og **Om** (`om.html`). Bøker og passord styres i `js/skole.js` og `js/gate.js`; passord byttes med `node tools/set-passord.js "passord"` (dørlås i nettleseren, ikke ekte sikkerhet). Publisering på skoleboken.com: `docs/skoleboken-publisering.md`.
 
 | Fag | Opplegg | Side |
 |---|---|---|
@@ -18,7 +18,7 @@ Læreopplegg i samme system, samlet i en **rotmeny** (`index.html`) med fagene *
 Norsk er hovedspråket. Kinesisk er støtte, både som tekst og som opplesing.
 
 ## Matematikk etter kompetansemål (`matte.html`)
-Egen meny for matematikk, ordnet etter **trinn og kompetansemål** i LK20 (gyldig fra 1.8.2026; alle 101 mål ligger i `js/mt-maal.js`, generert fra `docs/laereplan/lk20-grunnskole.json`). Fra rotmenyen er matematikk nå ett kort. Gange, gangesystemet og geometri ligger fortsatt i egne sider og lenkes fra matematikkmenyen.
+Egen meny for matematikk, ordnet etter **trinn og kompetansemål** i LK20 (gyldig fra 1.8.2026; alle 101 mål ligger i `js/mt-maal.js`, generert fra `docs/laereplan/lk20-grunnskole.json`). Fra forsiden lenkes matematikk i menyen (oversikten er åpen, modulene krever passord). Gange, gangesystemet og geometri ligger fortsatt i egne sider og lenkes fra matematikkmenyen.
 
 **Modell** (annen metode enn gangesystemet): først *forståelse* (grundig video: konkret → bilde → symbol), så *trening på flere nivåer*. Hver modul har:
 - en video på tavle med lærerinne (5–9 scener, norsk tale og tekst),
@@ -156,7 +156,7 @@ Bruker nettleserens talesyntese (Web Speech API): norsk (`nb-NO`) og kinesisk (`
 
 ## Filer
 ```
-index.html                 rotmeny (js/hub.js: programmer og fag)
+index.html                 forside (tre gratis moduler); boker.html, om.html
 substantiv.html, substantiv-grunnkurs.html, adjektiv.html, adjektiv-grunnkurs.html, geometri.html, multiplikasjon.html, gange.html
 teacher.html, adjektiv-laerer.html, geometri-laerer.html, multiplikasjon-laerer.html
 ark.html, adjektiv-ark.html, geo-ark.html, mult-ark.html     skriveark
@@ -175,7 +175,7 @@ js/mult-graphics.js        grupper, prikker, rutenett, oppstilling, tabell
 js/mult-calc.js            regneoppgaver og trinn for trinn
 js/mult-exercises.js, mult-lessons.js, mult-videos.js, mult-drill.js, mult-worksheets.js
 gangesystem.html, css/gs.css, js/gs-core.js, gs-videos.js, gs-app.js   gangetabellen som system
-js/hub.js                  rotmenyen
+js/skole.js, js/gate.js    felles meny og bøker; passordlås (css/skole.css)
 voksen.html                Norsk Voksenopplæring (css/vox.css)
 js/vox-core.js             data, repetisjon (SRS), tekst- og taleverktøy
 js/vox-build.js            oppgavetyper og detaljvisning
