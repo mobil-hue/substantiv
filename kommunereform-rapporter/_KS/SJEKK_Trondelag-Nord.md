@@ -1,6 +1,6 @@
 # Sjekk: KS-materiale om enkeltsammenslåinger (Trøndelag, Nordland, Troms og Finnmark)
 
-Oppfølging av første KS-runde (se INDEKS.md). Søkt med WebSearch (standard; 14 søk totalt, budsjettet tok ikke slutt) – ks.no-filtrerte søk og ufiltrerte søk. Ingenting som allerede lå i `_KS/` eller `_Felles/` er lastet ned på nytt. ks.no HTML-sider er blokkert (403) og ikke forsøkt omgått.
+Oppfølging av første KS-runde (se INDEKS.md). Søkt med WebSearch (standard; 12 søk totalt, budsjettet tok ikke slutt) – ks.no-filtrerte søk og ufiltrerte søk. Ingenting som allerede lå i `_KS/` eller `_Felles/` er lastet ned på nytt. ks.no HTML-sider er blokkert (403) og ikke forsøkt omgått.
 
 **Resultat:** Én ny fil (Åfjord, og den er kun delvis relevant). Ingen KS-bestilt eller KS-utgitt rapport om en bestemt sammenslåing ble funnet for de øvrige 15 kommunene. KS har altså (så langt søk og tilgjengelige PDF-er viser) ikke publisert egne sammenslåingsevalueringer for disse; de generelle dokumentene i `_KS/` (idéhefte, Deloitte-arbeidsgiverpolitikk, ISF, Nordlandsforskning, Menon, TF 438 Nye Trøndelag) er det nærmeste.
 
