@@ -2,10 +2,10 @@
 
 | Filnavn | Tittel | Utreder/forfatter | År | Kilde-URL |
 |---|---|---|---|---|
-| 2016_Fylkesmannen-Oslo-og-Akershus_Faglig-tilrådning-kommunereformen.pdf | Kommunereformen i Oslo og Akershus – Fylkesmannens faglige tilrådning (28.9.2016) | Fylkesmannen i Oslo og Akershus | 2016 | https://utdatert.statsforvalteren.no/siteassets/utgatt/fm-oslo-og-akershus/dokument-fmoa/kommunal-styring/kommunereformen/fylkesmannens-faglige-tilradning.pdf |
-| 2016_Fylkesmannen-Oslo-og-Akershus_Oversikt-vedtak-og-innsendte-dokumenter-kommunereform-Akershus.pdf | Vedlegg 2: Kommunereformvedtak i Akershus, utredninger og innbyggerhøring (inkl. Aurskog-Hølands rapport om kommunereform) | Fylkesmannen i Oslo og Akershus | 2016 | https://utdatert.statsforvalteren.no/siteassets/utgatt/fm-oslo-og-akershus/dokument-fmoa/kommunal-styring/kommunereformen/oversendt-endelig-vedlegg-2--oversikt-vedtak-og-innsendte-dokumenter-kommunereform-akershus.pdf |
+| ../_Felles/2016_Fylkesmannen-Oslo-og-Akershus_Faglig-tilrådning-kommunereformen.pdf | Kommunereformen i Oslo og Akershus – Fylkesmannens faglige tilrådning (28.9.2016) | Fylkesmannen i Oslo og Akershus | 2016 | https://utdatert.statsforvalteren.no/siteassets/utgatt/fm-oslo-og-akershus/dokument-fmoa/kommunal-styring/kommunereformen/fylkesmannens-faglige-tilradning.pdf |
+| ../_Felles/2016_Fylkesmannen-Oslo-og-Akershus_Oversikt-vedtak-og-innsendte-dokumenter-kommunereform-Akershus.pdf | Vedlegg 2: Kommunereformvedtak i Akershus, utredninger og innbyggerhøring (inkl. Aurskog-Hølands rapport om kommunereform) | Fylkesmannen i Oslo og Akershus | 2016 | https://utdatert.statsforvalteren.no/siteassets/utgatt/fm-oslo-og-akershus/dokument-fmoa/kommunal-styring/kommunereformen/oversendt-endelig-vedlegg-2--oversikt-vedtak-og-innsendte-dokumenter-kommunereform-akershus.pdf |
 
-(Begge filene er identiske med kopiene i Nordre Follo/ og Lillestrøm/.)
+(Filene ligger i den delte mappen ../_Felles/ og dekker hele Akershus.)
 
 ## Ikke funnet / bare tilgjengelig på blokkert sted
 
