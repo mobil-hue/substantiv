@@ -64,9 +64,31 @@ Merknader:
 - **Ikke kontrollert:** befolkningsframskrivinger mot 2040, valgdeltakelse, sysselsetting/pendling, tjenesteindikatorer, beregnet innsparingspotensial (utledet fra egne antakelser), og alle spørreundersøkelser (ingen rådata).
 - Det som er kontrollert er grunnfakta som er lette å sjekke. Konklusjoner og poengsetting er ikke testet, og en korrekt datagrunnlag sier ingenting om at vurderingene er riktige.
 
+## 6. Innsparingspotensial på administrasjon: regnet på nytt fra SSB
+
+TF beregner potensialet slik (gjentatt i alle økonomi-delrapporter): netto driftsutgifter (KOSTRA, konsern) på funksjon 100, 110, 120, 121 og 130; gevinst = summen for dagens kommuner minus folketallet × et benchmark per innbygger (billigste kommune i alternativet, landsgjennomsnittet, eller «sammenlignbare» kommuner). Skript for gjenskaping: `kontroll_innsparing_ssb.py` (SSB-tabell 05065 og 06913).
+
+| Kontroll | Resultat |
+|---|---|
+| Inngangstall: netto adm.-utgifter 2014 for Snillfjord, Hitra, Frøya, Fræna, Orkdal, Voss, Vik, Aurland, Stord og Os | **Alle stemmer** med SSB (avvik ≤ 2 tusen kr, avrunding) |
+| Regnestykket (gevinst «ved nivå tilsvarende» Hitra, landsgjennomsnittet, Fræna og Orkdal i Heim; Voss, landsgjennomsnittet, Stord og Os i Voss) | **Alle åtte stemmer** (f.eks. Heim 47 965 mot 47 964; Voss 40 435 mot 40 433 tusen kr) |
+| Benchmark «landsgjennomsnittet 3 885 kr per innbygger» | Er **2013-verdien** (jeg får 3 882 for 2013 fra SSB). For regnskapsåret 2014 blir tallet 4 003. |
+
+**Funn: gammelt benchmark i rapporter som bruker 2014-tall.** Rapportene som sammenligner kommunenes 2013-utgifter bruker 3 885 riktig (Molde-regionen, Landkommune Sunnmøre, Midt-Troms, Sunnfjord). Delrapportene der kommunenes tall er fra 2014 (Heim/Snillfjord–Hitra–Frøya, Bjørnafjorden, Sogn og Voss–Vik–Aurland) bruker fortsatt 3 885. Tabelloverskriften sier «administrasjonsutgifter 2014», men benchmarken er fra året før. Virkning på overskriften «gevinst mot landsgjennomsnittet»:
+- Heim: 47,96 mill. kr (rapporten) mot 46,76 mill. med riktig benchmark, altså **2,5 % for høyt**.
+- Voss–Vik–Aurland: 40,4 mill. mot 38,2 mill., **5,5 % for høyt**.
+- Retningen er alltid at gevinsten blir overvurdert. Størrelsen er liten og står sammen med de andre sporene etter gjenbruk (del 2): benchmarken ble sannsynligvis tatt med fra forrige utredning uten å oppdateres. Jeg har ingenting som tyder på at det var bevisst, og det endrer ikke konklusjonene i rapportene. Narvik/Ofoten (3 792) og Kinn (4 129) bruker andre tall, og er ikke undersøkt.
+
+**Metodevalg som påvirker størrelsen (ikke feil):**
+- Landsgjennomsnittet inkluderer store kommuner med stordriftsfordeler, så mange små kommuner får et stort «potensial» nesten uansett.
+- Beregningene er «illustrasjonsberegninger» (rapportenes egen formulering) uten vurdering av om kostnaden faktisk kan tas ut.
+
+**Ikke kontrollert:** befolkningsframskrivingene mot 2040. SSBs åpne API har bare framskrivinger fra 2018, ikke 2014-versjonen rapportene bruker.
+
 ## Anbefalt videre arbeid
 
 - Sjekke de tre Sogn og Fjordane-presentasjonene og Meldal/Agdenes/Målselv-listene mot TFs egne originalfiler eller en senere versjon, hvis den finnes.
-- Kontrollere de utledede tallene (innsparingspotensial, utgiftsbehov), befolkningsframskrivinger og flere KOSTRA-indikatorer mot SSB (folketall og driftsresultat for to kommuner er gjort, se del 5).
+- Kontrollere befolkningsframskrivingene (krever SSBs 2014-versjon fra arkiv), utgiftsbehov og tjenesteindikatorer mot SSB. Folketall, driftsresultat og administrasjonsutgifter er gjort (del 5 og 6).
+- Sjekke benchmarken i de øvrige TF-rapportene (Narvik/Ofoten, Kinn, Øygarden) og regne ut samlet effekt per rapport.
 - Skaffe Orkland-rapporten (KS Konsulent 2023) fra kommunens arkiv og sammenligne den direkte med Halden 2024.
 - Analysere NIVI, Agenda Kaupang og andre utredere når filene kan hentes, for å se om gjenbruksmønsteret gjelder TF spesielt eller bransjen.
