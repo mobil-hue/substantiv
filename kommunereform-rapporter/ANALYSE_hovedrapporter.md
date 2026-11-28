@@ -49,9 +49,24 @@ Det jeg har kontrollert selv, mot originalfilene:
 
 Sammenligning med reformrapportene: TF-materialet har mye mer gjenbruk totalt (median 43 %), men formuleringene for **svarene** er lokale, mens malen og metoden gjenbrukes. De avvikene jeg fant (punkt 2 ovenfor) er av en annen type: kopiering som har etterlatt feil (skrivefeil, feil regionnavn i figurtekst, setning og tall som ikke er oppdatert), ikke kopierte funn fra intervjuer.
 
+## 5. Kontroll av tall mot SSB (2026-11-28)
+
+Metode: tall som rapportene oppgir med eksplisitt dato er sammenlignet med SSBs åpne API (tabell 06913 og 01222 for folketall, tabell 04949 for KOSTRA-konsern, driftsresultat i prosent av driftsinntekter).
+
+| Kontroll | Antall | Resultat |
+|---|---|---|
+| Folketall, ulike datoer (1.1.2014–1.1.2016, 31. mars og 2. kvartal 2015) for 17 kommuner (Tingvoll, Eide, Hemne, Hitra, Frøya, Nesset, Aukra, Fræna, Molde, Rauma, Vestnes, Sunndal, Gjemnes, Voss, Vik, Aurland, Sogndal, Meldal, Agdenes, Ballangen, Tysfjord) | 23 | **23 av 23 stemmer eksakt** |
+| KOSTRA brutto og netto driftsresultat 2012–2014 (Ballangen, Tysfjord) | 12 | **12 av 12 stemmer** (±0,1 prosentpoeng) |
+
+Merknader:
+- To tilsynelatende avvik viste seg å være min egen feil: Sunndal (jeg brukte feil kommunenummer) og Ballangen/Tysfjord (rapportene bruker 1.1.2016, ikke 2015).
+- Notatene for Halsa, Hitra, Meldal, Agdenes, Fræna, Nesset og Stordal har KOSTRA-tabeller som ikke lot seg lese ut av tekstlaget, så de er ikke kontrollert på driftsresultat.
+- **Ikke kontrollert:** befolkningsframskrivinger mot 2040, valgdeltakelse, sysselsetting/pendling, tjenesteindikatorer, beregnet innsparingspotensial (utledet fra egne antakelser), og alle spørreundersøkelser (ingen rådata).
+- Det som er kontrollert er grunnfakta som er lette å sjekke. Konklusjoner og poengsetting er ikke testet, og en korrekt datagrunnlag sier ingenting om at vurderingene er riktige.
+
 ## Anbefalt videre arbeid
 
 - Sjekke de tre Sogn og Fjordane-presentasjonene og Meldal/Agdenes/Målselv-listene mot TFs egne originalfiler eller en senere versjon, hvis den finnes.
-- Kontrollere folketall og innsparingsberegninger mot KOSTRA/SSB (ikke gjort her).
+- Kontrollere de utledede tallene (innsparingspotensial, utgiftsbehov), befolkningsframskrivinger og flere KOSTRA-indikatorer mot SSB (folketall og driftsresultat for to kommuner er gjort, se del 5).
 - Skaffe Orkland-rapporten (KS Konsulent 2023) fra kommunens arkiv og sammenligne den direkte med Halden 2024.
 - Analysere NIVI, Agenda Kaupang og andre utredere når filene kan hentes, for å se om gjenbruksmønsteret gjelder TF spesielt eller bransjen.
