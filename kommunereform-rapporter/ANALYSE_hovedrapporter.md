@@ -37,8 +37,21 @@ Metode: andel 12-ords-sekvenser i et dokument som står ordrett i minst ett anne
 - **Respondentenes åpne svar** (ca. 1 500 linjer i 16 dokumenter) er ikke gjenbrukt på tvers: ingen identiske svarformuleringer i ≥ 3 dokumenter som ikke var rapporttekst. Svarene er altså lokale.
 - **Kommunenes egne saksframlegg og vedtak** (11 dokumenter) henter lite fra konsulentrapportene: 0–5,5 % delt. Det som deles er sitater av reformens fire hovedmål. Unntaket er Eide og Fræna (41 %), som hadde en felles prosess.
 
+## 4. Sammenligning med Aftenposten-saken (KS Konsulent, skolestruktur)
+
+Aftenposten viser at KS Konsulent gjenbrukte det intervjuede elever og foresatte sa («funn») i skolestrukturrapporter for ulike kommuner, mens intervjuspørsmålene var like. Jeg fikk bare lest den åpne delen av artikkelen (innledning og en side-ved-side-tabell for Orkland 2023 og Halden 2024). Resten ligger bak betalingsmur.
+
+Det jeg har kontrollert selv, mot originalfilene:
+- **Halden 2024** (KSK-rapport 3/2024): 9 av 11 punkter som artikkelen viser for Orkland 2023 står ordrett i Halden-rapporten, blant annet «Elever vektlegger muligheter for å få venner, og lærere som er relasjonelt gode» og «Elevene ønsket en kombinasjon av digitale verktøy og bøker». To punkter er omskrevet eller falt bort (uteområder, møteplasser/skyss). Halden har lagt til noen egne («men mange uttalte frustrasjon over manglende vedlikehold…», «oppdaterte lærebøker»).
+- **Åfjord 2022, Frogn 2022 og Ørland 2025** (alle KS Konsulent): 0 av 11 punkter ordrett. Åfjord beskriver elevenes synspunkter med egne, kortere formuleringer om omtrent de samme temaene (venner, godt læringsmiljø, gode lærere, utstyr).
+- Tekstoverlapp mellom de fire KS Konsulent-rapportene jeg har: 6–10 %, i hovedsak forskningsoppsummeringer om skolestørrelse, nasjonale reformer og metode. Intervjuspørsmålene er identiske i Halden og Frogn («Hva er ditt inntrykk av kvaliteten på skolen der du er forelder?…»), altså standard, slik artikkelen også skiller.
+- **Ikke verifisert:** selve Orkland-rapporten (lenken er død, 404). Påstanden om at Halden-teksten er hentet derfra bygger på utdraget i artikkelen.
+
+Sammenligning med reformrapportene: TF-materialet har mye mer gjenbruk totalt (median 43 %), men formuleringene for **svarene** er lokale, mens malen og metoden gjenbrukes. De avvikene jeg fant (punkt 2 ovenfor) er av en annen type: kopiering som har etterlatt feil (skrivefeil, feil regionnavn i figurtekst, setning og tall som ikke er oppdatert), ikke kopierte funn fra intervjuer.
+
 ## Anbefalt videre arbeid
 
 - Sjekke de tre Sogn og Fjordane-presentasjonene og Meldal/Agdenes/Målselv-listene mot TFs egne originalfiler eller en senere versjon, hvis den finnes.
 - Kontrollere folketall og innsparingsberegninger mot KOSTRA/SSB (ikke gjort her).
+- Skaffe Orkland-rapporten (KS Konsulent 2023) fra kommunens arkiv og sammenligne den direkte med Halden 2024.
 - Analysere NIVI, Agenda Kaupang og andre utredere når filene kan hentes, for å se om gjenbruksmønsteret gjelder TF spesielt eller bransjen.
