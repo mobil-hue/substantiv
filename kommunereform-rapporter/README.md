@@ -75,3 +75,5 @@ Egen gjennomgang av om KS har laget materiale om hver enkelt sammenslåing. Resu
 Detaljer og kjente-men-ikke-hentede KS-sider: `_KS/SJEKK_Ost-Sor.md`, `_KS/SJEKK_Vest-More.md`, `_KS/SJEKK_Trondelag-Nord.md`.
 
 Ikke sjekket (blokkert av Cloudflare): ks.no sine HTML-sider og KS FoU-database (`ks.no/fou-sok/`), bl.a. «Erfaringer fra nye Sandefjord kommune» og FoU 164041. Kjente, men ikke hentede nasjonale dokumenter: PA Consulting «Digitale konsekvenser» (FoU 154005) og «Kommunenummer», KS' arbeidsrettsveileder (FoU 144031). Kommunale saksframlegg er ikke gjennomgått for KS-vedlegg.
+
+Analyse av hovedrapportene (tekstgjenbruk, feil, standardformuleringer): [ANALYSE_hovedrapporter.md](ANALYSE_hovedrapporter.md).
