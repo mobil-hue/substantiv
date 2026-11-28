@@ -67,3 +67,11 @@ Nedlastet 2026-11-28. Se [sammenslainger.md](sammenslainger.md) for hvem som ble
 - **statsforvalteren.no**: gamle fylkesmannsfiler gir 404 på www; de ligger nå på `utdatert.`/`inte.`/`prep.statsforvalteren.no` som ikke var tilgjengelig.
 - Listen i `sammenslainger.md` er bygget fra Wikipedia og kan mangle 1–2 av de 47 offisielle nye kommunene.
 - Mange søk ble avkortet av søkebudsjettet i agentene; flere rapporter kan finnes ved nytt søk, særlig for Sandnes, Ullensvang, Rennebu, Hammerfest, Hamarøy, Tjeldsund, Steinkjer, Namsos, Indre Fosen og Åfjord.
+
+## KS-sjekk per kommune (2026-11-28)
+
+Egen gjennomgang av om KS har laget materiale om hver enkelt sammenslåing. Resultat: **ingen av de ~48 kommunene fikk en KS-rapport om selve sammenslåingen**, utover Sandefjord (KS-bestilt TF-rapport 396, i `_Felles/` og referert fra `_KS/`) og den generelle KS-samlingen i `_KS/`. Åfjord har en KS Konsulent-rapport fra 2022 om skolestruktur etter sammenslåingen (`_KS/Åfjord/`).
+
+Detaljer og kjente-men-ikke-hentede KS-sider: `_KS/SJEKK_Ost-Sor.md`, `_KS/SJEKK_Vest-More.md`, `_KS/SJEKK_Trondelag-Nord.md`.
+
+Ikke sjekket (blokkert av Cloudflare): ks.no sine HTML-sider og KS FoU-database (`ks.no/fou-sok/`), bl.a. «Erfaringer fra nye Sandefjord kommune» og FoU 164041. Kjente, men ikke hentede nasjonale dokumenter: PA Consulting «Digitale konsekvenser» (FoU 154005) og «Kommunenummer», KS' arbeidsrettsveileder (FoU 144031). Kommunale saksframlegg er ikke gjennomgått for KS-vedlegg.
